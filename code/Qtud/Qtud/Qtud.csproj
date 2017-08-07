@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{925F5CDC-94CA-43B1-8B2F-F9D51F1BA506}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Qtud.Qtud</RootNamespace>
+    <AssemblyName>尿动力数据管理系统</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>huoniao.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CMainForm.Designer.cs">
+      <DependentUpon>CMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CurrentUser.cs" />
+    <Compile Include="CurveMeno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurveMeno.Designer.cs">
+      <DependentUpon>CurveMeno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DrawFuns.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="loginDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loginDlg.Designer.cs">
+      <DependentUpon>loginDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CurveMainFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurveMainFrom.Designer.cs">
+      <DependentUpon>CurveMainFrom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MakeReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MakeReportForm.Designer.cs">
+      <DependentUpon>MakeReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="myPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PatientInfoDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientInfoDlg.Designer.cs">
+      <DependentUpon>PatientInfoDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PatientManageDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PatientManageDlg.Designer.cs">
+      <DependentUpon>PatientManageDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangSettingDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RangSettingDlg.Designer.cs">
+      <DependentUpon>RangSettingDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ReportListView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportListView.Designer.cs">
+      <DependentUpon>ReportListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TestResultDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestResultDlg.Designer.cs">
+      <DependentUpon>TestResultDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UsbDevhelper.cs" />
+    <EmbeddedResource Include="CMainForm.resx">
+      <DependentUpon>CMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurveMeno.resx">
+      <DependentUpon>CurveMeno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loginDlg.resx">
+      <DependentUpon>loginDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CurveMainFrom.resx">
+      <DependentUpon>CurveMainFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MakeReportForm.resx">
+      <DependentUpon>MakeReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientInfoDlg.resx">
+      <DependentUpon>PatientInfoDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PatientManageDlg.resx">
+      <DependentUpon>PatientManageDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="RangSettingDlg.resx">
+      <DependentUpon>RangSettingDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportListView.resx">
+      <DependentUpon>ReportListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestResultDlg.resx">
+      <DependentUpon>TestResultDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBManage\DBManage.csproj">
+      <Project>{C0F7D57A-E280-4E38-9F8A-82004C3C0E19}</Project>
+      <Name>DBManage</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SystemCommon\SystemCommon.csproj">
+      <Project>{CB6EB334-12EE-4F58-8F86-F21F028F99F5}</Project>
+      <Name>SystemCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="huoniao.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

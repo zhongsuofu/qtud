@@ -1,0 +1,13 @@
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\SystemCommon.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\SystemCommon.pdb
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\Access.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\Excel.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\ICSharpCode.SharpZipLib.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\SelfishInfo.Access.DBUtility.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\MySql.Data.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\LTP.Common.dll
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\SelfishInfo.Access.DBUtility.pdb
+E:\Work\my\SelfishInfo\SystemCommon\bin\x64\Debug\Access.pdb
+E:\Work\my\SelfishInfo\SystemCommon\obj\x64\Debug\SystemCommon.csprojResolveAssemblyReference.cache
+E:\Work\my\SelfishInfo\SystemCommon\obj\x64\Debug\SystemCommon.dll
+E:\Work\my\SelfishInfo\SystemCommon\obj\x64\Debug\SystemCommon.pdb

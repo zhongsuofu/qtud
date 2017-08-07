@@ -1,0 +1,10 @@
+bin\Release\SelfishInfo.Access.DBUtility.dll
+bin\Release\MySql.Data.dll
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\SelfishInfo.Access.DBUtility.dll
+bin\Debug\SelfishInfo.Access.DBUtility.dll
+bin\Debug\SelfishInfo.Access.DBUtility.pdb
+bin\Debug\MySql.Data.dll
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\SelfishInfo.Access.DBUtility.dll
+obj\Debug\SelfishInfo.Access.DBUtility.pdb

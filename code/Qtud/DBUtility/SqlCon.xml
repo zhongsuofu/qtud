@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<SysConfig>
+  <AccessConfig>
+    <ConnectionString>
+      Driver="Database=qtud;Data Source=localhost;User Id=root;Password=softok;pooling=false;CharSet=utf8;port=3306"
+    </ConnectionString>
+    <ConStringEncrypt>false</ConStringEncrypt>
+  </AccessConfig>
+</SysConfig>

@@ -1,0 +1,6 @@
+E:\Work\my\SelfishInfo\DBUtility\bin\x64\Debug\SelfishInfo.Access.DBUtility.dll
+E:\Work\my\SelfishInfo\DBUtility\bin\x64\Debug\SelfishInfo.Access.DBUtility.pdb
+E:\Work\my\SelfishInfo\DBUtility\bin\x64\Debug\MySql.Data.dll
+E:\Work\my\SelfishInfo\DBUtility\obj\x64\Debug\DBUtility.csprojResolveAssemblyReference.cache
+E:\Work\my\SelfishInfo\DBUtility\obj\x64\Debug\SelfishInfo.Access.DBUtility.dll
+E:\Work\my\SelfishInfo\DBUtility\obj\x64\Debug\SelfishInfo.Access.DBUtility.pdb
