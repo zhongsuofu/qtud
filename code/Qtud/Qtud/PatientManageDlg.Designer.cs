@@ -80,6 +80,7 @@
             this.button_sys_Setting.TabIndex = 5;
             this.button_sys_Setting.Text = "删 除";
             this.button_sys_Setting.UseVisualStyleBackColor = true;
+            this.button_sys_Setting.Click += new System.EventHandler(this.button_sys_Setting_Click);
             // 
             // button_user_manage
             // 
@@ -90,6 +91,7 @@
             this.button_user_manage.TabIndex = 4;
             this.button_user_manage.Text = "修 改";
             this.button_user_manage.UseVisualStyleBackColor = true;
+            this.button_user_manage.Click += new System.EventHandler(this.button_user_manage_Click);
             // 
             // button_patient_manage
             // 
@@ -136,6 +138,8 @@
             this.listView_patList.TabIndex = 1;
             this.listView_patList.UseCompatibleStateImageBehavior = false;
             this.listView_patList.View = System.Windows.Forms.View.Details;
+            this.listView_patList.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView_patList_MouseClick);
+            this.listView_patList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_patList_MouseDoubleClick);
             // 
             // panel7
             // 

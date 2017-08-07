@@ -19,6 +19,7 @@ namespace Qtud.Qtud
 
         private List<PatientInfoModel> listPatientInfo = new List<PatientInfoModel>();  //病人数据列表
 
+        private PatientInfoModel m_CurSelPatientInfo ;
         public PatientManageDlg()
         {
             InitializeComponent();
@@ -203,6 +204,114 @@ namespace Qtud.Qtud
         private void button_patient_manage_Click(object sender, EventArgs e)
         {
             ADDPatientInfo();
+        }
+
+        private void listView_patList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
+            if (listView_patList.SelectedItems.Count == 0)
+                return;
+            else
+            {
+                string site = listView_patList.SelectedItems[0].Text;
+                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+
+
+                int i = 0;
+                foreach (PatientInfoModel data in listPatientInfo)
+                {
+                    if (cardid == data.cardid)
+                    {
+                        m_CurSelPatientInfo = data;   //当前选择的病人信息
+
+                        ADDPatientInfo(m_CurSelPatientInfo);
+                        break;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void listView_patList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView_patList.SelectedItems.Count == 0)
+                return;
+            else
+            {
+                string site = listView_patList.SelectedItems[0].Text;
+                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+
+
+                int i = 0;
+                foreach (PatientInfoModel data in listPatientInfo)
+                {
+                    if (cardid == data.cardid)
+                    {
+                        m_CurSelPatientInfo = data;   //当前选择的病人信息
+
+                        break;
+                    }
+                    i++;
+                }
+            }
+        }
+
+        private void button_sys_Setting_Click(object sender, EventArgs e)
+        {
+            if (listView_patList.SelectedItems.Count > 0)
+            {
+                DialogResult ret = MessageBox.Show("删除病人后，相关的检查数据都会删除。\r\n确定删除病人 " + m_CurSelPatientInfo.name + " 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                if (ret == DialogResult.OK)
+                {
+
+                    //------------------------------------------------
+                    string strWhere = string.Empty;
+                    string sRet = string.Empty;
+                    try
+                    {
+                        pim.Delete(m_CurSelPatientInfo.uuid);
+                        UpdateListView();
+                        textBox_queryWhere.Text = string.Empty;
+                        m_CurSelPatientInfo = null;
+                    }
+                    catch (System.Exception er)
+                    {
+                        throw er;
+                    }
+                    //------------------------------------------------
+
+                }
+            }
+            else
+            {
+                DialogResult ret = MessageBox.Show("请选择需要删除的项", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+            }
+        }
+
+        private void button_user_manage_Click(object sender, EventArgs e)
+        {
+            if (listView_patList.SelectedItems.Count == 0)
+                return;
+            else
+            {
+                string site = listView_patList.SelectedItems[0].Text;
+                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+
+
+                int i = 0;
+                foreach (PatientInfoModel data in listPatientInfo)
+                {
+                    if (cardid == data.cardid)
+                    {
+                        m_CurSelPatientInfo = data;   //当前选择的病人信息
+
+                        ADDPatientInfo(m_CurSelPatientInfo);
+                        break;
+                    }
+                    i++;
+                }
+            }
         }
     }
 }

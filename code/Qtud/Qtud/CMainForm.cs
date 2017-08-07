@@ -435,6 +435,7 @@ namespace Qtud.Qtud
             {
 
             }
+                        UpdateListBox();
             
             
         }

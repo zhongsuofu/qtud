@@ -61,11 +61,6 @@ J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\DBManage.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\SystemCommon.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.CurveMeno.resources
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.TestResultDlg.resources
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\Qtud.exe.config
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.exe
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.pdb
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\Qtud.exe
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\Qtud.pdb
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\DBManage.dll
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\SystemCommon.dll
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\SelfishInfo.Access.DBUtility.dll
@@ -79,10 +74,8 @@ F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.CMainForm.res
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.CurveMeno.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.MainForm.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.loginDlg.resources
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.MainFrom2.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.MakeReportForm.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.PatientInfoDlg.resources
-F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Properties.Resources.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.ReportListView.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.TestResultDlg.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.csproj.GenerateResource.Cache
@@ -96,3 +89,12 @@ J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\尿动力数据管理系统
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\尿动力数据管理系统.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\尿动力数据管理系统.exe
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\尿动力数据管理系统.pdb
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\尿动力数据管理系统.exe.config
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\尿动力数据管理系统.exe
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\尿动力数据管理系统.pdb
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\尿动力数据管理系统.exe
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Release\尿动力数据管理系统.pdb
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.MainFrom_Curve.resources
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.PatientManageDlg.resources
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.Properties.Resources.resources
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.RangSettingDlg.resources
