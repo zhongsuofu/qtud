@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SysConfig>
+  <AccessConfig>
+    <ConnectionString>
+         SERVER=localhost;DATABASE=qtud;UID=root;PASSWORD=softok;
+    </ConnectionString>
+    <ConStringEncrypt>false</ConStringEncrypt>
+  </AccessConfig>
+</SysConfig>
+ 
