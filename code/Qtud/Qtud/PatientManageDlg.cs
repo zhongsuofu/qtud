@@ -41,14 +41,14 @@ namespace Qtud.Qtud
 
         private void PatientManageDlg_Load(object sender, EventArgs e)
         {
-            this.listView_patList.Columns.Add("序 号", 80, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("姓 名", 150, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("身份证号", 200, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("性 别", 100, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("年 龄", 100, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("电 话", 150, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("病 史", 260, HorizontalAlignment.Center); //一步添加 
-            this.listView_patList.Columns.Add("备 注", 260, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("序 号", 80, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("姓 名", 150, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("身份证号", 200, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("性 别", 100, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("年 龄", 100, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("电 话", 150, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("病 史", 260, HorizontalAlignment.Center); //一步添加 
+            //this.listView_patList.Columns.Add("备 注", 260, HorizontalAlignment.Center); //一步添加 
 
             UpdateListView();
         }
@@ -311,6 +311,27 @@ namespace Qtud.Qtud
                     }
                     i++;
                 }
+            }
+        }
+
+        private void button_report_Click(object sender, EventArgs e)
+        {
+            if (listView_patList.SelectedItems.Count > 0)
+            {
+                this.Hide();
+
+                ReportListView m_ReportListView = new ReportListView(m_CurSelPatientInfo);
+                DialogResult dlgResult = m_ReportListView.ShowDialog();
+                if (dlgResult == DialogResult.OK)
+                {
+
+                }
+                this.Show();
+            }
+            else
+            {
+                DialogResult ret = MessageBox.Show("请先选择患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
             }
         }
     }

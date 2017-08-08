@@ -551,7 +551,7 @@ namespace Qtud.Qtud
             rtf.Width = DrawRect.Width;
             rtf.Location = new PointF(DrawRect.Left, DrawRect.Top + nCurHeight);
             if (_TestData.strNLL != null && _TestData.strNLL != "")
-                offScreenDC.DrawString("尿流率检查结果： 最大尿流率" + _TestData.strNLL + @" ml/s    尿流量" + _TestData.strNL + @" ml", new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
+                offScreenDC.DrawString("尿流率检查结果： 最大尿流率 " + _TestData.strNLL + @" ml/s    尿流量 " + _TestData.strNL + @" ml", new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
             else
                 offScreenDC.DrawString("尿流率检查结果： 最大尿流率         ml/s   尿流量         ml ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
@@ -563,9 +563,9 @@ namespace Qtud.Qtud
             rtf.Width = DrawRect.Width;
 
             rtf.Location = new PointF(DrawRect.Left, DrawRect.Top + nCurHeight);
-            if (_TestData.str_RJ_YL != null && _TestData.str_RJ_YL != "")
-                offScreenDC.DrawString("充盈期膀胱容积-压力测定结果： " + _TestData.str_RJ_YL, new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
-            else
+            //if (_TestData.str_RJ_YL != null && _TestData.str_RJ_YL != "")
+            //    offScreenDC.DrawString("充盈期膀胱容积-压力测定结果： " + _TestData.str_RJ_YL, new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
+            //else
                 offScreenDC.DrawString("充盈期膀胱容积-压力测定结果： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
             nCurHeight += nrowH;
@@ -589,7 +589,7 @@ namespace Qtud.Qtud
             nrowH = 30;
             rtf.Height = nrowH;
             offScreenDC.DrawString("膀胱顺应性： ", new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
-            offScreenDC.DrawString( _TestData.str_syx, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left +  stepw * 1.5f, DrawRect.Top + nCurHeight + 10));
+            offScreenDC.DrawString( _TestData.str_syx, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left +  stepw * 1, DrawRect.Top + nCurHeight + 10));
            
             //offScreenDC.DrawString("正常 " + _TestData.str_nl_cg, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 1, DrawRect.Top + nCurHeight + 10));
             //offScreenDC.DrawString("高顺应性 " + _TestData.str_nl_cg, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 2, DrawRect.Top + nCurHeight + 10));
@@ -602,7 +602,7 @@ namespace Qtud.Qtud
             nrowH = 30;
             rtf.Height = nrowH;
             offScreenDC.DrawString("膀胱稳定性： ", new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
-            offScreenDC.DrawString( _TestData.str_wdx, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 1.5f, DrawRect.Top + nCurHeight + 10));
+            offScreenDC.DrawString( _TestData.str_wdx, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 1, DrawRect.Top + nCurHeight + 10));
             //offScreenDC.DrawString("正常 " + _TestData.str_nl_cg, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 1, DrawRect.Top + nCurHeight + 10));
             //offScreenDC.DrawString("逼尿肌活动过度 " + _TestData.str_nl_cg, new Font("宋体", 12), drawBrush, new PointF(DrawRect.Left + stepw * 2, DrawRect.Top + nCurHeight + 10));
 
@@ -615,9 +615,9 @@ namespace Qtud.Qtud
             rtf.Width = DrawRect.Width;
 
             rtf.Location = new PointF(DrawRect.Left, DrawRect.Top + nCurHeight);
-            if (_TestData.str_tsjc != null && _TestData.str_tsjc != "")
-                offScreenDC.DrawString("特殊检查： " + _TestData.str_tsjc, new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
-            else
+            //if (_TestData.str_tsjc != null && _TestData.str_tsjc != "")
+            //    offScreenDC.DrawString("特殊检查： " + _TestData.str_tsjc, new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
+            //else
                 offScreenDC.DrawString("特殊检查： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
 
@@ -625,7 +625,7 @@ namespace Qtud.Qtud
             offScreenDC.DrawString("Valsalva 腹腔漏尿点压力（VLPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
            
             if (_TestData.str_vlpp != null && _TestData.str_vlpp != "")
-                offScreenDC.DrawString(  _TestData.str_vlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5)*2 -20 , DrawRect.Top + nCurHeight + 10));
+                offScreenDC.DrawString(_TestData.str_vlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5 * 1.5)  , DrawRect.Top + nCurHeight + 10));
            
             
             offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
@@ -633,21 +633,21 @@ namespace Qtud.Qtud
             nCurHeight += nrowH;
             offScreenDC.DrawString("逼尿肌漏尿点压（DLPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             if (_TestData.str_dlpp != null && _TestData.str_dlpp != "")
-                offScreenDC.DrawString(_TestData.str_dlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5) * 2 - 20, DrawRect.Top + nCurHeight + 10));
+                offScreenDC.DrawString(_TestData.str_dlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5* 1.5)  , DrawRect.Top + nCurHeight + 10));
             offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
              nCurHeight += nrowH;
-             offScreenDC.DrawString("咳嗽诱导腹腔漏尿点压力测定（CLPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
+             offScreenDC.DrawString("咳嗽诱导腹腔漏尿点压力测定（ALPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
           
             if (_TestData.str_clpp != null && _TestData.str_clpp != "")
-                offScreenDC.DrawString(_TestData.str_clpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5) * 2 - 20, DrawRect.Top + nCurHeight + 10));
+                offScreenDC.DrawString(_TestData.str_clpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5 * 1.5)  , DrawRect.Top + nCurHeight + 10));
             offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
             nCurHeight += nrowH;
             offScreenDC.DrawString("膀胱安全容量： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
            
             if (_TestData.str_aqrl != null && _TestData.str_aqrl != "")
-                offScreenDC.DrawString(_TestData.str_aqrl, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5) * 2 - 20, DrawRect.Top + nCurHeight + 10));
+                offScreenDC.DrawString(_TestData.str_aqrl, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5 * 1.5)  , DrawRect.Top + nCurHeight + 10));
             offScreenDC.DrawString(" ml", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
               

@@ -61,13 +61,13 @@ namespace Qtud.Qtud
 
         private void ReportListView_Load(object sender, EventArgs e)
         {
-            this.listView_report.Columns.Add("序 号", 80, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("日 期", 260, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("床号", 100, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("最大尿流率", 150, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("排尿量", 100, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("膀胱顺应性", 150, HorizontalAlignment.Center); //一步添加 
-            this.listView_report.Columns.Add("膀胱稳定性", 200, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("序 号", 80, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("日 期", 260, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("床 号", 100, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("最大尿流率", 150, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("排尿量", 100, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("膀胱顺应性", 150, HorizontalAlignment.Center); //一步添加 
+            //this.listView_report.Columns.Add("膀胱稳定性", 200, HorizontalAlignment.Center); //一步添加 
             
             UpdateListBox();
         }

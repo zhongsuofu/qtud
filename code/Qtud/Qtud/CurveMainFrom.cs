@@ -2297,7 +2297,10 @@ namespace Qtud.Qtud
                             index++;
                         }
                     }
-                    
+
+                    if (index < 1)
+                        return;
+
                     int StepH =(int) m_CurCurveArea.Height/index;
                     int nCurStep = (int) (e.Y-m_CurCurveArea.Top)/StepH;
                     if ((e.Y - m_CurCurveArea.Top) % StepH != 0)

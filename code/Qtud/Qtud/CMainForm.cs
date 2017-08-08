@@ -196,6 +196,7 @@ namespace Qtud.Qtud
         //更新病人列表
         public void UpdateListBox()
         {
+            CurSelIndex  = -1;
             string strWhere = string.Empty;
             string sRet = string.Empty;
             parient_list.Items.Clear();
@@ -413,6 +414,7 @@ namespace Qtud.Qtud
                     try
                     {
                         pim.Delete(m_CurSelPatientInfo.uuid);
+                        CurSelIndex = -1;
                         UpdateListBox();
                         textBox_queryWhere.Text = string.Empty;
 
@@ -429,14 +431,16 @@ namespace Qtud.Qtud
 
         private void button_patient_manage_Click(object sender, EventArgs e)
         {
-            PatientManageDlg m_ReportListView = new PatientManageDlg( );
+            this.Hide(); //显示  
+            PatientManageDlg m_ReportListView = new PatientManageDlg();
             DialogResult dlgResult = m_ReportListView.ShowDialog();
             if (dlgResult == DialogResult.OK)
             {
 
             }
-                        UpdateListBox();
-            
+            UpdateListBox();
+
+            this.Show(); //显示  
             
         }
 

@@ -103,6 +103,7 @@
             // 
             // textBox1_bs
             // 
+            this.textBox1_bs.Enabled = false;
             this.textBox1_bs.Location = new System.Drawing.Point(650, 282);
             this.textBox1_bs.MaxLength = 64;
             this.textBox1_bs.Multiline = true;
@@ -154,7 +155,7 @@
             this.label_msg.Name = "label_msg";
             this.label_msg.Size = new System.Drawing.Size(181, 21);
             this.label_msg.TabIndex = 31;
-            this.label_msg.Text = "病人姓名或身份证号";
+            this.label_msg.Text = "患者姓名或身份证号";
             this.label_msg.Click += new System.EventHandler(this.label_msg_Click);
             // 
             // button_query
@@ -268,6 +269,7 @@
             // 
             // textBox_meno
             // 
+            this.textBox_meno.Enabled = false;
             this.textBox_meno.Location = new System.Drawing.Point(650, 417);
             this.textBox_meno.MaxLength = 64;
             this.textBox_meno.Multiline = true;
@@ -290,6 +292,7 @@
             // 
             // textBox_phone
             // 
+            this.textBox_phone.Enabled = false;
             this.textBox_phone.Location = new System.Drawing.Point(650, 225);
             this.textBox_phone.MaxLength = 16;
             this.textBox_phone.Name = "textBox_phone";
@@ -299,6 +302,7 @@
             // 
             // textBox_cardid
             // 
+            this.textBox_cardid.Enabled = false;
             this.textBox_cardid.Location = new System.Drawing.Point(650, 46);
             this.textBox_cardid.MaxLength = 24;
             this.textBox_cardid.Name = "textBox_cardid";
@@ -308,6 +312,7 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.Enabled = false;
             this.textBox_name.Location = new System.Drawing.Point(650, 108);
             this.textBox_name.MaxLength = 32;
             this.textBox_name.Name = "textBox_name";
@@ -340,6 +345,7 @@
             // radioBtn_man
             // 
             this.radioBtn_man.AutoSize = true;
+            this.radioBtn_man.Enabled = false;
             this.radioBtn_man.ForeColor = System.Drawing.Color.White;
             this.radioBtn_man.Location = new System.Drawing.Point(650, 166);
             this.radioBtn_man.Name = "radioBtn_man";
@@ -352,6 +358,7 @@
             // 
             this.radioBTN_woman.AutoSize = true;
             this.radioBTN_woman.Checked = true;
+            this.radioBTN_woman.Enabled = false;
             this.radioBTN_woman.ForeColor = System.Drawing.Color.White;
             this.radioBTN_woman.Location = new System.Drawing.Point(737, 166);
             this.radioBTN_woman.Name = "radioBTN_woman";
@@ -439,7 +446,7 @@
             this.button_patient_manage.Name = "button_patient_manage";
             this.button_patient_manage.Size = new System.Drawing.Size(118, 44);
             this.button_patient_manage.TabIndex = 3;
-            this.button_patient_manage.Text = "病人管理";
+            this.button_patient_manage.Text = "患者管理";
             this.button_patient_manage.UseVisualStyleBackColor = true;
             this.button_patient_manage.Click += new System.EventHandler(this.button_patient_manage_Click);
             // 

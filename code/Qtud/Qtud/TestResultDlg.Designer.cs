@@ -273,7 +273,7 @@
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(484, 25);
             this.label23.TabIndex = 27;
-            this.label23.Text = "咳嗽诱导腹腔漏尿点压力测定（CLPP）：";
+            this.label23.Text = "咳嗽诱导腹腔漏尿点压力测定（ALPP）：";
             // 
             // textBox_clpp
             // 
@@ -379,6 +379,7 @@
             this.textBox_tsjc.Name = "textBox_tsjc";
             this.textBox_tsjc.Size = new System.Drawing.Size(508, 30);
             this.textBox_tsjc.TabIndex = 19;
+            this.textBox_tsjc.Visible = false;
             // 
             // label22
             // 
@@ -673,6 +674,7 @@
             this.textBox_cyqpgrj.Name = "textBox_cyqpgrj";
             this.textBox_cyqpgrj.Size = new System.Drawing.Size(191, 30);
             this.textBox_cyqpgrj.TabIndex = 10;
+            this.textBox_cyqpgrj.Visible = false;
             // 
             // textBox_nlljcjg
             // 
