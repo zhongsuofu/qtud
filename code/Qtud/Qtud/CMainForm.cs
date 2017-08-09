@@ -19,8 +19,10 @@ namespace Qtud.Qtud
         #region 变量
         private UserManager um = new UserManager();
         private PatientInfoManager pim = new PatientInfoManager();
+        private ReportInfoManager Rim = new ReportInfoManager();
 
-        private List<PatientInfoModel> listPatientInfo;  //病人数据列表
+        private List<PatientInfoModel> listPatientInfo = new List<PatientInfoModel>();  //病人数据列表
+        private List<ReportInfoModel> listReportInfo = new List<ReportInfoModel>();    //报告数据列表
         private PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
         private int CurSelIndex  = -1;  //当前选择的病人列表序号
   
@@ -54,9 +56,9 @@ namespace Qtud.Qtud
         private void CMainFoam_Load(object sender, EventArgs e)
         {  
             this.WindowState = FormWindowState.Maximized;
-            panel1.Location = new Point((int)(this.Width - panel1.Width) / 2, panel1.Top);
+            //panel1.Location = new Point((int)(this.Width - panel1.Width) / 2, panel1.Top);
 
-            UpdateListBox(); 
+            UpdateListView();
 
         }
 
@@ -100,6 +102,87 @@ namespace Qtud.Qtud
 
 
         #region 功能函数
+
+        //更新病人列表
+        public void UpdateListView()
+        {
+            string strWhere = string.Empty;
+            string sRet = string.Empty;
+            listView_patList.Items.Clear();
+            listPatientInfo.Clear();
+            try
+            { 
+                strWhere += " cardid<>''";//非冻结
+                strWhere += "   order by lastchecktime desc limit 0,50 ";
+                listPatientInfo = pim.GetModelList(strWhere);
+                if (0 < listPatientInfo.Count)//没找到数据
+                {
+                    int i = 0;
+                    foreach (PatientInfoModel data in listPatientInfo)
+                    {
+                        i++;
+
+                        //解密
+                        //string DBase64 = System.Text.Encoding.Default.GetString(Convert.FromBase64String(data.cardid));  //Base解码
+                        //string strcardid = DES.DESDecoder(DBase64, Encoding.Default, null, null);  //DES解码 
+                        //data.cardid = strcardid;
+                        data.cardid = data.cardid;
+
+                        ListViewItem lvi = new ListViewItem();
+                        lvi.Text = i.ToString();
+                        lvi.SubItems.Add(data.name);
+                        lvi.SubItems.Add(data.cardid);
+                      
+                        this.listView_patList.Items.Add(lvi);
+
+                    }
+
+
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public void UpdateReportListBox()
+        {
+            string strWhere = string.Empty;
+            string sRet = string.Empty;
+            listView_report.Items.Clear();
+            listReportInfo.Clear();
+            try
+            {
+                strWhere += @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' ";//非冻结
+                strWhere += @"   order by CreateDate desc ";
+
+                listReportInfo = Rim.GetModelList(strWhere);
+                if (0 < listReportInfo.Count)//没找到数据
+                {
+                    int i = 0;
+                    foreach (ReportInfoModel data in listReportInfo)
+                    {
+                        i++;
+
+                        ListViewItem lvi = new ListViewItem();
+                        lvi.Text = i.ToString();
+                        lvi.SubItems.Add(data.CreateDate.ToString());
+                        
+                        this.listView_report.Items.Add(lvi);
+
+                    }
+
+                    //if (CurSelIndex == -1)
+                    //    CurSelIndex = 0;
+                    //this.parient_list.SelectedIndex = CurSelIndex;
+                }
+            }
+            catch (System.Exception e)
+            {
+                throw e;
+            }
+        }
 
         private void GetSelPrtientInfo()
         {
@@ -452,6 +535,28 @@ namespace Qtud.Qtud
         private void button_sys_Setting_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void listView_patList_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (listView_patList.SelectedItems.Count == 0)
+                return;
+            else
+            {
+                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+                 
+                int i = 0;
+                foreach (PatientInfoModel data in listPatientInfo)
+                {
+                    if (cardid == data.cardid)
+                    {
+                        m_CurSelPatientInfo = data;   //当前选择的病人信息
+                        UpdateReportListBox();
+                        break;
+                    }
+                    i++;
+                }
+            }
         }
  
 

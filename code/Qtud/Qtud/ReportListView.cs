@@ -82,7 +82,7 @@ namespace Qtud.Qtud
             try
             {
                 strWhere += @" patient_uuid='" + m_CurSelPatientInfo.uuid+ @"' ";//非冻结
-                strWhere += @"   order by CreateDate ";
+                strWhere += @"   order by CreateDate desc ";
 
                 listReportInfo = pim.GetModelList(strWhere);
                 if (0 < listReportInfo.Count)//没找到数据
