@@ -30,12 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ReportListView));
             this.listView_report = new System.Windows.Forms.ListView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.button_up = new System.Windows.Forms.Button();
-            this.button_Create_rep = new System.Windows.Forms.Button();
-            this.label_Info = new System.Windows.Forms.Label();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -43,6 +37,12 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.button_up = new System.Windows.Forms.Button();
+            this.button_Create_rep = new System.Windows.Forms.Button();
+            this.label_Info = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -67,7 +67,48 @@
             this.listView_report.TabIndex = 0;
             this.listView_report.UseCompatibleStateImageBehavior = false;
             this.listView_report.View = System.Windows.Forms.View.Details;
+            this.listView_report.SelectedIndexChanged += new System.EventHandler(this.listView_report_SelectedIndexChanged);
             this.listView_report.DoubleClick += new System.EventHandler(this.listView_report_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "序 号";
+            this.columnHeader1.Width = 80;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "日 期";
+            this.columnHeader2.Width = 260;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "床 号";
+            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader3.Width = 100;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "最大尿流率";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader4.Width = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "排尿量";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader5.Width = 100;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "膀胱顺应性";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader6.Width = 150;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "膀胱稳定性";
+            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader7.Width = 200;
             // 
             // panel1
             // 
@@ -137,46 +178,6 @@
             this.label_Info.Name = "label_Info";
             this.label_Info.Size = new System.Drawing.Size(0, 24);
             this.label_Info.TabIndex = 0;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "序 号";
-            this.columnHeader1.Width = 80;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "日 期";
-            this.columnHeader2.Width = 260;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "床 号";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 100;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "最大尿流率";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 150;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "排尿量";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 100;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "膀胱顺应性";
-            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader6.Width = 150;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "膀胱稳定性";
-            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader7.Width = 200;
             // 
             // ReportListView
             // 

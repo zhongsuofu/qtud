@@ -19,6 +19,8 @@ namespace Qtud.DBManage.Model
         private DateTime _lastchecktime = DateTime.Now;
         private string _meno = string.Empty;
         private string _bs = string.Empty;  //²¡Ê·
+        private DateTime _birth = DateTime.Now;  //²¡Ê·
+        private string _id = string.Empty;  //²¡Ê·
 
          
 
@@ -30,6 +32,14 @@ namespace Qtud.DBManage.Model
             set { _uuid = value; }
             get { return _uuid; }
 		}
+        /// <summary>
+        /// 
+        /// </summary>
+        public string id
+        {
+            set { _id = value; }
+            get { return _id; }
+        }
 		/// <summary>
 		/// 
 		/// </summary>
@@ -81,6 +91,17 @@ namespace Qtud.DBManage.Model
             set { _lastchecktime = value; }
             get { return _lastchecktime; }
 		}
+
+        /// <summary>
+		/// 
+		/// </summary>
+        public DateTime birth
+		{
+            set { _birth = value; }
+            get { return _birth; }
+		}
+
+        
 
         /// <summary>
         /// 

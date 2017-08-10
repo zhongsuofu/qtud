@@ -156,5 +156,10 @@ namespace Qtud.Qtud
         {
             this.DialogResult = DialogResult.Cancel;
         }
+
+        private void listView_report_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
