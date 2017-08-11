@@ -28,3 +28,13 @@ J:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Debug\SelfishInfo.Acces
 J:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.csprojResolveAssemblyReference.cache
 J:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.dll
 J:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.pdb
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\SystemCommon.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\SystemCommon.pdb
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\Excel.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\ICSharpCode.SharpZipLib.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\SelfishInfo.Access.DBUtility.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\MySql.Data.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\bin\x86\Debug\SelfishInfo.Access.DBUtility.pdb
+E:\mywork\qtud\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.csprojResolveAssemblyReference.cache
+E:\mywork\qtud\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.dll
+E:\mywork\qtud\code\Qtud\SystemCommon\obj\x86\Debug\SystemCommon.pdb

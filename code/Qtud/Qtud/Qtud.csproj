@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -93,6 +93,7 @@
     <Compile Include="myPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="OperateIniFile.cs" />
     <Compile Include="PatientInfoDlg.cs">
       <SubType>Form</SubType>
     </Compile>
