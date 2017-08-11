@@ -181,7 +181,7 @@ namespace Qtud.Qtud
                 str = "男";
             else
                 str = "女";
-            label_Info.Text = "患者：" + m_CurSelPatientInfo.name + @"  " + str + @"  " + m_CurSelPatientInfo.cardid;
+            label_Info.Text = "患者：" + m_CurSelPatientInfo.name + @"  " + str + @"  " + m_CurSelPatientInfo.id;
 
             m_CurSelCurveArea.Location = new Point(0, 0);
             m_CurSelCurveArea.Size = new Size(0, 0);

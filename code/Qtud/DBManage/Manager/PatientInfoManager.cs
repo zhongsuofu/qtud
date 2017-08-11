@@ -129,7 +129,8 @@ namespace Qtud.DBManage.Manager
                     model.lastchecktime = DateTime.Parse(dt.Rows[n]["lastchecktime"].ToString());
                     model.bs = dt.Rows[n]["bs"].ToString();
                     model.id = dt.Rows[n]["id"].ToString();
-                    model.birth =DateTime.Parse(dt.Rows[n]["birth"].ToString());
+                    if (dt.Rows[n]["birth"].ToString() != null && dt.Rows[n]["birth"].ToString() != "")
+                        model.birth = DateTime.Parse(dt.Rows[n]["birth"].ToString());
                      
                     modelList.Add(model);
                 }

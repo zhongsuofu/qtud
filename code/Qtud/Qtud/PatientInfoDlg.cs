@@ -53,18 +53,26 @@ namespace Qtud.Qtud
         {
             try
             {
-                if (this.textBox_cardid.Text.Trim() == "")
+                //if (this.textBox_cardid.Text.Trim() == "")
+                //{
+                //    MessageBox.Show("请输入身份证号!", "输入提示");
+                //    textBox_cardid.Focus();
+                //    return;
+                //}
+                //if (this.textBox_cardid.Text.Trim().Length < 18)
+                //{
+                //    MessageBox.Show("身份证号错误，请重新输入!", "输入提示");
+                //    textBox_cardid.Focus();
+                //    return;
+                //}
+
+                if (this.textBox_id.Text.Trim() == "")
                 {
-                    MessageBox.Show("请输入身份证号!", "输入提示");
-                    textBox_cardid.Focus();
+                    MessageBox.Show("请输入ID号!", "输入提示");
+                    textBox_id.Focus();
                     return;
                 }
-                if (this.textBox_cardid.Text.Trim().Length < 18)
-                {
-                    MessageBox.Show("身份证号错误，请重新输入!", "输入提示");
-                    textBox_cardid.Focus();
-                    return;
-                }
+                model.id = this.textBox_id.Text.Trim();
 
                 if (this.textBox_name.Text.Trim() == "")
                 {
@@ -87,6 +95,7 @@ namespace Qtud.Qtud
                 model.bs = textBox_bs.Text.Trim();
                 model.phone = this.textBox_phone.Text.Trim();
                 model.meno = this.textBox_meno.Text.Trim();
+                model.birth = this.dateTimePicker1.Value  ;
 
                 PatientInfoManager pim = new PatientInfoManager();
                 if (DlgType == 0)  //新增
@@ -121,8 +130,9 @@ namespace Qtud.Qtud
         {
             if (DlgType == 1 && model != null)
             {
-                textBox_cardid.Enabled = false;
+                textBox_id.Enabled = false;
                 textBox_name.Enabled = false;
+                textBox_id.Text = model.id;
 
                 textBox_cardid.Text = model.cardid;
                 textBox_name.Text = model.name;
@@ -132,6 +142,7 @@ namespace Qtud.Qtud
                     radioBtn_man.Checked = true;
                 textBox_phone.Text = model.phone;
                 textBox_meno.Text = model.meno;
+                dateTimePicker1.Value = model.birth;
 
                 textBox_bs.Text = model.bs;
             }

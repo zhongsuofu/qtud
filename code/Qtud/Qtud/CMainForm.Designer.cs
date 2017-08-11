@@ -32,6 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CMainForm));
             this.panel_mid = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label_phone = new System.Windows.Forms.Label();
+            this.label_yearold = new System.Windows.Forms.Label();
+            this.label_birth = new System.Windows.Forms.Label();
+            this.label_sex = new System.Windows.Forms.Label();
+            this.label_cardid = new System.Windows.Forms.Label();
+            this.label_id = new System.Windows.Forms.Label();
+            this.label_name = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox_meno = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -66,16 +76,6 @@
             this.button_user_manage = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label_name = new System.Windows.Forms.Label();
-            this.label_id = new System.Windows.Forms.Label();
-            this.label_cardid = new System.Windows.Forms.Label();
-            this.label_sex = new System.Windows.Forms.Label();
-            this.label_birth = new System.Windows.Forms.Label();
-            this.label_yearold = new System.Windows.Forms.Label();
-            this.label_phone = new System.Windows.Forms.Label();
             this.panel_mid.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -120,6 +120,116 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(561, 579);
             this.panel1.TabIndex = 33;
+            // 
+            // label_phone
+            // 
+            this.label_phone.AutoSize = true;
+            this.label_phone.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_phone.ForeColor = System.Drawing.Color.White;
+            this.label_phone.Location = new System.Drawing.Point(167, 319);
+            this.label_phone.Name = "label_phone";
+            this.label_phone.Size = new System.Drawing.Size(77, 25);
+            this.label_phone.TabIndex = 41;
+            this.label_phone.Text = "=====";
+            // 
+            // label_yearold
+            // 
+            this.label_yearold.AutoSize = true;
+            this.label_yearold.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_yearold.ForeColor = System.Drawing.Color.White;
+            this.label_yearold.Location = new System.Drawing.Point(167, 272);
+            this.label_yearold.Name = "label_yearold";
+            this.label_yearold.Size = new System.Drawing.Size(77, 25);
+            this.label_yearold.TabIndex = 40;
+            this.label_yearold.Text = "=====";
+            // 
+            // label_birth
+            // 
+            this.label_birth.AutoSize = true;
+            this.label_birth.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_birth.ForeColor = System.Drawing.Color.White;
+            this.label_birth.Location = new System.Drawing.Point(167, 233);
+            this.label_birth.Name = "label_birth";
+            this.label_birth.Size = new System.Drawing.Size(77, 25);
+            this.label_birth.TabIndex = 39;
+            this.label_birth.Text = "=====";
+            // 
+            // label_sex
+            // 
+            this.label_sex.AutoSize = true;
+            this.label_sex.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_sex.ForeColor = System.Drawing.Color.White;
+            this.label_sex.Location = new System.Drawing.Point(167, 192);
+            this.label_sex.Name = "label_sex";
+            this.label_sex.Size = new System.Drawing.Size(77, 25);
+            this.label_sex.TabIndex = 38;
+            this.label_sex.Text = "=====";
+            // 
+            // label_cardid
+            // 
+            this.label_cardid.AutoSize = true;
+            this.label_cardid.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_cardid.ForeColor = System.Drawing.Color.White;
+            this.label_cardid.Location = new System.Drawing.Point(167, 150);
+            this.label_cardid.Name = "label_cardid";
+            this.label_cardid.Size = new System.Drawing.Size(77, 25);
+            this.label_cardid.TabIndex = 37;
+            this.label_cardid.Text = "=====";
+            // 
+            // label_id
+            // 
+            this.label_id.AutoSize = true;
+            this.label_id.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_id.ForeColor = System.Drawing.Color.White;
+            this.label_id.Location = new System.Drawing.Point(167, 103);
+            this.label_id.Name = "label_id";
+            this.label_id.Size = new System.Drawing.Size(77, 25);
+            this.label_id.TabIndex = 36;
+            this.label_id.Text = "=====";
+            // 
+            // label_name
+            // 
+            this.label_name.AutoSize = true;
+            this.label_name.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_name.ForeColor = System.Drawing.Color.White;
+            this.label_name.Location = new System.Drawing.Point(167, 64);
+            this.label_name.Name = "label_name";
+            this.label_name.Size = new System.Drawing.Size(77, 25);
+            this.label_name.TabIndex = 35;
+            this.label_name.Text = "=====";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.ForeColor = System.Drawing.Color.White;
+            this.label8.Location = new System.Drawing.Point(63, 272);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(90, 25);
+            this.label8.TabIndex = 34;
+            this.label8.Text = "年 龄:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(24, 233);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(129, 25);
+            this.label7.TabIndex = 33;
+            this.label7.Text = "出生日期:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(63, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 25);
+            this.label6.TabIndex = 32;
+            this.label6.Text = "ID 号:";
             // 
             // label1
             // 
@@ -244,7 +354,9 @@
             this.listView_patList.TabIndex = 32;
             this.listView_patList.UseCompatibleStateImageBehavior = false;
             this.listView_patList.View = System.Windows.Forms.View.Details;
+            this.listView_patList.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView_patList_ItemSelectionChanged);
             this.listView_patList.Click += new System.EventHandler(this.listView_patList_Click);
+            this.listView_patList.Validated += new System.EventHandler(this.listView_patList_Validated);
             // 
             // columnHeader1
             // 
@@ -259,7 +371,7 @@
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "身份证号";
+            this.columnHeader3.Text = "ID号";
             this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader3.Width = 200;
             // 
@@ -319,9 +431,9 @@
             this.label_msg.ForeColor = System.Drawing.Color.MediumSlateBlue;
             this.label_msg.Location = new System.Drawing.Point(109, 96);
             this.label_msg.Name = "label_msg";
-            this.label_msg.Size = new System.Drawing.Size(181, 21);
+            this.label_msg.Size = new System.Drawing.Size(146, 21);
             this.label_msg.TabIndex = 31;
-            this.label_msg.Text = "患者姓名或身份证号";
+            this.label_msg.Text = "患者姓名或ID号";
             this.label_msg.Click += new System.EventHandler(this.label_msg_Click);
             // 
             // button_query
@@ -373,7 +485,9 @@
             this.listView_report.TabIndex = 8;
             this.listView_report.UseCompatibleStateImageBehavior = false;
             this.listView_report.View = System.Windows.Forms.View.Details;
+            this.listView_report.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView_report_ItemSelectionChanged);
             this.listView_report.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_report_MouseDoubleClick);
+            this.listView_report.Validated += new System.EventHandler(this.listView_report_Validated);
             // 
             // columnHeader4
             // 
@@ -478,116 +592,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1457, 631);
             this.panel3.TabIndex = 22;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(63, 103);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(90, 25);
-            this.label6.TabIndex = 32;
-            this.label6.Text = "ID 号:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(24, 233);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(129, 25);
-            this.label7.TabIndex = 33;
-            this.label7.Text = "出生日期:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(63, 272);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(90, 25);
-            this.label8.TabIndex = 34;
-            this.label8.Text = "年 龄:";
-            // 
-            // label_name
-            // 
-            this.label_name.AutoSize = true;
-            this.label_name.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_name.ForeColor = System.Drawing.Color.White;
-            this.label_name.Location = new System.Drawing.Point(167, 64);
-            this.label_name.Name = "label_name";
-            this.label_name.Size = new System.Drawing.Size(77, 25);
-            this.label_name.TabIndex = 35;
-            this.label_name.Text = "=====";
-            // 
-            // label_id
-            // 
-            this.label_id.AutoSize = true;
-            this.label_id.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_id.ForeColor = System.Drawing.Color.White;
-            this.label_id.Location = new System.Drawing.Point(167, 103);
-            this.label_id.Name = "label_id";
-            this.label_id.Size = new System.Drawing.Size(77, 25);
-            this.label_id.TabIndex = 36;
-            this.label_id.Text = "=====";
-            // 
-            // label_cardid
-            // 
-            this.label_cardid.AutoSize = true;
-            this.label_cardid.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_cardid.ForeColor = System.Drawing.Color.White;
-            this.label_cardid.Location = new System.Drawing.Point(167, 150);
-            this.label_cardid.Name = "label_cardid";
-            this.label_cardid.Size = new System.Drawing.Size(77, 25);
-            this.label_cardid.TabIndex = 37;
-            this.label_cardid.Text = "=====";
-            // 
-            // label_sex
-            // 
-            this.label_sex.AutoSize = true;
-            this.label_sex.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_sex.ForeColor = System.Drawing.Color.White;
-            this.label_sex.Location = new System.Drawing.Point(167, 192);
-            this.label_sex.Name = "label_sex";
-            this.label_sex.Size = new System.Drawing.Size(77, 25);
-            this.label_sex.TabIndex = 38;
-            this.label_sex.Text = "=====";
-            // 
-            // label_birth
-            // 
-            this.label_birth.AutoSize = true;
-            this.label_birth.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_birth.ForeColor = System.Drawing.Color.White;
-            this.label_birth.Location = new System.Drawing.Point(167, 233);
-            this.label_birth.Name = "label_birth";
-            this.label_birth.Size = new System.Drawing.Size(77, 25);
-            this.label_birth.TabIndex = 39;
-            this.label_birth.Text = "=====";
-            // 
-            // label_yearold
-            // 
-            this.label_yearold.AutoSize = true;
-            this.label_yearold.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_yearold.ForeColor = System.Drawing.Color.White;
-            this.label_yearold.Location = new System.Drawing.Point(167, 272);
-            this.label_yearold.Name = "label_yearold";
-            this.label_yearold.Size = new System.Drawing.Size(77, 25);
-            this.label_yearold.TabIndex = 40;
-            this.label_yearold.Text = "=====";
-            // 
-            // label_phone
-            // 
-            this.label_phone.AutoSize = true;
-            this.label_phone.Font = new System.Drawing.Font("新宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_phone.ForeColor = System.Drawing.Color.White;
-            this.label_phone.Location = new System.Drawing.Point(167, 319);
-            this.label_phone.Name = "label_phone";
-            this.label_phone.Size = new System.Drawing.Size(77, 25);
-            this.label_phone.TabIndex = 41;
-            this.label_phone.Text = "=====";
             // 
             // CMainForm
             // 

@@ -78,7 +78,7 @@ namespace Qtud.Qtud
             listPatientInfo.Clear();
             try
             { 
-                strWhere += " cardid<>''";//非冻结
+                strWhere += "  id<>''";//非冻结
                 strWhere += "   order by lastchecktime desc limit 0,50 ";
                 listPatientInfo = pim.GetModelList(strWhere);
                 if (0 < listPatientInfo.Count)//没找到数据
@@ -97,13 +97,12 @@ namespace Qtud.Qtud
                         ListViewItem lvi = new ListViewItem();
                         lvi.Text = i.ToString();
                         lvi.SubItems.Add(data.name);
-                        lvi.SubItems.Add(data.cardid);
+                        lvi.SubItems.Add(data.id);
                       
                         this.listView_patList.Items.Add(lvi);
 
                     }
-
-
+                     
                 }
             }
             catch (System.Exception e)
@@ -126,7 +125,7 @@ namespace Qtud.Qtud
 
 
 
-                strWhere += @" cardid<>'' and ( cardid like '%" + strQuery.Trim() + @"%'  or  name like '%" + strQuery + @"%' ) ";//非冻结
+                strWhere += @" id<>'' and (  id like '%" + strQuery.Trim() + @"%'  or  name like '%" + strQuery + @"%' ) ";//非冻结
                 strWhere += "   order by lastchecktime desc  ";
 
                 listPatientInfo = pim.GetModelList(strWhere);
@@ -146,7 +145,7 @@ namespace Qtud.Qtud
                         ListViewItem lvi = new ListViewItem();
                         lvi.Text = i.ToString();
                         lvi.SubItems.Add(data.name);
-                        lvi.SubItems.Add(data.cardid);
+                        lvi.SubItems.Add(data.id);
                         
                         this.listView_patList.Items.Add(lvi);
                     }
@@ -216,16 +215,12 @@ namespace Qtud.Qtud
             string strTemp = string.Empty;
             if (CurSelPatientInfo.birth != null)
             {
-                string str = CurSelPatientInfo.cardid.Substring(6, 4);
-                if (str != "")
-                {
-                    DateTime dt = DateTime.Now;
-                    int year = dt.Year - CurSelPatientInfo.birth.Year;
-                    strTemp = year.ToString();
-                }
+                DateTime dt = DateTime.Now;
+                int year = dt.Year - CurSelPatientInfo.birth.Year;
+                strTemp = year.ToString();
 
             }
-            label_yearold.Text = strTemp + "  岁";
+            label_yearold.Text = strTemp + " 岁";
         }
 
          
@@ -323,13 +318,13 @@ namespace Qtud.Qtud
             else
             {
                 string site = listView_patList.SelectedItems[0].Text;
-                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+                string strid = listView_patList.SelectedItems[0].SubItems[2].Text;
 
 
                 int i = 0;
                 foreach (PatientInfoModel data in listPatientInfo)
                 {
-                    if (cardid == data.cardid)
+                    if (strid == data.id)
                     {
                         m_CurSelPatientInfo = data;   //当前选择的病人信息
 
@@ -381,12 +376,12 @@ namespace Qtud.Qtud
                 return;
             else
             {
-                string cardid = listView_patList.SelectedItems[0].SubItems[2].Text;
+                string strID = listView_patList.SelectedItems[0].SubItems[2].Text;
 
                 int i = 0;
                 foreach (PatientInfoModel data in listPatientInfo)
                 {
-                    if (cardid == data.cardid)
+                    if (strID == data.id)
                     {
                         m_CurSelPatientInfo = data;   //当前选择的病人信息
                         UpdateReportListBox();
@@ -455,6 +450,46 @@ namespace Qtud.Qtud
                     }
                 }
 
+            }
+        }
+
+        private void listView_patList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            e.Item.ForeColor = Color.Black;
+            e.Item.BackColor = SystemColors.Window;
+
+            if (listView_patList.FocusedItem != null)
+            {
+                listView_patList.FocusedItem.Selected = true;
+            }
+        }
+
+        private void listView_patList_Validated(object sender, EventArgs e)
+        {
+            if (listView_patList.FocusedItem != null)
+            {
+                listView_patList.FocusedItem.BackColor = SystemColors.Highlight;
+                listView_patList.FocusedItem.ForeColor = Color.White;
+            }
+        }
+
+        private void listView_report_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            e.Item.ForeColor = Color.Black;
+            e.Item.BackColor = SystemColors.Window;
+
+            if (listView_report.FocusedItem != null)
+            {
+                listView_report.FocusedItem.Selected = true;
+            }
+        }
+
+        private void listView_report_Validated(object sender, EventArgs e)
+        {
+            if (listView_report.FocusedItem != null)
+            {
+                listView_report.FocusedItem.BackColor = SystemColors.Highlight;
+                listView_report.FocusedItem.ForeColor = Color.White;
             }
         }
  
