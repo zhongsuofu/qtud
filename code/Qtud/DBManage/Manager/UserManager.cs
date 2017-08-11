@@ -155,6 +155,7 @@ namespace Qtud.DBManage.Manager
                         model.user_lastlogintime = DateTime.Parse(dt.Rows[n]["user_lastlogintime"].ToString());
                     } 
                     model.user_meno = dt.Rows[n]["user_meno"].ToString();
+                    model.user_loginName = dt.Rows[n]["user_loginName"].ToString();
                      
 
 

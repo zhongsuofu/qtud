@@ -83,54 +83,23 @@ namespace Qtud.DBManage.DAL
         public void Add(Qtud.DBManage.Model.UserModel model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("insert into SysUserTbl(");
-            strSql.Append("UUID,UserName,UserFullName,UserPassword,SocialSecurityNO,Email,Dept,Tel,CellPhone,Fax,Status,CreateDate,ModifyDate,LastLogDate,Meno,IsSysUser)");   
+            strSql.Append("insert into tb_user(");
+            strSql.Append(" user_id,user_name,user_passwd,user_status,user_class,user_phone,user_createtime,user_lastlogintime,user_meno,user_loginName)");   
             strSql.Append("  values(");
-            strSql.Append("?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");  
+            strSql.Append(@"'"+model.user_id+ @"',");
+            strSql.Append(@"'"+model.user_name+ @"',");
+            strSql.Append(@"'"+model.user_passwd+ @"',");
+            strSql.Append( model.user_status+ @",");
+            strSql.Append( model.user_class+ @",");
+            strSql.Append(@"'"+model.user_phone+ @"',");
+            strSql.Append(@"'"+model.user_createtime+ @"',");
+            strSql.Append(@"'"+model.user_lastlogintime+ @"',");
+            strSql.Append(@"'"+model.user_meno+ @"',");
+            strSql.Append(@"'"+model.user_loginName+ @"'");
+            strSql.Append(" );");  
 
-            
-            
-            OleDbParameter[] parameters = {
-					new OleDbParameter("@UUID", OleDbType.VarChar,64),
-					new OleDbParameter("@UserName", OleDbType.VarChar,64),
-					new OleDbParameter("@UserFullName", OleDbType.VarChar,64) ,
-                    new OleDbParameter("@UserPassword", OleDbType.VarChar,255) ,
-                    new OleDbParameter("@SocialSecurityNO", OleDbType.VarChar,64),
-                    new OleDbParameter("@Email", OleDbType.VarChar,50),
-                    new OleDbParameter("@Dept", OleDbType.VarChar,50),
-                    new OleDbParameter("@Tel", OleDbType.VarChar,50),
-                    new OleDbParameter("@CellPhone", OleDbType.VarChar,64),
-                    new OleDbParameter("@Fax", OleDbType.VarChar,64), 
-                    new OleDbParameter("@Status", OleDbType.Integer),
-                    new OleDbParameter("@CreateDate", OleDbType.Date),
-                    new OleDbParameter("@ModifyDate", OleDbType.Date),
-                    new OleDbParameter("@LastLogDate", OleDbType.Date),
-                    new OleDbParameter("@Meno", OleDbType.VarChar,255),
-                    new OleDbParameter("@IsSysUser", OleDbType.Integer)
-                
-            };
-            //test
-            //parameters[0].Value = model.UUID;
-            //parameters[1].Value = model.UserName;
-            //parameters[2].Value = model.UserFullName;
-
-            
-
-            //parameters[3].Value = model.Password;
-            //parameters[4].Value = model.SocialSecurityNO;
-            //parameters[5].Value = model.Email;
-            //parameters[6].Value = model.Dept;
-            //parameters[7].Value = model.Tel;
-            //parameters[8].Value = model.CellPhone;
-            //parameters[9].Value = model.Fax;
-            //parameters[10].Value = model.Status;
-            //parameters[11].Value = model.CreateDate;
-            //parameters[12].Value = model.ModifyDate;
-            //parameters[13].Value = model.LastLogDate;
-            //parameters[14].Value = model.Meno;
-            //parameters[15].Value = model.IsSysUser;
-            
-            DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
+             
+            DbHelperMySQL.ExecuteSql(strSql.ToString());
         }
         /// <summary>
         /// 更新一条数据
@@ -138,57 +107,20 @@ namespace Qtud.DBManage.DAL
         public void Update(Qtud.DBManage.Model.UserModel model)
         {
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("update SysUserTbl set ");
-            strSql.Append("UserName=?,");
-            strSql.Append("UserFullName=?,");
-            strSql.Append("UserPassword=?,");
-            strSql.Append("SocialSecurityNO=?,");
-            strSql.Append("Email=?,");
-            strSql.Append("Dept=?,");
-            strSql.Append("Tel=?,");
-            strSql.Append("CellPhone=?,");
-            strSql.Append("Fax=?,");
-            strSql.Append("Status=?,");
-            strSql.Append("ModifyDate=?,");
-            strSql.Append("Meno=?,"); 
-            strSql.Append("IsSysUser=?");
-            strSql.Append(" where UUID=? ");
-            OleDbParameter[] parameters = { 
-					new OleDbParameter("@UserName", OleDbType.VarChar,64),
-					new OleDbParameter("@UserFullName", OleDbType.VarChar,64),
-					new OleDbParameter("@UserPassword", OleDbType.VarChar,255),
-					new OleDbParameter("@SocialSecurityNO", OleDbType.VarChar,64),
-					new OleDbParameter("@Email", OleDbType.VarChar,50),
-					new OleDbParameter("@Dept", OleDbType.VarChar,50),
-					new OleDbParameter("@Tel", OleDbType.VarChar,50),
-					new OleDbParameter("@CellPhone", OleDbType.VarChar,64),
-					new OleDbParameter("@Fax", OleDbType.VarChar,64),
-					new OleDbParameter("@Status", OleDbType.Integer), 
-					new OleDbParameter("@ModifyDate", OleDbType.Date),  
-					new OleDbParameter("@Meno", OleDbType.VarChar,255),
-					new OleDbParameter("@IsSysUser", OleDbType.Integer),
-
-                    new OleDbParameter("@UUID", OleDbType.VarChar,64)
-            };
-
-            //test
-            //parameters[0].Value = model.UserName;
-            //parameters[1].Value = model.UserFullName;
- 
-            //parameters[2].Value = model.Password;
-            //parameters[3].Value = model.SocialSecurityNO;
-            //parameters[4].Value = model.Email;
-            //parameters[5].Value = model.Dept;
-            //parameters[6].Value = model.Tel;
-            //parameters[7].Value = model.CellPhone;
-            //parameters[8].Value = model.Fax;
-            //parameters[9].Value = model.Status;
-            //parameters[10].Value = DateTime.Now;
-            //parameters[11].Value = model.Meno;
-            //parameters[12].Value = model.IsSysUser;
-            //parameters[13].Value = model.UUID;
-
-            DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
+            strSql.Append("update tb_user set ");
+            strSql.Append("user_name='"+model.user_name+@"',");
+            strSql.Append("user_passwd='"+model.user_passwd+@"',");
+            strSql.Append("user_phone='"+model.user_phone+@"',");
+            strSql.Append("user_status="+model.user_status+@",");
+            strSql.Append("user_class="+model.user_class+@",");
+            strSql.Append("user_createtime='"+model.user_createtime+@"',");
+            strSql.Append("user_lastlogintime='"+model.user_lastlogintime+@"',");
+            strSql.Append("user_meno='"+model.user_meno+@"',");
+            strSql.Append("user_loginName='"+model.user_loginName+@"' ");
+          
+            strSql.Append(" where user_id='"+model.user_id+@"'");
+          
+            DbHelperMySQL.ExecuteSql(strSql.ToString());
         }
 
         /// <summary>
@@ -219,13 +151,10 @@ namespace Qtud.DBManage.DAL
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from SysUserTbl ");
-            strSql.Append(" where UUID=? ");
-            OleDbParameter[] parameters = {
-					new OleDbParameter("@UUID", OleDbType.VarChar,64)};
-            parameters[0].Value = UUID;
+            strSql.Append("delete from tb_user ");
+            strSql.Append(" where user_id='"+UUID+@"' "); 
 
-            DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
+            DbHelperMySQL.ExecuteSql(strSql.ToString());
         }
         /// <summary>
         /// 得到一个对象实体
@@ -291,7 +220,7 @@ namespace Qtud.DBManage.DAL
         {
             
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("select user_id, user_name, user_passwd, user_status,user_class,user_phone,user_createtime,user_lastlogintime,user_meno ");
+            strSql.Append("select user_id, user_name, user_passwd, user_status,user_class,user_phone,user_createtime,user_lastlogintime,user_meno,user_loginName ");
             strSql.Append(" from tb_user ");
             if (strWhere.Trim() != "")
             {

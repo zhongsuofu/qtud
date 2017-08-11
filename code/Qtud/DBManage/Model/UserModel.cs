@@ -18,8 +18,8 @@ namespace Qtud.DBManage.Model
         private string _user_phone = string.Empty;
         private DateTime _user_createtime = DateTime.Now;
         private DateTime _user_lastlogintime = DateTime.Now;
-        private string _user_meno = string.Empty;
-        private string _user_bs = string.Empty;
+        private string _user_meno = string.Empty; 
+        private string _user_loginName = string.Empty;
 
 		/// <summary>
 		/// 
@@ -98,6 +98,14 @@ namespace Qtud.DBManage.Model
             get { return _user_meno; }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public string user_loginName
+        {
+            set { _user_loginName = value; }
+            get { return _user_loginName; }
+        }
        
 
         

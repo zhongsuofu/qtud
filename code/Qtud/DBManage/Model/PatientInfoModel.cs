@@ -19,8 +19,8 @@ namespace Qtud.DBManage.Model
         private DateTime _lastchecktime = DateTime.Now;
         private string _meno = string.Empty;
         private string _bs = string.Empty;  //病史
-        private DateTime _birth = DateTime.Now;  //病史
-        private string _id = string.Empty;  //病史
+        private DateTime _birth = DateTime.Now;  //出生日期
+        private string _id = string.Empty;  //ID
 
          
 

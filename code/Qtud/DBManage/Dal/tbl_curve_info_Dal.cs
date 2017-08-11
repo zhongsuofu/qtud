@@ -10,9 +10,9 @@ using Qtud.DBManage.Model;
 
 namespace Qtud.DBManage.DAL
 {
-    public class PatientInfoDal
+    public class tbl_curve_info_Dal
     {
-        public PatientInfoDal()
+        public tbl_curve_info_Dal()
 		{}
 		#region  成员方法
 
@@ -36,23 +36,18 @@ namespace Qtud.DBManage.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public void Add(Qtud.DBManage.Model.PatientInfoModel model)
+		public void Add(Qtud.DBManage.Model.tbl_curve_info_Model model)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("insert into tb_patient_info(");
-            strSql.Append("uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,birth, id,meno  )");
+            strSql.Append("insert into tbl_curve_info(");
+            strSql.Append("uuid,report_uuid,starttime,endtime,meno )");
 			strSql.Append(" values (");
 			strSql.Append(@"'"+ model.uuid +@"', ");
-			strSql.Append(@"'"+ model.cardid +@"', ");
-			strSql.Append(@"'"+ model.name +@"', ");
-			strSql.Append( model.sex +@", ");
-			strSql.Append(@"'"+ model.phone +@"', ");
-			strSql.Append(@"'"+ model.createtime +@"', ");
-            strSql.Append(@"'" + model.lastchecktime + @"', ");
-            strSql.Append(@"'" + model.bs + @"', ");
-            strSql.Append(@"'" + model.birth + @"', ");
-            strSql.Append(@"'" + model.id + @"', ");
-			strSql.Append(@"'"+ model.meno +@"' );"); 
+			strSql.Append(@"'"+ model.report_uuid +@"', ");
+			strSql.Append(@"'"+ model.starttime +@"', "); 
+			strSql.Append(@"'"+ model.endtime +@"', ");
+			strSql.Append(@"'"+ model.meno +@"' ); ");
+			 
              
             DbHelperMySQL.ExecuteSql(strSql.ToString() );
               
@@ -66,12 +61,8 @@ namespace Qtud.DBManage.DAL
             strSql.Append("update tb_patient_info set ");
 
             strSql.Append(@"name ='" + model.name + @"',");
-            strSql.Append(@"cardid ='" + model.cardid + @"',");
-
             strSql.Append(@"sex =" + model.sex + @",");
             strSql.Append(@"phone ='" + model.phone + @"',");
-            strSql.Append(@"bs ='" + model.bs + @"',");
-            strSql.Append(@"birth ='" + model.birth + @"',");
             strSql.Append(@"meno ='" + model.meno + @"' ");
 			 
 			strSql.Append(@" where cardid='"+ model.cardid + @"' ");
@@ -168,7 +159,7 @@ namespace Qtud.DBManage.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,meno,birth,id ");
+            strSql.Append("select  uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,meno ");
             strSql.Append(" from tb_patient_info ");
 			if(strWhere.Trim()!="")
 			{

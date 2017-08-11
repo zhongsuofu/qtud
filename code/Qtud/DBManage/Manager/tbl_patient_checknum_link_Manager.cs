@@ -11,10 +11,10 @@ namespace Qtud.DBManage.Manager
     /// <summary>
     /// 业务逻辑类SysMenTbl 的摘要说明。
     /// </summary>
-    public class PatientInfoManager
+    public class tbl_patient_checknum_link_Manager
     {
-        private readonly Qtud.DBManage.DAL.PatientInfoDal dal = new Qtud.DBManage.DAL.PatientInfoDal();
-        public PatientInfoManager()
+        private readonly Qtud.DBManage.DAL.tbl_patient_checknum_link_Dal dal = new Qtud.DBManage.DAL.tbl_patient_checknum_link_Dal();
+        public tbl_patient_checknum_link_Manager()
         { }
         #region  成员方法
         /// <summary>
@@ -28,7 +28,7 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public void Add(Qtud.DBManage.Model.PatientInfoModel model)
+        public void Add(Qtud.DBManage.Model.tbl_patient_checknum_link_Model model)
         {
             dal.Add(model);
         }
@@ -128,8 +128,6 @@ namespace Qtud.DBManage.Manager
                     model.createtime = DateTime.Parse(dt.Rows[n]["createtime"].ToString());
                     model.lastchecktime = DateTime.Parse(dt.Rows[n]["lastchecktime"].ToString());
                     model.bs = dt.Rows[n]["bs"].ToString();
-                    model.id = dt.Rows[n]["id"].ToString();
-                    model.birth =DateTime.Parse(dt.Rows[n]["birth"].ToString());
                      
                     modelList.Add(model);
                 }
