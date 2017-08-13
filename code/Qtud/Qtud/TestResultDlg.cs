@@ -19,9 +19,32 @@ namespace Qtud.Qtud
         public PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
         private ReportInfoModel m_ReportInfoModel;    //当前报告
 
-        public TestDatas m_TestDatas = new TestDatas();
+        public TestDatas m_TestDatas = new TestDatas
+        {
+            uuid = string.Empty,
+            strKS = string.Empty,
+            strCH = string.Empty,
+            strBS = string.Empty,
+            strNLL = string.Empty,
+            strNL = string.Empty,
 
-        private bool isSave = false;
+            str_RJ_YL = string.Empty,
+            str_nl_cg = string.Empty,
+            str_nl_zc = string.Empty,
+            str_nl_zd = string.Empty,
+
+            str_syx = string.Empty,
+            str_wdx = string.Empty,
+
+            str_tsjc = string.Empty,
+            str_vlpp = string.Empty,
+            str_dlpp = string.Empty,
+            str_clpp = string.Empty,
+            str_aqrl = string.Empty,
+            str_qtms = string.Empty,
+            str_ndlxzd = string.Empty
+        };
+         
 
         public TestResultDlg(PatientInfoModel CurSelPatientInfo,   ReportInfoModel _ReportInfoModel)
         {
@@ -46,20 +69,16 @@ namespace Qtud.Qtud
             else
                 textBox_sex.Text = "男";
 
-            string strTemp = string.Empty;
-            if (m_CurSelPatientInfo.cardid != "")
+            string strTemp = string.Empty; 
+            if (m_CurSelPatientInfo.birth != null && m_CurSelPatientInfo.birth.ToString() != "")
             {
-                string str = m_CurSelPatientInfo.cardid.Substring(6, 4);
-                if (str != "")
-                {
-                    DateTime dt = DateTime.Now;
-                    int year = dt.Year - int.Parse(str);
-                    strTemp = year.ToString() + " 岁";
-                }
+                DateTime dt = DateTime.Now;
+                int year = dt.Year - m_CurSelPatientInfo.birth.Year;
+                strTemp = year.ToString() + @" 岁";
 
             }
 
-            label_Info.Text = "患者：" + m_CurSelPatientInfo.name + @"  " + textBox_sex.Text + @"  " + m_CurSelPatientInfo.cardid;
+            label_Info.Text = "患者：" + m_CurSelPatientInfo.name + @"  " + textBox_sex.Text + @"  " + m_CurSelPatientInfo.id;
 
             //---------------------------------------------------- 
             if (m_ReportInfoModel != null)
@@ -111,24 +130,24 @@ namespace Qtud.Qtud
 
             if (m_TestDatas.str_syx == "正常")
             {
-                radioButton_syqzc.Checked = true;
+                checkBox_syx_zc.Checked = true;
             }
             else if (m_TestDatas.str_syx == "高顺应性")
             {
-                radioButton_syqg.Checked = true;
+                checkBox_syx_g.Checked = true;
             }
             else if (m_TestDatas.str_syx == "低顺应性")
             {
-                radioButton_syqd.Checked = true;
+                checkBox_syx_d.Checked = true;
             }
 
             if (m_TestDatas.str_wdx == "正常")
             {
-                radioButton_wdqzc.Checked = true;
+                checkBox_wdx_z.Checked = true;
             }
             else if (m_TestDatas.str_wdx == "逼尿肌活动过度")
             {
-                radioButton_wdqb.Checked = true;
+                checkBox_wdx_b.Checked = true;
             }
                 
 
@@ -174,19 +193,19 @@ namespace Qtud.Qtud
             m_TestDatas.str_nl_zc = textBox_rlzc.Text;
             m_TestDatas.str_nl_zd = textBox_rlzd.Text;
 
-            if (radioButton_syqzc.Checked)
+            m_TestDatas.str_syx = "";
+            if (checkBox_syx_zc.Checked)
                 m_TestDatas.str_syx = "正常";
-            else if (radioButton_syqg.Checked)
+            else if (checkBox_syx_g.Checked)
                 m_TestDatas.str_syx = "高顺应性";
-            else if (radioButton_syqd.Checked)
+            else if (checkBox_syx_d.Checked)
                 m_TestDatas.str_syx = "低顺应性";
 
-            if (radioButton_wdqzc.Checked)
+            m_TestDatas.str_wdx = "";
+            if (checkBox_wdx_z.Checked)
                 m_TestDatas.str_wdx = "正常";
-            else if (radioButton_wdqb.Checked)
+            else if (checkBox_wdx_b.Checked)
                 m_TestDatas.str_wdx = "逼尿肌活动过度";
-
-
 
             m_TestDatas.str_tsjc = textBox_tsjc.Text;
             m_TestDatas.str_vlpp = textBox_vlpp.Text;
@@ -235,6 +254,7 @@ namespace Qtud.Qtud
                 ReportInfoManager rim = new ReportInfoManager();
 
                 rim.Update(m_ReportInfoModel);
+                MessageBox.Show(" 保存成功！ ");
             }
             catch (System.Exception ex)
             {
@@ -256,16 +276,18 @@ namespace Qtud.Qtud
             m_TestDatas.str_nl_zc = textBox_rlzc.Text;
             m_TestDatas.str_nl_zd = textBox_rlzd.Text;
 
-            if (radioButton_syqzc.Checked)
+            m_TestDatas.str_syx = "";
+            if (checkBox_syx_zc.Checked)
                 m_TestDatas.str_syx = "正常";
-            else if (radioButton_syqg.Checked)
+            else if (checkBox_syx_g.Checked)
                 m_TestDatas.str_syx = "高顺应性";
-            else if (radioButton_syqd.Checked)
+            else if (checkBox_syx_d.Checked)
                 m_TestDatas.str_syx = "低顺应性";
 
-            if (radioButton_wdqzc.Checked)
+            m_TestDatas.str_wdx = "";
+            if (checkBox_wdx_z.Checked)
                 m_TestDatas.str_wdx = "正常";
-            else if (radioButton_wdqb.Checked)
+            else if (checkBox_wdx_b.Checked)
                 m_TestDatas.str_wdx = "逼尿肌活动过度";
             
              
@@ -319,12 +341,114 @@ namespace Qtud.Qtud
                 ReportInfoManager pim = new ReportInfoManager();
 
                 pim.Add(model);
+                MessageBox.Show(" 保存成功！ ");
             }
             catch (System.Exception ex)
             {
                 MessageBox.Show(" 保存失败！ ");
             	
             }
+        }
+
+        //是否修改了
+        private bool isEdit()
+        {
+            bool isbool = true;
+
+            if (m_TestDatas.strKS != textBox_ks.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.strCH != textBox_ch.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.strBS != textBox_bs.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.strNLL != textBox_nlljcjg.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.strNL != textBox1_nl.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_RJ_YL != textBox_cyqpgrj.Text)
+            {
+                return isbool;
+            }
+
+            if (m_TestDatas.str_nl_cg != textBox_rlcg.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_nl_zc != textBox_rlzc.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_nl_zd != textBox_rlzd.Text)
+            {
+                return isbool;
+            }
+
+            string temp = "";
+            if (checkBox_syx_zc.Checked)
+                temp = "正常";
+            else if (checkBox_syx_g.Checked)
+                temp = "高顺应性";
+            else if (checkBox_syx_d.Checked)
+                temp = "低顺应性";
+            if (m_TestDatas.str_syx != temp)
+            {
+                return isbool;
+            }
+
+            temp = "";
+            if (checkBox_wdx_z.Checked)
+                temp = "正常";
+            else if (checkBox_wdx_b.Checked)
+                temp = "逼尿肌活动过度";
+
+            if (m_TestDatas.str_wdx != temp)
+            {
+                return isbool;
+            }
+
+            if (m_TestDatas.str_tsjc != textBox_tsjc.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_vlpp != textBox_vlpp.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_dlpp != textBox_dlpp.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_clpp != textBox_clpp.Text)
+            {
+                return isbool;
+            }
+
+            if (m_TestDatas.str_aqrl != textBox_pgaqrl.Text)
+            {
+                return isbool;
+            }
+
+            if (m_TestDatas.str_qtms != textBox_qtms.Text)
+            {
+                return isbool;
+            }
+            if (m_TestDatas.str_ndlxzd != textBox_ndlxzd.Text)
+            {
+                return isbool;
+            }
+            isbool = false;
+            return isbool;
+             
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -339,7 +463,11 @@ namespace Qtud.Qtud
         }
 
         private void TestResultDlg_FormClosing(object sender, FormClosingEventArgs e)
-        { 
+        {
+            if (!isEdit())
+            {
+                return;
+            }
             DialogResult res = MessageBox.Show("退出前，是否保存吗？", "保存提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
              
             if (res == DialogResult.Cancel)  //不保存
@@ -364,12 +492,21 @@ namespace Qtud.Qtud
 
         private void button_AddCural_Click(object sender, EventArgs e)
         {
-            //-----------------------------------
-            if (m_ReportInfoModel == null)
-                sava();
-            else
-                UpdateData();
-            //-----------------------------------
+            if (isEdit())
+            {
+                DialogResult res = MessageBox.Show("报告已修改，是否保存吗？", "保存提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+                if (res == DialogResult.OK)  //保存 
+                {
+                    //-----------------------------------
+                    if (m_ReportInfoModel == null)
+                        sava();
+                    else
+                        UpdateData();
+                    //-----------------------------------
+                }
+            }
+          
 
             Hide();
             MainFrom_Curve m_MainFrom2 = new MainFrom_Curve(m_CurSelPatientInfo, m_TestDatas);
@@ -379,6 +516,49 @@ namespace Qtud.Qtud
 
             }
             Show();
+        }
+
+        private void checkBox_syx_zc_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_syx_zc.Checked)
+            {
+                checkBox_syx_g.Checked = false;
+                checkBox_syx_d.Checked = false;
+            }
+        }
+
+        private void checkBox_syx_g_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_syx_g.Checked)
+            {
+                checkBox_syx_zc.Checked = false;
+                checkBox_syx_d.Checked = false;
+            }
+        }
+
+        private void checkBox_syx_d_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_syx_d.Checked)
+            {
+                checkBox_syx_zc.Checked = false;
+                checkBox_syx_g.Checked = false;
+            }
+        }
+
+        private void checkBox_wdx_z_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_wdx_z.Checked)
+            {
+                checkBox_wdx_b.Checked = false; 
+            }
+        }
+
+        private void checkBox_wdx_b_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_wdx_b.Checked)
+            {
+                checkBox_wdx_z.Checked = false;
+            }
         }
 
     }

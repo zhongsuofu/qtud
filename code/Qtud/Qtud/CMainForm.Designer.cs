@@ -55,8 +55,6 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.listView_patList = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel7 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -76,6 +74,8 @@
             this.button_user_manage = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel_mid.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -343,8 +343,8 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listView_patList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3});
+            this.columnHeader6,
+            this.columnHeader7});
             this.listView_patList.FullRowSelect = true;
             this.listView_patList.GridLines = true;
             this.listView_patList.Location = new System.Drawing.Point(21, 155);
@@ -361,19 +361,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "序 号";
-            this.columnHeader1.Width = 80;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "姓 名";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 120;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "ID号";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 200;
+            this.columnHeader1.Width = 90;
             // 
             // panel7
             // 
@@ -593,6 +581,18 @@
             this.panel3.Size = new System.Drawing.Size(1457, 631);
             this.panel3.TabIndex = 22;
             // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "ID 号";
+            this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader6.Width = 150;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "姓 名";
+            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader7.Width = 150;
+            // 
             // CMainForm
             // 
             this.AcceptButton = this.button_query;
@@ -654,8 +654,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListView listView_patList;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Button button_edit_report;
         private System.Windows.Forms.Button button_Create_rep;
@@ -673,5 +671,7 @@
         private System.Windows.Forms.Label label_sex;
         private System.Windows.Forms.Label label_cardid;
         private System.Windows.Forms.Label label_id;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
     }
 }

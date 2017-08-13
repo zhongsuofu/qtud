@@ -96,8 +96,8 @@ namespace Qtud.Qtud
 
                         ListViewItem lvi = new ListViewItem();
                         lvi.Text = i.ToString();
-                        lvi.SubItems.Add(data.name);
                         lvi.SubItems.Add(data.id);
+                        lvi.SubItems.Add(data.name);
                       
                         this.listView_patList.Items.Add(lvi);
 
@@ -144,8 +144,8 @@ namespace Qtud.Qtud
 
                         ListViewItem lvi = new ListViewItem();
                         lvi.Text = i.ToString();
-                        lvi.SubItems.Add(data.name);
                         lvi.SubItems.Add(data.id);
+                        lvi.SubItems.Add(data.name);
                         
                         this.listView_patList.Items.Add(lvi);
                     }
@@ -310,7 +310,7 @@ namespace Qtud.Qtud
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (listView_patList.SelectedItems.Count == 0)
+            if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
             {
                 DialogResult ret = MessageBox.Show("请选择需要修改的患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 return;
@@ -318,7 +318,7 @@ namespace Qtud.Qtud
             else
             {
                 string site = listView_patList.SelectedItems[0].Text;
-                string strid = listView_patList.SelectedItems[0].SubItems[2].Text;
+                string strid = listView_patList.SelectedItems[0].SubItems[1].Text;
 
 
                 int i = 0;
@@ -338,7 +338,7 @@ namespace Qtud.Qtud
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (listView_patList.SelectedItems.Count > 0)
+            if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
             {
                 DialogResult ret = MessageBox.Show("删除病人后，相关的检查数据都会删除。\r\n确定删除病人 " + m_CurSelPatientInfo.name + " 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (ret == DialogResult.OK)
@@ -352,8 +352,10 @@ namespace Qtud.Qtud
                         pim.Delete(m_CurSelPatientInfo.uuid);
                         UpdateListView();
                         textBox_queryWhere.Text = string.Empty;
+
                         m_CurSelPatientInfo = null;
-                        UpdateReportListBox();
+                        listView_report.Items.Clear();
+                        listReportInfo.Clear();
                     }
                     catch (System.Exception er)
                     {
@@ -372,29 +374,29 @@ namespace Qtud.Qtud
 
         private void listView_patList_Click(object sender, EventArgs e)
         {
-            if (listView_patList.SelectedItems.Count == 0)
-                return;
-            else
-            {
-                string strID = listView_patList.SelectedItems[0].SubItems[2].Text;
+            string strID = listView_patList.SelectedItems[0].SubItems[1].Text;
 
-                int i = 0;
-                foreach (PatientInfoModel data in listPatientInfo)
+            int i = 0;
+            foreach (PatientInfoModel data in listPatientInfo)
+            {
+                if (strID == data.id)
                 {
-                    if (strID == data.id)
-                    {
-                        m_CurSelPatientInfo = data;   //当前选择的病人信息
-                        UpdateReportListBox();
-                        UpdatePatientInfoEdit(m_CurSelPatientInfo);
-                        break;
-                    }
-                    i++;
+                    m_CurSelPatientInfo = data;   //当前选择的病人信息
+                    UpdateReportListBox();
+                    UpdatePatientInfoEdit(m_CurSelPatientInfo);
+                    break;
                 }
+                i++;
             }
         }
 
         private void button_Create_rep_Click(object sender, EventArgs e)
         { 
+            if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
+            {
+                MessageBox.Show("请选择患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                return;
+            }
             this.Hide();
             TestResultDlg m_TestResForm = new TestResultDlg(m_CurSelPatientInfo, null);
             DialogResult dlgResult1 = m_TestResForm.ShowDialog();
@@ -412,10 +414,14 @@ namespace Qtud.Qtud
 
         private void button_edit_report_Click(object sender, EventArgs e)
         {
-
+            UpdateReport();
         }
 
         private void listView_report_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            UpdateReport(); 
+        }
+        private void UpdateReport( )
         {
             if (this.listView_report.SelectedItems.Count > 0)
             {
@@ -451,8 +457,12 @@ namespace Qtud.Qtud
                 }
 
             }
-        }
+            else
+            {
+                MessageBox.Show("请选择报告", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
 
+            }
+        }
         private void listView_patList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             e.Item.ForeColor = Color.Black;

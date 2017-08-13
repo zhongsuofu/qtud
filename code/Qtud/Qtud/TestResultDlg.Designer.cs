@@ -54,6 +54,11 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.checkBox_wdx_b = new System.Windows.Forms.CheckBox();
+            this.checkBox_wdx_z = new System.Windows.Forms.CheckBox();
+            this.checkBox_syx_d = new System.Windows.Forms.CheckBox();
+            this.checkBox_syx_g = new System.Windows.Forms.CheckBox();
+            this.checkBox_syx_zc = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
@@ -62,13 +67,6 @@
             this.textBox_rlzd = new System.Windows.Forms.TextBox();
             this.textBox_rlzc = new System.Windows.Forms.TextBox();
             this.textBox_rlcg = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.radioButton_wdqb = new System.Windows.Forms.RadioButton();
-            this.radioButton_wdqzc = new System.Windows.Forms.RadioButton();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.radioButton_syqg = new System.Windows.Forms.RadioButton();
-            this.radioButton_syqzc = new System.Windows.Forms.RadioButton();
-            this.radioButton_syqd = new System.Windows.Forms.RadioButton();
             this.label15 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -104,8 +102,6 @@
             this.panel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -408,6 +404,11 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.checkBox_wdx_b);
+            this.groupBox2.Controls.Add(this.checkBox_wdx_z);
+            this.groupBox2.Controls.Add(this.checkBox_syx_d);
+            this.groupBox2.Controls.Add(this.checkBox_syx_g);
+            this.groupBox2.Controls.Add(this.checkBox_syx_zc);
             this.groupBox2.Controls.Add(this.label34);
             this.groupBox2.Controls.Add(this.label33);
             this.groupBox2.Controls.Add(this.label32);
@@ -416,8 +417,6 @@
             this.groupBox2.Controls.Add(this.textBox_rlzd);
             this.groupBox2.Controls.Add(this.textBox_rlzc);
             this.groupBox2.Controls.Add(this.textBox_rlcg);
-            this.groupBox2.Controls.Add(this.panel3);
-            this.groupBox2.Controls.Add(this.panel2);
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.label10);
@@ -438,6 +437,61 @@
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "检查信息";
+            // 
+            // checkBox_wdx_b
+            // 
+            this.checkBox_wdx_b.AutoSize = true;
+            this.checkBox_wdx_b.Location = new System.Drawing.Point(291, 190);
+            this.checkBox_wdx_b.Name = "checkBox_wdx_b";
+            this.checkBox_wdx_b.Size = new System.Drawing.Size(171, 24);
+            this.checkBox_wdx_b.TabIndex = 33;
+            this.checkBox_wdx_b.Text = "逼尿肌活动过度";
+            this.checkBox_wdx_b.UseVisualStyleBackColor = true;
+            this.checkBox_wdx_b.CheckedChanged += new System.EventHandler(this.checkBox_wdx_b_CheckedChanged);
+            // 
+            // checkBox_wdx_z
+            // 
+            this.checkBox_wdx_z.AutoSize = true;
+            this.checkBox_wdx_z.Location = new System.Drawing.Point(170, 190);
+            this.checkBox_wdx_z.Name = "checkBox_wdx_z";
+            this.checkBox_wdx_z.Size = new System.Drawing.Size(71, 24);
+            this.checkBox_wdx_z.TabIndex = 32;
+            this.checkBox_wdx_z.Text = "正常";
+            this.checkBox_wdx_z.UseVisualStyleBackColor = true;
+            this.checkBox_wdx_z.CheckedChanged += new System.EventHandler(this.checkBox_wdx_z_CheckedChanged);
+            // 
+            // checkBox_syx_d
+            // 
+            this.checkBox_syx_d.AutoSize = true;
+            this.checkBox_syx_d.Location = new System.Drawing.Point(434, 156);
+            this.checkBox_syx_d.Name = "checkBox_syx_d";
+            this.checkBox_syx_d.Size = new System.Drawing.Size(111, 24);
+            this.checkBox_syx_d.TabIndex = 31;
+            this.checkBox_syx_d.Text = "低顺应性";
+            this.checkBox_syx_d.UseVisualStyleBackColor = true;
+            this.checkBox_syx_d.CheckedChanged += new System.EventHandler(this.checkBox_syx_d_CheckedChanged);
+            // 
+            // checkBox_syx_g
+            // 
+            this.checkBox_syx_g.AutoSize = true;
+            this.checkBox_syx_g.Location = new System.Drawing.Point(291, 154);
+            this.checkBox_syx_g.Name = "checkBox_syx_g";
+            this.checkBox_syx_g.Size = new System.Drawing.Size(111, 24);
+            this.checkBox_syx_g.TabIndex = 30;
+            this.checkBox_syx_g.Text = "高顺应性";
+            this.checkBox_syx_g.UseVisualStyleBackColor = true;
+            this.checkBox_syx_g.CheckedChanged += new System.EventHandler(this.checkBox_syx_g_CheckedChanged);
+            // 
+            // checkBox_syx_zc
+            // 
+            this.checkBox_syx_zc.AutoSize = true;
+            this.checkBox_syx_zc.Location = new System.Drawing.Point(170, 156);
+            this.checkBox_syx_zc.Name = "checkBox_syx_zc";
+            this.checkBox_syx_zc.Size = new System.Drawing.Size(71, 24);
+            this.checkBox_syx_zc.TabIndex = 29;
+            this.checkBox_syx_zc.Text = "正常";
+            this.checkBox_syx_zc.UseVisualStyleBackColor = true;
+            this.checkBox_syx_zc.CheckedChanged += new System.EventHandler(this.checkBox_syx_zc_CheckedChanged);
             // 
             // label34
             // 
@@ -505,7 +559,7 @@
             // 
             // textBox_rlzc
             // 
-            this.textBox_rlzc.Location = new System.Drawing.Point(453, 116);
+            this.textBox_rlzc.Location = new System.Drawing.Point(442, 116);
             this.textBox_rlzc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_rlzc.Name = "textBox_rlzc";
             this.textBox_rlzc.Size = new System.Drawing.Size(103, 30);
@@ -518,93 +572,6 @@
             this.textBox_rlcg.Name = "textBox_rlcg";
             this.textBox_rlcg.Size = new System.Drawing.Size(104, 30);
             this.textBox_rlcg.TabIndex = 11;
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.Transparent;
-            this.panel3.Controls.Add(this.radioButton_wdqb);
-            this.panel3.Controls.Add(this.radioButton_wdqzc);
-            this.panel3.Location = new System.Drawing.Point(169, 184);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(360, 36);
-            this.panel3.TabIndex = 19;
-            // 
-            // radioButton_wdqb
-            // 
-            this.radioButton_wdqb.AutoSize = true;
-            this.radioButton_wdqb.ForeColor = System.Drawing.Color.Snow;
-            this.radioButton_wdqb.Location = new System.Drawing.Point(112, 5);
-            this.radioButton_wdqb.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioButton_wdqb.Name = "radioButton_wdqb";
-            this.radioButton_wdqb.Size = new System.Drawing.Size(170, 24);
-            this.radioButton_wdqb.TabIndex = 18;
-            this.radioButton_wdqb.Text = "逼尿肌活动过度";
-            this.radioButton_wdqb.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_wdqzc
-            // 
-            this.radioButton_wdqzc.AutoSize = true;
-            this.radioButton_wdqzc.Checked = true;
-            this.radioButton_wdqzc.ForeColor = System.Drawing.Color.Snow;
-            this.radioButton_wdqzc.Location = new System.Drawing.Point(7, 5);
-            this.radioButton_wdqzc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioButton_wdqzc.Name = "radioButton_wdqzc";
-            this.radioButton_wdqzc.Size = new System.Drawing.Size(70, 24);
-            this.radioButton_wdqzc.TabIndex = 17;
-            this.radioButton_wdqzc.TabStop = true;
-            this.radioButton_wdqzc.Text = "正常";
-            this.radioButton_wdqzc.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Controls.Add(this.radioButton_syqg);
-            this.panel2.Controls.Add(this.radioButton_syqzc);
-            this.panel2.Controls.Add(this.radioButton_syqd);
-            this.panel2.Location = new System.Drawing.Point(169, 147);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(360, 35);
-            this.panel2.TabIndex = 18;
-            // 
-            // radioButton_syqg
-            // 
-            this.radioButton_syqg.AutoSize = true;
-            this.radioButton_syqg.ForeColor = System.Drawing.Color.Snow;
-            this.radioButton_syqg.Location = new System.Drawing.Point(112, 6);
-            this.radioButton_syqg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioButton_syqg.Name = "radioButton_syqg";
-            this.radioButton_syqg.Size = new System.Drawing.Size(110, 24);
-            this.radioButton_syqg.TabIndex = 15;
-            this.radioButton_syqg.Text = "高顺应性";
-            this.radioButton_syqg.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_syqzc
-            // 
-            this.radioButton_syqzc.AutoSize = true;
-            this.radioButton_syqzc.Checked = true;
-            this.radioButton_syqzc.ForeColor = System.Drawing.Color.Snow;
-            this.radioButton_syqzc.Location = new System.Drawing.Point(7, 6);
-            this.radioButton_syqzc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioButton_syqzc.Name = "radioButton_syqzc";
-            this.radioButton_syqzc.Size = new System.Drawing.Size(70, 24);
-            this.radioButton_syqzc.TabIndex = 14;
-            this.radioButton_syqzc.TabStop = true;
-            this.radioButton_syqzc.Text = "正常";
-            this.radioButton_syqzc.UseVisualStyleBackColor = true;
-            // 
-            // radioButton_syqd
-            // 
-            this.radioButton_syqd.AutoSize = true;
-            this.radioButton_syqd.ForeColor = System.Drawing.Color.Snow;
-            this.radioButton_syqd.Location = new System.Drawing.Point(247, 6);
-            this.radioButton_syqd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.radioButton_syqd.Name = "radioButton_syqd";
-            this.radioButton_syqd.Size = new System.Drawing.Size(110, 24);
-            this.radioButton_syqd.TabIndex = 16;
-            this.radioButton_syqd.Text = "底顺应性";
-            this.radioButton_syqd.UseVisualStyleBackColor = true;
             // 
             // label15
             // 
@@ -623,7 +590,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.ForeColor = System.Drawing.Color.Snow;
-            this.label11.Location = new System.Drawing.Point(396, 119);
+            this.label11.Location = new System.Drawing.Point(385, 119);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(49, 20);
@@ -987,7 +954,7 @@
             this.AutoScroll = true;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1007, 1027);
+            this.ClientSize = new System.Drawing.Size(1007, 1047);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -1004,10 +971,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel4.ResumeLayout(false);
@@ -1048,13 +1011,6 @@
         private System.Windows.Forms.TextBox textBox_rlzd;
         private System.Windows.Forms.TextBox textBox_rlzc;
         private System.Windows.Forms.TextBox textBox_rlcg;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.RadioButton radioButton_wdqb;
-        private System.Windows.Forms.RadioButton radioButton_wdqzc;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RadioButton radioButton_syqg;
-        private System.Windows.Forms.RadioButton radioButton_syqzc;
-        private System.Windows.Forms.RadioButton radioButton_syqd;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
@@ -1092,6 +1048,11 @@
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.CheckBox checkBox_wdx_b;
+        private System.Windows.Forms.CheckBox checkBox_wdx_z;
+        private System.Windows.Forms.CheckBox checkBox_syx_d;
+        private System.Windows.Forms.CheckBox checkBox_syx_g;
+        private System.Windows.Forms.CheckBox checkBox_syx_zc;
 
 
     }

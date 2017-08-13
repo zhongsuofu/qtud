@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PatientInfoDlg));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox_id = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.textBox_bs = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.btn_Add = new System.Windows.Forms.Button();
@@ -46,10 +50,6 @@
             this.radioBTN_woman = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox_id = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +85,43 @@
             this.panel1.Size = new System.Drawing.Size(758, 659);
             this.panel1.TabIndex = 0;
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(249, 212);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(311, 38);
+            this.dateTimePicker1.TabIndex = 4;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(114, 212);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(116, 31);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "出生日期:";
+            // 
+            // textBox_id
+            // 
+            this.textBox_id.Location = new System.Drawing.Point(249, 40);
+            this.textBox_id.MaxLength = 24;
+            this.textBox_id.Name = "textBox_id";
+            this.textBox_id.Size = new System.Drawing.Size(311, 38);
+            this.textBox_id.TabIndex = 1;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.ForeColor = System.Drawing.Color.White;
+            this.label9.Location = new System.Drawing.Point(161, 43);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 31);
+            this.label9.TabIndex = 15;
+            this.label9.Text = "ID号:";
+            // 
             // textBox_bs
             // 
             this.textBox_bs.Location = new System.Drawing.Point(249, 366);
@@ -93,7 +130,7 @@
             this.textBox_bs.Name = "textBox_bs";
             this.textBox_bs.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_bs.Size = new System.Drawing.Size(405, 83);
-            this.textBox_bs.TabIndex = 14;
+            this.textBox_bs.TabIndex = 8;
             // 
             // label7
             // 
@@ -112,7 +149,7 @@
             this.btn_Add.Location = new System.Drawing.Point(498, 571);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(156, 56);
-            this.btn_Add.TabIndex = 12;
+            this.btn_Add.TabIndex = 10;
             this.btn_Add.Text = "保 存";
             this.btn_Add.UseVisualStyleBackColor = false;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -147,7 +184,7 @@
             this.textBox_meno.Name = "textBox_meno";
             this.textBox_meno.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_meno.Size = new System.Drawing.Size(405, 83);
-            this.textBox_meno.TabIndex = 11;
+            this.textBox_meno.TabIndex = 9;
             // 
             // label5
             // 
@@ -166,7 +203,7 @@
             this.textBox_phone.MaxLength = 16;
             this.textBox_phone.Name = "textBox_phone";
             this.textBox_phone.Size = new System.Drawing.Size(311, 38);
-            this.textBox_phone.TabIndex = 10;
+            this.textBox_phone.TabIndex = 7;
             // 
             // textBox_cardid
             // 
@@ -174,7 +211,7 @@
             this.textBox_cardid.MaxLength = 24;
             this.textBox_cardid.Name = "textBox_cardid";
             this.textBox_cardid.Size = new System.Drawing.Size(311, 38);
-            this.textBox_cardid.TabIndex = 6;
+            this.textBox_cardid.TabIndex = 3;
             // 
             // textBox_name
             // 
@@ -182,7 +219,7 @@
             this.textBox_name.MaxLength = 32;
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.Size = new System.Drawing.Size(311, 38);
-            this.textBox_name.TabIndex = 7;
+            this.textBox_name.TabIndex = 2;
             // 
             // label4
             // 
@@ -214,7 +251,7 @@
             this.radioBtn_man.Location = new System.Drawing.Point(249, 259);
             this.radioBtn_man.Name = "radioBtn_man";
             this.radioBtn_man.Size = new System.Drawing.Size(66, 35);
-            this.radioBtn_man.TabIndex = 8;
+            this.radioBtn_man.TabIndex = 5;
             this.radioBtn_man.Text = " 男";
             this.radioBtn_man.UseVisualStyleBackColor = false;
             // 
@@ -227,7 +264,7 @@
             this.radioBTN_woman.Location = new System.Drawing.Point(336, 259);
             this.radioBTN_woman.Name = "radioBTN_woman";
             this.radioBTN_woman.Size = new System.Drawing.Size(66, 35);
-            this.radioBTN_woman.TabIndex = 9;
+            this.radioBTN_woman.TabIndex = 6;
             this.radioBTN_woman.TabStop = true;
             this.radioBTN_woman.Text = " 女";
             this.radioBTN_woman.UseVisualStyleBackColor = false;
@@ -253,43 +290,6 @@
             this.label1.Size = new System.Drawing.Size(82, 31);
             this.label1.TabIndex = 0;
             this.label1.Text = "姓  名:";
-            // 
-            // textBox_id
-            // 
-            this.textBox_id.Location = new System.Drawing.Point(249, 40);
-            this.textBox_id.MaxLength = 24;
-            this.textBox_id.Name = "textBox_id";
-            this.textBox_id.Size = new System.Drawing.Size(311, 38);
-            this.textBox_id.TabIndex = 16;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(161, 43);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(69, 31);
-            this.label9.TabIndex = 15;
-            this.label9.Text = "ID号:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(114, 212);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(116, 31);
-            this.label10.TabIndex = 17;
-            this.label10.Text = "出生日期:";
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(249, 212);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(311, 38);
-            this.dateTimePicker1.TabIndex = 18;
             // 
             // PatientInfoDlg
             // 

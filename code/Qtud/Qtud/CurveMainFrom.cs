@@ -17,6 +17,7 @@ using System.Management;  //获取所有USB用到
 
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
+ 
 
 namespace Qtud.Qtud
 {
@@ -46,6 +47,8 @@ namespace Qtud.Qtud
         public List<StruData> list_Pdet;   //逼尿肌压力 = 膀胱压力 - 直肠压力
         public List<StruData> list_ufr;    //尿流率
         public string strMeno ;   //备注
+
+        public int FirstFileEndIndex;  //6模式，两个文件结束分隔线点
         
     };
 
@@ -78,8 +81,7 @@ namespace Qtud.Qtud
         private List<TreeNode> m_CheckNode_List = new List<TreeNode>();   //最多两个
         private Rectangle m_CurCurveArea = new Rectangle();  //曲线绘制区域,鼠标滑动时，显示当前值
         private Rectangle m_CurSelCurveArea = new Rectangle();  //选取的曲线绘制区域
-
-
+        
         Dictionary<int, Index_value> Pves_X_Value_Map = new Dictionary<int, Index_value>();    //曲线X坐标点与值的映射
         Dictionary<int, Index_value> Pabd_X_Value_Map = new Dictionary<int, Index_value>();    //曲线X坐标点与值的映射
         Dictionary<int, Index_value> Pdet_X_Value_Map = new Dictionary<int, Index_value>();    //曲线X坐标点与值的映射
@@ -124,7 +126,8 @@ namespace Qtud.Qtud
             fmax_Pdet =-100f,
             fmax_ufr =-100f, 
 
-            strMeno = string.Empty, 
+            strMeno = string.Empty,
+            FirstFileEndIndex = -1
 
         };
 
@@ -151,9 +154,12 @@ namespace Qtud.Qtud
             fmax_ufr = -100f, 
 
             strMeno = string.Empty,
+            FirstFileEndIndex = -1
         };
 
         private TestDatas m_TestDatas = new TestDatas();
+         
+       
         #endregion
 
         #region  界面操作函数
@@ -187,12 +193,13 @@ namespace Qtud.Qtud
             m_CurSelCurveArea.Size = new Size(0, 0);
 
 
-            m_ListUSBDevs = GetMobileDiskList();
-
+            m_ListUSBDevs = GetMobileDiskList(); 
             UpdateUsbTree();
-        
+             
+       
         }
-
+         
+    
         private void button_Back_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
@@ -362,10 +369,6 @@ namespace Qtud.Qtud
                  
             }
         }
-        private void treeView_File_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-           
-        }
 
         private void IniCurveData(ref CurveDatas _CurveDatas)
         {
@@ -393,6 +396,7 @@ namespace Qtud.Qtud
             _CurveDatas.fmax_ufr = -1000;   //最大值
 
             _CurveDatas.strMeno = string.Empty;
+            _CurveDatas.FirstFileEndIndex =-1;
             //--------------------------------------------
         }
 
@@ -613,6 +617,7 @@ namespace Qtud.Qtud
                             break;
                         case DBT_DEVICEARRIVAL://U盘插入
                             DriveInfo[] s = DriveInfo.GetDrives();
+                            int ncnt = m_ListUSBDevs.Count;
                             foreach (DriveInfo drive in s)
                             {
                                 if (drive.Name.ToString() == "A:\\")
@@ -621,8 +626,17 @@ namespace Qtud.Qtud
                                 }
                                 if (drive.DriveType == DriveType.Removable)
                                 {
-                                    m_ListUSBDevs.Insert(0, drive.Name.ToString());
-                                    UpdateUsbTree();
+
+                                    int kk = 0;
+                                    for ( kk = 0; kk < m_ListUSBDevs.Count; kk++ )
+                                    {
+                                        if(m_ListUSBDevs[kk] == drive.Name.ToString())
+                                            break;
+                                    }
+                                    if (kk >= m_ListUSBDevs.Count)
+                                        m_ListUSBDevs.Insert(0, drive.Name.ToString());
+                                      
+                                    //-----------------------------------------------
 
                                     //DialogResult dr = MessageBox.Show("是否要拷贝U盘中的信息？", "U盘", MessageBoxButtons.OKCancel);
                                     //if (dr == DialogResult.OK)
@@ -649,9 +663,11 @@ namespace Qtud.Qtud
                                     //}
 
                                     //CopyDirectory(drive.Name.ToString(), "E:\\");
-                                    break;
+                                    
                                 }
                             }
+                            if (ncnt != m_ListUSBDevs.Count)
+                                UpdateUsbTree();
                             break;
                         case DBT_CONFIGCHANGECANCELED:
                             break;
@@ -673,29 +689,49 @@ namespace Qtud.Qtud
 
                                 if (devType == DBT_DEVTYP_VOLUME)
                                 {
-                                    DEV_BROADCAST_VOLUME vol;
-                                    vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
-                                    string ID = vol.dbcv_unitmask.ToString("x");
-                                    string moveDev = IO(ID) + @"\";
+                                    //DEV_BROADCAST_VOLUME vol;
+                                    //vol = (DEV_BROADCAST_VOLUME)Marshal.PtrToStructure(m.LParam, typeof(DEV_BROADCAST_VOLUME));
+                                    //string ID = vol.dbcv_unitmask.ToString("x");
+                                    //string moveDev = IO(ID) + @"\";
 
-                                    int ii = 0;
-                                    foreach (string strUsb in m_ListUSBDevs)
-                                    {
-                                        if (strUsb == moveDev)
-                                        {
-                                            m_ListUSBDevs.RemoveAt(ii);
-                                            break;
-                                        }
-                                        ii++;
-                                    }
-                                  
+                                    //int ii = 0;
+                                    //foreach (string strUsb in m_ListUSBDevs)
+                                    //{
+                                    //    if (strUsb == moveDev)
+                                    //    {
+                                    //        m_ListUSBDevs.RemoveAt(ii);
+                                    //        break;
+                                    //    }
+                                    //    ii++;
+                                    //}
 
+                                    //------------------------------------------
+                                    //DriveInfo[] ss = DriveInfo.GetDrives();
+                                    //m_ListUSBDevs.Clear();
+                                    //foreach (DriveInfo drive in ss)
+                                    //{
+                                    //    if (drive.Name.ToString() == "A:\\")
+                                    //    {
+                                    //        continue;
+                                    //    }
+                                    //    if (drive.DriveType == DriveType.Removable)
+                                    //    { 
+                                    //        m_ListUSBDevs.Add(drive.Name.ToString());
+                                    //    }
+                                    //}
+
+                                    //------------------------------------------
+
+                                    Thread.Sleep(5000);
+                                    m_ListUSBDevs = GetMobileDiskList();
+                                    UpdateUsbTree();
+                                     
+                                    break;
                                 }
                             }
 
                             //----------------------------------------------------
-                            //更新列表
-                            UpdateUsbTree();
+                             
                              
                             break;
                         case DBT_DEVICEREMOVEPENDING:
@@ -827,6 +863,8 @@ namespace Qtud.Qtud
             nSelStartindex = 0;
             IniCurveData(ref m_SubCurveDatas);
             IniCurveData(ref m_CurveDatas);
+
+            DrawEmpty();  //绘制空
 
             //添加根节点
             TreeNode treeNode0 = new TreeNode();
@@ -967,7 +1005,7 @@ namespace Qtud.Qtud
                 int ii4 = 400;
                 foreach (Struct_Txt_Data Stru_Txt_Data in m_checkDatas)  //txt 数据内容
                 {
-                    if (m_SelMode != -1)
+                    if (m_SelMode != -1 && Stru_Txt_Data.strCheckMode!="")
                     {
                         if (Stru_Txt_Data.strCheckMode.Substring(0, 1) != m_SelMode.ToString())
                             continue;
@@ -1150,7 +1188,7 @@ namespace Qtud.Qtud
             return listDataFile;
         }
 
-        //读取Data文件内容 
+        //6模式下，读取文件列表文件内容 ，多个文件合并到一条曲线中，
         private void ReadOneDataFile(List<string> File_List, ref CurveDatas m_TempCurveDatas)
         {
             if (File_List.Count < 1)
@@ -1270,6 +1308,9 @@ namespace Qtud.Qtud
 
                         nTimeIndex++;
                     }
+
+                    if (m_TempCurveDatas.FirstFileEndIndex <0)
+                        m_TempCurveDatas.FirstFileEndIndex = nTimeIndex;
                 }
                 catch (EndOfStreamException e2)
                 {
@@ -1502,6 +1543,7 @@ namespace Qtud.Qtud
 
                     //----------------------------------------------------------
 
+                    int nPosx = -1;  //分隔线
                     for (int ii = 0; ii < nCurveCnt; ii++)
                     {
                         Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域
@@ -1522,7 +1564,7 @@ namespace Qtud.Qtud
                             m_DrawFuns.DrawRowtitle("Pves", "cmH2O", oneDataManage.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
 
                             //画曲线
-                            m_DrawFuns.plotLine3( ref oneDataManage.list_Pves, m_range, m_oneDrawArea, Color.Blue, ref Pves_X_Value_Map);
+                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pves, m_range, m_oneDrawArea, Color.Blue, ref Pves_X_Value_Map, oneDataManage.FirstFileEndIndex);
                         }
                         else if (checkModes[ii] == "Pabd")
                         {
@@ -1531,7 +1573,7 @@ namespace Qtud.Qtud
                             m_DrawFuns.DrawRowtitle("Pabd", "cmH2O", oneDataManage.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
 
                             //画曲线
-                            m_DrawFuns.plotLine3( ref oneDataManage.list_Pabd, m_range, m_oneDrawArea, Color.DarkViolet, ref Pabd_X_Value_Map);
+                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pabd, m_range, m_oneDrawArea, Color.DarkViolet, ref Pabd_X_Value_Map, oneDataManage.FirstFileEndIndex);
                         }
                         else if (checkModes[ii] == "Pdet")
                         {
@@ -1541,9 +1583,16 @@ namespace Qtud.Qtud
                             m_DrawFuns.DrawRowtitle("Pdet", "cmH2O", oneDataManage.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
 
                             //画曲线
-                            m_DrawFuns.plotLine3( ref oneDataManage.list_Pdet, m_range, m_oneDrawArea, Color.Green, ref Pdet_X_Value_Map);
+                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pdet, m_range, m_oneDrawArea, Color.Green, ref Pdet_X_Value_Map, oneDataManage.FirstFileEndIndex);
                         }
 
+
+                    }
+
+                    //绘制分隔线
+                    if (nPosx > -1)
+                    { 
+                        m_DrawFuns.plotLine2(new Point[] { new Point(nPosx, m_DrawArea.Top), new Point(nPosx, m_DrawArea.Top + nCurveCnt * stepH) }, false, new Pen(Color.FromArgb(50, 150, 120)));
 
                     }
                 }
@@ -1925,6 +1974,11 @@ namespace Qtud.Qtud
         {
             m_TempCurveDatas.StartTime = sourData.StartTime;
             m_TempCurveDatas.endTime = sourData.endTime;
+ 
+            if(sourData.FirstFileEndIndex > nstartIndex && sourData.FirstFileEndIndex < nendIndex)
+                m_TempCurveDatas.FirstFileEndIndex = sourData.FirstFileEndIndex-nstartIndex;
+            else
+                m_TempCurveDatas.FirstFileEndIndex = -1;
 
             //m_TempCurveDatas.strMeno = m_CurveDatas.strMeno;
 
@@ -2007,6 +2061,7 @@ namespace Qtud.Qtud
             m_TempCurveDatas.endTime = sourData.endTime;
 
             m_TempCurveDatas.strMeno = sourData.strMeno;
+            m_TempCurveDatas.FirstFileEndIndex = sourData.FirstFileEndIndex;
 
             for (int i = 0; i < 5; i++)
             {
@@ -2099,6 +2154,7 @@ namespace Qtud.Qtud
                 StartTime = DateTime.Now, //(filename.Replace('.', ':')),
                 endTime = DateTime.Now,
                 showMode = new byte[5],  //全部显示
+                FirstFileEndIndex = -1,
 
                 list_Pabd = new List<StruData>(),
                 list_Pdet = new List<StruData>(),

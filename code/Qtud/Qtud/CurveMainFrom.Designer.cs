@@ -48,6 +48,7 @@
             this.ToolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Export_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Allcancel_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -73,7 +74,6 @@
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Draw = new MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
-            this.Export_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -195,7 +195,6 @@
             this.treeView_File.TabIndex = 0;
             this.treeView_File.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView_File_AfterCheck);
             this.treeView_File.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView_File_DrawNode);
-            this.treeView_File.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView_File_AfterSelect);
             // 
             // contextMenuStrip_TreeView
             // 
@@ -214,7 +213,7 @@
             this.toolStripSeparator4,
             this.refresh_ToolStripMenuItem});
             this.contextMenuStrip_TreeView.Name = "contextMenuStrip_TreeView";
-            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(199, 302);
+            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(199, 280);
             // 
             // All_ToolStripMenuItem
             // 
@@ -271,6 +270,13 @@
             this.ToolStripMenuItem6.Size = new System.Drawing.Size(198, 24);
             this.ToolStripMenuItem6.Text = "6-尿动力检测模式";
             this.ToolStripMenuItem6.Click += new System.EventHandler(this.ToolStripMenuItem6_Click);
+            // 
+            // Export_ToolStripMenuItem
+            // 
+            this.Export_ToolStripMenuItem.Name = "Export_ToolStripMenuItem";
+            this.Export_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.Export_ToolStripMenuItem.Text = "导 出";
+            this.Export_ToolStripMenuItem.Click += new System.EventHandler(this.Export_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -510,20 +516,14 @@
             // 
             this.label_tip.AutoSize = true;
             this.label_tip.BackColor = System.Drawing.Color.Transparent;
+            this.label_tip.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_tip.ForeColor = System.Drawing.Color.DarkBlue;
             this.label_tip.Location = new System.Drawing.Point(18, 3);
             this.label_tip.Name = "label_tip";
-            this.label_tip.Size = new System.Drawing.Size(59, 20);
+            this.label_tip.Size = new System.Drawing.Size(75, 24);
             this.label_tip.TabIndex = 0;
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
-            // 
-            // Export_ToolStripMenuItem
-            // 
-            this.Export_ToolStripMenuItem.Name = "Export_ToolStripMenuItem";
-            this.Export_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.Export_ToolStripMenuItem.Text = "导 出";
-            this.Export_ToolStripMenuItem.Click += new System.EventHandler(this.Export_ToolStripMenuItem_Click);
             // 
             // MainFrom_Curve
             // 

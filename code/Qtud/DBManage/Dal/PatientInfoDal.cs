@@ -19,11 +19,11 @@ namespace Qtud.DBManage.DAL
 		/// <summary>
 		/// 是否存在该记录
 		/// </summary>
-        public bool Exists(string cardid)
+        public bool Exists(string  id)
 		{
 			StringBuilder strSql=new StringBuilder();
             strSql.Append("select count(1) from tb_patient_info");
-            strSql.Append(" where cardid='" + cardid + "' ");
+            strSql.Append(" where  id='" +  id + "' ");
 
             //MySqlParameter[] parameters = {
             //        new MySqlParameter("@cardid", MySqlDbType.VarChar,128)};

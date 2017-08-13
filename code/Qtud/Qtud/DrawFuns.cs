@@ -242,13 +242,15 @@ namespace Qtud.Qtud
         }
 
         //isflag ，是否画虚线
-        public void plotLine2(  Point[] Sp, bool isflag = false)
+        public void plotLine2(Point[] Sp, bool isflag = false, Pen pen = null)
         {
             int Len = Sp.Length;
 
             //Bitmap canvas = new Bitmap(size1.Width, size1.Height);  // 画布、笔
             //Graphics offScreenDC = Graphics.FromImage(canvas);
-            Pen pen = new Pen(Color.FromArgb(100, 100, 100));
+            if(pen  == null)
+                pen = new Pen(Color.FromArgb(100, 100, 100));
+
             if (isflag)
             {
                 pen.DashStyle = DashStyle.Custom;
@@ -269,12 +271,12 @@ namespace Qtud.Qtud
             //offScreenDC.Dispose();
         }
 
-        //按坐标点画线,按中心横线
-        public void plotLine3(ref List<StruData> list_data, Size range, Rectangle DrawRect, Color Pencolor, ref Dictionary<int, Index_value> x_value_map)
+        //按坐标点画线,按中心横线  返回分隔线X位置
+        public int plotLine3(ref List<StruData> list_data, Size range, Rectangle DrawRect, Color Pencolor, ref Dictionary<int, Index_value> x_value_map,int FirstFileIndex = -1)
         {
             int Len = list_data.Count();
             if (Len < 1)
-                return;
+                return -1;
 
             //Bitmap canvas = new Bitmap(size1.Width, size1.Height);  // 画布、笔
             //Graphics offScreenDC = Graphics.FromImage(canvas);
@@ -326,6 +328,8 @@ namespace Qtud.Qtud
             };
             x_value_map.Add(0, m_Index_value);
 
+            int PosX = -1;  //分隔线X位置
+
             if (Len >= width)
             {
                 for (int i = 1; i < width; i++)
@@ -334,7 +338,7 @@ namespace Qtud.Qtud
 
                     int ipos = (int)(i * scaleX);  //采样
                     if (ipos > Len - 1)
-                        return;
+                        return PosX;
 
 
                     int yNext = (int)DrawRect.Bottom - (int)((list_data[ipos].value - range.Width) / scaleY);
@@ -360,6 +364,11 @@ namespace Qtud.Qtud
 
                     xFirst = xNext;
                     yFirst = yNext;
+
+                    if (FirstFileIndex > -1 && FirstFileIndex <= ipos && PosX == -1)
+                    {
+                        PosX = xFirst;
+                    }
                 }
             }
             else
@@ -393,10 +402,16 @@ namespace Qtud.Qtud
 
                     xFirst = xNext;
                     yFirst = yNext;
+
+                    if (FirstFileIndex > -1 && FirstFileIndex <= i && PosX == -1)
+                    {
+                        PosX = xFirst;
+                    }
                 }
 
             }
-           
+
+            return PosX;
             
             //panel.BackgroundImage = canvas;
             //offScreenDC.Dispose();

@@ -100,9 +100,9 @@ namespace Qtud.Qtud
                 PatientInfoManager pim = new PatientInfoManager();
                 if (DlgType == 0)  //新增
                 {
-                    if (pim.Exists(model.cardid))
+                    if (pim.Exists(model.id))
                     {
-                        MessageBox.Show("身份证号已经存在,不能重复添加", "输入提示");
+                        MessageBox.Show("ID号已经存在,不能重复添加", "输入提示");
                         textBox_cardid.Focus();
                         return;
                     }
