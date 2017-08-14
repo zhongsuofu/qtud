@@ -883,24 +883,28 @@ namespace Qtud.Qtud
                 {
                     if (treeView_File.SelectedNode != null)
                     {
-                        //创建一个节点对象，并初始化 
-                        TreeNode treeNode1 = new TreeNode();
 
-                        //在TreeView组件中加入子节点 
-                        treeNode1.Tag = iv;//把自己的id存放在该节点tag对象里
-                        treeNode1.Text = strUsb.ToString().Trim();
-                        treeView_File.SelectedNode.Nodes.Add(treeNode1);
-                        treeView_File.SelectedNode = treeNode1;
-                        HideCheckBox(this.treeView_File, treeNode1);
+                         List<string> listSerial = UpdateCheckSerialList(strUsb);
+                         if (listSerial.Count > 0)  //只显示有检查文件夹的盘符
+                         { 
+                             //创建一个节点对象，并初始化 
+                             TreeNode treeNode1 = new TreeNode();
 
-                        //----------------------------------
-                        //一个设备下的文件展开
-                        Update_Dev_listSerial_Map(treeNode1, strUsb.ToString());
-                        //----------------------------------
-                        treeView_File.SelectedNode = treeNode0;
-                        //treeView_File.ExpandAll();
+                             //在TreeView组件中加入子节点 
+                             treeNode1.Tag = iv;//把自己的id存放在该节点tag对象里
+                             treeNode1.Text = strUsb.ToString().Trim();
+                             treeView_File.SelectedNode.Nodes.Add(treeNode1);
+                             treeView_File.SelectedNode = treeNode1;
+                             HideCheckBox(this.treeView_File, treeNode1);
 
-                        iv++;
+                             //----------------------------------
+                             //一个设备下的文件展开
+                             Update_Dev_listSerial_Map(treeNode1, strUsb.ToString());
+                             //----------------------------------
+                             treeView_File.SelectedNode = treeNode0;
+                             //treeView_File.ExpandAll();
+                             iv++;
+                         }
                     }
 
 
@@ -910,7 +914,7 @@ namespace Qtud.Qtud
 
         }
 
-        //更新USB设备列表
+        //1, 盘符对应这个盘下的检查文件夹
         private void Update_Dev_listSerial_Map(TreeNode parentNode,  string strDev)  // G:\
         {
             if (strDev == "")
@@ -953,14 +957,15 @@ namespace Qtud.Qtud
             
         }
 
-        private void Update_Serial_Txt_SubTree(TreeNode parentNode, string strSerialPath)  // strDev = G:\1508491901\ ,更新序列号下面的文件子树
+        //3 更新序列号下面的文件子树
+        private void Update_Serial_Txt_SubTree(TreeNode parentNode, string strSerialPath)  // strSerialPath = G:\1508491901\ 
         {
             if (strSerialPath == "")
             {
                 return;
             }
 
-            List<string> m_ListTxtFiles = Update_Dev_Txt_Map(strSerialPath);  // txt 文件列表  
+            List<string> m_ListTxtFiles = UpdateTxtFileList(strSerialPath);  // txt 文件列表  
 
             if (m_ListTxtFiles.Count > 0)
             {
@@ -975,7 +980,7 @@ namespace Qtud.Qtud
                     string strfile = strtxtfile.Substring(ipos + 1);  // ID2017-07-01.txt
 
                     //在TreeView组件中加入子节点 
-                    treeNode3.Tag = ii3 + @"," + strSerialPath + @"info\" + strfile.Substring(0, strfile.Length - 4);//路径\info\ID2017-07-01
+                    treeNode3.Tag = ii3 + @"," + strSerialPath + @"info\" + strfile.Substring(0, strfile.Length - 4);  //01,G:\3384328829\info\ID2017-06-29
                     treeNode3.Text = strfile.Substring(0, strfile.Length - 4);  //ID2017-07-01
                     treeView_File.SelectedNode.Nodes.Add(treeNode3);
                     treeView_File.SelectedNode = treeNode3;
@@ -991,7 +996,9 @@ namespace Qtud.Qtud
                 }
             }
         }
-        private void Update_Date_TimeFile_SubTree(TreeNode parentNode, string strTXTPath)  // strDev = G:\1508491901\ID2017-07-01.txt ,更新序列号下面的文件子树
+
+        // 5 ,更新序列号下面的文件子树
+        private void Update_Date_TimeFile_SubTree(TreeNode parentNode, string strTXTPath)  // strDev = G:\1508491901\ID2017-07-01.txt 
         {
             if (strTXTPath == "")
             {
@@ -1005,8 +1012,10 @@ namespace Qtud.Qtud
                 int ii4 = 400;
                 foreach (Struct_Txt_Data Stru_Txt_Data in m_checkDatas)  //txt 数据内容
                 {
-                    if (m_SelMode != -1 && Stru_Txt_Data.strCheckMode!="")
+                    if (m_SelMode != -1 )
                     {
+                        if (Stru_Txt_Data.strCheckMode == "")  //没类型，不显示
+                            continue; 
                         if (Stru_Txt_Data.strCheckMode.Substring(0, 1) != m_SelMode.ToString())
                             continue;
                     }
@@ -1019,7 +1028,7 @@ namespace Qtud.Qtud
 
                     //在TreeView组件中加入子节点  
 
-                    treeNode4.Tag = ii4 + @"," + strPath + @"info\" + Stru_Txt_Data.strCheckDate + @"\" + Stru_Txt_Data.strCheckDate + " " + Stru_Txt_Data.strCheckTime;//E:\1508491901\info\ID2017-06-29\ID2017-06-29 16.57.10
+                    treeNode4.Tag = ii4 + @"," + strPath + @"info\" + Stru_Txt_Data.strCheckDate + @"\" + Stru_Txt_Data.strCheckDate + " " + Stru_Txt_Data.strCheckTime; //400,G:\3384328829\info\ID2017-06-29\ID2017-06-29 10.27.23
                     treeNode4.Text = @"[" + Stru_Txt_Data.strCheckMode + @"] " + Stru_Txt_Data.strCheckTime;
 
                     //if (m_CheckNode_List.Count == 1)
@@ -1062,19 +1071,9 @@ namespace Qtud.Qtud
             }
         }
 
-        //1更新USB设备列表
-        private List<string> Update_Dev_Txt_Map( string strSerialFloder)
-        {
-            if (strSerialFloder == "")
-            {
-                return ( new  List<string>());
-            }
-            List<string> listTxtFiles = UpdateTxtFileList(strSerialFloder);
-             
-            return listTxtFiles;
-        }
+        
 
-        //获取检测编号列表
+        //2 获取盘符下的检测编号列表,返回检查号列表：1234567890，1122334455
         private List<string>  UpdateCheckSerialList(string strPath)  //  G:\
         {
 
@@ -1105,9 +1104,14 @@ namespace Qtud.Qtud
             return listSerial;
         }
 
-        //获取TXT文件列表
-        private List<string> UpdateTxtFileList(string strPath)  //G:\data\1508491901
+        //4 获取TXT文件列表
+        private List<string> UpdateTxtFileList(string strPath)  //G:\1508491901\
         {
+            if (strPath == "")
+            {
+                return (new List<string>());
+            }
+
             List<string> listTxtFile = new List<string>();
 
             DirectoryInfo theFolder = new DirectoryInfo(strPath);
@@ -1127,7 +1131,7 @@ namespace Qtud.Qtud
             return listTxtFile;
         }
 
-        //读取TXT文件内容
+        //6,读取TXT文件内容
         private List<Struct_Txt_Data> ReadTxtFile(string path)
         {
             List<Struct_Txt_Data> m_listTxtDatas = new List<Struct_Txt_Data>();
@@ -1592,7 +1596,7 @@ namespace Qtud.Qtud
                     //绘制分隔线
                     if (nPosx > -1)
                     { 
-                        m_DrawFuns.plotLine2(new Point[] { new Point(nPosx, m_DrawArea.Top), new Point(nPosx, m_DrawArea.Top + nCurveCnt * stepH) }, false, new Pen(Color.FromArgb(50, 150, 120)));
+                        m_DrawFuns.plotLine2(new Point[] { new Point(nPosx, m_DrawArea.Top), new Point(nPosx, m_DrawArea.Top + nCurveCnt * stepH) }, false, new Pen(Color.FromArgb(124, 252, 2)));
 
                     }
                 }
