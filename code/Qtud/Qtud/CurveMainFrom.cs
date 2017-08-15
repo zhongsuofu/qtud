@@ -17,7 +17,7 @@ using System.Management;  //获取所有USB用到
 
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
- 
+  
 
 namespace Qtud.Qtud
 {
@@ -75,6 +75,9 @@ namespace Qtud.Qtud
         private PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
         private List<string> m_ListUSBDevs = new List<string>();  //USB设备列表
 
+        private string  m_strFloder= @"d:\qtud_data\";    //备份文件夹 
+
+
         Dictionary<string, List<string>> Dev_listSerial_Map = new Dictionary<string, List<string>>();    //设备号 -检测号列表映射
 
         private int m_SelMode = 6;  //-1全部
@@ -90,7 +93,7 @@ namespace Qtud.Qtud
         int nSelStartindex = 0;  //子图中的开始序号
 
         Size curve3_Range = new Size(-100, 300);  //3条曲线范围：（最小值 ，最大值）
-        Size nl_Range = new Size(0, 2000);  //尿量范围：（最小值 ，最大值）
+        Size nl_Range = new Size(0, 3000);  //尿量范围：（最小值 ，最大值）
         Size nll_Range = new Size(0, 100);  //尿流率范围：（最小值 ，最大值）
 
         DrawFuns m_DrawFuns = new DrawFuns();
@@ -103,6 +106,25 @@ namespace Qtud.Qtud
             public string strCheckMode;
         }
 
+
+        //-------------------------------------------------------
+        public struct StruFileInfo  //一个检测号文件
+        {
+            public string  strFileMode;      //文件检测模式
+            public string  m_filePath;    //文件路径
+        }
+
+        public struct StruOneDayFileInfo  //一个检测号文件
+        {
+            public string strTxtFile;                    //Txt文件
+            public List<StruFileInfo> m_StruFileInfo;    //文件列表
+        }
+        public struct StruCheckFileInfo  //一个检测号文件
+        {
+            public bool isLoad;     //是否导入                  //Txt文件
+            public List<StruOneDayFileInfo> m_StruOneDayFileInfo;    //文件列表
+        }
+        Dictionary<string, StruCheckFileInfo> m_checkNum_Files_map = new Dictionary<string, StruCheckFileInfo>();    //检查号与文件的映射
         //-------------------------------------------------------
 
        
@@ -160,6 +182,7 @@ namespace Qtud.Qtud
         private TestDatas m_TestDatas = new TestDatas();
          
        
+        private tbl_patient_checknum_link_Manager   patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
         #endregion
 
         #region  界面操作函数
@@ -192,7 +215,7 @@ namespace Qtud.Qtud
             m_CurSelCurveArea.Location = new Point(0, 0);
             m_CurSelCurveArea.Size = new Size(0, 0);
 
-
+            comboBox_checkMode.SelectedIndex = m_SelMode+1;
             m_ListUSBDevs = GetMobileDiskList(); 
             UpdateUsbTree();
              
@@ -249,11 +272,11 @@ namespace Qtud.Qtud
                             string strNodeid2 = e.Node.Tag.ToString().Substring(0, ipos);
                             if(int.Parse(strNodeid2) - int.Parse(strNodeid1) == 1  )
                             {
-                                m_CheckNode_List.Add(e.Node);
+                                m_CheckNode_List.Insert(0, e.Node);
                             }
                             else if (int.Parse(strNodeid2) - int.Parse(strNodeid1) == -1)
                             {
-                                m_CheckNode_List.Insert(0,e.Node); 
+                                m_CheckNode_List.Add(e.Node);
                             }
                             else
                             {
@@ -886,7 +909,7 @@ namespace Qtud.Qtud
 
                          List<string> listSerial = UpdateCheckSerialList(strUsb);
                          if (listSerial.Count > 0)  //只显示有检查文件夹的盘符
-                         { 
+                         {  
                              //创建一个节点对象，并初始化 
                              TreeNode treeNode1 = new TreeNode();
 
@@ -900,6 +923,7 @@ namespace Qtud.Qtud
                              //----------------------------------
                              //一个设备下的文件展开
                              Update_Dev_listSerial_Map(treeNode1, strUsb.ToString());
+                              
                              //----------------------------------
                              treeView_File.SelectedNode = treeNode0;
                              //treeView_File.ExpandAll();
@@ -929,7 +953,7 @@ namespace Qtud.Qtud
 
                 int iv = 200;
                 foreach (string strSerial in listSerial)
-                {
+                { 
                     //----------------------------------
                     //创建一个节点对象，并初始化 
                     TreeNode treeNode2 = new TreeNode();
@@ -942,7 +966,17 @@ namespace Qtud.Qtud
                     HideCheckBox(this.treeView_File, treeNode2);
 
                     //----------------------------------
-                    Update_Serial_Txt_SubTree(treeNode2, strDev + strSerial + @"\");  // txt 文件路径列表 G:\1508491901\
+
+                    StruCheckFileInfo tempCheckFileInfo = new StruCheckFileInfo
+                        {
+                            isLoad = false,
+                            m_StruOneDayFileInfo = new List<StruOneDayFileInfo>()
+                        };
+
+                    Update_Serial_Txt_SubTree(treeNode2, strDev + strSerial + @"\",ref tempCheckFileInfo);  // txt 文件路径列表 G:\1508491901\
+
+                    if (!m_checkNum_Files_map.ContainsKey(strSerial))
+                        m_checkNum_Files_map[strSerial] = tempCheckFileInfo;
                     
                     //----------------------------------
 
@@ -958,7 +992,7 @@ namespace Qtud.Qtud
         }
 
         //3 更新序列号下面的文件子树
-        private void Update_Serial_Txt_SubTree(TreeNode parentNode, string strSerialPath)  // strSerialPath = G:\1508491901\ 
+        private void Update_Serial_Txt_SubTree(TreeNode parentNode, string strSerialPath, ref StruCheckFileInfo tempCheckFileInfo)  // strSerialPath = G:\1508491901\ 
         {
             if (strSerialPath == "")
             {
@@ -968,7 +1002,7 @@ namespace Qtud.Qtud
             List<string> m_ListTxtFiles = UpdateTxtFileList(strSerialPath);  // txt 文件列表  
 
             if (m_ListTxtFiles.Count > 0)
-            {
+            {  
                 int ii3 = 300;
                 foreach (string strtxtfile in m_ListTxtFiles)  //TXT文件 
                 {
@@ -987,8 +1021,18 @@ namespace Qtud.Qtud
                     HideCheckBox(this.treeView_File, treeNode3);
 
                     //--------------------------------------------
-                    Update_Date_TimeFile_SubTree(treeNode3, strtxtfile);
-                    
+
+                    StruOneDayFileInfo tempOneDayFileInfo = new StruOneDayFileInfo
+                    {
+                        strTxtFile = string.Empty,
+                        m_StruFileInfo = new List<StruFileInfo>()
+                         
+                    };
+                    tempOneDayFileInfo.strTxtFile =  strtxtfile;
+
+                    Update_Date_TimeFile_SubTree(treeNode3, strtxtfile, ref tempOneDayFileInfo);
+
+                    tempCheckFileInfo.m_StruOneDayFileInfo.Add(tempOneDayFileInfo);
                     //--------------------------------------------
 
                     ii3++;
@@ -998,7 +1042,7 @@ namespace Qtud.Qtud
         }
 
         // 5 ,更新序列号下面的文件子树
-        private void Update_Date_TimeFile_SubTree(TreeNode parentNode, string strTXTPath)  // strDev = G:\1508491901\ID2017-07-01.txt 
+        private void Update_Date_TimeFile_SubTree(TreeNode parentNode, string strTXTPath, ref StruOneDayFileInfo tempCheckFileInfo)  // strDev = G:\1508491901\ID2017-07-01.txt 
         {
             if (strTXTPath == "")
             {
@@ -1012,6 +1056,18 @@ namespace Qtud.Qtud
                 int ii4 = 400;
                 foreach (Struct_Txt_Data Stru_Txt_Data in m_checkDatas)  //txt 数据内容
                 {
+
+                    //--------------------------------------------
+                    int ipos1 = strTXTPath.LastIndexOf(@"\");
+                    string strPath1 = strTXTPath.Substring(0, ipos1 + 1);  // G:\1508491901\
+                    string tempPath1 = strPath1 + @"info\" + Stru_Txt_Data.strCheckDate + @"\" + Stru_Txt_Data.strCheckDate + " " + Stru_Txt_Data.strCheckTime;
+
+                    StruFileInfo m_tempFileInfo = new StruFileInfo();
+                    m_tempFileInfo.strFileMode = Stru_Txt_Data.strCheckMode;
+                    m_tempFileInfo.m_filePath = tempPath1;
+                    tempCheckFileInfo.m_StruFileInfo.Add(m_tempFileInfo);
+                    //--------------------------------------------
+
                     if (m_SelMode != -1 )
                     {
                         if (Stru_Txt_Data.strCheckMode == "")  //没类型，不显示
@@ -1026,11 +1082,13 @@ namespace Qtud.Qtud
                     //创建一个节点对象，并初始化 
                     TreeNode treeNode4 = new TreeNode();
 
-                    //在TreeView组件中加入子节点  
+                    //在TreeView组件中加入子节点
+                    string tempPath =  strPath + @"info\" + Stru_Txt_Data.strCheckDate + @"\" + Stru_Txt_Data.strCheckDate + " " + Stru_Txt_Data.strCheckTime ;
 
-                    treeNode4.Tag = ii4 + @"," + strPath + @"info\" + Stru_Txt_Data.strCheckDate + @"\" + Stru_Txt_Data.strCheckDate + " " + Stru_Txt_Data.strCheckTime; //400,G:\3384328829\info\ID2017-06-29\ID2017-06-29 10.27.23
+                    treeNode4.Tag = ii4 + @"," +tempPath; //400,G:\3384328829\info\ID2017-06-29\ID2017-06-29 10.27.23
                     treeNode4.Text = @"[" + Stru_Txt_Data.strCheckMode + @"] " + Stru_Txt_Data.strCheckTime;
-
+                     
+                     
                     //if (m_CheckNode_List.Count == 1)
                     //{
                     //    m_CheckNode_List.Add(treeNode4);
@@ -1122,8 +1180,7 @@ namespace Qtud.Qtud
             {
                 if (NextFile.Name != null && NextFile.Name.Contains(".txt") && NextFile.Length > 0)
                 {
-                    listTxtFile.Add(  strPath + NextFile.Name);
-                    //listTxtFile.Insert(0, strPath + NextFile.Name);
+                    listTxtFile.Insert( 0, strPath + NextFile.Name);
                      
                 }
 
@@ -1149,7 +1206,7 @@ namespace Qtud.Qtud
                         structTxtData.strCheckTime = lineCodes[1].Trim();
                         structTxtData.strCheckMode = lineCodes[3].Trim();
 
-                        m_listTxtDatas.Add(structTxtData); 
+                        m_listTxtDatas.Insert(0,structTxtData); 
                     }
                 }
                 sr.Close();
@@ -1921,50 +1978,59 @@ namespace Qtud.Qtud
         private void All_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             m_SelMode = -1;
-            UpdateUsbTree();
+
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
         private void ToolStripMenuItem0_Click(object sender, EventArgs e)
         {
-            m_SelMode = 0;  
+            m_SelMode = 0;
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
 
-            UpdateUsbTree();
+            //UpdateUsbTree();
 
         }
 
         private void ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             m_SelMode = 1;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             m_SelMode = 2;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void ToolStripMenuItem3_Click(object sender, EventArgs e)
         {
             m_SelMode = 3;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void ToolStripMenuItem4_Click(object sender, EventArgs e)
         {
             m_SelMode = 4;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void ToolStripMenuItem5_Click(object sender, EventArgs e)
         {
             m_SelMode = 5;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void ToolStripMenuItem6_Click(object sender, EventArgs e)
         {
             m_SelMode = 6;
-            UpdateUsbTree();
+            comboBox_checkMode.SelectedIndex = m_SelMode + 1;
+            //UpdateUsbTree();
         }
 
         private void button_Add_Report_Click(object sender, EventArgs e)
@@ -2547,6 +2613,75 @@ namespace Qtud.Qtud
         private void Export_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("正在开发中");
+        }
+
+        //导出一个检查号下的文件，isAllExport是否全部导出
+        private void ExportFile( ref  StruCheckFileInfo tempStruCheckFileInfo , bool isAllExport = false)
+        {
+            foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
+            {
+                string strTxtFile = OneDayFileInfo.strTxtFile;
+                //txt文件可以单独存储一个表。
+                foreach (StruFileInfo tempFileInfo in OneDayFileInfo.m_StruFileInfo)
+                {
+                    string strDesPath = m_strFloder + m_CurSelPatientInfo.id;
+                    if (Directory.Exists(strDesPath))  //创建文件夹
+                    {
+                    }
+                     
+                    //tempFileInfo.m_filePath;
+                    //tempFileInfo.strFileMode;
+                }
+            }
+        }
+
+        private void Export_Click(object sender, EventArgs e)
+        {
+            if (m_checkNum_Files_map.Count < 1)
+            {
+                MessageBox.Show("请先选择需要导出的文件");
+                return;
+            }
+
+            TreeNode FirstNode = m_CheckNode_List[0];
+
+
+            int ipos = FirstNode.Tag.ToString().IndexOf(",");  //401,G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+            string strPath= FirstNode.Tag.ToString().Substring( ipos +1); //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+
+            ipos = strPath.IndexOf("\\");
+            strPath = strPath.Substring(ipos + 1); // 1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+
+            ipos = strPath.IndexOf("\\"); 
+            string checkNo = strPath.Substring(0,ipos ); // 1508491901
+
+            if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
+            { 
+                string strWhere = string.Empty;
+                strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
+                List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+                if (tempModelist.Count < 1)  //从没导入
+                {
+                    StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+
+                    ExportFile(ref tempStruCheckFileInfo, true);
+                    tempStruCheckFileInfo.isLoad = true;
+                }
+                else //部分导出
+                {
+                    StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+
+                    ExportFile(ref tempStruCheckFileInfo);
+                    tempStruCheckFileInfo.isLoad = true;
+                }
+            }
+
+        }
+
+        private void comboBox_checkMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           m_SelMode =  comboBox_checkMode.SelectedIndex - 1;
+           UpdateUsbTree();
         }
          
         //----------------------------------------------------------

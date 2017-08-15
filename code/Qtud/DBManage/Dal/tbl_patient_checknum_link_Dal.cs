@@ -156,15 +156,15 @@ namespace Qtud.DBManage.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,meno ");
-            strSql.Append(" from tb_patient_info ");
+            strSql.Append("select  uuid,patient_uuid,checknum ");
+            strSql.Append(" from tbl_patient_checknum_link ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
 			}
 			return DbHelperMySQL.Query(strSql.ToString());
 		}
-
+      
 		/*
 		/// <summary>
 		/// 分页获取数据列表

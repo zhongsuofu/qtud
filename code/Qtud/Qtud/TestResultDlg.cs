@@ -16,8 +16,8 @@ namespace Qtud.Qtud
     public partial class TestResultDlg : Form
     {
         private PatientInfoManager pim = new PatientInfoManager();
-        public PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
-        private ReportInfoModel m_ReportInfoModel;    //当前报告
+        public PatientInfoModel m_CurSelPatientInfo = null;    //当前选择的病人
+        private ReportInfoModel m_ReportInfoModel = null;    //当前报告
 
         public TestDatas m_TestDatas = new TestDatas
         {
@@ -107,6 +107,11 @@ namespace Qtud.Qtud
 
                 m_TestDatas.str_qtms = m_ReportInfoModel.otherInfo ;
                 m_TestDatas.str_ndlxzd = m_ReportInfoModel.testresult ;
+            }
+
+            if (m_CurSelPatientInfo != null)
+            {
+                m_TestDatas.strBS = m_CurSelPatientInfo.bs;
             }
            
             //----------------------------------------------------

@@ -101,7 +101,7 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.PatientInfoModel> GetModelList(string strWhere)
+        public List<Qtud.DBManage.Model.tbl_patient_checknum_link_Model> GetModelList(string strWhere)
         {
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
@@ -109,26 +109,20 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.PatientInfoModel> DataTableToList(DataTable dt)
+        public List<Qtud.DBManage.Model.tbl_patient_checknum_link_Model> DataTableToList(DataTable dt)
         {
-            List<Qtud.DBManage.Model.PatientInfoModel> modelList = new List<Qtud.DBManage.Model.PatientInfoModel>();
+            List<Qtud.DBManage.Model.tbl_patient_checknum_link_Model> modelList = new List<Qtud.DBManage.Model.tbl_patient_checknum_link_Model>();
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                Qtud.DBManage.Model.PatientInfoModel model;
+                Qtud.DBManage.Model.tbl_patient_checknum_link_Model model;
                 for (int n = 0; n < rowsCount; n++)
                 {
-                    model = new Qtud.DBManage.Model.PatientInfoModel();
+                    model = new Qtud.DBManage.Model.tbl_patient_checknum_link_Model();
                     model.uuid = dt.Rows[n]["uuid"].ToString();
-                    model.cardid = dt.Rows[n]["cardid"].ToString();
-                    model.name = dt.Rows[n]["name"].ToString();
-                    model.phone = dt.Rows[n]["phone"].ToString();
-                    model.sex = int.Parse( dt.Rows[n]["sex"].ToString());
-                    model.meno = dt.Rows[n]["meno"].ToString();
-                    model.createtime = DateTime.Parse(dt.Rows[n]["createtime"].ToString());
-                    model.lastchecktime = DateTime.Parse(dt.Rows[n]["lastchecktime"].ToString());
-                    model.bs = dt.Rows[n]["bs"].ToString();
-                     
+                    model.patient_uuid = dt.Rows[n]["patient_uuid"].ToString();
+                    model.checknum = dt.Rows[n]["checkNum"].ToString();
+                      
                     modelList.Add(model);
                 }
             }

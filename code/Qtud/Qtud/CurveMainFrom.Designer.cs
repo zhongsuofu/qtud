@@ -35,9 +35,10 @@
             this.button_make_Report = new System.Windows.Forms.Button();
             this.button_Back = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Export = new System.Windows.Forms.Button();
+            this.comboBox_checkMode = new System.Windows.Forms.ComboBox();
             this.treeView_File = new System.Windows.Forms.TreeView();
             this.contextMenuStrip_TreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.All_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,6 @@
             this.Allcancel_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.refresh_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel5 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBox_SelSeg = new System.Windows.Forms.ListBox();
             this.contextMenuStrip_deleteItem = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -75,8 +75,6 @@
             this.panel_Draw = new MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -146,42 +144,66 @@
             this.label_Info.TabIndex = 0;
             this.label_Info.Text = "患者：";
             // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.tableLayoutPanel1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel2.Location = new System.Drawing.Point(0, 79);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(360, 885);
-            this.panel2.TabIndex = 1;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("tableLayoutPanel1.BackgroundImage")));
-            this.tableLayoutPanel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.9887F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 94.0113F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(360, 885);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Controls.Add(this.label1);
+            this.panel4.Controls.Add(this.Export);
+            this.panel4.Controls.Add(this.comboBox_checkMode);
             this.panel4.Controls.Add(this.treeView_File);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 55);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 79);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(354, 827);
+            this.panel4.Size = new System.Drawing.Size(354, 885);
             this.panel4.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(17, 88);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 19);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "检测模式";
+            // 
+            // Export
+            // 
+            this.Export.Location = new System.Drawing.Point(21, 18);
+            this.Export.Name = "Export";
+            this.Export.Size = new System.Drawing.Size(86, 44);
+            this.Export.TabIndex = 4;
+            this.Export.Text = "导 出";
+            this.Export.UseVisualStyleBackColor = true;
+            this.Export.Click += new System.EventHandler(this.Export_Click);
+            // 
+            // comboBox_checkMode
+            // 
+            this.comboBox_checkMode.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBox_checkMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_checkMode.ForeColor = System.Drawing.Color.DarkBlue;
+            this.comboBox_checkMode.FormattingEnabled = true;
+            this.comboBox_checkMode.Items.AddRange(new object[] {
+            "全  部",
+            "0-畅通模式",
+            "1-尿潴留模式",
+            "2-定时模式",
+            "3-定压模式",
+            "4-定时定压模式",
+            "5-分段定压模式",
+            "6-尿动力检测模式"});
+            this.comboBox_checkMode.Location = new System.Drawing.Point(111, 83);
+            this.comboBox_checkMode.Name = "comboBox_checkMode";
+            this.comboBox_checkMode.Size = new System.Drawing.Size(231, 28);
+            this.comboBox_checkMode.TabIndex = 2;
+            this.comboBox_checkMode.SelectedIndexChanged += new System.EventHandler(this.comboBox_checkMode_SelectedIndexChanged);
             // 
             // treeView_File
             // 
@@ -189,9 +211,9 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView_File.ContextMenuStrip = this.contextMenuStrip_TreeView;
-            this.treeView_File.Location = new System.Drawing.Point(12, 14);
+            this.treeView_File.Location = new System.Drawing.Point(12, 124);
             this.treeView_File.Name = "treeView_File";
-            this.treeView_File.Size = new System.Drawing.Size(328, 729);
+            this.treeView_File.Size = new System.Drawing.Size(330, 727);
             this.treeView_File.TabIndex = 0;
             this.treeView_File.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView_File_AfterCheck);
             this.treeView_File.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView_File_DrawNode);
@@ -302,16 +324,6 @@
             this.refresh_ToolStripMenuItem.Text = "刷 新";
             this.refresh_ToolStripMenuItem.Click += new System.EventHandler(this.refresh_ToolStripMenuItem_Click);
             // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Transparent;
-            this.panel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel5.BackgroundImage")));
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel5.Location = new System.Drawing.Point(3, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(354, 46);
-            this.panel5.TabIndex = 1;
-            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
@@ -333,9 +345,9 @@
             this.listBox_SelSeg.ForeColor = System.Drawing.Color.DarkBlue;
             this.listBox_SelSeg.FormattingEnabled = true;
             this.listBox_SelSeg.ItemHeight = 23;
-            this.listBox_SelSeg.Location = new System.Drawing.Point(6, 219);
+            this.listBox_SelSeg.Location = new System.Drawing.Point(6, 265);
             this.listBox_SelSeg.Name = "listBox_SelSeg";
-            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 533);
+            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 579);
             this.listBox_SelSeg.TabIndex = 6;
             // 
             // contextMenuStrip_deleteItem
@@ -384,7 +396,7 @@
             this.groupBox5.ForeColor = System.Drawing.Color.White;
             this.groupBox5.Location = new System.Drawing.Point(7, 31);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(275, 182);
+            this.groupBox5.Size = new System.Drawing.Size(275, 212);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "曲线通道";
@@ -395,7 +407,7 @@
             this.checkBox_nll.Checked = true;
             this.checkBox_nll.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_nll.ForeColor = System.Drawing.Color.White;
-            this.checkBox_nll.Location = new System.Drawing.Point(37, 140);
+            this.checkBox_nll.Location = new System.Drawing.Point(37, 160);
             this.checkBox_nll.Name = "checkBox_nll";
             this.checkBox_nll.Size = new System.Drawing.Size(131, 24);
             this.checkBox_nll.TabIndex = 4;
@@ -409,7 +421,7 @@
             this.checkBox_nl.Checked = true;
             this.checkBox_nl.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_nl.ForeColor = System.Drawing.Color.White;
-            this.checkBox_nl.Location = new System.Drawing.Point(37, 113);
+            this.checkBox_nl.Location = new System.Drawing.Point(37, 133);
             this.checkBox_nl.Name = "checkBox_nl";
             this.checkBox_nl.Size = new System.Drawing.Size(111, 24);
             this.checkBox_nl.TabIndex = 3;
@@ -423,7 +435,7 @@
             this.checkBox_Pdet.Checked = true;
             this.checkBox_Pdet.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Pdet.ForeColor = System.Drawing.Color.White;
-            this.checkBox_Pdet.Location = new System.Drawing.Point(37, 86);
+            this.checkBox_Pdet.Location = new System.Drawing.Point(37, 106);
             this.checkBox_Pdet.Name = "checkBox_Pdet";
             this.checkBox_Pdet.Size = new System.Drawing.Size(211, 24);
             this.checkBox_Pdet.TabIndex = 2;
@@ -437,7 +449,7 @@
             this.checkBox_Pabd.Checked = true;
             this.checkBox_Pabd.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Pabd.ForeColor = System.Drawing.Color.White;
-            this.checkBox_Pabd.Location = new System.Drawing.Point(37, 59);
+            this.checkBox_Pabd.Location = new System.Drawing.Point(37, 79);
             this.checkBox_Pabd.Name = "checkBox_Pabd";
             this.checkBox_Pabd.Size = new System.Drawing.Size(191, 24);
             this.checkBox_Pabd.TabIndex = 1;
@@ -451,7 +463,7 @@
             this.checkBox_Pves.Checked = true;
             this.checkBox_Pves.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox_Pves.ForeColor = System.Drawing.Color.White;
-            this.checkBox_Pves.Location = new System.Drawing.Point(37, 32);
+            this.checkBox_Pves.Location = new System.Drawing.Point(37, 52);
             this.checkBox_Pves.Name = "checkBox_Pves";
             this.checkBox_Pves.Size = new System.Drawing.Size(191, 24);
             this.checkBox_Pves.TabIndex = 0;
@@ -497,14 +509,16 @@
             // 
             // panel_Draw
             // 
-            this.panel_Draw.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel_Draw.BackgroundImage")));
+            this.panel_Draw.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_Draw.BackColor = System.Drawing.Color.Transparent;
             this.panel_Draw.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel_Draw.ContextMenuStrip = this.contextMenuStrip_Curve;
             this.panel_Draw.Controls.Add(this.label_tip);
-            this.panel_Draw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Draw.Location = new System.Drawing.Point(360, 79);
+            this.panel_Draw.Location = new System.Drawing.Point(360, 85);
             this.panel_Draw.Name = "panel_Draw";
-            this.panel_Draw.Size = new System.Drawing.Size(613, 885);
+            this.panel_Draw.Size = new System.Drawing.Size(607, 867);
             this.panel_Draw.TabIndex = 3;
             this.panel_Draw.Click += new System.EventHandler(this.panel_Draw_Click);
             this.panel_Draw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Draw_MouseDown);
@@ -514,11 +528,14 @@
             // 
             // label_tip
             // 
+            this.label_tip.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.label_tip.AutoSize = true;
             this.label_tip.BackColor = System.Drawing.Color.Transparent;
             this.label_tip.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_tip.ForeColor = System.Drawing.Color.DarkBlue;
-            this.label_tip.Location = new System.Drawing.Point(18, 3);
+            this.label_tip.Location = new System.Drawing.Point(12, 12);
             this.label_tip.Name = "label_tip";
             this.label_tip.Size = new System.Drawing.Size(75, 24);
             this.label_tip.TabIndex = 0;
@@ -532,9 +549,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1258, 964);
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel_Draw);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -546,9 +563,8 @@
             this.Load += new System.EventHandler(this.MainFrom2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.contextMenuStrip_TreeView.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.contextMenuStrip_deleteItem.ResumeLayout(false);
@@ -564,7 +580,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.TreeView treeView_File;
         private System.Windows.Forms.Panel panel4;
@@ -578,8 +593,6 @@
         private System.Windows.Forms.Label label_Info;
         private System.Windows.Forms.Button button_Back;
         private System.Windows.Forms.Button button_make_Report;
-        private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_TreeView;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem0;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem1;
@@ -608,6 +621,9 @@
         private System.Windows.Forms.ToolStripMenuItem refresh_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Range_ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem Export_ToolStripMenuItem;
+        private System.Windows.Forms.Button Export;
+        private System.Windows.Forms.ComboBox comboBox_checkMode;
+        private System.Windows.Forms.Label label1;
         
     }
 }
