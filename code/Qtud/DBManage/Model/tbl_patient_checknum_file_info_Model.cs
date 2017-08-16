@@ -13,7 +13,7 @@ namespace Qtud.DBManage.Model
         private string _uuid = string.Empty;
         private string _check_uuid = string.Empty;
         private string _path = string.Empty;
-        private int _checkmode = 0;
+        private string _checkmode = string.Empty;
         private DateTime _createtime = DateTime.Now;
      
 
@@ -45,7 +45,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
 		/// 
 		/// </summary>
-        public int checkmode
+        public string checkmode
 		{
             set { _checkmode = value; }
             get { return _checkmode; }

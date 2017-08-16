@@ -74,6 +74,7 @@
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_Draw = new MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
+            this.button_show_history = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
@@ -147,6 +148,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
+            this.panel4.Controls.Add(this.button_show_history);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.Export);
             this.panel4.Controls.Add(this.comboBox_checkMode);
@@ -542,6 +544,16 @@
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
             // 
+            // button_show_history
+            // 
+            this.button_show_history.Location = new System.Drawing.Point(113, 18);
+            this.button_show_history.Name = "button_show_history";
+            this.button_show_history.Size = new System.Drawing.Size(102, 44);
+            this.button_show_history.TabIndex = 5;
+            this.button_show_history.Text = "历史数据";
+            this.button_show_history.UseVisualStyleBackColor = true;
+            this.button_show_history.Click += new System.EventHandler(this.button_show_history_Click);
+            // 
             // MainFrom_Curve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -624,6 +636,7 @@
         private System.Windows.Forms.Button Export;
         private System.Windows.Forms.ComboBox comboBox_checkMode;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button_show_history;
         
     }
 }

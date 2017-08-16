@@ -453,7 +453,7 @@ namespace Qtud.Qtud
         }
 
         //绘制报告标题，病人信息等非曲线图信息，返回当前绘制的高度位置  isHideTail是否显示页脚
-        public int DrawReportTitle(PatientInfoModel CurSelPatientInfo, TestDatas _TestData, Rectangle DrawRect,bool isHideTail = false)
+        public int DrawReportTitle(PatientInfoModel CurSelPatientInfo, TestDatas _TestData, Rectangle DrawRect, bool isHideTail = false, bool IsPrintReportheadPage = true)
         {
             int nCurHeight = 0;
             string strTemp = string.Empty;
@@ -560,6 +560,9 @@ namespace Qtud.Qtud
             offScreenDC.DrawLine(pen, DrawRect.Left, DrawRect.Top + nCurHeight, DrawRect.Right, DrawRect.Top + nCurHeight);
             nCurHeight += 5;   // 画横线  
 
+
+            if (!IsPrintReportheadPage)
+                return nCurHeight;
             //------------------------------------------------------------
             nrowH = 30;
             rtf.Height = nrowH;

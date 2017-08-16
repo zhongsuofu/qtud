@@ -13,7 +13,8 @@ namespace Qtud.DBManage.Model
         private string _uuid = string.Empty;
         private string _patient_uuid = string.Empty;
         private string _checknum = string.Empty;
-     
+
+        private string _txtPath = string.Empty;
 
 		/// <summary>
 		/// 
@@ -40,6 +41,16 @@ namespace Qtud.DBManage.Model
             get { return _checknum; }
 		}
 		 
+        /// <summary>
+		/// 
+		/// </summary>
+        public string txtPath
+		{
+            set { _txtPath = value; }
+            get { return _txtPath; }
+		}
+		 
+        
 		#endregion Model
 
 	}

@@ -40,11 +40,12 @@ namespace Qtud.DBManage.DAL
 		{
 			StringBuilder strSql=new StringBuilder();
             strSql.Append("insert into tbl_patient_checknum_link(");
-            strSql.Append("uuid,patient_uuid,checknum )");
+            strSql.Append("uuid,patient_uuid,checknum,txtPath )");
 			strSql.Append(" values (");
 			strSql.Append(@"'"+ model.uuid +@"', ");
 			strSql.Append(@"'"+ model.patient_uuid +@"', "); 
-            strSql.Append(@"'"+ model.checknum + @"'  );");
+            strSql.Append(@"'"+ model.checknum + @"',  ");
+            strSql.Append(@"'" + model.txtPath + @"'  );");
              
             DbHelperMySQL.ExecuteSql(strSql.ToString() );
               
@@ -156,7 +157,7 @@ namespace Qtud.DBManage.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  uuid,patient_uuid,checknum ");
+            strSql.Append("select  uuid,patient_uuid,checknum,txtPath ");
             strSql.Append(" from tbl_patient_checknum_link ");
 			if(strWhere.Trim()!="")
 			{

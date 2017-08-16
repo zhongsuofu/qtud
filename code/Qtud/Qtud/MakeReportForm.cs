@@ -187,13 +187,17 @@ namespace Qtud.Qtud
             Rectangle m_DrawArea = e.MarginBounds;  //绘画区域, 含行标题,及其尿流率图
 
             int nCurHight = 0;
-            if (m_CurPageIndex == 1 && IsPrintReportheadPage)
+            if (m_CurPageIndex == 1   )
             {
-                nCurHight = m_DrawFuns.DrawReportTitle(m_CurSelPatientInfo, m_TestDatas,m_DrawArea);   //绘制报告标题，病人信息等非曲线图信息，返回当前绘制的高度位置
+                nCurHight = m_DrawFuns.DrawReportTitle(m_CurSelPatientInfo, m_TestDatas, m_DrawArea, false ,IsPrintReportheadPage);   //绘制报告标题，病人信息等非曲线图信息，返回当前绘制的高度位置
                 nCurHight += 20;   //间隔
 
-                e.HasMorePages = true;  //分页
-                return;
+                if (IsPrintReportheadPage)
+                {
+                    e.HasMorePages = true;  //分页
+                    return;
+                }
+                
 
             }
 
@@ -381,7 +385,8 @@ namespace Qtud.Qtud
                         // 绘制曲线
                         int ii = m_CurCurveMode;
                         int useii = 0;
-                        while (m_CurCurveMode +useii < m_CurCurveMode + iCount && ii< 3)
+                        int nPosx = -1;  //分隔线
+                        while (m_CurCurveMode + useii < m_CurCurveMode + iCount && ii < 3)
                         {
                             Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域
                             m_oneDrawArea.Location = new Point(m_DrawArea.Left + ntitleWitch, m_DrawArea.Top + useii * stepH);
@@ -403,7 +408,7 @@ namespace Qtud.Qtud
                                 List<StruData> tempstrudata = OneCurveData.list_Pves;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Blue, ref temp);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Blue, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pabd)  //Pabd
@@ -415,7 +420,7 @@ namespace Qtud.Qtud
                                 List<StruData> tempstrudata = OneCurveData.list_Pabd;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.DarkViolet, ref temp);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkViolet, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pdet)  //Pdet
@@ -428,13 +433,20 @@ namespace Qtud.Qtud
                                 List<StruData> tempstrudata = OneCurveData.list_Pdet;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             ii++;
 
 
                         }
+                         //绘制分隔线
+                        if (nPosx > -1)
+                        {
+                            m_DrawFuns.plotLine2(new Point[] { new Point(nPosx, m_DrawArea.Top), new Point(nPosx, m_DrawArea.Top + useii * stepH) }, false, new Pen(Color.FromArgb(30, 20, 80)));
+
+                        }
+
                         m_CurCurveMode =  ii ;
                         m_CurCurveDataIndex = nCurIndex;
                         if (isPartCurve)  // 
@@ -1042,9 +1054,8 @@ namespace Qtud.Qtud
             m_DrawArea.Size = new Size((int)(panel_print_RC.Width - panel_print_RC.Width * 0.2), (int)(panel_print_RC.Height -40));
 
             //-------------------------------------------------------
-            int nCurHight = 0;
-            if(IsPrintReportheadPage)
-                nCurHight = m_DrawFuns.DrawReportTitle(m_CurSelPatientInfo, m_TestDatas,m_DrawArea,true);   //绘制报告标题，病人信息等非曲线图信息，返回当前绘制的高度位置
+            int nCurHight = 0; 
+            nCurHight = m_DrawFuns.DrawReportTitle(m_CurSelPatientInfo, m_TestDatas, m_DrawArea, true, IsPrintReportheadPage);   //绘制报告标题，病人信息等非曲线图信息，返回当前绘制的高度位置
              
             nCurHight += 20;
             //-------------------------------------------------------
@@ -1129,11 +1140,11 @@ namespace Qtud.Qtud
 
                         string strtitle = string.Empty;
                         if (nStepSecond < 60)
-                            strtitle = (iv + 1) * nStepSecond + "秒";
+                            strtitle = (iv + 1) * nStepSecond + "\"";
                         else
                         {
-                            strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
-                            strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
+                            strtitle = ((iv + 1) * nStepSecond) / 60 + "\'";
+                            strtitle += ((iv + 1) * nStepSecond) % 60 + "\"";
                         }
                         if ((iv + 1) == nduan)
                         {
@@ -1148,6 +1159,7 @@ namespace Qtud.Qtud
                     //----------------------------------------------------------
                     int ii = 0;
                     int useii = 0;  //有效的II
+                    int nPosx = -1;  //分隔线
                     while (useii < ncurcount && ii < 3)
                     {
                         Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域
@@ -1170,7 +1182,7 @@ namespace Qtud.Qtud
                             List<StruData> tempstrudata = OneCurveData.list_Pves;
                             //画曲线
                             Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Blue, ref temp);
+                            nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Blue, ref temp, OneCurveData.FirstFileEndIndex);
                             useii++;
                         }
                         else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pabd)  //Pabd
@@ -1182,7 +1194,7 @@ namespace Qtud.Qtud
                             List<StruData> tempstrudata = OneCurveData.list_Pabd;
                             //画曲线
                             Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.DarkViolet, ref temp);
+                            nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkViolet, ref temp, OneCurveData.FirstFileEndIndex);
                             useii++;
                         }
                         else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pdet)  //Pdet
@@ -1195,11 +1207,18 @@ namespace Qtud.Qtud
                             List<StruData> tempstrudata = OneCurveData.list_Pdet;
                             //画曲线
                             Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp);
+                            nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp, OneCurveData.FirstFileEndIndex);
                             useii++;
                            
                         }
                         ii++;
+
+                    }
+
+                    //绘制分隔线
+                    if (nPosx > -1)
+                    {
+                        m_DrawFuns.plotLine2(new Point[] { new Point(nPosx, m_DrawArea.Top), new Point(nPosx, m_DrawArea.Top + useii * stepH) }, false, new Pen(Color.FromArgb(30, 20, 80)));
 
                     }
                     //-------------------------------------------------------

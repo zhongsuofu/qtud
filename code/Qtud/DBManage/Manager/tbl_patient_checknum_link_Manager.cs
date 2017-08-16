@@ -122,6 +122,7 @@ namespace Qtud.DBManage.Manager
                     model.uuid = dt.Rows[n]["uuid"].ToString();
                     model.patient_uuid = dt.Rows[n]["patient_uuid"].ToString();
                     model.checknum = dt.Rows[n]["checkNum"].ToString();
+                    model.txtPath = dt.Rows[n]["txtPath"].ToString();
                       
                     modelList.Add(model);
                 }

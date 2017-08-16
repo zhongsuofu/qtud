@@ -44,7 +44,7 @@ namespace Qtud.DBManage.DAL
 			strSql.Append(" values (");
 			strSql.Append(@"'"+ model.uuid +@"', ");
 			strSql.Append(@"'"+ model.check_uuid +@"', ");
-			strSql.Append(  model.checkmode +@", ");
+            strSql.Append(@"'" + model.checkmode + @"', ");
 			strSql.Append(@"'"+ model.createtime +@"', ");
 			strSql.Append(@"'"+ model.path +@"' ); ");
 			 
@@ -159,15 +159,15 @@ namespace Qtud.DBManage.DAL
 		public DataSet GetList(string strWhere)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,meno ");
-            strSql.Append(" from tb_patient_info ");
+            strSql.Append("select  uuid,path,checkmode ,check_uuid ,createtime  ");
+            strSql.Append(" from tbl_patient_checknum_file_info ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
 			}
 			return DbHelperMySQL.Query(strSql.ToString());
 		}
-
+          
 		/*
 		/// <summary>
 		/// 分页获取数据列表

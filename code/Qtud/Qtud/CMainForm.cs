@@ -502,6 +502,19 @@ namespace Qtud.Qtud
                 listView_report.FocusedItem.ForeColor = Color.White;
             }
         }
+
+
+        //删除报告
+        private void button_del_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //查看报告
+        private void button_showRep_Click(object sender, EventArgs e)
+        {
+
+        }
  
 
        

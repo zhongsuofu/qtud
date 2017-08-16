@@ -180,9 +180,10 @@ namespace Qtud.Qtud
         };
 
         private TestDatas m_TestDatas = new TestDatas();
-         
-       
-        private tbl_patient_checknum_link_Manager   patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
+
+
+        private tbl_patient_checknum_link_Manager patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
+        private tbl_patient_checknum_file_info_Manager patient_checknum_file_info_Manager = new tbl_patient_checknum_file_info_Manager();
         #endregion
 
         #region  界面操作函数
@@ -1235,7 +1236,7 @@ namespace Qtud.Qtud
                 {
                     if (NextFile.Name.IndexOf(strsubFileName) >= 0) 
                     {
-                        listDataFile.Add(strPath+ NextFile.Name); 
+                        listDataFile.Add(strPath+ @"\" + NextFile.Name); 
 
                     }
                     else if (listDataFile.Count> 0)
@@ -2615,29 +2616,114 @@ namespace Qtud.Qtud
             MessageBox.Show("正在开发中");
         }
 
-        //导出一个检查号下的文件，isAllExport是否全部导出
-        private void ExportFile( ref  StruCheckFileInfo tempStruCheckFileInfo , bool isAllExport = false)
+        //导出一个检查号下的文件，isAllExport是否全部导出 G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+
+        private void ExportFile(string checkNo, ref  StruCheckFileInfo tempStruCheckFileInfo, bool isAllExport = false)
         {
             foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
             {
-                string strTxtFile = OneDayFileInfo.strTxtFile;
-                //txt文件可以单独存储一个表。
+                string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
+
+                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + checkNo;
+                if (!Directory.Exists(strDesPath))  //创建文件夹
+                {
+                    Directory.CreateDirectory(strDesPath);
+                }
+                strDesPath += @"\";
+                string strtempPath = string.Empty;
+
+                tbl_patient_checknum_link_Model m_model = new tbl_patient_checknum_link_Model();
+                int npos = strTxtFile.LastIndexOf("\\");
+                if (npos > -1)
+                {
+                    strtempPath = strDesPath + strTxtFile.Substring(npos+1);   //目标txt文件
+                     
+                    if (!File.Exists(strtempPath))  //创建文件夹
+                    {
+                        File.Copy(strTxtFile, strtempPath);  //复制txt文件 
+                    }
+
+                    string strWhere = string.Empty;
+                    strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"' and  txtpath='" + strtempPath + @"' ";
+                    List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+                  
+                    if (tempModelist.Count < 1)
+                    {
+                        //txt文件可以单独存储一个表。存储到数据库
+                        //---------------------------------------
+
+                        m_model.uuid = PublicConst.GenerateUUID();
+                        m_model.checknum = checkNo;
+                        m_model.patient_uuid = m_CurSelPatientInfo.uuid;
+                        m_model.txtPath = strtempPath;
+                        patient_checknum_link_Manager.Add(m_model);
+                        //---------------------------------------
+                    }
+                    else
+                    {
+                        m_model = tempModelist[0];
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+
                 foreach (StruFileInfo tempFileInfo in OneDayFileInfo.m_StruFileInfo)
                 {
-                    string strDesPath = m_strFloder + m_CurSelPatientInfo.id;
-                    if (Directory.Exists(strDesPath))  //创建文件夹
+                    strtempPath = tempFileInfo.m_filePath;   //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+                    string[] strCodes = strtempPath.Split('\\');
+                    strtempPath = strDesPath + strCodes[2] + @"\" + strCodes[3];   // + \info\ID2017-06-30
+                    if (!Directory.Exists(strtempPath))  //创建文件夹
                     {
+                        Directory.CreateDirectory(strtempPath);
                     }
-                     
-                    //tempFileInfo.m_filePath;
-                    //tempFileInfo.strFileMode;
+                    strtempPath += @"\";
+
+                    //--------------------------------------------
+                    //获取路径下，文件名含有strDate的文件
+                    npos = tempFileInfo.m_filePath.LastIndexOf('\\');
+                    List<string> m_strDataFilList = UpdateDataFileList(tempFileInfo.m_filePath.Substring(0, npos), tempFileInfo.m_filePath.Substring(npos+1));
+                    for (int v = 0; v < m_strDataFilList.Count; v++)
+                    {
+                        npos  = m_strDataFilList[v].LastIndexOf("\\");
+                        string strtarFile = strtempPath + m_strDataFilList[v].Substring(npos + 1);
+                        if (!File.Exists(strtarFile))  //创建文件夹
+                        {
+                            File.Copy(m_strDataFilList[v], strtarFile);  //复制txt文件
+                        }
+                         
+
+                        string strWhere = @"check_uuid='" + m_model.uuid + @"' and  path='" + strtarFile + @"'  "  ;
+                        List<tbl_patient_checknum_file_info_Model> tempModelist = patient_checknum_file_info_Manager.GetModelList(strWhere);
+
+                        if (tempModelist.Count < 1)
+                        {
+                            // 存储到数据库
+                            //---------------------------------------
+
+                            tbl_patient_checknum_file_info_Model file_Model = new tbl_patient_checknum_file_info_Model();
+                            file_Model.check_uuid = m_model.uuid;
+                            file_Model.createtime = DateTime.Now;
+                            file_Model.checkmode = tempFileInfo.strFileMode;
+                            file_Model.uuid = PublicConst.GenerateUUID();
+                            file_Model.path = strtarFile;
+                            patient_checknum_file_info_Manager.Add(file_Model);
+                            //---------------------------------------
+                        }
+
+                        
+                    }
+                    //--------------------------------------------
+
+                    
                 }
             }
         }
 
         private void Export_Click(object sender, EventArgs e)
         {
-            if (m_checkNum_Files_map.Count < 1)
+            if (m_CheckNode_List.Count < 1)
             {
                 MessageBox.Show("请先选择需要导出的文件");
                 return;
@@ -2648,7 +2734,7 @@ namespace Qtud.Qtud
 
             int ipos = FirstNode.Tag.ToString().IndexOf(",");  //401,G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
             string strPath= FirstNode.Tag.ToString().Substring( ipos +1); //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
-
+          
             ipos = strPath.IndexOf("\\");
             strPath = strPath.Substring(ipos + 1); // 1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
 
@@ -2657,22 +2743,31 @@ namespace Qtud.Qtud
 
             if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
             { 
-                string strWhere = string.Empty;
-                strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
-                List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
-                if (tempModelist.Count < 1)  //从没导入
-                {
-                    StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+                try
+                { 
+                    string strWhere = string.Empty;
+                    strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
+                    List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+                    if (tempModelist.Count < 1)  //从没导入
+                    { 
+                        StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
 
-                    ExportFile(ref tempStruCheckFileInfo, true);
-                    tempStruCheckFileInfo.isLoad = true;
+                        ExportFile(checkNo, ref tempStruCheckFileInfo, true);
+                        tempStruCheckFileInfo.isLoad = true;
+                    }
+                    else //部分导出
+                    {
+                        StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+
+                        ExportFile(checkNo, ref tempStruCheckFileInfo,false);
+                        tempStruCheckFileInfo.isLoad = true;
+                    }
+                    MessageBox.Show("导出完成！");
+
                 }
-                else //部分导出
+                catch (System.Exception ex)
                 {
-                    StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
 
-                    ExportFile(ref tempStruCheckFileInfo);
-                    tempStruCheckFileInfo.isLoad = true;
                 }
             }
 
@@ -2682,6 +2777,13 @@ namespace Qtud.Qtud
         {
            m_SelMode =  comboBox_checkMode.SelectedIndex - 1;
            UpdateUsbTree();
+        }
+
+
+        //显示历史记录
+        private void button_show_history_Click(object sender, EventArgs e)
+        {
+
         }
          
         //----------------------------------------------------------
