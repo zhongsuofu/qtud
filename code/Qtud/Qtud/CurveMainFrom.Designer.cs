@@ -36,6 +36,7 @@
             this.button_Back = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button_show_history = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.Export = new System.Windows.Forms.Button();
             this.comboBox_checkMode = new System.Windows.Forms.ComboBox();
@@ -72,9 +73,9 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.srcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel_Draw = new MyPanel();
+            this.panel_Draw = new  MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
-            this.button_show_history = new System.Windows.Forms.Button();
+            this.button_Save = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
@@ -89,6 +90,7 @@
             // 
             this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel1.Controls.Add(this.button_Save);
             this.panel1.Controls.Add(this.button_Add_Report);
             this.panel1.Controls.Add(this.button_make_Report);
             this.panel1.Controls.Add(this.button_Back);
@@ -158,6 +160,16 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(354, 885);
             this.panel4.TabIndex = 0;
+            // 
+            // button_show_history
+            // 
+            this.button_show_history.Location = new System.Drawing.Point(113, 18);
+            this.button_show_history.Name = "button_show_history";
+            this.button_show_history.Size = new System.Drawing.Size(102, 44);
+            this.button_show_history.TabIndex = 5;
+            this.button_show_history.Text = "历史数据";
+            this.button_show_history.UseVisualStyleBackColor = true;
+            this.button_show_history.Click += new System.EventHandler(this.button_show_history_Click);
             // 
             // label1
             // 
@@ -544,15 +556,15 @@
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
             // 
-            // button_show_history
+            // button_Save
             // 
-            this.button_show_history.Location = new System.Drawing.Point(113, 18);
-            this.button_show_history.Name = "button_show_history";
-            this.button_show_history.Size = new System.Drawing.Size(102, 44);
-            this.button_show_history.TabIndex = 5;
-            this.button_show_history.Text = "历史数据";
-            this.button_show_history.UseVisualStyleBackColor = true;
-            this.button_show_history.Click += new System.EventHandler(this.button_show_history_Click);
+            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Save.Location = new System.Drawing.Point(757, 12);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(118, 44);
+            this.button_Save.TabIndex = 4;
+            this.button_Save.Text = "保 存";
+            this.button_Save.UseVisualStyleBackColor = true;
             // 
             // MainFrom_Curve
             // 
@@ -637,6 +649,7 @@
         private System.Windows.Forms.ComboBox comboBox_checkMode;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button_show_history;
+        private System.Windows.Forms.Button button_Save;
         
     }
 }

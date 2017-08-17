@@ -74,7 +74,7 @@ namespace Qtud.DBManage.DAL
             strSql.Append(@"birth ='" + model.birth + @"',");
             strSql.Append(@"meno ='" + model.meno + @"' ");
 			 
-			strSql.Append(@" where cardid='"+ model.cardid + @"' ");
+			strSql.Append(@" where id='"+ model.id + @"' ");
             DbHelperMySQL.ExecuteSql(strSql.ToString());
               
             //OleDbParameter[] parameters = { 

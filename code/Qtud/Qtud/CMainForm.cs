@@ -308,6 +308,8 @@ namespace Qtud.Qtud
             ADDPatientInfo();
         }
 
+
+        //修改
         private void button2_Click(object sender, EventArgs e)
         {
             if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
@@ -336,9 +338,20 @@ namespace Qtud.Qtud
             }
         }
 
+
+        /// <summary>
+        /// 删除患者信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
+            if ( m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
+            {
+                DialogResult ret = MessageBox.Show("请选择需要删除的患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+            }
+            else
             {
                 DialogResult ret = MessageBox.Show("删除病人后，相关的检查数据都会删除。\r\n确定删除病人 " + m_CurSelPatientInfo.name + " 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (ret == DialogResult.OK)
@@ -353,6 +366,10 @@ namespace Qtud.Qtud
                         UpdateListView();
                         textBox_queryWhere.Text = string.Empty;
 
+                        //===================================
+                        //删除患者的其它信息
+                        //===================================
+
                         m_CurSelPatientInfo = null;
                         listView_report.Items.Clear();
                         listReportInfo.Clear();
@@ -365,11 +382,7 @@ namespace Qtud.Qtud
 
                 }
             }
-            else
-            {
-                DialogResult ret = MessageBox.Show("请选择需要删除的患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
-
-            }
+            
         }
 
         private void listView_patList_Click(object sender, EventArgs e)
