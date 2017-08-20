@@ -82,6 +82,8 @@ namespace Qtud.Qtud
         Size nll_Range = new Size(0, 100);  //尿流率范围：（最小值 ，最大值）
 
         private PrintInfoManager printM = new PrintInfoManager();
+        private string ValueUnit = "cmH2O";
+         
 
         public MakeReportForm(PatientInfoModel CurSelPatientInfo, List<CurveDatas> PrintCurveDatas, TestDatas _TestDatas, Size _curve3_Range, Size _nl_Range, Size _nll_Range)
         {
@@ -181,7 +183,8 @@ namespace Qtud.Qtud
         private void OnPrintPage(object sender, PrintPageEventArgs e)
         {
             m_CurPageIndex++;
-            DrawFuns m_DrawFuns = new DrawFuns();
+            DrawFuns m_DrawFuns = new DrawFuns( );
+            m_DrawFuns.SetValueUnit(ValueUnit);
             m_DrawFuns.IniPrintDraw(e.Graphics, e.MarginBounds.Size);
 
             Rectangle m_DrawArea = e.MarginBounds;  //绘画区域, 含行标题,及其尿流率图
@@ -412,7 +415,7 @@ namespace Qtud.Qtud
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pves", "cmH2O", OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
+                                m_DrawFuns.DrawRowtitle("Pves", ValueUnit, OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pves;
                                 //画曲线
@@ -424,7 +427,7 @@ namespace Qtud.Qtud
                             {
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pabd", "cmH2O", OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
+                                m_DrawFuns.DrawRowtitle("Pabd", ValueUnit, OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pabd;
                                 //画曲线
@@ -437,7 +440,7 @@ namespace Qtud.Qtud
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pdet", "cmH2O", OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
+                                m_DrawFuns.DrawRowtitle("Pdet", ValueUnit, OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pdet;
                                 //画曲线
@@ -1073,6 +1076,12 @@ namespace Qtud.Qtud
 
             }
 
+            string strIniFile = "config.ini";
+            strIniFile = Directory.GetCurrentDirectory() + "\\" + strIniFile;
+            //获取指定KEY的值  
+            ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
+            if (ValueUnit == null)
+                ValueUnit = "cmH2O"; 
 
 
             DrawPrintContext();  //绘制报告内容
@@ -1082,6 +1091,7 @@ namespace Qtud.Qtud
         private void DrawPrintContext()
         {
             DrawFuns m_DrawFuns = new DrawFuns();
+            m_DrawFuns.SetValueUnit(ValueUnit);
             m_DrawFuns.IniDraw(ref panel_Context);
             m_DrawFuns.ClearDC();
 
@@ -1244,7 +1254,7 @@ namespace Qtud.Qtud
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pves", "cmH2O", OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
+                            m_DrawFuns.DrawRowtitle("Pves", ValueUnit, OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
 
                             List<StruData> tempstrudata = OneCurveData.list_Pves;
                             //画曲线
@@ -1256,7 +1266,7 @@ namespace Qtud.Qtud
                         {
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pabd", "cmH2O", OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
+                            m_DrawFuns.DrawRowtitle("Pabd", ValueUnit, OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
 
                             List<StruData> tempstrudata = OneCurveData.list_Pabd;
                             //画曲线
@@ -1269,7 +1279,7 @@ namespace Qtud.Qtud
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pdet", "cmH2O", OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
+                            m_DrawFuns.DrawRowtitle("Pdet", ValueUnit, OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
 
                             List<StruData> tempstrudata = OneCurveData.list_Pdet;
                             //画曲线

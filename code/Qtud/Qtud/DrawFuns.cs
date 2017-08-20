@@ -12,6 +12,8 @@ namespace Qtud.Qtud
 {
     class DrawFuns
     {
+        private string ValueUnit = "cmH2O";
+
         //按像素点画线
         public void plotLinePixel(ref Panel panel,PointF[] Sp,Size size1)
         {
@@ -199,7 +201,11 @@ namespace Qtud.Qtud
             offScreenDC.Clear(Color.White);
             m_panel = panel;
         }
-         
+
+        public void SetValueUnit(string _ValueUnit)
+        {
+            ValueUnit = _ValueUnit;
+        }
 
         public void ClearDC( )
         {
@@ -442,9 +448,11 @@ namespace Qtud.Qtud
             Font drawFont1 = new Font("Arial", 23);
             if (float.Parse(strMaxValue) < 0)
             {
-                if(strMaxValue.Length > 4)
-                    drawPoint = new PointF(DrawRect.Left + DrawRect.Width / 3, DrawRect.Top + DrawRect.Height * 2 / 5);
-            
+                if (strMaxValue.Length > 4)
+                {
+                    drawFont1 = new Font("Arial", 20);
+                    drawPoint = new PointF(DrawRect.Left + DrawRect.Width / 4, DrawRect.Top + DrawRect.Height * 2 / 5);
+                }
                 // Draw string to screen.
                 offScreenDC.DrawString(strMaxValue, drawFont1, drawBrush, drawPoint);
             }
@@ -657,22 +665,22 @@ namespace Qtud.Qtud
            
             if (_TestData.str_vlpp != null && _TestData.str_vlpp != "")
                 offScreenDC.DrawString(_TestData.str_vlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5 * 1.5)  , DrawRect.Top + nCurHeight + 10));
-           
-            
-            offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
+
+
+            offScreenDC.DrawString(" " + ValueUnit, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
             nCurHeight += nrowH;
             offScreenDC.DrawString("逼尿肌漏尿点压（DLPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             if (_TestData.str_dlpp != null && _TestData.str_dlpp != "")
                 offScreenDC.DrawString(_TestData.str_dlpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5* 1.5)  , DrawRect.Top + nCurHeight + 10));
-            offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
+            offScreenDC.DrawString(" " + ValueUnit, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
              nCurHeight += nrowH;
              offScreenDC.DrawString("咳嗽诱导腹腔漏尿点压力测定（ALPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
           
             if (_TestData.str_clpp != null && _TestData.str_clpp != "")
                 offScreenDC.DrawString(_TestData.str_clpp, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5 * 1.5)  , DrawRect.Top + nCurHeight + 10));
-            offScreenDC.DrawString(" cmH2O", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
+            offScreenDC.DrawString(" " + ValueUnit, new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Right - (int)(DrawRect.Width / 5), DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
             nCurHeight += nrowH;
             offScreenDC.DrawString("膀胱安全容量： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));

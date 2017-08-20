@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Qtud.DBManage.Model;
 using Qtud.DBManage.Manager;
 using Qtud.SystemCommon;
+using System.IO;
 
 namespace Qtud.Qtud
 {
@@ -60,7 +61,17 @@ namespace Qtud.Qtud
 
             textBox_ks.Focus();
             //---------------------------------------------------- 
-
+            string strIniFile = "config.ini";
+            strIniFile = Directory.GetCurrentDirectory() + "\\" +strIniFile; 
+             //获取指定KEY的值  
+            string ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
+            if (ValueUnit != "")
+            {
+                label_vlpp.Text = ValueUnit;
+                label_dlpp.Text = ValueUnit;
+                label_alpp.Text = ValueUnit;
+            }
+            //---------------------------------------------------- 
 
             textBox_name.Text = m_CurSelPatientInfo.name;
             textBox_cardid.Text = m_CurSelPatientInfo.cardid;

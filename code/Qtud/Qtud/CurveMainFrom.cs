@@ -80,7 +80,7 @@ namespace Qtud.Qtud
 
         private string  m_strFloder= @"d:\qtud_data\";    //备份文件夹 
 
-
+        private string ValueUnit = "cmH2O";  //数值单位
         Dictionary<string, List<string>> Dev_listSerial_Map = new Dictionary<string, List<string>>();    //设备号 -检测号列表映射
 
         private int m_SelMode = 6;  //-1全部
@@ -225,7 +225,17 @@ namespace Qtud.Qtud
         private void MainFrom2_Load(object sender, EventArgs e)
         {
             this.FormBorderStyle =FormBorderStyle.Sizable;
-            m_DrawFuns.IniDraw(ref panel_Draw);  
+            m_DrawFuns.IniDraw(ref panel_Draw);
+
+            //-----------------------------------
+            string strIniFile = "config.ini";
+            strIniFile = Directory.GetCurrentDirectory() + "\\" + strIniFile;
+            //获取指定KEY的值  
+            ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
+            if (ValueUnit==null)
+                ValueUnit = "cmH2O"; 
+            //-----------------------------------
+            
 
             string str = string.Empty;
             if (m_CurSelPatientInfo.sex ==1)
@@ -266,7 +276,81 @@ namespace Qtud.Qtud
             if (e.Node != null)
             {
                 if (e.Node.Checked)
-                {
+                { 
+                    //----------------------------------------------------
+                    //检查是否导出了
+                    string strTag = e.Node.Tag.ToString();
+                    if (strTag.IndexOf("qtud_data") > -1)  //选的是历史数据
+                    {
+
+                    }
+                    else
+                    {
+                        //判断是否导出
+
+                        int ipos = strTag.ToString().IndexOf(",");  //401,G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+                        string strPath = strTag.ToString().Substring(ipos + 1); //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+
+                        ipos = strPath.IndexOf("\\");
+                        strPath = strPath.Substring(ipos + 1); // 1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+
+                        ipos = strPath.IndexOf("\\");
+                        string checkNo = strPath.Substring(0, ipos); // 1508491901
+
+
+                        string strWhere = string.Empty;
+                        strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
+                        List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+
+                        if (tempModelist.Count < 1 )
+                        {
+                            MessageBox.Show("清先导出数据");
+                            m_CheckNode_List.Add(e.Node);
+
+                            return;
+                        }
+
+                        //查看文件是否存在
+                        for (int r = 0; r < tempModelist.Count; r++)
+                        {
+                            if (!File.Exists(tempModelist[r].txtPath))
+                            {
+                                MessageBox.Show("清先导出数据");
+                                m_CheckNode_List.Add(e.Node);
+                                return;
+                            }
+                        }
+                        //查看是否有文件没导出
+                        if (m_checkNum_Files_map.ContainsKey(checkNo))
+                        {
+                            StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+
+                            foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
+                            {
+                                string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
+
+                                ipos = strTxtFile.IndexOf("\\");
+                                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + strTxtFile.Substring(ipos);
+
+                                int n = 0;
+                                for ( n = 0; n < tempModelist.Count; n++)
+                                {
+                                    if (strDesPath == tempModelist[n].txtPath)
+                                    {
+                                        break;
+                                    } 
+                                }
+                                if (tempModelist.Count == n)
+                                {
+                                    MessageBox.Show("清先导出数据");
+                                    m_CheckNode_List.Add(e.Node);
+                                    return;
+                                }
+                            }
+                         }
+                    }
+
+                    //----------------------------------------------------
                     string nodeText = e.Node.Text;
                     string nMode = nodeText.Substring(1, 1);
                     if (nMode == "6")
@@ -1826,8 +1910,9 @@ namespace Qtud.Qtud
                         {
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
+                             
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pves", "cmH2O", oneDataManage.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
+                            m_DrawFuns.DrawRowtitle("Pves", ValueUnit, oneDataManage.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
 
                             //画曲线
                             nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pves, m_range, m_oneDrawArea, Color.Blue, ref Pves_X_Value_Map, oneDataManage.FirstFileEndIndex);
@@ -1836,7 +1921,7 @@ namespace Qtud.Qtud
                         {
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pabd", "cmH2O", oneDataManage.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
+                            m_DrawFuns.DrawRowtitle("Pabd", ValueUnit, oneDataManage.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
 
                             //画曲线
                             nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pabd, m_range, m_oneDrawArea, Color.DarkViolet, ref Pabd_X_Value_Map, oneDataManage.FirstFileEndIndex);
@@ -1846,7 +1931,7 @@ namespace Qtud.Qtud
                             Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
                             
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("Pdet", "cmH2O", oneDataManage.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
+                            m_DrawFuns.DrawRowtitle("Pdet", ValueUnit, oneDataManage.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
 
                             //画曲线
                             nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Pdet, m_range, m_oneDrawArea, Color.Green, ref Pdet_X_Value_Map, oneDataManage.FirstFileEndIndex);
@@ -3043,6 +3128,12 @@ namespace Qtud.Qtud
 
             TreeNode FirstNode = m_CheckNode_List[0];
 
+            string strTag = FirstNode.Tag.ToString();
+            if (strTag.IndexOf("\\qtud_data\\"+ m_CurSelPatientInfo.id) > -1)  //选的是历史数据
+            {
+                MessageBox.Show("历史数据不能再次导出");
+                return;
+            }
 
             int ipos = FirstNode.Tag.ToString().IndexOf(",");  //401,G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
             string strPath= FirstNode.Tag.ToString().Substring( ipos +1); //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
@@ -3053,8 +3144,26 @@ namespace Qtud.Qtud
             ipos = strPath.IndexOf("\\"); 
             string checkNo = strPath.Substring(0,ipos ); // 1508491901
 
+            if (checkNo != "")  // 判断是否已经导出到其他患者名下
+            {
+                string strWhere = string.Empty;
+                strWhere = @" uuid in (select patient_uuid from tbl_patient_checknum_link where checkNum='" + checkNo + "' )";
+                  
+                PatientInfoManager pim = new PatientInfoManager();
+                List< PatientInfoModel> pInfoModelList = pim.GetModelList(strWhere);
+                if (pInfoModelList.Count > 0)
+                { 
+                    MessageBox.Show("文件曾经导出在 " + pInfoModelList[0].id+@" " + pInfoModelList[0].name + " 名下,请确认检查数据是否是当前患者数据.");
+                    return;
+                }
+            }
+
             if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
-            { 
+            {
+                DialogResult res = MessageBox.Show("请确认导出的数据是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据吗.");
+                if (res != DialogResult.OK)
+                    return;
+
                 try
                 { 
                     string strWhere = string.Empty;
@@ -3074,6 +3183,7 @@ namespace Qtud.Qtud
                         ExportFile(checkNo, ref tempStruCheckFileInfo, false);
                         tempStruCheckFileInfo.isLoad = true;
                     }
+                    UpdateUsbTree();
                     MessageBox.Show("导出完成！");
 
                 }
@@ -3095,6 +3205,7 @@ namespace Qtud.Qtud
         //显示历史记录
         private void button_show_history_Click(object sender, EventArgs e)
         {
+            m_ListUSBDevs.Clear();
             m_ListUSBDevs = GetMobileDiskList();
 
             string strWhere = string.Empty;

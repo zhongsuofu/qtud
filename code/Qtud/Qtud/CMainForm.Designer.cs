@@ -578,7 +578,6 @@
             // button_sys_Setting
             // 
             this.button_sys_Setting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_sys_Setting.Enabled = false;
             this.button_sys_Setting.Location = new System.Drawing.Point(1327, 12);
             this.button_sys_Setting.Name = "button_sys_Setting";
             this.button_sys_Setting.Size = new System.Drawing.Size(118, 44);

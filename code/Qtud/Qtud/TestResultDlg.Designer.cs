@@ -39,15 +39,15 @@
             this.label27 = new System.Windows.Forms.Label();
             this.textBox_pgaqrl = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.label_alpp = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.textBox_clpp = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
+            this.label_dlpp = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox_dlpp = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label_vlpp = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.textBox_vlpp = new System.Windows.Forms.TextBox();
             this.textBox_tsjc = new System.Windows.Forms.TextBox();
@@ -178,15 +178,15 @@
             this.groupBox3.Controls.Add(this.label27);
             this.groupBox3.Controls.Add(this.textBox_pgaqrl);
             this.groupBox3.Controls.Add(this.label28);
-            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.label_alpp);
             this.groupBox3.Controls.Add(this.label23);
             this.groupBox3.Controls.Add(this.textBox_clpp);
             this.groupBox3.Controls.Add(this.label25);
-            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.label_dlpp);
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.textBox_dlpp);
             this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.label_vlpp);
             this.groupBox3.Controls.Add(this.label20);
             this.groupBox3.Controls.Add(this.textBox_vlpp);
             this.groupBox3.Controls.Add(this.textBox_tsjc);
@@ -247,17 +247,17 @@
             this.label28.Size = new System.Drawing.Size(0, 20);
             this.label28.TabIndex = 29;
             // 
-            // label21
+            // label_alpp
             // 
-            this.label21.AutoSize = true;
-            this.label21.BackColor = System.Drawing.Color.Transparent;
-            this.label21.ForeColor = System.Drawing.Color.Snow;
-            this.label21.Location = new System.Drawing.Point(682, 150);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(59, 20);
-            this.label21.TabIndex = 28;
-            this.label21.Text = "cmH2O";
+            this.label_alpp.AutoSize = true;
+            this.label_alpp.BackColor = System.Drawing.Color.Transparent;
+            this.label_alpp.ForeColor = System.Drawing.Color.Snow;
+            this.label_alpp.Location = new System.Drawing.Point(682, 150);
+            this.label_alpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_alpp.Name = "label_alpp";
+            this.label_alpp.Size = new System.Drawing.Size(59, 20);
+            this.label_alpp.TabIndex = 28;
+            this.label_alpp.Text = "cmH2O";
             // 
             // label23
             // 
@@ -292,17 +292,17 @@
             this.label25.Size = new System.Drawing.Size(0, 20);
             this.label25.TabIndex = 25;
             // 
-            // label17
+            // label_dlpp
             // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.ForeColor = System.Drawing.Color.Snow;
-            this.label17.Location = new System.Drawing.Point(682, 114);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(59, 20);
-            this.label17.TabIndex = 24;
-            this.label17.Text = "cmH2O";
+            this.label_dlpp.AutoSize = true;
+            this.label_dlpp.BackColor = System.Drawing.Color.Transparent;
+            this.label_dlpp.ForeColor = System.Drawing.Color.Snow;
+            this.label_dlpp.Location = new System.Drawing.Point(682, 114);
+            this.label_dlpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_dlpp.Name = "label_dlpp";
+            this.label_dlpp.Size = new System.Drawing.Size(59, 20);
+            this.label_dlpp.TabIndex = 24;
+            this.label_dlpp.Text = "cmH2O";
             // 
             // label18
             // 
@@ -337,17 +337,17 @@
             this.label19.Size = new System.Drawing.Size(0, 20);
             this.label19.TabIndex = 21;
             // 
-            // label16
+            // label_vlpp
             // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.ForeColor = System.Drawing.Color.Snow;
-            this.label16.Location = new System.Drawing.Point(682, 80);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(59, 20);
-            this.label16.TabIndex = 20;
-            this.label16.Text = "cmH2O";
+            this.label_vlpp.AutoSize = true;
+            this.label_vlpp.BackColor = System.Drawing.Color.Transparent;
+            this.label_vlpp.ForeColor = System.Drawing.Color.Snow;
+            this.label_vlpp.Location = new System.Drawing.Point(682, 80);
+            this.label_vlpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label_vlpp.Name = "label_vlpp";
+            this.label_vlpp.Size = new System.Drawing.Size(59, 20);
+            this.label_vlpp.TabIndex = 20;
+            this.label_vlpp.Text = "cmH2O";
             // 
             // label20
             // 
@@ -1006,15 +1006,15 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.TextBox textBox_pgaqrl;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label_alpp;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox_clpp;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label_dlpp;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox_dlpp;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label_vlpp;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox_vlpp;
         private System.Windows.Forms.TextBox textBox_tsjc;

@@ -61,7 +61,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Pves范围：";
+            this.label2.Text = "压力范围：";
             // 
             // textBox_nlX
             // 

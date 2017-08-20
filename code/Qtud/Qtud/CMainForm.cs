@@ -299,8 +299,12 @@ namespace Qtud.Qtud
         }
 
         private void button_sys_Setting_Click(object sender, EventArgs e)
-        {
-
+        { 
+            SettingForm m_SettingForm = new SettingForm();
+            DialogResult dlgResult1 = m_SettingForm.ShowDialog();
+            if (dlgResult1 == DialogResult.OK)
+            { 
+            }
         }
          
 

@@ -108,3 +108,4 @@ J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\SystemCommon.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\SelfishInfo.Access.DBUtility.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.exe
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.pdb
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.SettingForm.resources
