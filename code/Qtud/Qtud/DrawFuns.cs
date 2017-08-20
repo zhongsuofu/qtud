@@ -303,10 +303,9 @@ namespace Qtud.Qtud
             else
                 scaleX = width / Len;
 
-            if ((range.Height - range.Width) > height)
-                scaleY = (range.Height - range.Width) / height;     // 窗高的一般为单位 1
-            else
-                scaleY = 1;     // 窗高的一般为单位 1
+            scaleY = (range.Height - range.Width) / height;     // 窗高的一般为单位 1
+             
+            
 
 
             int xFirst = (int) DrawRect.Left;
@@ -439,14 +438,28 @@ namespace Qtud.Qtud
 
             //--------------------------------------------
             // Create point for upper-left corner of drawing.
-            PointF drawPoint = new PointF(DrawRect.Left + DrawRect.Width / 4, DrawRect.Top + DrawRect.Height *2/ 5);
-
+            PointF drawPoint = new PointF(DrawRect.Left + DrawRect.Width / 4-2, DrawRect.Top + DrawRect.Height * 2 / 5);
             Font drawFont1 = new Font("Arial", 23);
-
-            // Draw string to screen.
-            offScreenDC.DrawString(strMaxValue, drawFont1, drawBrush, drawPoint);
-
+            if (float.Parse(strMaxValue) < 0)
+            {
+                if(strMaxValue.Length > 4)
+                    drawPoint = new PointF(DrawRect.Left + DrawRect.Width / 3, DrawRect.Top + DrawRect.Height * 2 / 5);
             
+                // Draw string to screen.
+                offScreenDC.DrawString(strMaxValue, drawFont1, drawBrush, drawPoint);
+            }
+            else
+            {
+                drawPoint = new PointF(DrawRect.Left, DrawRect.Top + DrawRect.Height * 2 / 5);
+
+                RectangleF rtf = new Rectangle(new Point(DrawRect.Left, DrawRect.Top + DrawRect.Height * 2 / 5), new Size(DrawRect.Width, DrawRect.Height * 2 / 5));
+
+                StringFormat format = new StringFormat(StringFormatFlags.DirectionRightToLeft);
+                format.LineAlignment = StringAlignment.Center;  // 更正： 垂直居中
+                format.Alignment = StringAlignment.Center;      // 水平居中
+
+                offScreenDC.DrawString(strMaxValue, drawFont1, drawBrush, rtf, format);
+            } 
              
             //panel.BackgroundImage = canvas;
             //offScreenDC.Dispose();
@@ -503,21 +516,21 @@ namespace Qtud.Qtud
             nCurHeight += nrowH; //第一行  
             rtf.Location = new PointF(DrawRect.Left, DrawRect.Top + nCurHeight);
             format.Alignment = StringAlignment.Far;      // 水平居中
-            offScreenDC.DrawString("身份证号： " + CurSelPatientInfo.cardid, drawFont2, drawBrush, rtf, format);
+            if (  CurSelPatientInfo.cardid != "")
+                offScreenDC.DrawString("身份证号： " + CurSelPatientInfo.cardid, drawFont2, drawBrush, rtf, format);
+            else
+                offScreenDC.DrawString("身份证号： ", drawFont2, drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 5)); 
 
 
             strTemp = string.Empty;
-            if (CurSelPatientInfo.cardid != "")
+            if (CurSelPatientInfo.birth != null)
             {
-                string str = CurSelPatientInfo.cardid.Substring(6, 4);
-                if (str != "")
-                {
-                    DateTime dt = DateTime.Now;
-                    int year = dt.Year - int.Parse(str);
-                    strTemp = year.ToString();
-                }
-              
+                DateTime dt = DateTime.Now;
+                int year = dt.Year - CurSelPatientInfo.birth.Year;
+                strTemp = year.ToString();
+
             }
+
             rtf.Location = new PointF(DrawRect.Left + (int)DrawRect.Width / 2, DrawRect.Top + nCurHeight);
             offScreenDC.DrawString("年龄： "+strTemp+" 岁 ", drawFont2, drawBrush, rtf, format);
             //------------------------------------------------------------
@@ -738,7 +751,7 @@ namespace Qtud.Qtud
 
                 tempRC4.Location = new Point((int)(DrawRect.Left), _nCurHeight);
                 tempRC4.Size = new Size(DrawRect.Width - 100, 20);
-                DrawPrintOneString(CurSelPatientInfo.name + "  " + CurSelPatientInfo.cardid, 9,StringAlignment.Far, tempRC4);
+                DrawPrintOneString(CurSelPatientInfo.name + "  " + CurSelPatientInfo.id, 9,StringAlignment.Far, tempRC4);
 
                 tempRC4.Location = new Point((int)(DrawRect.Right - 100), _nCurHeight);
                 tempRC4.Size = new Size(100, 20);

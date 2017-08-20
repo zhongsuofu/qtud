@@ -231,6 +231,7 @@
             // 
             this.textBox_pgaqrl.Location = new System.Drawing.Point(542, 181);
             this.textBox_pgaqrl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_pgaqrl.MaxLength = 8;
             this.textBox_pgaqrl.Name = "textBox_pgaqrl";
             this.textBox_pgaqrl.Size = new System.Drawing.Size(136, 30);
             this.textBox_pgaqrl.TabIndex = 23;
@@ -275,6 +276,7 @@
             // 
             this.textBox_clpp.Location = new System.Drawing.Point(542, 145);
             this.textBox_clpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_clpp.MaxLength = 8;
             this.textBox_clpp.Name = "textBox_clpp";
             this.textBox_clpp.Size = new System.Drawing.Size(136, 30);
             this.textBox_clpp.TabIndex = 22;
@@ -319,6 +321,7 @@
             // 
             this.textBox_dlpp.Location = new System.Drawing.Point(542, 111);
             this.textBox_dlpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_dlpp.MaxLength = 8;
             this.textBox_dlpp.Name = "textBox_dlpp";
             this.textBox_dlpp.Size = new System.Drawing.Size(136, 30);
             this.textBox_dlpp.TabIndex = 21;
@@ -363,6 +366,7 @@
             // 
             this.textBox_vlpp.Location = new System.Drawing.Point(542, 76);
             this.textBox_vlpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_vlpp.MaxLength = 8;
             this.textBox_vlpp.Name = "textBox_vlpp";
             this.textBox_vlpp.Size = new System.Drawing.Size(136, 30);
             this.textBox_vlpp.TabIndex = 20;
@@ -545,6 +549,7 @@
             // 
             this.textBox1_nl.Location = new System.Drawing.Point(624, 35);
             this.textBox1_nl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox1_nl.MaxLength = 8;
             this.textBox1_nl.Name = "textBox1_nl";
             this.textBox1_nl.Size = new System.Drawing.Size(93, 30);
             this.textBox1_nl.TabIndex = 9;
@@ -553,6 +558,7 @@
             // 
             this.textBox_rlzd.Location = new System.Drawing.Point(641, 115);
             this.textBox_rlzd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_rlzd.MaxLength = 8;
             this.textBox_rlzd.Name = "textBox_rlzd";
             this.textBox_rlzd.Size = new System.Drawing.Size(101, 30);
             this.textBox_rlzd.TabIndex = 13;
@@ -561,6 +567,7 @@
             // 
             this.textBox_rlzc.Location = new System.Drawing.Point(442, 116);
             this.textBox_rlzc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_rlzc.MaxLength = 8;
             this.textBox_rlzc.Name = "textBox_rlzc";
             this.textBox_rlzc.Size = new System.Drawing.Size(103, 30);
             this.textBox_rlzc.TabIndex = 12;
@@ -569,6 +576,7 @@
             // 
             this.textBox_rlcg.Location = new System.Drawing.Point(228, 115);
             this.textBox_rlcg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_rlcg.MaxLength = 8;
             this.textBox_rlcg.Name = "textBox_rlcg";
             this.textBox_rlcg.Size = new System.Drawing.Size(104, 30);
             this.textBox_rlcg.TabIndex = 11;
@@ -647,6 +655,7 @@
             // 
             this.textBox_nlljcjg.Location = new System.Drawing.Point(374, 36);
             this.textBox_nlljcjg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.textBox_nlljcjg.MaxLength = 8;
             this.textBox_nlljcjg.Name = "textBox_nlljcjg";
             this.textBox_nlljcjg.Size = new System.Drawing.Size(88, 30);
             this.textBox_nlljcjg.TabIndex = 8;
@@ -744,6 +753,7 @@
             // 
             // textBox_yearold
             // 
+            this.textBox_yearold.Enabled = false;
             this.textBox_yearold.Location = new System.Drawing.Point(550, 72);
             this.textBox_yearold.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_yearold.Name = "textBox_yearold";
@@ -753,6 +763,7 @@
             // 
             // textBox_cardid
             // 
+            this.textBox_cardid.Enabled = false;
             this.textBox_cardid.Location = new System.Drawing.Point(135, 70);
             this.textBox_cardid.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_cardid.Name = "textBox_cardid";
@@ -762,6 +773,7 @@
             // 
             // textBox_sex
             // 
+            this.textBox_sex.Enabled = false;
             this.textBox_sex.Location = new System.Drawing.Point(550, 32);
             this.textBox_sex.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_sex.Name = "textBox_sex";
@@ -771,6 +783,7 @@
             // 
             // textBox_name
             // 
+            this.textBox_name.Enabled = false;
             this.textBox_name.Location = new System.Drawing.Point(135, 29);
             this.textBox_name.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_name.Name = "textBox_name";

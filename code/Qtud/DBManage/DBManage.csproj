@@ -50,6 +50,7 @@
     <Compile Include="Dal\PatientInfoDal.cs" />
     <Compile Include="Dal\PrintInfoDal.cs" />
     <Compile Include="Dal\ReportInfoDal.cs" />
+    <Compile Include="Dal\tbl_curve_file_link_Dal.cs" />
     <Compile Include="Dal\tbl_curve_info_Dal.cs" />
     <Compile Include="Dal\tbl_patient_checknum_file_info_Dal.cs" />
     <Compile Include="Dal\tbl_patient_checknum_link_Dal.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Manager\PatientInfoManager.cs" />
     <Compile Include="Manager\PrintInfoManager.cs" />
     <Compile Include="Manager\ReportInfoManager.cs" />
+    <Compile Include="Manager\tbl_curve_file_link_Manager.cs" />
     <Compile Include="Manager\tbl_curve_info_Manager.cs" />
     <Compile Include="Manager\tbl_patient_checknum_file_info_Manager.cs" />
     <Compile Include="Manager\tbl_patient_checknum_link_Manager.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Model\PatientInfoModel.cs" />
     <Compile Include="Model\PrintInfoModel.cs" />
     <Compile Include="Model\ReportInfoModel.cs" />
+    <Compile Include="Model\tbl_curve_file_link_Mode.cs" />
     <Compile Include="Model\tbl_curve_info_Mode.cs" />
     <Compile Include="Model\tbl_patient_checknum_file_info_Model.cs" />
     <Compile Include="Model\tbl_patient_checknum_link_Model.cs" />

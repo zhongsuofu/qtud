@@ -17,21 +17,21 @@ namespace Qtud.DBManage.Model
         private string _patient_uuid = string.Empty;
         private string _ks = string.Empty;
         private string _ch = string.Empty;
-        private float _nlljcjg = 0f;  //最大尿流率
-        private float _nlljcjg_nl = 0f;  //尿量
-        
-        private float _pgrlylcd = 0f;
-        private float _pgrl_cg = 0f;
-        private float _pgrl_zc = 0f;
-        private float _pgrl_zd = 0f;
+        private string _nlljcjg = string.Empty;  //最大尿流率
+        private string _nlljcjg_nl = string.Empty;  //尿量
+
+        private string _pgrlylcd = string.Empty;
+        private string _pgrl_cg = string.Empty;
+        private string _pgrl_zc = string.Empty;
+        private string _pgrl_zd = string.Empty;
 
         private string _pgsyx = string.Empty;
         private string _pgwdx = string.Empty;
         private string _tsjc = string.Empty;
-        private float _vlpp = 0f;
-        private float _dlpp = 0f;
-        private float _clpp = 0f;
-        private float _pgaqrl = 0f;
+        private string _vlpp = string.Empty;
+        private string _dlpp = string.Empty;
+        private string _clpp = string.Empty;
+        private string _pgaqrl = string.Empty;
 
         private string _otherInfo = string.Empty;
         private string _testresult = string.Empty;
@@ -92,7 +92,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float nlljcjg
+        public string nlljcjg
         {
             set { _nlljcjg = value; }
             get { return _nlljcjg; }
@@ -101,7 +101,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float nlljcjg_nl
+        public string nlljcjg_nl
         {
             set { _nlljcjg_nl = value; }
             get { return _nlljcjg_nl; }
@@ -110,7 +110,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float pgrlylcd
+        public string pgrlylcd
         {
             set { _pgrlylcd = value; }
             get { return _pgrlylcd; }
@@ -118,7 +118,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float pgrl_cg
+        public string pgrl_cg
         {
             set { _pgrl_cg = value; }
             get { return _pgrl_cg; }
@@ -128,7 +128,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float pgrl_zc
+        public string pgrl_zc
         {
             set { _pgrl_zc = value; }
             get { return _pgrl_zc; }
@@ -137,7 +137,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float pgrl_zd
+        public string pgrl_zd
         {
             set { _pgrl_zd = value; }
             get { return _pgrl_zd; }
@@ -173,7 +173,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float vlpp
+        public string vlpp
         {
             set { _vlpp = value; }
             get { return _vlpp; }
@@ -182,7 +182,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float dlpp
+        public string dlpp
         {
             set { _dlpp = value; }
             get { return _dlpp; }
@@ -191,7 +191,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float clpp
+        public string clpp
         {
             set { _clpp = value; }
             get { return _clpp; }
@@ -201,7 +201,7 @@ namespace Qtud.DBManage.Model
         /// <summary>
         /// 
         /// </summary>
-        public float pgaqrl
+        public string pgaqrl
         {
             set { _pgaqrl = value; }
             get { return _pgaqrl; }

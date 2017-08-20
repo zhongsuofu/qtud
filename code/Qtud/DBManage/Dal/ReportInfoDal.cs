@@ -92,19 +92,19 @@ namespace Qtud.DBManage.DAL
             strSql.Append(@"'" + model.patient_uuid + @"',");
             strSql.Append(@"'" + model.ks + @"',");
             strSql.Append(@"'" + model.ch + @"',");
-            strSql.Append(model.nlljcjg + @",");
-            strSql.Append(model.nlljcjg_nl + @",");
-            strSql.Append(model.pgrlylcd + @",");
-            strSql.Append(model.pgrl_cg + @",");
-            strSql.Append(model.pgrl_zc + @",");
-            strSql.Append(model.pgrl_zd + @",");
+            strSql.Append(@"'" + model.nlljcjg + @"',");
+            strSql.Append(@"'" + model.nlljcjg_nl + @"',");
+            strSql.Append(@"'" + model.pgrlylcd + @"',");
+            strSql.Append(@"'" + model.pgrl_cg + @"',");
+            strSql.Append(@"'" + model.pgrl_zc + @"',");
+            strSql.Append(@"'" + model.pgrl_zd + @"',");
             strSql.Append(@"'" + model.pgsyx + @"',");
             strSql.Append(@"'" + model.pgwdx + @"',");
             strSql.Append(@"'" + model.tsjc + @"',");
-            strSql.Append(model.vlpp + @",");
-            strSql.Append(model.dlpp + @",");
-            strSql.Append(model.clpp + @",");
-            strSql.Append(model.pgaqrl + @",");
+            strSql.Append(@"'" + model.vlpp + @"',");
+            strSql.Append(@"'" + model.dlpp + @"',");
+            strSql.Append(@"'" + model.clpp + @"',");
+            strSql.Append(@"'" + model.pgaqrl + @"',");
             
             strSql.Append(@"'" + model.otherInfo + @"',");
             strSql.Append(@"'" + model.testresult + @"'");
@@ -165,19 +165,19 @@ namespace Qtud.DBManage.DAL
             strSql.Append("update tb_report_info set "); 
             strSql.Append(@"ks='" + model.ks + @"',");
             strSql.Append(@"ch='" +model.ch  + @"',");
-            strSql.Append(@"nlljcjg=" + model.nlljcjg + @",");
-            strSql.Append(@"pnl=" + model.nlljcjg_nl + @",");
-            strSql.Append(@"pgrlylcd=" +model.pgrlylcd + @",");
-            strSql.Append(@"pgrl_cg=" +model.pgrl_cg + @",");
-            strSql.Append(@"pgrl_zc=" +model.pgrl_zc + @",");
-            strSql.Append(@"pgrl_zd=" +model.pgrl_zd + @",");
+            strSql.Append(@"nlljcjg='" + model.nlljcjg + @"',");
+            strSql.Append(@"pnl='" + model.nlljcjg_nl + @"',");
+            strSql.Append(@"pgrlylcd='" +model.pgrlylcd + @"',");
+            strSql.Append(@"pgrl_cg='" +model.pgrl_cg + @"',");
+            strSql.Append(@"pgrl_zc='" +model.pgrl_zc + @"',");
+            strSql.Append(@"pgrl_zd='" +model.pgrl_zd + @"',");
             strSql.Append(@"pgsyx='" +model.pgsyx  + @"',");
             strSql.Append(@"pgwdx='" +model.pgwdx  + @"',");
             strSql.Append(@"tsjc='" +model.tsjc  + @"',");
-            strSql.Append(@"vlpp=" + model.vlpp+ @",");
-            strSql.Append(@"clpp=" + model.clpp+ @",");
-            strSql.Append(@"dlpp=" + model.dlpp+ @",");
-            strSql.Append(@"pgaqrl=" + model.pgaqrl+ @",");
+            strSql.Append(@"vlpp='" + model.vlpp+ @"',");
+            strSql.Append(@"clpp='" + model.clpp+ @"',");
+            strSql.Append(@"dlpp='" + model.dlpp+ @"',");
+            strSql.Append(@"pgaqrl='" + model.pgaqrl+ @"',");
             strSql.Append(@"otherInfo='" +model.otherInfo  + @"',");
             strSql.Append(@"testresult='" +model.testresult  + @"' ");
             
@@ -244,17 +244,18 @@ namespace Qtud.DBManage.DAL
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public void Delete(string UUID)
+        public void Delete(string strWhere)
         {
 
             StringBuilder strSql = new StringBuilder();
-            strSql.Append("delete from SysUserTbl ");
-            strSql.Append(" where UUID=? ");
-            OleDbParameter[] parameters = {
-					new OleDbParameter("@UUID", OleDbType.VarChar,64)};
-            parameters[0].Value = UUID;
+            strSql.Append("delete from tb_report_info ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
 
-            DbHelperOleDb.ExecuteSql(strSql.ToString(), parameters);
+
+            DbHelperMySQL.ExecuteSql(strSql.ToString());
         }
         /// <summary>
         /// 得到一个对象实体

@@ -10,11 +10,11 @@ namespace Qtud.DBManage.Manager
 {
     /// <summary>
     /// 业务逻辑类SysMenTbl 的摘要说明。
-    /// </summary>
-    public class tbl_patient_checknum_file_info_Manager
+    /// </summary> 
+    public class tbl_curve_file_link_Manager
     {
-        private readonly Qtud.DBManage.DAL.tbl_patient_checknum_file_info_Dal dal= new Qtud.DBManage.DAL.tbl_patient_checknum_file_info_Dal();
-        public tbl_patient_checknum_file_info_Manager()
+        private readonly Qtud.DBManage.DAL.tbl_curve_file_link_Dal dal= new Qtud.DBManage.DAL.tbl_curve_file_link_Dal();
+        public tbl_curve_file_link_Manager()
         { }
         #region  成员方法
         /// <summary>
@@ -28,9 +28,8 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 增加一条数据
         /// </summary>
-        public void Add(Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model model)
+        public void Add(Qtud.DBManage.Model.tbl_curve_file_link_Model model)
         {
-            model.path = model.path.Replace('\\', '*');
             dal.Add(model);
         }
 
@@ -45,10 +44,10 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public void Delete(string UUID)
+        public void Delete(string strWhere)
         {
 
-            dal.Delete(UUID);
+            dal.Delete(strWhere);
         }
 
         /// <summary>
@@ -102,7 +101,7 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model> GetModelList(string strWhere)
+        public List<Qtud.DBManage.Model.tbl_curve_file_link_Model> GetModelList(string strWhere)
         {
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
@@ -110,25 +109,19 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model> DataTableToList(DataTable dt)
+        public List<Qtud.DBManage.Model.tbl_curve_file_link_Model> DataTableToList(DataTable dt)
         {
-            List<Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model> modelList = new List<Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model>();
+            List<Qtud.DBManage.Model.tbl_curve_file_link_Model> modelList = new List<Qtud.DBManage.Model.tbl_curve_file_link_Model>();
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model model;
+                Qtud.DBManage.Model.tbl_curve_file_link_Model model;
                 for (int n = 0; n < rowsCount; n++)
                 {
-                    model = new Qtud.DBManage.Model.tbl_patient_checknum_file_info_Model();
-                    model.uuid = dt.Rows[n]["uuid"].ToString();
-                    model.checkmode = dt.Rows[n]["checkmode"].ToString();
-                    model.path = dt.Rows[n]["path"].ToString();
-
-                    model.check_uuid = dt.Rows[n]["check_uuid"].ToString();
-                     
-                    model.createtime = DateTime.Parse(dt.Rows[n]["createtime"].ToString());
-                    model.path = model.path.Replace('*', '\\');
-                    
+                    model = new Qtud.DBManage.Model.tbl_curve_file_link_Model();
+                    model.curve_uuid = dt.Rows[n]["curve_uuid"].ToString();
+                    model.file_uuid = dt.Rows[n]["file_uuid"].ToString();
+                    model.nindex = int.Parse(dt.Rows[n]["nindex"].ToString()); 
                      
                     modelList.Add(model);
                 }

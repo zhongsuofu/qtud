@@ -45,6 +45,7 @@
             // 
             // textBox_meno
             // 
+            this.textBox_meno.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox_meno.ForeColor = System.Drawing.Color.Navy;
             this.textBox_meno.Location = new System.Drawing.Point(22, 83);
             this.textBox_meno.MaxLength = 128;

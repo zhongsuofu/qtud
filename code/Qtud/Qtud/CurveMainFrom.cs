@@ -39,6 +39,8 @@ namespace Qtud.Qtud
         public float fmax_Pdet;   //最大值
         public float fmax_ufr;   //最大值
 
+        public string str_range;  //范围， 压力最小值，压力最大值，尿量最小值，尿量最大值，尿流率最小值，尿流率最大值
+
         public Byte []showMode;  //显示检测的模式,  //pves, pabd, pdet, wights 
 
         public List<StruData> list_Wights;  //尿量值
@@ -49,6 +51,7 @@ namespace Qtud.Qtud
         public string strMeno ;   //备注
 
         public int FirstFileEndIndex;  //6模式，两个文件结束分隔线点
+        public List<string> list_Files;    //文件列表
         
     };
 
@@ -137,6 +140,7 @@ namespace Qtud.Qtud
             StartTime = DateTime.Now, //(filename.Replace('.', ':')),
             endTime = DateTime.Now,
             showMode = new byte[5],  //全部显示
+            str_range = string.Empty,
 
             list_Pabd = new List<StruData>(),
             list_Pdet = new List<StruData>(),
@@ -151,11 +155,14 @@ namespace Qtud.Qtud
             fmax_ufr =-100f, 
 
             strMeno = string.Empty,
-            FirstFileEndIndex = -1
+            FirstFileEndIndex = -1,
+
+            list_Files =new  List<string>()
 
         };
 
         List<CurveDatas> m_PrintCurveDatas = new List<CurveDatas>();  //加入到打印列表里的
+        bool m_isSavePrintCurve = false;    //是否需要提示保存
         //-------------------------------------------------------
 
         //选择的子级
@@ -164,6 +171,8 @@ namespace Qtud.Qtud
             StartTime = DateTime.Now, //(filename.Replace('.', ':')),
             endTime = DateTime.Now,
             showMode = new byte[5],  //全部显示
+
+            str_range = string.Empty,
 
             list_Pabd = new List<StruData>(),
             list_Pdet = new List<StruData>(),
@@ -178,14 +187,22 @@ namespace Qtud.Qtud
             fmax_ufr = -100f, 
 
             strMeno = string.Empty,
-            FirstFileEndIndex = -1
+            FirstFileEndIndex = -1,
+            list_Files =new  List<string>() 
         };
 
-        private TestDatas m_TestDatas = new TestDatas();
+        public TestDatas m_TestDatas = new TestDatas();
 
-
+        
         private tbl_patient_checknum_link_Manager patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
-        private tbl_patient_checknum_file_info_Manager patient_checknum_file_info_Manager = new tbl_patient_checknum_file_info_Manager();
+        private tbl_patient_checknum_file_info_Manager patient_checknum_file_info_Manager = new tbl_patient_checknum_file_info_Manager();  //文件存储管理
+       
+        private ReportInfoModel m_ReportInfoModel = new ReportInfoModel();
+        private ReportInfoManager m_ReportInfoManager = new ReportInfoManager();  //报告
+
+        private tbl_curve_info_Model curve_info_Model = new tbl_curve_info_Model();
+        private tbl_curve_info_Manager m_curve_info_Manager = new tbl_curve_info_Manager(); //曲线
+
         #endregion
 
         #region  界面操作函数
@@ -195,6 +212,8 @@ namespace Qtud.Qtud
 
             m_CurSelPatientInfo = CurSelPatientInfo;
             m_TestDatas = _TestDatas;
+
+            m_ReportInfoModel.uuid = m_TestDatas.uuid;
         }
 
         ~MainFrom_Curve()
@@ -408,12 +427,15 @@ namespace Qtud.Qtud
             _CurveDatas.showMode[3] = 0;
             _CurveDatas.showMode[4] = 0;
 
+            _CurveDatas.str_range = string.Empty;
+
             _CurveDatas.list_Pabd.RemoveRange(0, _CurveDatas.list_Pabd.Count);
             _CurveDatas.list_Pdet.RemoveRange(0, _CurveDatas.list_Pdet.Count);
             _CurveDatas.list_Pves.RemoveRange(0, _CurveDatas.list_Pves.Count);
             _CurveDatas.list_Wights.RemoveRange(0, _CurveDatas.list_Wights.Count);
             _CurveDatas.list_ufr.RemoveRange(0, _CurveDatas.list_ufr.Count);
 
+            _CurveDatas.list_Files.RemoveRange(0, _CurveDatas.list_Files.Count);
 
             _CurveDatas.fmax_Wight = -1000;   //最大值
             _CurveDatas.fmax_Pves = -1000;   //最大值
@@ -455,6 +477,8 @@ namespace Qtud.Qtud
             if (m_strDataFilList.Count > 0)
             {
                 ReadOneDataFile(m_strDataFilList, ref  m_CurveDatas);
+
+                m_CurveDatas.list_Files = m_strDataFilList;
             }
             //--------------------------------------------
 
@@ -946,7 +970,11 @@ namespace Qtud.Qtud
                             Update_Dev_listSerial_Map(treeNode1, strUsb.ToString());
 
                             //----------------------------------
-                            treeView_File.SelectedNode = treeNode0;
+                            if (islishi)
+                                treeView_File.SelectedNode = treeNodelishi0;
+                            else
+                                treeView_File.SelectedNode = treeNode0;
+
                             //treeView_File.ExpandAll();
                             iv++;
                         }
@@ -971,7 +999,7 @@ namespace Qtud.Qtud
             List<string> listSerial = UpdateCheckSerialList(strDev);
             if(listSerial.Count > 0)
             {
-                Dev_listSerial_Map.Add(strDev, listSerial);
+                //Dev_listSerial_Map.Add(strDev, listSerial);
 
                 int iv = 200;
                 foreach (string strSerial in listSerial)
@@ -1257,7 +1285,7 @@ namespace Qtud.Qtud
                 {
                     if (NextFile.Name.IndexOf(strsubFileName) >= 0) 
                     {
-                        listDataFile.Add(strPath+ @"\" + NextFile.Name); 
+                        listDataFile.Add(strPath+   NextFile.Name); 
 
                     }
                     else if (listDataFile.Count> 0)
@@ -1417,6 +1445,155 @@ namespace Qtud.Qtud
         }
 
 
+        // 读取文件列表文件内容 ，多个文件合并到一条曲线中，
+        public void ReadFiles(List<string> File_List, ref CurveDatas m_TempCurveDatas, int nstartIndex, int nendIndex )
+        {
+            if (File_List.Count < 1)
+                return;
+
+            int nTimeIndex = 0;  //时间点序号
+
+            float fLastWeightVal = -1000f;
+            int nufrIndex = 0;  //时间点序号
+
+            foreach (string strTempfile in File_List)
+            {
+                BinaryReader br;
+                // 读取文件
+                try
+                {
+                    br = new BinaryReader(new FileStream(strTempfile, FileMode.Open));
+                }
+                catch (IOException e1)
+                {
+                    MessageBox.Show("读取文件失败 " + strTempfile);
+                    return;
+                }
+                try
+                {
+                    while (true)
+                    {
+                        //---------------------------------
+                        byte[] byteWeight = br.ReadBytes(2);  //高低位需要反过来 
+                        if (byteWeight.Count() < 1)
+                            break;   //读取结束
+                        int nWeight = Convert.ToInt16((byteWeight[1].ToString("X2") + byteWeight[0].ToString("X2")), 16);  //br.ReadInt16()
+
+                        byte[] bytePves = br.ReadBytes(2);
+                        int nPves = Convert.ToInt16((bytePves[1].ToString("X2") + bytePves[0].ToString("X2")), 16);  //br.ReadInt16()
+
+                        byte[] bytePabd = br.ReadBytes(2);
+                        int nPabd = Convert.ToInt16((bytePabd[1].ToString("X2") + bytePabd[0].ToString("X2")), 16);  //br.ReadInt16()
+
+                        br.ReadInt16();  //-1 表示无效ff
+
+                        //---------------------------------
+                        int ncurIndex =   nTimeIndex / 2;
+                        StruData WeightData;
+                        WeightData.value = nWeight / 10;
+                        if (m_TempCurveDatas.fmax_Wight < WeightData.value)
+                        {
+                            m_TempCurveDatas.fmax_Wight = WeightData.value;
+                        }
+                        WeightData.time = nTimeIndex;
+                        WeightData.isShow = false;
+                        if (ncurIndex>=nstartIndex && ncurIndex <= nendIndex)
+                            m_TempCurveDatas.list_Wights.Add(WeightData);
+
+                        if (nTimeIndex % 2 == 0)
+                        {
+                            if (fLastWeightVal == -1000f)
+                            {
+                                fLastWeightVal = WeightData.value;
+
+                            }
+                            else
+                            {
+                                StruData ufrData;
+                                ufrData.value = System.Math.Abs(WeightData.value - fLastWeightVal);
+                                ufrData.time = nufrIndex;
+                                ufrData.isShow = false;
+                                if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                                    m_TempCurveDatas.list_ufr.Add(ufrData);
+
+                                if (m_TempCurveDatas.fmax_ufr < ufrData.value)
+                                {
+                                    m_TempCurveDatas.fmax_ufr = ufrData.value;
+                                }
+                                fLastWeightVal = WeightData.value;
+                                nufrIndex++;
+                            }
+                        }
+
+
+
+
+                        StruData PvesData;
+                        PvesData.value = nPves;
+
+                        if (m_TempCurveDatas.fmax_Pves < PvesData.value)
+                        {
+                            m_TempCurveDatas.fmax_Pves = PvesData.value;
+                        }
+
+                        PvesData.time = nTimeIndex;
+                        PvesData.isShow = false;
+                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                            m_TempCurveDatas.list_Pves.Add(PvesData);
+
+                        StruData PabdData;
+                        PabdData.value = nPabd;
+
+                        if (m_TempCurveDatas.fmax_Pabd < PabdData.value)
+                        {
+                            m_TempCurveDatas.fmax_Pabd = PabdData.value;
+                        }
+                        PabdData.time = nTimeIndex;
+                        PabdData.isShow = false;
+                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                            m_TempCurveDatas.list_Pabd.Add(PabdData);
+
+                        StruData PdetData;
+                        PdetData.value = PvesData.value - PabdData.value;
+
+                        if (m_TempCurveDatas.fmax_Pdet < PdetData.value)
+                        {
+                            m_TempCurveDatas.fmax_Pdet = PdetData.value;
+                        }
+
+                        PdetData.time = nTimeIndex;
+                        PdetData.isShow = false;
+                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                            m_TempCurveDatas.list_Pdet.Add(PdetData);
+
+
+                        //---------------------------------
+
+                        nTimeIndex++;
+                    }
+
+                    if (m_TempCurveDatas.FirstFileEndIndex < 0)
+                        m_TempCurveDatas.FirstFileEndIndex = nTimeIndex;
+                }
+                catch (EndOfStreamException e2)
+                {
+                    //MessageBox.Show("读取结束 " + strTempfile);
+
+                    br.Close();
+
+                    continue;
+                }
+                br.Close();
+            }
+
+            if (m_TempCurveDatas.list_Pdet.Count() > 0 && m_TempCurveDatas.list_Pdet.Count() % 2 == 0)
+                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds(m_TempCurveDatas.list_Pdet.Count() / 2);
+            else if (m_TempCurveDatas.list_Pdet.Count() > 0)
+                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds((m_TempCurveDatas.list_Pdet.Count() + 1) / 2);
+             
+        }
+
+
         //画曲线
         private void DrawCurve(CurveDatas oneDataManage,int curX = -1)
         {
@@ -1495,8 +1672,8 @@ namespace Qtud.Qtud
             Rectangle m_DrawArea = new Rectangle();  //绘画区域, 含行标题,及其尿流率图
             //m_DrawArea.Location = new Point((int)(clientR.Left + clientR.Width * 0.05), (int)(clientR.Top + clientR.Height * 0.05));
             //m_DrawArea.Size = new Size((int)(clientR.Width - clientR.Width * 0.1), (int)(clientR.Height - clientR.Height * 0.1));
-            m_DrawArea.Location = new Point((int)(clientR.Left + 20), (int)(clientR.Top + 30));
-            m_DrawArea.Size = new Size((int)(clientR.Width - 40), (int)(clientR.Height - 40));
+            m_DrawArea.Location = new Point((int)(clientR.Left + 40), (int)(clientR.Top + 40));
+            m_DrawArea.Size = new Size((int)(clientR.Width - 80), (int)(clientR.Height - 60));
 
             m_CurCurveArea.Location = new Point(0,0);
             m_CurCurveArea.Size = new Size(0,0);
@@ -1606,22 +1783,22 @@ namespace Qtud.Qtud
 
                         string strtitle = string.Empty;
                         if (nStepSecond < 60)
-                            strtitle = (iv + 1) * nStepSecond + "\"";
+                            strtitle = (iv + 1) * nStepSecond + "秒";
                         else
                         {
-                            strtitle = ((iv + 1) * nStepSecond) / 60 + "\'";
-                            strtitle += ((iv + 1) * nStepSecond) % 60 + "\"";
+                            strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
+                            strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
                         }
 
                         if ((iv + 1) == nduan)
                         {
-                            tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 25), iniH + 6);
+                            tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
                         }
                         else
                         {
-                            tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 25), iniH + 6);
+                            tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
                         }
-                        m_DrawFuns.DrawPrintOneString(strtitle, 10, StringAlignment.Center, tempRC,true);
+                        m_DrawFuns.DrawPrintOneString(strtitle, 10, StringAlignment.Center, tempRC,false);
 
                     }
 
@@ -1679,10 +1856,10 @@ namespace Qtud.Qtud
                             Size m_range = nl_Range;  //范围：（最小值 ，最大值）
 
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("尿量", "ml", oneDataManage.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.DarkOliveGreen);
+                            m_DrawFuns.DrawRowtitle("尿量", "ml", oneDataManage.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.DeepSkyBlue);
 
                             //画曲线
-                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Wights, m_range, m_oneDrawArea, Color.DarkOliveGreen, ref Wight_X_Value_Map, oneDataManage.FirstFileEndIndex);
+                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_Wights, m_range, m_oneDrawArea, Color.DeepSkyBlue, ref Wight_X_Value_Map, oneDataManage.FirstFileEndIndex);
                        
                         }
                         else if (checkModes[ii] == "尿流率")
@@ -1690,10 +1867,10 @@ namespace Qtud.Qtud
                             Size m_range = nll_Range;  //范围：（最小值 ，最大值）
                            
                             //画行标题
-                            m_DrawFuns.DrawRowtitle("尿流率", "ml/s", oneDataManage.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.MediumSeaGreen);
+                            m_DrawFuns.DrawRowtitle("尿流率", "ml/s", oneDataManage.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.DarkOrange);
 
                             //画曲线
-                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_ufr, m_range, m_oneDrawArea, Color.MediumSeaGreen, ref Ufr_X_Value_Map, (int)(oneDataManage.FirstFileEndIndex/2));
+                            nPosx = m_DrawFuns.plotLine3(ref oneDataManage.list_ufr, m_range, m_oneDrawArea, Color.DarkOrange, ref Ufr_X_Value_Map, (int)(oneDataManage.FirstFileEndIndex / 2));
                        
                         }
                     }
@@ -1804,11 +1981,11 @@ namespace Qtud.Qtud
                                 //绘制刻度值
                                 string strtitle = string.Empty;
                                 if (nStepSecond < 60)
-                                    strtitle = (k) * nStepSecond + "\"";
+                                    strtitle = (k) * nStepSecond + "秒";
                                 else
                                 {
-                                    strtitle = ((k) * nStepSecond) / 60 + @"\'";
-                                    strtitle += ((k) * nStepSecond) % 60 + "\"";
+                                    strtitle = ((k) * nStepSecond) / 60 + @"分";
+                                    strtitle += ((k) * nStepSecond) % 60 + "秒";
                                 }
                                 tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
                                 tempRC.Size = new Size(120, 20);
@@ -1933,11 +2110,11 @@ namespace Qtud.Qtud
                                 //绘制刻度值
                                 string strtitle = string.Empty;
                                 if (nStepSecond < 60)
-                                    strtitle = (k) * nStepSecond + "\"";
+                                    strtitle = (k) * nStepSecond + "秒";
                                 else
                                 {
-                                    strtitle = ((k) * nStepSecond) / 60 + @"\'";
-                                    strtitle += ((k) * nStepSecond) % 60 + "\"";
+                                    strtitle = ((k) * nStepSecond) / 60 + @"分";
+                                    strtitle += ((k) * nStepSecond) % 60 + "秒";
                                 }
                                 tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
                                 tempRC.Size = new Size(120, 20);
@@ -2000,6 +2177,19 @@ namespace Qtud.Qtud
 
         private void button_make_Report_Click(object sender, EventArgs e)
         {
+            if (m_isSavePrintCurve)
+            {
+                DialogResult dr = MessageBox.Show("打印曲线已修改，是否保存修改", "保存", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
+                {
+                    SaveCurveFunc();
+                }
+                else
+                {
+                    m_isSavePrintCurve = false;
+                }
+            }
+
             this.Hide();
 
             //TestDatas m_TestDatas = new TestDatas();
@@ -2113,6 +2303,12 @@ namespace Qtud.Qtud
             m_TempCurveDatas.fmax_Pdet = -100;
             m_TempCurveDatas.fmax_ufr = -100;
 
+            for(int tt = 0 ; tt<sourData.list_Files.Count ; tt++)
+            {
+                m_TempCurveDatas.list_Files.Add(sourData.list_Files[tt]);
+            }
+             
+
             for (int i = nstartIndex; i < nendIndex; i++)
             {
                 m_TempCurveDatas.list_Pabd.Add(sourData.list_Pabd[i]);
@@ -2212,7 +2408,14 @@ namespace Qtud.Qtud
             {
                 m_TempCurveDatas.list_ufr.Add(sourData.list_ufr[i]);
             }
-              
+
+
+            for (int i = 0; i < sourData.list_Files.Count; i++)
+            {
+                m_TempCurveDatas.list_Files.Add(sourData.list_Files[i]);
+            }
+            
+
             m_TempCurveDatas.fmax_Wight = sourData.fmax_Wight;
             m_TempCurveDatas.fmax_Pves = sourData.fmax_Pves;
             m_TempCurveDatas.fmax_Pabd = sourData.fmax_Pabd;
@@ -2268,6 +2471,10 @@ namespace Qtud.Qtud
                 strmeno = m_CurveMeno.GetStrMeno();
                
             }
+            else
+            {
+                return;
+            }
 
             CurveDatas m_TempCurveDatas = new CurveDatas
             {
@@ -2275,13 +2482,16 @@ namespace Qtud.Qtud
                 endTime = DateTime.Now,
                 showMode = new byte[5],  //全部显示
                 FirstFileEndIndex = -1,
+                str_range = string.Empty,
 
                 list_Pabd = new List<StruData>(),
                 list_Pdet = new List<StruData>(),
                 list_Pves = new List<StruData>(),
                 list_Wights = new List<StruData>(),
-                list_ufr = new List<StruData>()
+                list_ufr = new List<StruData>(),
                 
+                list_Files = new List<string>()
+
             };
 
             string strTemp = string.Empty;
@@ -2298,8 +2508,11 @@ namespace Qtud.Qtud
                 strTemp = m_PrintCurveDatas.Count + ": " + m_CurveDatas.StartTime.ToString();
             }
 
+            m_TempCurveDatas.str_range = curve3_Range.Width + "," + curve3_Range.Height + "," + nl_Range.Width + "," + nl_Range.Height + "," + nll_Range.Width + "," + nll_Range.Height;
+
             m_PrintCurveDatas.Add(m_TempCurveDatas); 
             listBox_SelSeg.Items.Add(strTemp);
+            m_isSavePrintCurve = true;
              
         }
 
@@ -2307,6 +2520,7 @@ namespace Qtud.Qtud
         {
             m_PrintCurveDatas.RemoveAt(listBox_SelSeg.SelectedIndex);
             listBox_SelSeg.Items.RemoveAt(listBox_SelSeg.SelectedIndex);
+            m_isSavePrintCurve = true;
 
         }
 
@@ -2314,6 +2528,7 @@ namespace Qtud.Qtud
         {
             listBox_SelSeg.Items.Clear();
             m_PrintCurveDatas.Clear();
+            m_isSavePrintCurve = true;
         }
 
         private void panel_Draw_MouseDown(object sender, MouseEventArgs e)
@@ -2618,6 +2833,8 @@ namespace Qtud.Qtud
                     DialogResult dlgResult = m_CurveMeno.ShowDialog();
                     if (dlgResult == DialogResult.OK)
                     {
+                        if (tempdata.strMeno != m_CurveMeno.GetStrMeno())
+                            m_isSavePrintCurve = true;
                         tempdata.strMeno = m_CurveMeno.GetStrMeno();
 
                         m_PrintCurveDatas.RemoveAt(i);
@@ -2735,6 +2952,7 @@ namespace Qtud.Qtud
                         File.Copy(strTxtFile, strtempPath);  //复制txt文件 
                     }
 
+                    strtempPath = strtempPath.Replace('\\', '*');
                     string strWhere = string.Empty;
                     strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"' and  txtpath='" + strtempPath + @"' ";
                     List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
@@ -2747,6 +2965,7 @@ namespace Qtud.Qtud
                         m_model.uuid = PublicConst.GenerateUUID();
                         m_model.checknum = checkNo;
                         m_model.patient_uuid = m_CurSelPatientInfo.uuid;
+
                         m_model.txtPath = strtempPath;
                         patient_checknum_link_Manager.Add(m_model);
                         //---------------------------------------
@@ -2775,7 +2994,7 @@ namespace Qtud.Qtud
                     //--------------------------------------------
                     //获取路径下，文件名含有strDate的文件
                     npos = tempFileInfo.m_filePath.LastIndexOf('\\');
-                    List<string> m_strDataFilList = UpdateDataFileList(tempFileInfo.m_filePath.Substring(0, npos), tempFileInfo.m_filePath.Substring(npos+1));
+                    List<string> m_strDataFilList = UpdateDataFileList(tempFileInfo.m_filePath.Substring(0, npos+1), tempFileInfo.m_filePath.Substring(npos+1));
                     for (int v = 0; v < m_strDataFilList.Count; v++)
                     {
                         npos  = m_strDataFilList[v].LastIndexOf("\\");
@@ -2784,9 +3003,10 @@ namespace Qtud.Qtud
                         {
                             File.Copy(m_strDataFilList[v], strtarFile);  //复制txt文件
                         }
-                         
 
-                        string strWhere = @"check_uuid='" + m_model.uuid + @"' and  path='" + strtarFile + @"'  "  ;
+
+                        strtarFile = strtarFile.Replace('\\', '*');
+                        string strWhere = @"check_uuid='" + m_model.uuid + @"' and  path='" + strtarFile + @"'  ";
                         List<tbl_patient_checknum_file_info_Model> tempModelist = patient_checknum_file_info_Manager.GetModelList(strWhere);
 
                         if (tempModelist.Count < 1)
@@ -2878,20 +3098,222 @@ namespace Qtud.Qtud
             m_ListUSBDevs = GetMobileDiskList();
 
             string strWhere = string.Empty;
-            strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid +@"'";
+            strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid +@"' order by txtpath ";
             List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+            string lastpath = string.Empty;
             foreach (tbl_patient_checknum_link_Model tempmodel in tempModelist)
             {
-                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + tempmodel.checknum;
+                int npos = tempmodel.txtPath.LastIndexOf("\\");
+                string strDesPath = m_strFloder + m_CurSelPatientInfo.id; // +@"\" + tempmodel.checknum;
+                  
+                if (npos > -1)
+                {
+                    strDesPath = tempmodel.txtPath.Substring(0,npos);
+                    npos =  strDesPath.LastIndexOf("\\");
+                    strDesPath = tempmodel.txtPath.Substring(0, npos);
+                }
+                if (lastpath == strDesPath)
+                    continue;
+                else
+                {
+                    lastpath = strDesPath;
+                }
                 if (!Directory.Exists(strDesPath))  //创建文件夹
                 {
                     MessageBox.Show(@"无历史数据！");
-                    return;
+                    continue;
                 }
                 strDesPath += @"\";
                 m_ListUSBDevs.Add(strDesPath);
             }
             UpdateUsbTree();
+        }
+
+
+        private bool SavaReport()
+        { 
+            //----------------------------------------------------
+            ReportInfoModel model = new ReportInfoModel();
+
+            model.uuid = PublicConst.GenerateUUID();
+            model.name = m_CurSelPatientInfo.cardid;
+            model.CreateDate = DateTime.Now;
+            model.patient_uuid = m_CurSelPatientInfo.uuid;
+
+            model.ks = m_TestDatas.strKS;
+            model.ch = m_TestDatas.strCH;
+            model.nlljcjg = (m_TestDatas.strNLL);
+            model.nlljcjg_nl = (m_TestDatas.strNL);
+            model.pgrlylcd = (m_TestDatas.str_RJ_YL);
+
+            model.pgrl_cg = (m_TestDatas.str_nl_cg);
+            model.pgrl_zc = (m_TestDatas.str_nl_zc);
+            model.pgrl_zd = (m_TestDatas.str_nl_zd);
+
+            model.pgsyx = m_TestDatas.str_syx;
+            model.pgwdx = m_TestDatas.str_wdx;
+            model.tsjc = m_TestDatas.str_tsjc;
+
+            model.vlpp = (m_TestDatas.str_vlpp);
+            model.dlpp = (m_TestDatas.str_dlpp);
+            model.clpp = (m_TestDatas.str_clpp);
+            model.pgaqrl = (m_TestDatas.str_aqrl);
+
+            model.otherInfo = m_TestDatas.str_qtms;
+            model.testresult = m_TestDatas.str_ndlxzd;
+
+            m_ReportInfoModel = model;
+
+            m_TestDatas.uuid = model.uuid;
+            try
+            {  
+                m_ReportInfoManager.Add(model);
+                //MessageBox.Show(" 保存成功！ ");
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(" 保存失败！ ");
+
+                return false;
+            }
+        }
+
+        private void SavaCurve()
+        {  
+            if (m_ReportInfoModel.uuid != ""  )
+            {
+                try
+                {
+                    //删除之前的曲线与文件的连接关系
+                    //tbl_curve_file_link
+                    tbl_curve_file_link_Manager m_file_link_manager = new tbl_curve_file_link_Manager();
+                    string strWhere = string.Empty;
+                    strWhere = @" curve_uuid in ( Select uuid from tbl_curve_info where  report_uuid='" + m_ReportInfoModel.uuid + @"' )";
+                    m_file_link_manager.Delete(strWhere);
+
+                    //删除之前的曲线信息
+                    strWhere = @" report_uuid='" + m_ReportInfoModel.uuid + @"' ";
+                    m_curve_info_Manager.Delete(strWhere);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show(" 保存失败！ "); 
+                }
+            }
+           
+            int cc = 0;
+            //添加曲线
+            foreach (CurveDatas onedatas in m_PrintCurveDatas)
+            {
+
+                //保存曲线
+                curve_info_Model.uuid = PublicConst.GenerateUUID();
+                curve_info_Model.report_uuid = m_ReportInfoModel.uuid;
+                curve_info_Model.rangs = onedatas.str_range;
+                curve_info_Model.starttime = onedatas.StartTime;
+                curve_info_Model.endtime = onedatas.endTime ;
+                curve_info_Model.meno = onedatas.strMeno;
+                curve_info_Model.nindex = cc;
+
+                string strMode = string.Empty;
+                for(int u= 0; u<5; u++)  //5个检查模式
+                {
+                    strMode+=onedatas.showMode[u].ToString() + ","; 
+                }
+                curve_info_Model.strmode = strMode;
+
+                try
+                {
+                    m_curve_info_Manager.Add(curve_info_Model);
+                    cc++;
+                }
+                catch (System.Exception ex)
+                {
+                	
+                }
+
+                int kkk = 0;
+                //保存曲线与文件的关系
+                foreach (string onefile in onedatas.list_Files)  //J:\3384328829\info\ID2017-08-10\ID2017-08-10 08.19.11.hold
+                {
+                    int npos = onefile.IndexOf('\\');
+                    string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + onefile.Substring(npos+1);
+
+                    try
+                    {
+                        string strWhere = string.Empty;
+                        strDesPath = strDesPath.Replace('\\', '*'); 
+
+                        strWhere = @" path='" + strDesPath + @"' ";
+                         
+                        List<tbl_patient_checknum_file_info_Model> modelList = patient_checknum_file_info_Manager.GetModelList(strWhere);
+                        for (int k = 0; k < modelList.Count; k++)
+                        {
+                            tbl_curve_file_link_Model m_curve_file_link_Model = new tbl_curve_file_link_Model();
+                            m_curve_file_link_Model.curve_uuid = curve_info_Model.uuid;
+                            m_curve_file_link_Model.file_uuid = modelList[k].uuid;
+                            m_curve_file_link_Model.nindex = kkk;
+
+                            tbl_curve_file_link_Manager m_curve_file_link_Manager = new tbl_curve_file_link_Manager();
+                            m_curve_file_link_Manager.Add(m_curve_file_link_Model);
+
+                            kkk++;
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+
+                    }
+                  
+                }
+
+            }
+          
+
+
+        }
+
+        private void SaveCurveFunc()
+        {
+            if (m_TestDatas.uuid == string.Empty)  //新建
+            {
+                bool ret = SavaReport();
+                if (ret)
+                {
+                    SavaCurve();
+                }
+                else
+                    return;
+            }
+            else
+            {
+                SavaCurve();
+            }
+            m_isSavePrintCurve = false;
+            MessageBox.Show(" 保存完成！ "); 
+        }
+
+        private void button_Save_Click(object sender, EventArgs e)
+        {
+            SaveCurveFunc();
+
+        }
+
+        private void MainFrom_Curve_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (m_isSavePrintCurve)
+            {
+                DialogResult dr = MessageBox.Show("打印曲线已修改，是否保存修改", "保存", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
+                {
+                    SaveCurveFunc();
+                }
+                else
+                {
+                    m_isSavePrintCurve = false;
+                }
+            }
         }
          
         //----------------------------------------------------------

@@ -15,6 +15,9 @@ namespace Qtud.DBManage.Model
         private DateTime _starttime = DateTime.Now;
         private DateTime _endtime = DateTime.Now;
         private string _meno = string.Empty;
+        private string _rangs = string.Empty;
+        private string _strmode = string.Empty;
+        private int _nindex = 0;
      
 
 		/// <summary>
@@ -59,6 +62,34 @@ namespace Qtud.DBManage.Model
             get { return _endtime; }
 		}
 		 
+        /// <summary>
+		/// 
+		/// </summary>
+        public string rangs
+		{
+            set { _rangs = value; }
+            get { return _rangs; }
+		}
+		  
+        /// <summary>
+		/// 
+		/// </summary>
+        public string strmode
+		{
+            set { _strmode = value; }
+            get { return _strmode; }
+		}
+		  
+        /// <summary>
+		/// 
+		/// </summary>
+        public int nindex
+		{
+            set { _nindex = value; }
+            get { return _nindex; }
+		}
+		  
+        
 		#endregion Model
 
 	}

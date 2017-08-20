@@ -30,6 +30,8 @@ namespace Qtud.DBManage.Manager
         /// </summary>
         public void Add(Qtud.DBManage.Model.tbl_patient_checknum_link_Model model)
         {
+            model.txtPath = model.txtPath.Replace('\\', '*'); 
+
             dal.Add(model);
         }
 
@@ -123,7 +125,8 @@ namespace Qtud.DBManage.Manager
                     model.patient_uuid = dt.Rows[n]["patient_uuid"].ToString();
                     model.checknum = dt.Rows[n]["checkNum"].ToString();
                     model.txtPath = dt.Rows[n]["txtPath"].ToString();
-                      
+
+                    model.txtPath = model.txtPath.Replace('*', '\\');
                     modelList.Add(model);
                 }
             }

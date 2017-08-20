@@ -29,7 +29,7 @@ namespace Qtud.DBManage.Manager
         /// 增加一条数据
         /// </summary>
         public void Add(Qtud.DBManage.Model.tbl_curve_info_Model model)
-        {
+        { 
             dal.Add(model);
         }
 
@@ -44,10 +44,10 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 删除一条数据
         /// </summary>
-        public void Delete(string UUID)
+        public void Delete(string strWhere)
         {
 
-            dal.Delete(UUID);
+            dal.Delete(strWhere);
         }
 
         /// <summary>
@@ -101,34 +101,33 @@ namespace Qtud.DBManage.Manager
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.PatientInfoModel> GetModelList(string strWhere)
-        {
+        public List<Qtud.DBManage.Model.tbl_curve_info_Model> GetModelList(string strWhere)
+        { 
             DataSet ds = dal.GetList(strWhere);
             return DataTableToList(ds.Tables[0]);
         }
         /// <summary>
         /// 获得数据列表
         /// </summary>
-        public List<Qtud.DBManage.Model.PatientInfoModel> DataTableToList(DataTable dt)
+        public List<Qtud.DBManage.Model.tbl_curve_info_Model> DataTableToList(DataTable dt)
         {
-            List<Qtud.DBManage.Model.PatientInfoModel> modelList = new List<Qtud.DBManage.Model.PatientInfoModel>();
+            List<Qtud.DBManage.Model.tbl_curve_info_Model> modelList = new List<Qtud.DBManage.Model.tbl_curve_info_Model>();
             int rowsCount = dt.Rows.Count;
             if (rowsCount > 0)
             {
-                Qtud.DBManage.Model.PatientInfoModel model;
+                Qtud.DBManage.Model.tbl_curve_info_Model model;
                 for (int n = 0; n < rowsCount; n++)
                 {
-                    model = new Qtud.DBManage.Model.PatientInfoModel();
+                    model = new Qtud.DBManage.Model.tbl_curve_info_Model();
                     model.uuid = dt.Rows[n]["uuid"].ToString();
-                    model.cardid = dt.Rows[n]["cardid"].ToString();
-                    model.name = dt.Rows[n]["name"].ToString();
-                    model.phone = dt.Rows[n]["phone"].ToString();
-                    model.sex = int.Parse( dt.Rows[n]["sex"].ToString());
+                    model.report_uuid = dt.Rows[n]["report_uuid"].ToString();
                     model.meno = dt.Rows[n]["meno"].ToString();
-                    model.createtime = DateTime.Parse(dt.Rows[n]["createtime"].ToString());
-                    model.lastchecktime = DateTime.Parse(dt.Rows[n]["lastchecktime"].ToString());
-                    model.bs = dt.Rows[n]["bs"].ToString();
-                     
+                    model.rangs = (dt.Rows[n]["ranges"].ToString());
+                    model.strmode = dt.Rows[n]["strmode"].ToString();
+                    model.starttime = DateTime.Parse(dt.Rows[n]["starttime"].ToString());
+                    model.endtime = DateTime.Parse(dt.Rows[n]["endtime"].ToString());
+                    model.nindex = int.Parse(dt.Rows[n]["nindex"].ToString());
+                      
                     modelList.Add(model);
                 }
             }

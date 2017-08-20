@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainFrom_Curve));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_Save = new System.Windows.Forms.Button();
             this.button_Add_Report = new System.Windows.Forms.Button();
             this.button_make_Report = new System.Windows.Forms.Button();
             this.button_Back = new System.Windows.Forms.Button();
@@ -73,9 +74,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.srcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel_Draw = new  MyPanel();
+            this.panel_Draw = new MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
-            this.button_Save = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
@@ -101,6 +101,17 @@
             this.panel1.Size = new System.Drawing.Size(1258, 79);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // button_Save
+            // 
+            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_Save.Location = new System.Drawing.Point(757, 12);
+            this.button_Save.Name = "button_Save";
+            this.button_Save.Size = new System.Drawing.Size(118, 44);
+            this.button_Save.TabIndex = 4;
+            this.button_Save.Text = "保 存";
+            this.button_Save.UseVisualStyleBackColor = true;
+            this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             // 
             // button_Add_Report
             // 
@@ -556,16 +567,6 @@
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
             // 
-            // button_Save
-            // 
-            this.button_Save.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Save.Location = new System.Drawing.Point(757, 12);
-            this.button_Save.Name = "button_Save";
-            this.button_Save.Size = new System.Drawing.Size(118, 44);
-            this.button_Save.TabIndex = 4;
-            this.button_Save.Text = "保 存";
-            this.button_Save.UseVisualStyleBackColor = true;
-            // 
             // MainFrom_Curve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -584,6 +585,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "尿动力数据管理系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainFrom_Curve_FormClosed);
             this.Load += new System.EventHandler(this.MainFrom2_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

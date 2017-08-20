@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 using Qtud.DBManage.Manager;
 using Qtud.DBManage.Model;
@@ -480,7 +481,7 @@ namespace Qtud.Qtud
         {
             e.Item.ForeColor = Color.Black;
             e.Item.BackColor = SystemColors.Window;
-
+            Thread.Sleep(200);
             if (listView_patList.FocusedItem != null)
             {
                 listView_patList.FocusedItem.Selected = true;
@@ -520,12 +521,208 @@ namespace Qtud.Qtud
         //删除报告
         private void button_del_Click(object sender, EventArgs e)
         {
+            if (this.listView_report.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in listView_report.SelectedItems)
+                {
+                    foreach (ReportInfoModel data in listReportInfo)
+                    {
+                        if (data.CreateDate.ToString() == listView_report.Items[lvi.Index].SubItems[1].Text)
+                        {
+                            if (data.uuid != "")
+                            {
+                                DialogResult ret = MessageBox.Show("\r\n确定删除报告 " + data.CreateDate + " 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                                if (ret != DialogResult.OK)
+                                {
+                                    return;
+                                }
 
+                                try
+                                {
+                                    //删除曲线与文件的连接关系
+                                    //tbl_curve_file_link
+                                    tbl_curve_file_link_Manager m_file_link_manager = new tbl_curve_file_link_Manager();
+                                    string strWhere = string.Empty;
+                                    strWhere = @" curve_uuid in ( Select uuid from tbl_curve_info where  report_uuid='" + data.uuid + @"' )";
+                                    m_file_link_manager.Delete(strWhere);
+
+                                    //删除曲线信息
+                                    tbl_curve_info_Manager m_curve_info_Manager = new tbl_curve_info_Manager();
+                                    strWhere = @" report_uuid='" + data.uuid + @"' ";
+                                    m_curve_info_Manager.Delete(strWhere);
+
+                                    //删除报告信息
+                                    strWhere = @" uuid='" + data.uuid + @"' ";
+                                    Rim.Delete(strWhere);
+                                }
+                                catch (System.Exception ex)
+                                {
+                                    MessageBox.Show(" 删除失败！ ");
+                                }
+                            }
+                             
+                            UpdateReportListBox();
+                             
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择需要删除的报告", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+            }
+            
         }
 
         //查看报告
         private void button_showRep_Click(object sender, EventArgs e)
         {
+            if (this.listView_report.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem lvi in listView_report.SelectedItems)
+                {
+                    foreach (ReportInfoModel data in listReportInfo)
+                    {
+                        if (data.CreateDate.ToString() == listView_report.Items[lvi.Index].SubItems[1].Text)
+                        {
+                            if (data.uuid != "")
+                            {
+                                this.Hide();
+
+
+                                Size curve3_Range = new Size(-100, 300);  //3条曲线范围：（最小值 ，最大值）
+                                Size nl_Range = new Size(0, 3000);  //尿量范围：（最小值 ，最大值）
+                                Size nll_Range = new Size(0, 100);  //尿流率范围：（最小值 ，最大值）
+
+                                //---------------------------------------
+                                TestDatas m_TestDatas = new TestDatas();
+
+                                m_TestDatas.uuid = data.uuid;
+                                m_TestDatas.strKS = data.ks;
+                                m_TestDatas.strCH = data.ch;
+                                m_TestDatas.strNLL = data.nlljcjg;
+                                m_TestDatas.strNL = data.nlljcjg_nl;
+
+                                m_TestDatas.str_RJ_YL = data.pgrlylcd;
+
+
+                                m_TestDatas.str_nl_cg = data.pgrl_cg;
+                                m_TestDatas.str_nl_zc = data.pgrl_zc;
+                                m_TestDatas.str_nl_zd = data.pgrl_zd;
+
+                                m_TestDatas.str_syx = data.pgsyx;
+                                m_TestDatas.str_wdx = data.pgwdx;
+                                m_TestDatas.str_tsjc = data.tsjc;
+
+                                m_TestDatas.str_vlpp = data.vlpp;
+                                m_TestDatas.str_dlpp = data.dlpp;
+                                m_TestDatas.str_clpp = data.clpp;
+                                m_TestDatas.str_aqrl = data.pgaqrl;
+
+                                m_TestDatas.str_qtms = data.otherInfo;
+                                m_TestDatas.str_ndlxzd = data.testresult;
+
+                                //---------------------------------------
+                                List<CurveDatas> m_PrintCurveDatas = new List<CurveDatas>();  //加入到打印列表里的
+                                MainFrom_Curve m_CurveMainFrom = new MainFrom_Curve(m_CurSelPatientInfo, m_TestDatas);
+
+                                //---------------------------------------
+                                tbl_curve_info_Manager m_curve_info_Manager = new tbl_curve_info_Manager(); //曲线
+                                string strWhere = string.Empty;
+                                strWhere += @"  report_uuid='" + data.uuid + @"'  ORDER BY nindex";//非冻结  
+                                List<tbl_curve_info_Model> m_curveInfoList = m_curve_info_Manager.GetModelList(strWhere);
+                                foreach (tbl_curve_info_Model curveinfo_Model in m_curveInfoList)
+                                {
+                                    CurveDatas m_TempCurveDatas = new CurveDatas
+                                    {
+                                        StartTime = DateTime.Now, //(filename.Replace('.', ':')),
+                                        endTime = DateTime.Now,
+                                        showMode = new byte[5],  //全部显示
+                                        FirstFileEndIndex = -1,
+                                        str_range = string.Empty,
+
+                                        list_Pabd = new List<StruData>(),
+                                        list_Pdet = new List<StruData>(),
+                                        list_Pves = new List<StruData>(),
+                                        list_Wights = new List<StruData>(),
+                                        list_ufr = new List<StruData>(),
+
+                                        list_Files = new List<string>()
+
+                                    };
+
+                                    m_TempCurveDatas.StartTime = curveinfo_Model.starttime;
+                                    m_TempCurveDatas.endTime = curveinfo_Model.endtime;
+                                    m_TempCurveDatas.strMeno = curveinfo_Model.meno;
+                                    m_TempCurveDatas.str_range = curveinfo_Model.rangs;
+
+                                    string[] m_modeList = curveinfo_Model.strmode.Split(',');
+                                    for(int t=0; t<m_modeList.Count() && t<5;t++)
+                                    {
+                                        if (m_modeList[t].ToString() != "")
+                                            m_TempCurveDatas.showMode[t] = byte.Parse(m_modeList[t].ToString());
+                                        else
+                                            m_TempCurveDatas.showMode[t] =  0; 
+                                    }
+                                    //---------------------------------------
+                                    //读取文件列表
+                                    tbl_patient_checknum_file_info_Manager pcfimanager = new tbl_patient_checknum_file_info_Manager();
+                                    strWhere = @"   uuid in (select file_uuid from tbl_curve_file_link where curve_uuid='" + curveinfo_Model.uuid + @"' ORDER BY nindex) ";
+                                    List < tbl_patient_checknum_file_info_Model> m_checknum_file_info_list = pcfimanager.GetModelList(strWhere);
+                                    foreach (tbl_patient_checknum_file_info_Model checknum_file_info_Model in m_checknum_file_info_list)
+                                    {
+                                        m_TempCurveDatas.list_Files.Add(checknum_file_info_Model.path);
+                                    }
+                                    //---------------------------------------
+                                    if (m_TempCurveDatas.list_Files.Count > 0)
+                                    {
+                                        string strDataFile = m_TempCurveDatas.list_Files[0];
+                                        int ipos = strDataFile.LastIndexOf(@"\ID");
+                                        string strDate = strDataFile.Substring(ipos + 3);  // 2017-07-25 08.36.22.hold
+                                        ipos = strDate.LastIndexOf('.');
+                                        strDate = strDate.Substring(0, ipos);
+                                        DateTime StartTime = DateTime.Parse(strDate.Replace('.', ':'));  // 2017-06-29 16:57:10
+
+                                        System.TimeSpan   ts =m_TempCurveDatas.StartTime -StartTime;
+                                        int nstartIndex = (int)ts.TotalSeconds;
+                                        System.TimeSpan te = m_TempCurveDatas.endTime - StartTime;
+                                        int nendIndex = (int)te.TotalSeconds;
+
+                                        m_CurveMainFrom.ReadFiles(m_TempCurveDatas.list_Files, ref m_TempCurveDatas, nstartIndex, nendIndex);
+                                        m_PrintCurveDatas.Add(m_TempCurveDatas);
+                                    }
+                                 
+                                } 
+                                //---------------------------------------
+
+                                MakeReportForm m_reportForm = new MakeReportForm(m_CurSelPatientInfo, m_PrintCurveDatas, m_TestDatas, curve3_Range, nl_Range, nll_Range);
+                                DialogResult dlgResult = m_reportForm.ShowDialog();
+                                if (dlgResult == DialogResult.Cancel)
+                                {  
+                                }
+
+                                this.Show(); //显示  
+                            } 
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("请选择报告", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+
+            }
+            
+            
+        }
+
+        private void CMainForm_ResizeEnd(object sender, EventArgs e)
+        {
+            //this.WindowState = FormWindowState.Maximized;
+            //panel1.Location = new Point((int)(this.panel_mid.Width - panel1.Width) / 2, panel1.Top);
 
         }
  

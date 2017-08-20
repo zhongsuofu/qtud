@@ -241,7 +241,7 @@ namespace Qtud.Qtud
                 //--------------------------------------------------------------------
                 //打印前三条曲线
                 int iCount = 0;
-                for (int iv = 0; iv < 3; iv++)
+                for (int iv = 0; iv < 5; iv++)
                 {
 
                     if (OneCurveData.showMode[iv] == 1 && iv >= m_CurCurveMode)
@@ -276,7 +276,7 @@ namespace Qtud.Qtud
 
                                 tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
                                 tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
-                                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.cardid, 9, StringAlignment.Far, tempRC4);
+                                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.id, 9, StringAlignment.Far, tempRC4);
 
                                 tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
                                 tempRC4.Size = new Size(100, 20);
@@ -363,30 +363,39 @@ namespace Qtud.Qtud
 
                             string strtitle = string.Empty;
                             if (nStepSecond < 60)
-                                strtitle = (iv + 1) * nStepSecond + "\"";
+                                strtitle = (iv + 1) * nStepSecond + "秒";
                             else
                             {
-                                strtitle = ((iv + 1) * nStepSecond) / 60 + "\'";
-                                strtitle += ((iv + 1) * nStepSecond) % 60 + "\"";
+                                strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
+                                strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
                             }
 
                             if ((iv + 1) == nduan)
                             { 
-                                tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 15), iniH + 6);
+                                tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
                             }
                             else
                             {
-                                tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 15), iniH + 6);
+                                tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
                             }
-                            m_DrawFuns.DrawPrintOneString(strtitle, 10, StringAlignment.Center, tempRC, true);
+                            m_DrawFuns.DrawPrintOneString(strtitle, 10, StringAlignment.Center, tempRC, false);
                        
+                        }
+
+                        //----------------------------------------------------------
+                        if (OneCurveData.str_range != "")
+                        {
+                            string[] list_ranges = OneCurveData.str_range.Split(',');
+                            curve3_Range = new Size(int.Parse(list_ranges[0]), int.Parse(list_ranges[1]));
+                            nl_Range = new Size(int.Parse(list_ranges[2]), int.Parse(list_ranges[3]));
+                            nll_Range = new Size(int.Parse(list_ranges[4]), int.Parse(list_ranges[5]));
                         }
                         //----------------------------------------------------------
                         // 绘制曲线
                         int ii = m_CurCurveMode;
                         int useii = 0;
                         int nPosx = -1;  //分隔线
-                        while (m_CurCurveMode + useii < m_CurCurveMode + iCount && ii < 3)
+                        while (m_CurCurveMode + useii < m_CurCurveMode + iCount && ii < 5)
                         {
                             Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域
                             m_oneDrawArea.Location = new Point(m_DrawArea.Left + ntitleWitch, m_DrawArea.Top + useii * stepH);
@@ -436,6 +445,32 @@ namespace Qtud.Qtud
                                 nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
+                            else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Wight)  //Wight
+                            {
+                                Size m_range = nl_Range;  //范围：（最小值 ，最大值）
+
+                                //画行标题
+                                m_DrawFuns.DrawRowtitle("尿量", "ml", OneCurveData.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.DeepSkyBlue);
+
+                                List<StruData> tempstrudata = OneCurveData.list_Wights;
+                                //画曲线
+                                Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DeepSkyBlue, ref temp, OneCurveData.FirstFileEndIndex);
+                                useii++;
+                            }
+                            else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.ufr)  //ufr
+                            {
+                                Size m_range = nll_Range;  //范围：（最小值 ，最大值）
+
+                                //画行标题
+                                m_DrawFuns.DrawRowtitle("尿流率", "ml/s", OneCurveData.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.DarkOrange);
+
+                                List<StruData> tempstrudata = OneCurveData.list_ufr;
+                                //画曲线
+                                Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkOrange, ref temp, (int)(OneCurveData.FirstFileEndIndex / 2));
+                                useii++;
+                            }
                             ii++;
 
 
@@ -465,7 +500,7 @@ namespace Qtud.Qtud
 
                                 tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
                                 tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
-                                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.cardid, 9, StringAlignment.Far, tempRC4);
+                                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.id, 9, StringAlignment.Far, tempRC4);
 
                                 tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
                                 tempRC4.Size = new Size(100, 20);
@@ -483,317 +518,320 @@ namespace Qtud.Qtud
 
 
                 //-------------------------------------------------------
-                //绘制尿量，尿流率
-                iCount = 0;
-                if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1 && m_CurCurveMode <=  (int)CuvrlMode.Wight )
+                if (false) //屏蔽代码用
                 {
-                    iCount++;
-                }
-                if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1 && m_CurCurveMode <= (int)CuvrlMode.ufr )
-                {
-                    iCount++;
-                }
-
-                nCurHight += 30;  //间隔
-                if (iCount > 0)
-                {
-                    if (!isPrintCurveTitle)
-                        nCurHight += 20;  //预留出打印曲线标题用
-
                     //绘制尿量，尿流率
-                    if (nCurHight + stepH*2 <= e.MarginBounds.Bottom-pageTailH)  // 2条曲线打印一行
+                    iCount = 0;
+                    if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1 && m_CurCurveMode <= (int)CuvrlMode.Wight)
                     {
+                        iCount++;
+                    }
+                    if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1 && m_CurCurveMode <= (int)CuvrlMode.ufr)
+                    {
+                        iCount++;
+                    }
 
-                        //--------------------------------
-                        //打印曲线标题
+                    nCurHight += 30;  //间隔
+                    if (iCount > 0)
+                    {
                         if (!isPrintCurveTitle)
+                            nCurHight += 20;  //预留出打印曲线标题用
+
+                        //绘制尿量，尿流率
+                        if (nCurHight + stepH * 2 <= e.MarginBounds.Bottom - pageTailH)  // 2条曲线打印一行
                         {
-                            Rectangle tempRC = new Rectangle();
-                            tempRC.Location = new Point((int)(m_DrawArea.Left), nCurHight - 20);
-                            tempRC.Size = new Size(m_DrawArea.Width - 2, 20);
-                            m_DrawFuns.DrawPrintOneString(OneCurveData.StartTime.ToString() + " 至 " + OneCurveData.endTime.ToString(), 9, StringAlignment.Far, tempRC,true);
-                            isPrintCurveTitle = true;
-                        }
 
-                        //--------------------------------
-
-                        if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)  //尿量
-                        {
-                            Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
-                            m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, (int)nCurHight );
-                            m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 30);
-                            m_oneDrawArea.Height = (int)(stepH * 3 / 2);
-
-                            //绘制纵坐标
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
-                            //箭头
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 1, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 1, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 2, m_oneDrawArea.Top + 10) });
-
-                            Rectangle tempRC = new Rectangle();
-
-                            tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Top);
-                            tempRC.Size = new Size(120, 20);
-
-                            m_DrawFuns.DrawPrintOneString("V(ml)", 10, StringAlignment.Center, tempRC, true);
-
-
-                            //-------------------------------------------------
-                            
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
-
-                            //箭头
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
-
-                            tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
-                            tempRC.Size = new Size(120, 20);
-
-                            m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
-                            //-------------------------------------------------
-                            m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
-                            m_oneDrawArea.Width -= 30;
-                            m_oneDrawArea.Height -= 30;
-                            //-------------------------------------------------
-                            Size m_range = nl_Range;  //范围：（最小值 ，最大值）
-
-                            //绘制刻度
-                            int ptCnt = OneCurveData.list_Wights.Count;
-                            int nSecond = (ptCnt + 1) / 2; //秒数
-
-
-                            int nduan = 12;  //分几个区间
-                            int nStepSecond = 0;
-                            if (nSecond >= nduan)
+                            //--------------------------------
+                            //打印曲线标题
+                            if (!isPrintCurveTitle)
                             {
-                                nStepSecond = (int)nSecond / nduan;
+                                Rectangle tempRC = new Rectangle();
+                                tempRC.Location = new Point((int)(m_DrawArea.Left), nCurHight - 20);
+                                tempRC.Size = new Size(m_DrawArea.Width - 2, 20);
+                                m_DrawFuns.DrawPrintOneString(OneCurveData.StartTime.ToString() + " 至 " + OneCurveData.endTime.ToString(), 9, StringAlignment.Far, tempRC, true);
+                                isPrintCurveTitle = true;
                             }
-                            else
+
+                            //--------------------------------
+
+                            if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)  //尿量
                             {
-                                if (nSecond == 0)
+                                Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
+                                m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, (int)nCurHight);
+                                m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 30);
+                                m_oneDrawArea.Height = (int)(stepH * 3 / 2);
+
+                                //绘制纵坐标
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
+                                //箭头
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 1, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 1, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 2, m_oneDrawArea.Top + 10) });
+
+                                Rectangle tempRC = new Rectangle();
+
+                                tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Top);
+                                tempRC.Size = new Size(120, 20);
+
+                                m_DrawFuns.DrawPrintOneString("V(ml)", 10, StringAlignment.Center, tempRC, true);
+
+
+                                //-------------------------------------------------
+
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
+
+                                //箭头
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
+
+                                tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
+                                tempRC.Size = new Size(120, 20);
+
+                                m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
+                                //-------------------------------------------------
+                                m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
+                                m_oneDrawArea.Width -= 30;
+                                m_oneDrawArea.Height -= 30;
+                                //-------------------------------------------------
+                                Size m_range = nl_Range;  //范围：（最小值 ，最大值）
+
+                                //绘制刻度
+                                int ptCnt = OneCurveData.list_Wights.Count;
+                                int nSecond = (ptCnt + 1) / 2; //秒数
+
+
+                                int nduan = 12;  //分几个区间
+                                int nStepSecond = 0;
+                                if (nSecond >= nduan)
                                 {
-                                    nduan = 1;
-                                    nStepSecond = 1;
+                                    nStepSecond = (int)nSecond / nduan;
                                 }
                                 else
                                 {
-                                    nduan = nSecond;
-                                    nStepSecond = 1;
+                                    if (nSecond == 0)
+                                    {
+                                        nduan = 1;
+                                        nStepSecond = 1;
+                                    }
+                                    else
+                                    {
+                                        nduan = nSecond;
+                                        nStepSecond = 1;
+                                    }
+
+                                }
+                                //-------------------------------------------------
+                                int hStep = (int)(m_oneDrawArea.Width / nduan);
+
+                                tempRC.Location = new Point(m_oneDrawArea.Left - 5, m_oneDrawArea.Bottom + 5);
+                                tempRC.Size = new Size(120, 20);
+                                //绘制刻度值
+                                m_DrawFuns.DrawPrintOneString("0", 10, StringAlignment.Center, tempRC, true);
+                                //绘制横刻度
+                                for (int k = 1; k <= nduan; k++)
+                                {
+                                    m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom - 5), new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom) });
+
+                                    //绘制刻度值
+                                    string strtitle = string.Empty;
+                                    if (nStepSecond < 60)
+                                        strtitle = (k) * nStepSecond + "\"";
+                                    else
+                                    {
+                                        strtitle = ((k) * nStepSecond) / 60 + @"\'";
+                                        strtitle += ((k) * nStepSecond) % 60 + "\"";
+                                    }
+                                    tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
+                                    tempRC.Size = new Size(120, 20);
+                                    //绘制刻度值
+                                    m_DrawFuns.DrawPrintOneString(strtitle, 8, StringAlignment.Center, tempRC, true);
+
                                 }
 
+                                //-------------------------------------------------
+                                //绘制纵刻度
+                                int Vcnt = (int)(m_range.Height / 500);  //刻度数
+                                int VStep = (int)(m_oneDrawArea.Height / Vcnt);
+                                int Vvalue = 0;
+
+                                for (int k = 1; k <= Vcnt; k++)
+                                {
+                                    m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom - k * VStep), new Point(m_oneDrawArea.Left + 5, m_oneDrawArea.Bottom - k * VStep) });
+
+
+                                    tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Bottom - k * VStep - 10);
+                                    tempRC.Size = new Size(120, 20);
+                                    //绘制刻度值
+                                    m_DrawFuns.DrawPrintOneString((Vvalue + k * 500).ToString(), 8, StringAlignment.Center, tempRC, true);
+
+                                }
+
+                                //-------------------------------------------------
+                                Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                                //画曲线
+                                List<StruData> tempstrudata = OneCurveData.list_Wights;
+                                m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
+
                             }
-                            //-------------------------------------------------
-                            int hStep = (int)(m_oneDrawArea.Width / nduan);
-
-                            tempRC.Location = new Point(m_oneDrawArea.Left - 5, m_oneDrawArea.Bottom + 5);
-                            tempRC.Size = new Size(120, 20);
-                            //绘制刻度值
-                            m_DrawFuns.DrawPrintOneString("0", 10, StringAlignment.Center, tempRC, true);
-                            //绘制横刻度
-                            for (int k = 1; k <= nduan; k++)
+                            if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1)  //尿流率
                             {
-                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom - 5), new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom) });
+                                Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
+                                if (iCount == 1)
+                                    m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, nCurHight);
+                                else
+                                    m_oneDrawArea.Location = new Point((int)m_DrawArea.Left + m_DrawArea.Width / 2 - 10, nCurHight);
+                                m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 30);
+                                m_oneDrawArea.Height = (int)(stepH * 3 / 2);
 
-                                //绘制刻度值
-                                string strtitle = string.Empty;
-                                if (nStepSecond < 60)
-                                    strtitle = (k) * nStepSecond + "\"";
+                                //绘制坐标
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
+                                //箭头
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 1, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 1, m_oneDrawArea.Top + 10) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 2, m_oneDrawArea.Top + 10) });
+
+                                Rectangle tempRC = new Rectangle();
+
+                                tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Top);
+                                tempRC.Size = new Size(120, 20);
+
+                                m_DrawFuns.DrawPrintOneString("V(ml)", 10, StringAlignment.Center, tempRC, true);
+
+
+                                //-------------------------------------------------
+
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
+                                //箭头
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
+
+                                tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
+                                tempRC.Size = new Size(120, 20);
+
+                                m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
+                                //-------------------------------------------------
+                                m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
+                                m_oneDrawArea.Width -= 30;
+                                m_oneDrawArea.Height -= 30;
+                                //-------------------------------------------------
+                                Size m_range = nll_Range;  //范围：（最小值 ，最大值）
+                                //绘制刻度
+                                int ptCnt = OneCurveData.list_Wights.Count;
+                                int nSecond = ptCnt; //秒数
+
+                                int nduan = 12;  //分几个区间
+                                int nStepSecond = 0;
+                                if (nSecond >= nduan)
+                                {
+                                    nStepSecond = (int)nSecond / nduan;
+                                }
                                 else
                                 {
-                                    strtitle = ((k) * nStepSecond) / 60 + @"\'";
-                                    strtitle += ((k) * nStepSecond) % 60 + "\"";
+                                    if (nSecond == 0)
+                                    {
+                                        nduan = 1;
+                                        nStepSecond = 1;
+                                    }
+                                    else
+                                    {
+                                        nduan = nSecond;
+                                        nStepSecond = 1;
+                                    }
+
                                 }
-                                tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
+                                //-------------------------------------------------
+                                int hStep = (int)(m_oneDrawArea.Width / nduan);
+
+
+                                tempRC.Location = new Point(m_oneDrawArea.Left - 5, m_oneDrawArea.Bottom + 5);
                                 tempRC.Size = new Size(120, 20);
                                 //绘制刻度值
-                                m_DrawFuns.DrawPrintOneString(strtitle, 8, StringAlignment.Center, tempRC, true);
+                                m_DrawFuns.DrawPrintOneString("0", 10, StringAlignment.Center, tempRC, true);
+                                //绘制横刻度
+                                for (int k = 1; k <= nduan; k++)
+                                {
+                                    m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom - 5), new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom) });
 
+                                    //绘制刻度值
+                                    string strtitle = string.Empty;
+                                    if (nStepSecond < 60)
+                                        strtitle = (k) * nStepSecond + "\"";
+                                    else
+                                    {
+                                        strtitle = ((k) * nStepSecond) / 60 + @"\'";
+                                        strtitle += ((k) * nStepSecond) % 60 + "\"";
+                                    }
+                                    tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
+                                    tempRC.Size = new Size(120, 20);
+                                    //绘制刻度值
+                                    m_DrawFuns.DrawPrintOneString(strtitle, 8, StringAlignment.Center, tempRC, true);
+
+                                }
+
+                                //-------------------------------------------------
+                                //绘制纵刻度
+                                int VvaluStep = (int)(m_range.Height / 3);  //刻度数
+                                int VStep = (int)(m_oneDrawArea.Height / 3); //刻度step
+                                int Vvalue = 0;
+
+                                for (int k = 1; k <= 3; k++)
+                                {
+                                    m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom - k * VStep), new Point(m_oneDrawArea.Left + 5, m_oneDrawArea.Bottom - k * VStep) });
+
+
+                                    tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Bottom - k * VStep - 10);
+                                    tempRC.Size = new Size(120, 20);
+                                    //绘制刻度值
+                                    m_DrawFuns.DrawPrintOneString((Vvalue + k * VvaluStep).ToString(), 8, StringAlignment.Center, tempRC, true);
+
+                                }
+
+                                //-------------------------------------------------
+                                //画曲线
+                                Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                                List<StruData> tempstrudata = OneCurveData.list_ufr;
+                                m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
                             }
+                            nCurHight += (int)(stepH * 3 / 2);  // 2条曲线打印一行
 
-                            //-------------------------------------------------
-                            //绘制纵刻度
-                            int Vcnt = (int)(m_range.Height / 500);  //刻度数
-                            int VStep = (int)(m_oneDrawArea.Height / Vcnt);
-                            int Vvalue = 0;
-
-                            for (int k = 1; k <= Vcnt; k++)
-                            {
-                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom - k * VStep), new Point(m_oneDrawArea.Left + 5, m_oneDrawArea.Bottom - k * VStep) });
-
-
-                                tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Bottom - k * VStep - 10);
-                                tempRC.Size = new Size(120, 20);
-                                //绘制刻度值
-                                m_DrawFuns.DrawPrintOneString((Vvalue + k * 500).ToString(), 8, StringAlignment.Center, tempRC, true);
-
-                            }
-
-                            //-------------------------------------------------
-                            Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                            //画曲线
-                            List<StruData> tempstrudata = OneCurveData.list_Wights;
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
-                        
+                            nCurHight += 20;  //间隔
                         }
-                        if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1)  //尿流率
+                        else
                         {
-                            Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
-                            if (iCount ==1)
-                                m_oneDrawArea.Location = new Point((int)m_DrawArea.Left , nCurHight);
-                            else
-                                m_oneDrawArea.Location = new Point((int)m_DrawArea.Left + m_DrawArea.Width / 2-10, nCurHight);
-                            m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 30);
-                            m_oneDrawArea.Height = (int)(stepH * 3 / 2);
+                            m_CurCurveDataIndex = nCurIndex;
 
-                            //绘制坐标
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
-                            //箭头
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 1, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 1, m_oneDrawArea.Top + 10) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left + 2, m_oneDrawArea.Top + 10) });
-
-                            Rectangle tempRC = new Rectangle();
-
-                            tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Top);
-                            tempRC.Size = new Size(120, 20);
-
-                            m_DrawFuns.DrawPrintOneString("V(ml)", 10, StringAlignment.Center, tempRC, true);
+                            e.HasMorePages = true;  //分页
 
 
-                            //-------------------------------------------------
-                            
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
-                            //箭头
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
-
-                            tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
-                            tempRC.Size = new Size(120, 20);
-
-                            m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
-                            //-------------------------------------------------
-                            m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
-                            m_oneDrawArea.Width -= 30;
-                            m_oneDrawArea.Height -= 30;
-                            //-------------------------------------------------
-                            Size m_range = nll_Range;  //范围：（最小值 ，最大值）
-                            //绘制刻度
-                            int ptCnt = OneCurveData.list_Wights.Count;
-                            int nSecond = ptCnt; //秒数
-
-                            int nduan = 12;  //分几个区间
-                            int nStepSecond = 0;
-                            if (nSecond >= nduan)
+                            //------------------------------------------------------- 
+                            //打印页标题（是否画蛇添足了，需求没说，但感觉加上会更好）
                             {
-                                nStepSecond = (int)nSecond / nduan;
-                            }
-                            else
-                            {
-                                if (nSecond == 0)
-                                {
-                                    nduan = 1;
-                                    nStepSecond = 1;
-                                }
-                                else
-                                {
-                                    nduan = nSecond;
-                                    nStepSecond = 1;
-                                }
+                                nCurHight = e.MarginBounds.Bottom - pageTailH;  //间隔
+                                Rectangle tempRC4 = new Rectangle();
+                                tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
+                                m_DrawFuns.plotLine2(new Point[] { new Point(m_DrawArea.Left, nCurHight), new Point(m_DrawArea.Right, nCurHight) });
+                                nCurHight += 2;
+
+                                tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
+                                tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
+                                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.id, 9, StringAlignment.Far, tempRC4);
+
+                                tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
+                                tempRC4.Size = new Size(100, 20);
+                                m_DrawFuns.DrawPrintOneString("第" + m_CurPageIndex + "页", 9, StringAlignment.Far, tempRC4);
 
                             }
-                            //-------------------------------------------------
-                            int hStep = (int)(m_oneDrawArea.Width / nduan);
-
-
-                            tempRC.Location = new Point(m_oneDrawArea.Left - 5, m_oneDrawArea.Bottom + 5);
-                            tempRC.Size = new Size(120, 20);
-                            //绘制刻度值
-                            m_DrawFuns.DrawPrintOneString("0", 10, StringAlignment.Center, tempRC, true);
-                            //绘制横刻度
-                            for (int k = 1; k <= nduan; k++)
-                            {
-                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom - 5), new Point(m_oneDrawArea.Left + k * hStep, m_oneDrawArea.Bottom) });
-
-                                //绘制刻度值
-                                string strtitle = string.Empty;
-                                if (nStepSecond < 60)
-                                    strtitle = (k) * nStepSecond + "\"";
-                                else
-                                {
-                                    strtitle = ((k) * nStepSecond) / 60 + @"\'";
-                                    strtitle += ((k) * nStepSecond) % 60 + "\"";
-                                }
-                                tempRC.Location = new Point(m_oneDrawArea.Left + k * hStep - 10, m_oneDrawArea.Bottom + 5);
-                                tempRC.Size = new Size(120, 20);
-                                //绘制刻度值
-                                m_DrawFuns.DrawPrintOneString(strtitle, 8, StringAlignment.Center, tempRC, true);
-
-                            }
-
-                            //-------------------------------------------------
-                            //绘制纵刻度
-                            int VvaluStep = (int)(m_range.Height / 3);  //刻度数
-                            int VStep = (int)(m_oneDrawArea.Height / 3); //刻度step
-                            int Vvalue = 0;
-
-                            for (int k = 1; k <= 3; k++)
-                            {
-                                m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom - k * VStep), new Point(m_oneDrawArea.Left + 5, m_oneDrawArea.Bottom - k * VStep) });
-
-
-                                tempRC.Location = new Point(m_oneDrawArea.Left + 8, m_oneDrawArea.Bottom - k * VStep - 10);
-                                tempRC.Size = new Size(120, 20);
-                                //绘制刻度值
-                                m_DrawFuns.DrawPrintOneString((Vvalue + k * VvaluStep).ToString(), 8, StringAlignment.Center, tempRC, true);
-
-                            }
-
-                            //-------------------------------------------------
-                            //画曲线
-                            Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                            List<StruData> tempstrudata = OneCurveData.list_ufr;
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
+                            //------------------------------------------------------- 
+                            return;
                         }
-                        nCurHight += (int) ( stepH * 3/2);  // 2条曲线打印一行
-
-                        nCurHight += 20;  //间隔
-                    }
-                    else
-                    {
-                        m_CurCurveDataIndex = nCurIndex;
-
-                        e.HasMorePages = true;  //分页
-
-
-                        //------------------------------------------------------- 
-                        //打印页标题（是否画蛇添足了，需求没说，但感觉加上会更好）
-                        {
-                            nCurHight = e.MarginBounds.Bottom - pageTailH;  //间隔
-                            Rectangle tempRC4 = new Rectangle();
-                            tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
-                            m_DrawFuns.plotLine2(new Point[] { new Point(m_DrawArea.Left, nCurHight), new Point(m_DrawArea.Right, nCurHight) });
-                            nCurHight += 2;
-
-                            tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
-                            tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
-                            m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.cardid, 9, StringAlignment.Far, tempRC4);
-
-                            tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
-                            tempRC4.Size = new Size(100, 20);
-                            m_DrawFuns.DrawPrintOneString("第" + m_CurPageIndex + "页", 9, StringAlignment.Far, tempRC4);
-
-                        }
-                        //------------------------------------------------------- 
-                        return;
-                    }
-                }  //结束尿流率
+                    }  //结束尿流率
+                } //结束屏蔽代码
                 
                 //------------------------------------------------------- 
                 m_CurCurveMode = (int)CuvrlMode.meno;
@@ -827,7 +865,7 @@ namespace Qtud.Qtud
 
                             tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
                             tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
-                            m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.cardid, 9, StringAlignment.Far, tempRC4);
+                            m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.id, 9, StringAlignment.Far, tempRC4);
 
                             tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
                             tempRC4.Size = new Size(100, 20);
@@ -862,7 +900,7 @@ namespace Qtud.Qtud
 
                 tempRC4.Location = new Point((int)(m_DrawArea.Left), nCurHight);
                 tempRC4.Size = new Size(m_DrawArea.Width - 100, 20);
-                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.cardid, 9, StringAlignment.Far, tempRC4);
+                m_DrawFuns.DrawPrintOneString(m_CurSelPatientInfo.name + "  " + m_CurSelPatientInfo.id, 9, StringAlignment.Far, tempRC4);
 
                 tempRC4.Location = new Point((int)(m_DrawArea.Right - 100), nCurHight);
                 tempRC4.Size = new Size(100, 20);
@@ -1026,9 +1064,9 @@ namespace Qtud.Qtud
                     iCount++;  //备注
 
             }
-
-            int stepH = 120;
-            int nCurHight = 4000;  //病人信息
+            
+            int stepH = 170;
+            int nCurHight = 2000;  //病人信息
             if ((stepH * iCount) + nCurHight > panel_Context.Height)  //重新设置窗体大小
             {
                 panel_print.Size = new Size((int)(panel_Report.Width * 0.6f), (stepH * iCount) + nCurHight);  //A4纸的模板：长宽比0.7
@@ -1050,8 +1088,8 @@ namespace Qtud.Qtud
             Rectangle panel_print_RC = this.panel_Context.ClientRectangle; 
 
             Rectangle m_DrawArea = new Rectangle();  //绘画区域, 含行标题,及其尿流率图
-            m_DrawArea.Location = new Point((int)(panel_print_RC.Left + panel_print_RC.Width * 0.1), (int)(panel_print_RC.Top + 20));
-            m_DrawArea.Size = new Size((int)(panel_print_RC.Width - panel_print_RC.Width * 0.2), (int)(panel_print_RC.Height -40));
+            m_DrawArea.Location = new Point((int)(panel_print_RC.Left + panel_print_RC.Width * 0.1), (int)(panel_print_RC.Top + 40));
+            m_DrawArea.Size = new Size((int)(panel_print_RC.Width - panel_print_RC.Width * 0.2), (int)(panel_print_RC.Height -60));
 
             //-------------------------------------------------------
             int nCurHight = 0; 
@@ -1086,8 +1124,29 @@ namespace Qtud.Qtud
                 {
                     ncurcount++;
                 }
-                if (ncurcount > 0)  //3条曲线
+                if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)
                 {
+                    ncurcount++;
+                }
+                if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1)
+                {
+                    ncurcount++;
+                }
+                if (ncurcount > 0)  //5条曲线
+                {
+                    //--------------------------------
+                    //打印曲线标题
+                    {
+                        Rectangle tempRC1 = new Rectangle();
+                        tempRC1.Location = new Point((int)(m_DrawArea.Left), nCurHight);
+                        tempRC1.Size = new Size(m_DrawArea.Width - 2, 20);
+                        m_DrawFuns.DrawPrintOneString(OneCurveData.StartTime.ToString() + " 至 " + OneCurveData.endTime.ToString(), 9, StringAlignment.Far, tempRC1, true);
+
+                        nCurHight += 20;
+                        m_DrawArea.Location = new Point((int)(m_DrawArea.Left), nCurHight);
+                    }
+
+                    //--------------------------------
                     m_DrawArea.Size = new Size((int)(m_DrawArea.Width), (int)( stepH * ncurcount ));
                     nCurHight += stepH * ncurcount;  
 
@@ -1140,11 +1199,11 @@ namespace Qtud.Qtud
 
                         string strtitle = string.Empty;
                         if (nStepSecond < 60)
-                            strtitle = (iv + 1) * nStepSecond + "\"";
+                            strtitle = (iv + 1) * nStepSecond + "秒";
                         else
                         {
-                            strtitle = ((iv + 1) * nStepSecond) / 60 + "\'";
-                            strtitle += ((iv + 1) * nStepSecond) % 60 + "\"";
+                            strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
+                            strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
                         }
                         if ((iv + 1) == nduan)
                         {
@@ -1157,10 +1216,18 @@ namespace Qtud.Qtud
                         m_DrawFuns.DrawPrintOneString(strtitle, 10, StringAlignment.Center, tempRC);
                     }
                     //----------------------------------------------------------
+                    if (OneCurveData.str_range != "")
+                    {
+                        string[] list_ranges = OneCurveData.str_range.Split(',');
+                        curve3_Range = new Size(int.Parse(list_ranges[0]), int.Parse(list_ranges[1]));
+                        nl_Range = new Size(int.Parse(list_ranges[2]), int.Parse(list_ranges[3]));
+                        nll_Range = new Size(int.Parse(list_ranges[4]), int.Parse(list_ranges[5]));
+                    }
+                    //----------------------------------------------------------
                     int ii = 0;
                     int useii = 0;  //有效的II
                     int nPosx = -1;  //分隔线
-                    while (useii < ncurcount && ii < 3)
+                    while (useii < ncurcount && ii < 5)
                     {
                         Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域
                         m_oneDrawArea.Location = new Point(m_DrawArea.Left + ntitleWitch, m_DrawArea.Top + useii * stepH);
@@ -1211,6 +1278,34 @@ namespace Qtud.Qtud
                             useii++;
                            
                         }
+                        else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Wight)  //Wight
+                        {
+                            Size m_range = nl_Range;  //范围：（最小值 ，最大值）
+
+                            //画行标题
+                            m_DrawFuns.DrawRowtitle("尿量", "ml", OneCurveData.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.DeepSkyBlue);
+
+                            List<StruData> tempstrudata = OneCurveData.list_Wights;
+                            //画曲线
+                            Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                            nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DeepSkyBlue, ref temp, OneCurveData.FirstFileEndIndex);
+                            useii++;
+
+                        }
+                        else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.ufr)  //ufr
+                        {
+                            Size m_range = nll_Range;  //范围：（最小值 ，最大值）
+
+                            //画行标题
+                            m_DrawFuns.DrawRowtitle("尿流率", "ml/s", OneCurveData.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.DarkOrange);
+
+                            List<StruData> tempstrudata = OneCurveData.list_ufr;
+                            //画曲线
+                            Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
+                            nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkOrange, ref temp, (int)(OneCurveData.FirstFileEndIndex / 2));
+                            useii++;
+
+                        }
                         ii++;
 
                     }
@@ -1227,27 +1322,29 @@ namespace Qtud.Qtud
                 }
                    
                 //-------------------------------------------------------
-                //尿流量， 尿流率曲线
-                ncurcount =0;
-                if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1) 
+                if (false)   //屏蔽
                 {
-                    ncurcount++;
-                }
-                if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1) 
-                {
-                    ncurcount++;                   
-                }
-                if(ncurcount>0)
-                {
-                     if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)  //尿量
+                    //尿流量， 尿流率曲线
+                    ncurcount = 0;
+                    if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)
+                    {
+                        ncurcount++;
+                    }
+                    if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1)
+                    {
+                        ncurcount++;
+                    }
+                    if (ncurcount > 0)
+                    {
+                        if (OneCurveData.showMode[(int)CuvrlMode.Wight] == 1)  //尿量
                         {
                             Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
-                            m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, (int)nCurHight+30);
+                            m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, (int)nCurHight + 30);
                             m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 20);
-                            m_oneDrawArea.Height = (int)( stepH * 3 /2  );
+                            m_oneDrawArea.Height = (int)(stepH * 3 / 2);
 
                             //绘制坐标
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
                             //箭头
                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 1, m_oneDrawArea.Top + 10) });
@@ -1263,22 +1360,22 @@ namespace Qtud.Qtud
 
 
                             //-------------------------------------------------
-                             m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
-                             //箭头
-                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
-                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
-                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
-                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
+                            //箭头
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 1) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom + 2) });
 
-                             tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
-                             tempRC.Size = new Size(120, 20);
+                            tempRC.Location = new Point(m_oneDrawArea.Right - 30, m_oneDrawArea.Bottom - 25);
+                            tempRC.Size = new Size(120, 20);
 
-                             m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
-                             //-------------------------------------------------
-                             m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
-                             m_oneDrawArea.Width -= 30;
-                             m_oneDrawArea.Height -= 30;
-                             //-------------------------------------------------
+                            m_DrawFuns.DrawPrintOneString("T(s)", 10, StringAlignment.Center, tempRC, true);
+                            //-------------------------------------------------
+                            m_oneDrawArea.Location = new Point(m_oneDrawArea.Left, m_oneDrawArea.Top + 30);
+                            m_oneDrawArea.Width -= 30;
+                            m_oneDrawArea.Height -= 30;
+                            //-------------------------------------------------
                             Size m_range = nl_Range;  //范围：（最小值 ，最大值）
 
                             //绘制刻度
@@ -1357,22 +1454,22 @@ namespace Qtud.Qtud
                             Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
                             //画曲线
                             List<StruData> tempstrudata = OneCurveData.list_Wights;
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
-                        
+                            m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
+
                         }
                         if (OneCurveData.showMode[(int)CuvrlMode.ufr] == 1)  //尿流率
                         {
                             Rectangle m_oneDrawArea = m_DrawArea;  //绘画区域 
 
-                            if (ncurcount ==1)
+                            if (ncurcount == 1)
                                 m_oneDrawArea.Location = new Point((int)m_DrawArea.Left, (int)nCurHight + 30);
                             else
                                 m_oneDrawArea.Location = new Point((int)m_DrawArea.Left + m_DrawArea.Width / 2, (int)nCurHight + 30);
                             m_oneDrawArea.Width = (int)(m_DrawArea.Width / 2 - 20);
-                            m_oneDrawArea.Height = (int)( stepH * 3 /2 );
+                            m_oneDrawArea.Height = (int)(stepH * 3 / 2);
 
                             //绘制坐标
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom) });
 
                             //箭头
                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Top), new Point(m_oneDrawArea.Left - 2, m_oneDrawArea.Top + 10) });
@@ -1389,7 +1486,7 @@ namespace Qtud.Qtud
 
 
                             //-------------------------------------------------
-                            m_DrawFuns.plotLine2( new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
+                            m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Left, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom) });
                             //箭头
                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 1) });
                             m_DrawFuns.plotLine2(new Point[] { new Point(m_oneDrawArea.Right, m_oneDrawArea.Bottom), new Point(m_oneDrawArea.Right - 10, m_oneDrawArea.Bottom - 2) });
@@ -1484,11 +1581,12 @@ namespace Qtud.Qtud
                             //画曲线
                             Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
                             List<StruData> tempstrudata = OneCurveData.list_ufr;
-                            m_DrawFuns.plotLine3( ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
-                   
+                            m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp);
+
                         }
-                        nCurHight += 2*stepH;
-                }
+                        nCurHight += 2 * stepH;
+                    }
+                }//结束屏蔽
                 nCurHight += 20;   
                  
                 //-------------------------------------------------------

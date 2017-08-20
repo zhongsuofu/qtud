@@ -44,7 +44,7 @@ namespace Qtud.DBManage.Manager
 		/// 增加一条数据
 		/// </summary>
         public void Add(Qtud.DBManage.Model.ReportInfoModel model)
-		{
+		{ 
 			dal.Add(model);
 		}
 
@@ -144,21 +144,21 @@ namespace Qtud.DBManage.Manager
                     } 
                     model.ks = dt.Rows[n]["ks"].ToString();
                     model.ch = dt.Rows[n]["ch"].ToString();
-                    model.nlljcjg = float.Parse(dt.Rows[n]["nlljcjg"].ToString());
-                    model.nlljcjg_nl = float.Parse(dt.Rows[n]["pnl"].ToString());
-                    model.pgrlylcd = float.Parse(dt.Rows[n]["pgrlylcd"].ToString());
-                    model.pgrl_cg = float.Parse(dt.Rows[n]["pgrl_cg"].ToString());
-                    model.pgrl_zc = float.Parse(dt.Rows[n]["pgrl_zc"].ToString());
-                    model.pgrl_zd = float.Parse(dt.Rows[n]["pgrl_zd"].ToString());
+                    model.nlljcjg =  (dt.Rows[n]["nlljcjg"].ToString());
+                    model.nlljcjg_nl =  (dt.Rows[n]["pnl"].ToString());
+                    model.pgrlylcd =  (dt.Rows[n]["pgrlylcd"].ToString());
+                    model.pgrl_cg = (dt.Rows[n]["pgrl_cg"].ToString());
+                    model.pgrl_zc = (dt.Rows[n]["pgrl_zc"].ToString());
+                    model.pgrl_zd = (dt.Rows[n]["pgrl_zd"].ToString());
 
                     model.pgsyx = dt.Rows[n]["pgsyx"].ToString();
                     model.pgwdx = dt.Rows[n]["pgwdx"].ToString();
                     model.tsjc = dt.Rows[n]["tsjc"].ToString();
 
-                    model.vlpp = float.Parse(dt.Rows[n]["vlpp"].ToString());
-                    model.dlpp = float.Parse(dt.Rows[n]["dlpp"].ToString());
-                    model.clpp = float.Parse(dt.Rows[n]["clpp"].ToString());
-                    model.pgaqrl = float.Parse(dt.Rows[n]["pgaqrl"].ToString());
+                    model.vlpp =  (dt.Rows[n]["vlpp"].ToString());
+                    model.dlpp =  (dt.Rows[n]["dlpp"].ToString());
+                    model.clpp =  (dt.Rows[n]["clpp"].ToString());
+                    model.pgaqrl =  (dt.Rows[n]["pgaqrl"].ToString());
                     model.otherInfo = dt.Rows[n]["otherInfo"].ToString();
                     model.testresult = dt.Rows[n]["testresult"].ToString();
                      

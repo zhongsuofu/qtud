@@ -65,6 +65,8 @@
             this.button_query = new System.Windows.Forms.Button();
             this.textBox_queryWhere = new System.Windows.Forms.TextBox();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.button_showRep = new System.Windows.Forms.Button();
+            this.button_del = new System.Windows.Forms.Button();
             this.listView_report = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -76,8 +78,6 @@
             this.button_user_manage = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button_del = new System.Windows.Forms.Button();
-            this.button_showRep = new System.Windows.Forms.Button();
             this.panel_mid.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -101,6 +101,9 @@
             // 
             // panel1
             // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.label_phone);
             this.panel1.Controls.Add(this.label_yearold);
@@ -472,6 +475,28 @@
             this.panel6.Size = new System.Drawing.Size(381, 631);
             this.panel6.TabIndex = 31;
             // 
+            // button_showRep
+            // 
+            this.button_showRep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_showRep.Location = new System.Drawing.Point(287, 40);
+            this.button_showRep.Name = "button_showRep";
+            this.button_showRep.Size = new System.Drawing.Size(83, 44);
+            this.button_showRep.TabIndex = 10;
+            this.button_showRep.Text = "查 看";
+            this.button_showRep.UseVisualStyleBackColor = true;
+            this.button_showRep.Click += new System.EventHandler(this.button_showRep_Click);
+            // 
+            // button_del
+            // 
+            this.button_del.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del.Location = new System.Drawing.Point(197, 40);
+            this.button_del.Name = "button_del";
+            this.button_del.Size = new System.Drawing.Size(83, 44);
+            this.button_del.TabIndex = 9;
+            this.button_del.Text = "删 除";
+            this.button_del.UseVisualStyleBackColor = true;
+            this.button_del.Click += new System.EventHandler(this.button_del_Click);
+            // 
             // listView_report
             // 
             this.listView_report.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -597,28 +622,6 @@
             this.panel3.Size = new System.Drawing.Size(1457, 631);
             this.panel3.TabIndex = 22;
             // 
-            // button_del
-            // 
-            this.button_del.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_del.Location = new System.Drawing.Point(197, 40);
-            this.button_del.Name = "button_del";
-            this.button_del.Size = new System.Drawing.Size(83, 44);
-            this.button_del.TabIndex = 9;
-            this.button_del.Text = "删 除";
-            this.button_del.UseVisualStyleBackColor = true;
-            this.button_del.Click += new System.EventHandler(this.button_del_Click);
-            // 
-            // button_showRep
-            // 
-            this.button_showRep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_showRep.Location = new System.Drawing.Point(287, 40);
-            this.button_showRep.Name = "button_showRep";
-            this.button_showRep.Size = new System.Drawing.Size(83, 44);
-            this.button_showRep.TabIndex = 10;
-            this.button_showRep.Text = "查 看";
-            this.button_showRep.UseVisualStyleBackColor = true;
-            this.button_showRep.Click += new System.EventHandler(this.button_showRep_Click);
-            // 
             // CMainForm
             // 
             this.AcceptButton = this.button_query;
@@ -636,6 +639,7 @@
             this.Text = "尿动力数据管理系统";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CMainForm_FormClosing);
             this.Load += new System.EventHandler(this.CMainFoam_Load);
+            this.ResizeEnd += new System.EventHandler(this.CMainForm_ResizeEnd);
             this.panel_mid.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

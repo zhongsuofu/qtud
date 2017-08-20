@@ -10,9 +10,9 @@ using Qtud.DBManage.Model;
 
 namespace Qtud.DBManage.DAL
 {
-    public class tbl_curve_info_Dal
+    public class tbl_curve_file_link_Dal
     {
-        public tbl_curve_info_Dal()
+        public tbl_curve_file_link_Dal()
 		{}
 		#region  成员方法
 
@@ -36,20 +36,15 @@ namespace Qtud.DBManage.DAL
 		/// <summary>
 		/// 增加一条数据
 		/// </summary>
-		public void Add(Qtud.DBManage.Model.tbl_curve_info_Model model)
+        public void Add(Qtud.DBManage.Model.tbl_curve_file_link_Model model)
 		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("insert into tbl_curve_info(");
-            strSql.Append("uuid,report_uuid,starttime,endtime,ranges,strmode,nindex,meno )");
+            strSql.Append("insert into tbl_curve_file_link(");
+            strSql.Append(" curve_uuid,file_uuid,nindex)");
 			strSql.Append(" values (");
-			strSql.Append(@"'"+ model.uuid +@"', ");
-			strSql.Append(@"'"+ model.report_uuid +@"', ");
-			strSql.Append(@"'"+ model.starttime +@"', ");
-            strSql.Append(@"'" + model.endtime + @"', ");
-            strSql.Append(@"'" + model.rangs + @"', ");
-            strSql.Append(@"'" + model.strmode + @"', ");
-            strSql.Append( model.nindex + @", ");
-			strSql.Append(@"'"+ model.meno +@"' ); ");
+            strSql.Append(@"'" + model.curve_uuid + @"', ");
+            strSql.Append(@"'" + model.file_uuid + @"', "); 
+			strSql.Append( model.nindex +@" ); ");
 			 
              
             DbHelperMySQL.ExecuteSql(strSql.ToString() );
@@ -95,7 +90,7 @@ namespace Qtud.DBManage.DAL
 		public void Delete(string strWhere)
 		{ 
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("delete from tbl_curve_info  ");
+            strSql.Append("delete from tbl_curve_file_link  ");
             if (strWhere.Trim() != "")
             {
                 strSql.Append(" where " + strWhere);
@@ -163,10 +158,10 @@ namespace Qtud.DBManage.DAL
 		/// 获得数据列表
 		/// </summary>
 		public DataSet GetList(string strWhere)
-		{ 
+		{
 			StringBuilder strSql=new StringBuilder();
-            strSql.Append("select  uuid,report_uuid,starttime,endtime,ranges,strmode,nindex,meno  ");
-            strSql.Append(" from tbl_curve_info ");
+            strSql.Append("select  uuid,cardid,name ,sex ,phone,createtime,lastchecktime,bs,meno ");
+            strSql.Append(" from tb_patient_info ");
 			if(strWhere.Trim()!="")
 			{
 				strSql.Append(" where "+strWhere);
