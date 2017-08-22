@@ -45,7 +45,24 @@ namespace Qtud.Qtud
             str_qtms = string.Empty,
             str_ndlxzd = string.Empty
         };
-         
+
+
+        //防止加载闪烁
+        protected override CreateParams CreateParams
+        {
+
+            get
+            {
+
+                CreateParams cp = base.CreateParams;
+
+                cp.ExStyle |= 0x02000000;
+
+                return cp;
+
+            }
+
+        }
 
         public TestResultDlg(PatientInfoModel CurSelPatientInfo,   ReportInfoModel _ReportInfoModel)
         {

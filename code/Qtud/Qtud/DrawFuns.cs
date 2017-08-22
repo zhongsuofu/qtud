@@ -657,10 +657,10 @@ namespace Qtud.Qtud
             //if (_TestData.str_tsjc != null && _TestData.str_tsjc != "")
             //    offScreenDC.DrawString("特殊检查： " + _TestData.str_tsjc, new Font("宋体", 14, FontStyle.Bold), drawBrush, rtf, format);
             //else
-                offScreenDC.DrawString("特殊检查： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
+                //offScreenDC.DrawString("特殊检查： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
             //------------------------------------------------------------
 
-            nCurHeight += nrowH;
+            //nCurHeight += nrowH;
             offScreenDC.DrawString("Valsalva 腹腔漏尿点压力（VLPP)： ", new Font("宋体", 14, FontStyle.Bold), drawBrush, new PointF(DrawRect.Left, DrawRect.Top + nCurHeight + 10));
            
             if (_TestData.str_vlpp != null && _TestData.str_vlpp != "")

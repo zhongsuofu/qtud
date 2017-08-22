@@ -304,7 +304,7 @@ namespace Qtud.Qtud
 
                         if (tempModelist.Count < 1 )
                         {
-                            MessageBox.Show("清先导出数据");
+                            MessageBox.Show("请先导出数据");
                             m_CheckNode_List.Add(e.Node);
 
                             return;
@@ -315,7 +315,7 @@ namespace Qtud.Qtud
                         {
                             if (!File.Exists(tempModelist[r].txtPath))
                             {
-                                MessageBox.Show("清先导出数据");
+                                MessageBox.Show("请先导出数据");
                                 m_CheckNode_List.Add(e.Node);
                                 return;
                             }
@@ -342,7 +342,7 @@ namespace Qtud.Qtud
                                 }
                                 if (tempModelist.Count == n)
                                 {
-                                    MessageBox.Show("清先导出数据");
+                                    MessageBox.Show("请先导出数据");
                                     m_CheckNode_List.Add(e.Node);
                                     return;
                                 }
@@ -632,6 +632,23 @@ namespace Qtud.Qtud
         }
 
         #endregion
+
+        //防止加载闪烁
+        protected override CreateParams CreateParams
+        {
+
+            get
+            {
+
+                CreateParams cp = base.CreateParams;
+
+                cp.ExStyle |= 0x02000000;
+
+                return cp;
+
+            }
+
+        }
 
         #region 隐藏前面的checkbox
 
@@ -1516,12 +1533,14 @@ namespace Qtud.Qtud
                     continue;
                 }
                 br.Close();
-            } 
+            }
 
-            if (m_TempCurveDatas.list_Pdet.Count() > 0 && m_TempCurveDatas.list_Pdet.Count() % 2 == 0)
-                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds(m_TempCurveDatas.list_Pdet.Count() / 2);
-            else if (m_TempCurveDatas.list_Pdet.Count() > 0)
-                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds((m_TempCurveDatas.list_Pdet.Count() + 1) / 2);
+            m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddMilliseconds(m_TempCurveDatas.list_Pdet.Count() * 500);
+
+            //if (m_TempCurveDatas.list_Pdet.Count() > 0 && m_TempCurveDatas.list_Pdet.Count() % 2 == 0)
+            //    m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds(m_TempCurveDatas.list_Pdet.Count() / 2);
+            //else if (m_TempCurveDatas.list_Pdet.Count() > 0)
+            //    m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds((m_TempCurveDatas.list_Pdet.Count() + 1) / 2);
 
 
             m_SubCurveDatas.StartTime = m_TempCurveDatas.StartTime;
@@ -1572,17 +1591,19 @@ namespace Qtud.Qtud
                         br.ReadInt16();  //-1 表示无效ff
 
                         //---------------------------------
-                        int ncurIndex =   nTimeIndex / 2;
                         StruData WeightData;
                         WeightData.value = nWeight / 10;
-                        if (m_TempCurveDatas.fmax_Wight < WeightData.value)
-                        {
-                            m_TempCurveDatas.fmax_Wight = WeightData.value;
-                        }
+                        
                         WeightData.time = nTimeIndex;
                         WeightData.isShow = false;
-                        if (ncurIndex>=nstartIndex && ncurIndex <= nendIndex)
+                        if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
+                        {
                             m_TempCurveDatas.list_Wights.Add(WeightData);
+                            if (m_TempCurveDatas.fmax_Wight < WeightData.value)
+                            {
+                                m_TempCurveDatas.fmax_Wight = WeightData.value;
+                            }
+                        }
 
                         if (nTimeIndex % 2 == 0)
                         {
@@ -1597,12 +1618,14 @@ namespace Qtud.Qtud
                                 ufrData.value = System.Math.Abs(WeightData.value - fLastWeightVal);
                                 ufrData.time = nufrIndex;
                                 ufrData.isShow = false;
-                                if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                                if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
+                                {
                                     m_TempCurveDatas.list_ufr.Add(ufrData);
 
-                                if (m_TempCurveDatas.fmax_ufr < ufrData.value)
-                                {
-                                    m_TempCurveDatas.fmax_ufr = ufrData.value;
+                                    if (m_TempCurveDatas.fmax_ufr < ufrData.value)
+                                    {
+                                        m_TempCurveDatas.fmax_ufr = ufrData.value;
+                                    }
                                 }
                                 fLastWeightVal = WeightData.value;
                                 nufrIndex++;
@@ -1614,41 +1637,44 @@ namespace Qtud.Qtud
 
                         StruData PvesData;
                         PvesData.value = nPves;
-
-                        if (m_TempCurveDatas.fmax_Pves < PvesData.value)
-                        {
-                            m_TempCurveDatas.fmax_Pves = PvesData.value;
-                        }
-
+                         
                         PvesData.time = nTimeIndex;
                         PvesData.isShow = false;
-                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                        if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
+                        {
                             m_TempCurveDatas.list_Pves.Add(PvesData);
+                            if (m_TempCurveDatas.fmax_Pves < PvesData.value)
+                            {
+                                m_TempCurveDatas.fmax_Pves = PvesData.value;
+                            }
+                        }
 
                         StruData PabdData;
-                        PabdData.value = nPabd;
-
-                        if (m_TempCurveDatas.fmax_Pabd < PabdData.value)
-                        {
-                            m_TempCurveDatas.fmax_Pabd = PabdData.value;
-                        }
+                        PabdData.value = nPabd; 
                         PabdData.time = nTimeIndex;
                         PabdData.isShow = false;
-                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                        if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
+                        {
                             m_TempCurveDatas.list_Pabd.Add(PabdData);
+                            if (m_TempCurveDatas.fmax_Pabd < PabdData.value)
+                            {
+                                m_TempCurveDatas.fmax_Pabd = PabdData.value;
+                            }
+                        }
 
                         StruData PdetData;
                         PdetData.value = PvesData.value - PabdData.value;
-
-                        if (m_TempCurveDatas.fmax_Pdet < PdetData.value)
-                        {
-                            m_TempCurveDatas.fmax_Pdet = PdetData.value;
-                        }
-
+                         
                         PdetData.time = nTimeIndex;
                         PdetData.isShow = false;
-                        if (ncurIndex >= nstartIndex && ncurIndex <= nendIndex)
+                        if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
+                        {
                             m_TempCurveDatas.list_Pdet.Add(PdetData);
+                            if (m_TempCurveDatas.fmax_Pdet < PdetData.value)
+                            {
+                                m_TempCurveDatas.fmax_Pdet = PdetData.value;
+                            }
+                        }
 
 
                         //---------------------------------
@@ -1670,10 +1696,12 @@ namespace Qtud.Qtud
                 br.Close();
             }
 
-            if (m_TempCurveDatas.list_Pdet.Count() > 0 && m_TempCurveDatas.list_Pdet.Count() % 2 == 0)
-                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds(m_TempCurveDatas.list_Pdet.Count() / 2);
-            else if (m_TempCurveDatas.list_Pdet.Count() > 0)
-                m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds((m_TempCurveDatas.list_Pdet.Count() + 1) / 2);
+            m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddMilliseconds(m_TempCurveDatas.list_Pdet.Count() * 500);
+
+            //if (m_TempCurveDatas.list_Pdet.Count() > 0 && m_TempCurveDatas.list_Pdet.Count() % 2 == 0)
+            //    m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds(m_TempCurveDatas.list_Pdet.Count() / 2);
+            //else if (m_TempCurveDatas.list_Pdet.Count() > 0)
+            //    m_TempCurveDatas.endTime = m_TempCurveDatas.StartTime.AddSeconds((m_TempCurveDatas.list_Pdet.Count() + 1) / 2);
              
         }
 
@@ -2768,8 +2796,8 @@ namespace Qtud.Qtud
                             IniCurveData(ref m_SubCurveDatas);
 
                             CopyPartCurveData(ref m_SubCurveDatas, m_CurveDatas, startIndex,  endIndex);
-                            m_SubCurveDatas.StartTime = m_CurveDatas.StartTime.AddSeconds((int)(startIndex / 2));
-                            m_SubCurveDatas.endTime = m_CurveDatas.StartTime.AddSeconds((int)(endIndex / 2));
+                            m_SubCurveDatas.StartTime = m_CurveDatas.StartTime.AddMilliseconds((int)(startIndex * 500));
+                            m_SubCurveDatas.endTime = m_CurveDatas.StartTime.AddMilliseconds((int)(endIndex * 500));
 
                             m_CurSelCurveArea.Location = new Point(0, 0);
                             m_CurSelCurveArea.Size = new Size(0, 0);
@@ -3152,15 +3180,15 @@ namespace Qtud.Qtud
                 PatientInfoManager pim = new PatientInfoManager();
                 List< PatientInfoModel> pInfoModelList = pim.GetModelList(strWhere);
                 if (pInfoModelList.Count > 0)
-                { 
-                    MessageBox.Show("文件曾经导出在 " + pInfoModelList[0].id+@" " + pInfoModelList[0].name + " 名下,请确认检查数据是否是当前患者数据.");
+                {
+                    MessageBox.Show("文件曾经导出在 \"" + pInfoModelList[0].id + @" " + pInfoModelList[0].name + "\" 名下，\r\n请确认: 检查数据是否是当前患者数据。");
                     return;
                 }
             }
 
             if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
             {
-                DialogResult res = MessageBox.Show("请确认导出的数据是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据吗.");
+                DialogResult res = MessageBox.Show("请确认: 导出的数据是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据。");
                 if (res != DialogResult.OK)
                     return;
 

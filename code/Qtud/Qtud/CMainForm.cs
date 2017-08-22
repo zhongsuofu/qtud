@@ -228,6 +228,22 @@ namespace Qtud.Qtud
         #endregion
 
 
+        //防止加载闪烁
+        protected override CreateParams CreateParams
+        {
+
+            get
+            {
+
+                CreateParams cp = base.CreateParams;
+
+                cp.ExStyle |= 0x02000000;
+
+                return cp;
+
+            }
+
+        }
 
         private void ADDPatientInfo(PatientInfoModel _model = null)
         {
@@ -392,6 +408,8 @@ namespace Qtud.Qtud
 
         private void listView_patList_Click(object sender, EventArgs e)
         {
+            if (listView_patList.SelectedItems.Count < 0)
+                return;
             string strID = listView_patList.SelectedItems[0].SubItems[1].Text;
 
             int i = 0;
@@ -673,7 +691,7 @@ namespace Qtud.Qtud
                                     //---------------------------------------
                                     //读取文件列表
                                     tbl_patient_checknum_file_info_Manager pcfimanager = new tbl_patient_checknum_file_info_Manager();
-                                    strWhere = @"   uuid in (select file_uuid from tbl_curve_file_link where curve_uuid='" + curveinfo_Model.uuid + @"' ORDER BY nindex) ";
+                                    strWhere = @"   uuid in (select file_uuid from tbl_curve_file_link where curve_uuid='" + curveinfo_Model.uuid + @"' )  ORDER BY path";
                                     List < tbl_patient_checknum_file_info_Model> m_checknum_file_info_list = pcfimanager.GetModelList(strWhere);
                                     foreach (tbl_patient_checknum_file_info_Model checknum_file_info_Model in m_checknum_file_info_list)
                                     {
@@ -690,9 +708,9 @@ namespace Qtud.Qtud
                                         DateTime StartTime = DateTime.Parse(strDate.Replace('.', ':'));  // 2017-06-29 16:57:10
 
                                         System.TimeSpan   ts =m_TempCurveDatas.StartTime -StartTime;
-                                        int nstartIndex = (int)ts.TotalSeconds;
+                                        int nstartIndex = (int)(ts.TotalMilliseconds /500);
                                         System.TimeSpan te = m_TempCurveDatas.endTime - StartTime;
-                                        int nendIndex = (int)te.TotalSeconds;
+                                        int nendIndex = (int)(te.TotalMilliseconds / 500);
 
                                         m_CurveMainFrom.ReadFiles(m_TempCurveDatas.list_Files, ref m_TempCurveDatas, nstartIndex, nendIndex);
                                         m_PrintCurveDatas.Add(m_TempCurveDatas);

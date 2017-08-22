@@ -138,7 +138,8 @@ namespace Qtud.Qtud
             }
             catch (System.Exception e)
             {
-                throw e;
+                //throw e;
+                MessageBox.Show("查询用户失败，请检查数据库连接是否正常。");
             }
             return sRet;
         }

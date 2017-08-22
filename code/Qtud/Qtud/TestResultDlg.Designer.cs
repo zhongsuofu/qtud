@@ -131,7 +131,7 @@
             this.label29.Location = new System.Drawing.Point(31, 695);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(109, 20);
+            this.label29.Size = new System.Drawing.Size(88, 16);
             this.label29.TabIndex = 30;
             this.label29.Text = "其他描述：";
             // 
@@ -143,14 +143,14 @@
             this.label30.Location = new System.Drawing.Point(31, 796);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(149, 20);
+            this.label30.Size = new System.Drawing.Size(120, 16);
             this.label30.TabIndex = 31;
             this.label30.Text = "尿动力学诊断：";
             // 
             // textBox_qtms
             // 
             this.textBox_qtms.ForeColor = System.Drawing.Color.Navy;
-            this.textBox_qtms.Location = new System.Drawing.Point(184, 692);
+            this.textBox_qtms.Location = new System.Drawing.Point(184, 691);
             this.textBox_qtms.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_qtms.MaxLength = 128;
             this.textBox_qtms.Multiline = true;
@@ -197,7 +197,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.groupBox3.Size = new System.Drawing.Size(758, 224);
+            this.groupBox3.Size = new System.Drawing.Size(758, 195);
             this.groupBox3.TabIndex = 29;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "特殊检查";
@@ -207,10 +207,10 @@
             this.label26.AutoSize = true;
             this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.ForeColor = System.Drawing.Color.Snow;
-            this.label26.Location = new System.Drawing.Point(682, 183);
+            this.label26.Location = new System.Drawing.Point(682, 145);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(29, 20);
+            this.label26.Size = new System.Drawing.Size(24, 16);
             this.label26.TabIndex = 32;
             this.label26.Text = "ml";
             // 
@@ -220,20 +220,20 @@
             this.label27.BackColor = System.Drawing.Color.Transparent;
             this.label27.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label27.ForeColor = System.Drawing.Color.Snow;
-            this.label27.Location = new System.Drawing.Point(28, 180);
+            this.label27.Location = new System.Drawing.Point(28, 142);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(194, 25);
+            this.label27.Size = new System.Drawing.Size(156, 20);
             this.label27.TabIndex = 31;
             this.label27.Text = "膀胱安全容量：";
             // 
             // textBox_pgaqrl
             // 
-            this.textBox_pgaqrl.Location = new System.Drawing.Point(542, 181);
+            this.textBox_pgaqrl.Location = new System.Drawing.Point(542, 143);
             this.textBox_pgaqrl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_pgaqrl.MaxLength = 8;
             this.textBox_pgaqrl.Name = "textBox_pgaqrl";
-            this.textBox_pgaqrl.Size = new System.Drawing.Size(136, 30);
+            this.textBox_pgaqrl.Size = new System.Drawing.Size(136, 26);
             this.textBox_pgaqrl.TabIndex = 23;
             // 
             // label28
@@ -244,7 +244,7 @@
             this.label28.Location = new System.Drawing.Point(352, 181);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(0, 20);
+            this.label28.Size = new System.Drawing.Size(0, 16);
             this.label28.TabIndex = 29;
             // 
             // label_alpp
@@ -252,10 +252,10 @@
             this.label_alpp.AutoSize = true;
             this.label_alpp.BackColor = System.Drawing.Color.Transparent;
             this.label_alpp.ForeColor = System.Drawing.Color.Snow;
-            this.label_alpp.Location = new System.Drawing.Point(682, 150);
+            this.label_alpp.Location = new System.Drawing.Point(682, 112);
             this.label_alpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_alpp.Name = "label_alpp";
-            this.label_alpp.Size = new System.Drawing.Size(59, 20);
+            this.label_alpp.Size = new System.Drawing.Size(48, 16);
             this.label_alpp.TabIndex = 28;
             this.label_alpp.Text = "cmH2O";
             // 
@@ -265,20 +265,20 @@
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label23.ForeColor = System.Drawing.Color.Snow;
-            this.label23.Location = new System.Drawing.Point(29, 147);
+            this.label23.Location = new System.Drawing.Point(29, 109);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(484, 25);
+            this.label23.Size = new System.Drawing.Size(389, 20);
             this.label23.TabIndex = 27;
             this.label23.Text = "咳嗽诱导腹腔漏尿点压力测定（ALPP）：";
             // 
             // textBox_clpp
             // 
-            this.textBox_clpp.Location = new System.Drawing.Point(542, 145);
+            this.textBox_clpp.Location = new System.Drawing.Point(542, 107);
             this.textBox_clpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_clpp.MaxLength = 8;
             this.textBox_clpp.Name = "textBox_clpp";
-            this.textBox_clpp.Size = new System.Drawing.Size(136, 30);
+            this.textBox_clpp.Size = new System.Drawing.Size(136, 26);
             this.textBox_clpp.TabIndex = 22;
             // 
             // label25
@@ -289,7 +289,7 @@
             this.label25.Location = new System.Drawing.Point(342, 148);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(0, 20);
+            this.label25.Size = new System.Drawing.Size(0, 16);
             this.label25.TabIndex = 25;
             // 
             // label_dlpp
@@ -297,10 +297,10 @@
             this.label_dlpp.AutoSize = true;
             this.label_dlpp.BackColor = System.Drawing.Color.Transparent;
             this.label_dlpp.ForeColor = System.Drawing.Color.Snow;
-            this.label_dlpp.Location = new System.Drawing.Point(682, 114);
+            this.label_dlpp.Location = new System.Drawing.Point(682, 76);
             this.label_dlpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_dlpp.Name = "label_dlpp";
-            this.label_dlpp.Size = new System.Drawing.Size(59, 20);
+            this.label_dlpp.Size = new System.Drawing.Size(48, 16);
             this.label_dlpp.TabIndex = 24;
             this.label_dlpp.Text = "cmH2O";
             // 
@@ -310,20 +310,20 @@
             this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label18.ForeColor = System.Drawing.Color.Snow;
-            this.label18.Location = new System.Drawing.Point(29, 111);
+            this.label18.Location = new System.Drawing.Point(29, 73);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(354, 25);
+            this.label18.Size = new System.Drawing.Size(284, 20);
             this.label18.TabIndex = 23;
             this.label18.Text = "逼尿肌漏尿点压力（DLPP）：";
             // 
             // textBox_dlpp
             // 
-            this.textBox_dlpp.Location = new System.Drawing.Point(542, 111);
+            this.textBox_dlpp.Location = new System.Drawing.Point(542, 73);
             this.textBox_dlpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_dlpp.MaxLength = 8;
             this.textBox_dlpp.Name = "textBox_dlpp";
-            this.textBox_dlpp.Size = new System.Drawing.Size(136, 30);
+            this.textBox_dlpp.Size = new System.Drawing.Size(136, 26);
             this.textBox_dlpp.TabIndex = 21;
             // 
             // label19
@@ -334,7 +334,7 @@
             this.label19.Location = new System.Drawing.Point(342, 112);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(0, 20);
+            this.label19.Size = new System.Drawing.Size(0, 16);
             this.label19.TabIndex = 21;
             // 
             // label_vlpp
@@ -342,10 +342,10 @@
             this.label_vlpp.AutoSize = true;
             this.label_vlpp.BackColor = System.Drawing.Color.Transparent;
             this.label_vlpp.ForeColor = System.Drawing.Color.Snow;
-            this.label_vlpp.Location = new System.Drawing.Point(682, 80);
+            this.label_vlpp.Location = new System.Drawing.Point(682, 42);
             this.label_vlpp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_vlpp.Name = "label_vlpp";
-            this.label_vlpp.Size = new System.Drawing.Size(59, 20);
+            this.label_vlpp.Size = new System.Drawing.Size(48, 16);
             this.label_vlpp.TabIndex = 20;
             this.label_vlpp.Text = "cmH2O";
             // 
@@ -355,20 +355,20 @@
             this.label20.BackColor = System.Drawing.Color.Transparent;
             this.label20.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label20.ForeColor = System.Drawing.Color.Snow;
-            this.label20.Location = new System.Drawing.Point(29, 77);
+            this.label20.Location = new System.Drawing.Point(29, 39);
             this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(440, 25);
+            this.label20.Size = new System.Drawing.Size(351, 20);
             this.label20.TabIndex = 16;
             this.label20.Text = "Valsalva腹腔漏尿点压力（VLPP）：";
             // 
             // textBox_vlpp
             // 
-            this.textBox_vlpp.Location = new System.Drawing.Point(542, 76);
+            this.textBox_vlpp.Location = new System.Drawing.Point(542, 38);
             this.textBox_vlpp.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_vlpp.MaxLength = 8;
             this.textBox_vlpp.Name = "textBox_vlpp";
-            this.textBox_vlpp.Size = new System.Drawing.Size(136, 30);
+            this.textBox_vlpp.Size = new System.Drawing.Size(136, 26);
             this.textBox_vlpp.TabIndex = 20;
             // 
             // textBox_tsjc
@@ -377,7 +377,7 @@
             this.textBox_tsjc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_tsjc.MaxLength = 32;
             this.textBox_tsjc.Name = "textBox_tsjc";
-            this.textBox_tsjc.Size = new System.Drawing.Size(508, 30);
+            this.textBox_tsjc.Size = new System.Drawing.Size(36, 26);
             this.textBox_tsjc.TabIndex = 19;
             this.textBox_tsjc.Visible = false;
             // 
@@ -390,9 +390,10 @@
             this.label22.Location = new System.Drawing.Point(29, 41);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(130, 25);
+            this.label22.Size = new System.Drawing.Size(104, 20);
             this.label22.TabIndex = 1;
             this.label22.Text = "特殊检查:";
+            this.label22.Visible = false;
             // 
             // label24
             // 
@@ -402,7 +403,7 @@
             this.label24.Location = new System.Drawing.Point(342, 78);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(0, 20);
+            this.label24.Size = new System.Drawing.Size(0, 16);
             this.label24.TabIndex = 4;
             // 
             // groupBox2
@@ -447,7 +448,7 @@
             this.checkBox_wdx_b.AutoSize = true;
             this.checkBox_wdx_b.Location = new System.Drawing.Point(291, 190);
             this.checkBox_wdx_b.Name = "checkBox_wdx_b";
-            this.checkBox_wdx_b.Size = new System.Drawing.Size(171, 24);
+            this.checkBox_wdx_b.Size = new System.Drawing.Size(139, 20);
             this.checkBox_wdx_b.TabIndex = 33;
             this.checkBox_wdx_b.Text = "逼尿肌活动过度";
             this.checkBox_wdx_b.UseVisualStyleBackColor = true;
@@ -458,7 +459,7 @@
             this.checkBox_wdx_z.AutoSize = true;
             this.checkBox_wdx_z.Location = new System.Drawing.Point(170, 190);
             this.checkBox_wdx_z.Name = "checkBox_wdx_z";
-            this.checkBox_wdx_z.Size = new System.Drawing.Size(71, 24);
+            this.checkBox_wdx_z.Size = new System.Drawing.Size(59, 20);
             this.checkBox_wdx_z.TabIndex = 32;
             this.checkBox_wdx_z.Text = "正常";
             this.checkBox_wdx_z.UseVisualStyleBackColor = true;
@@ -469,7 +470,7 @@
             this.checkBox_syx_d.AutoSize = true;
             this.checkBox_syx_d.Location = new System.Drawing.Point(434, 156);
             this.checkBox_syx_d.Name = "checkBox_syx_d";
-            this.checkBox_syx_d.Size = new System.Drawing.Size(111, 24);
+            this.checkBox_syx_d.Size = new System.Drawing.Size(91, 20);
             this.checkBox_syx_d.TabIndex = 31;
             this.checkBox_syx_d.Text = "低顺应性";
             this.checkBox_syx_d.UseVisualStyleBackColor = true;
@@ -480,7 +481,7 @@
             this.checkBox_syx_g.AutoSize = true;
             this.checkBox_syx_g.Location = new System.Drawing.Point(291, 154);
             this.checkBox_syx_g.Name = "checkBox_syx_g";
-            this.checkBox_syx_g.Size = new System.Drawing.Size(111, 24);
+            this.checkBox_syx_g.Size = new System.Drawing.Size(91, 20);
             this.checkBox_syx_g.TabIndex = 30;
             this.checkBox_syx_g.Text = "高顺应性";
             this.checkBox_syx_g.UseVisualStyleBackColor = true;
@@ -491,7 +492,7 @@
             this.checkBox_syx_zc.AutoSize = true;
             this.checkBox_syx_zc.Location = new System.Drawing.Point(170, 156);
             this.checkBox_syx_zc.Name = "checkBox_syx_zc";
-            this.checkBox_syx_zc.Size = new System.Drawing.Size(71, 24);
+            this.checkBox_syx_zc.Size = new System.Drawing.Size(59, 20);
             this.checkBox_syx_zc.TabIndex = 29;
             this.checkBox_syx_zc.Text = "正常";
             this.checkBox_syx_zc.UseVisualStyleBackColor = true;
@@ -505,7 +506,7 @@
             this.label34.Location = new System.Drawing.Point(719, 41);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(29, 20);
+            this.label34.Size = new System.Drawing.Size(24, 16);
             this.label34.TabIndex = 28;
             this.label34.Text = "ml";
             // 
@@ -517,7 +518,7 @@
             this.label33.Location = new System.Drawing.Point(473, 42);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(49, 20);
+            this.label33.Size = new System.Drawing.Size(40, 16);
             this.label33.TabIndex = 27;
             this.label33.Text = "ml/s";
             // 
@@ -529,7 +530,7 @@
             this.label32.Location = new System.Drawing.Point(567, 41);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(49, 20);
+            this.label32.Size = new System.Drawing.Size(40, 16);
             this.label32.TabIndex = 26;
             this.label32.Text = "尿量";
             // 
@@ -541,7 +542,7 @@
             this.label31.Location = new System.Drawing.Point(253, 45);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(109, 20);
+            this.label31.Size = new System.Drawing.Size(88, 16);
             this.label31.TabIndex = 25;
             this.label31.Text = "最大尿流率";
             // 
@@ -551,7 +552,7 @@
             this.textBox1_nl.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox1_nl.MaxLength = 8;
             this.textBox1_nl.Name = "textBox1_nl";
-            this.textBox1_nl.Size = new System.Drawing.Size(93, 30);
+            this.textBox1_nl.Size = new System.Drawing.Size(93, 26);
             this.textBox1_nl.TabIndex = 9;
             // 
             // textBox_rlzd
@@ -560,7 +561,7 @@
             this.textBox_rlzd.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_rlzd.MaxLength = 8;
             this.textBox_rlzd.Name = "textBox_rlzd";
-            this.textBox_rlzd.Size = new System.Drawing.Size(101, 30);
+            this.textBox_rlzd.Size = new System.Drawing.Size(101, 26);
             this.textBox_rlzd.TabIndex = 13;
             // 
             // textBox_rlzc
@@ -569,7 +570,7 @@
             this.textBox_rlzc.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_rlzc.MaxLength = 8;
             this.textBox_rlzc.Name = "textBox_rlzc";
-            this.textBox_rlzc.Size = new System.Drawing.Size(103, 30);
+            this.textBox_rlzc.Size = new System.Drawing.Size(103, 26);
             this.textBox_rlzc.TabIndex = 12;
             // 
             // textBox_rlcg
@@ -578,7 +579,7 @@
             this.textBox_rlcg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_rlcg.MaxLength = 8;
             this.textBox_rlcg.Name = "textBox_rlcg";
-            this.textBox_rlcg.Size = new System.Drawing.Size(104, 30);
+            this.textBox_rlcg.Size = new System.Drawing.Size(104, 26);
             this.textBox_rlcg.TabIndex = 11;
             // 
             // label15
@@ -589,7 +590,7 @@
             this.label15.Location = new System.Drawing.Point(577, 118);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(49, 20);
+            this.label15.Size = new System.Drawing.Size(40, 16);
             this.label15.TabIndex = 20;
             this.label15.Text = "最大";
             // 
@@ -601,7 +602,7 @@
             this.label11.Location = new System.Drawing.Point(385, 119);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(49, 20);
+            this.label11.Size = new System.Drawing.Size(40, 16);
             this.label11.TabIndex = 19;
             this.label11.Text = "正常";
             // 
@@ -613,7 +614,7 @@
             this.label10.Location = new System.Drawing.Point(166, 117);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 20);
+            this.label10.Size = new System.Drawing.Size(40, 16);
             this.label10.TabIndex = 18;
             this.label10.Text = "初感";
             // 
@@ -625,7 +626,7 @@
             this.label7.Location = new System.Drawing.Point(29, 190);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(129, 20);
+            this.label7.Size = new System.Drawing.Size(104, 16);
             this.label7.TabIndex = 17;
             this.label7.Text = "膀胱稳定性：";
             // 
@@ -638,7 +639,7 @@
             this.label14.Location = new System.Drawing.Point(29, 77);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(390, 25);
+            this.label14.Size = new System.Drawing.Size(314, 20);
             this.label14.TabIndex = 16;
             this.label14.Text = "充盈期膀胱容积-压力测定结果：";
             // 
@@ -647,7 +648,7 @@
             this.textBox_cyqpgrj.Location = new System.Drawing.Point(550, 76);
             this.textBox_cyqpgrj.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_cyqpgrj.Name = "textBox_cyqpgrj";
-            this.textBox_cyqpgrj.Size = new System.Drawing.Size(191, 30);
+            this.textBox_cyqpgrj.Size = new System.Drawing.Size(191, 26);
             this.textBox_cyqpgrj.TabIndex = 10;
             this.textBox_cyqpgrj.Visible = false;
             // 
@@ -657,7 +658,7 @@
             this.textBox_nlljcjg.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_nlljcjg.MaxLength = 8;
             this.textBox_nlljcjg.Name = "textBox_nlljcjg";
-            this.textBox_nlljcjg.Size = new System.Drawing.Size(88, 30);
+            this.textBox_nlljcjg.Size = new System.Drawing.Size(88, 26);
             this.textBox_nlljcjg.TabIndex = 8;
             // 
             // label8
@@ -668,7 +669,7 @@
             this.label8.Location = new System.Drawing.Point(29, 155);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 20);
+            this.label8.Size = new System.Drawing.Size(104, 16);
             this.label8.TabIndex = 7;
             this.label8.Text = "膀胱顺应性：";
             // 
@@ -681,7 +682,7 @@
             this.label9.Location = new System.Drawing.Point(29, 41);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(220, 25);
+            this.label9.Size = new System.Drawing.Size(177, 20);
             this.label9.TabIndex = 1;
             this.label9.Text = "尿流率检查结果：";
             // 
@@ -693,7 +694,7 @@
             this.label12.Location = new System.Drawing.Point(29, 117);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(139, 20);
+            this.label12.Size = new System.Drawing.Size(112, 16);
             this.label12.TabIndex = 5;
             this.label12.Text = "膀胱容量 ml：";
             // 
@@ -705,7 +706,7 @@
             this.label13.Location = new System.Drawing.Point(342, 78);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(0, 20);
+            this.label13.Size = new System.Drawing.Size(0, 16);
             this.label13.TabIndex = 4;
             // 
             // groupBox1
@@ -740,7 +741,7 @@
             this.textBox_ch.Location = new System.Drawing.Point(550, 112);
             this.textBox_ch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_ch.Name = "textBox_ch";
-            this.textBox_ch.Size = new System.Drawing.Size(191, 30);
+            this.textBox_ch.Size = new System.Drawing.Size(191, 26);
             this.textBox_ch.TabIndex = 6;
             // 
             // textBox_ks
@@ -748,7 +749,7 @@
             this.textBox_ks.Location = new System.Drawing.Point(135, 110);
             this.textBox_ks.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_ks.Name = "textBox_ks";
-            this.textBox_ks.Size = new System.Drawing.Size(191, 30);
+            this.textBox_ks.Size = new System.Drawing.Size(191, 26);
             this.textBox_ks.TabIndex = 5;
             // 
             // textBox_yearold
@@ -758,7 +759,7 @@
             this.textBox_yearold.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_yearold.Name = "textBox_yearold";
             this.textBox_yearold.ReadOnly = true;
-            this.textBox_yearold.Size = new System.Drawing.Size(191, 30);
+            this.textBox_yearold.Size = new System.Drawing.Size(191, 26);
             this.textBox_yearold.TabIndex = 4;
             // 
             // textBox_cardid
@@ -768,7 +769,7 @@
             this.textBox_cardid.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_cardid.Name = "textBox_cardid";
             this.textBox_cardid.ReadOnly = true;
-            this.textBox_cardid.Size = new System.Drawing.Size(191, 30);
+            this.textBox_cardid.Size = new System.Drawing.Size(191, 26);
             this.textBox_cardid.TabIndex = 3;
             // 
             // textBox_sex
@@ -778,7 +779,7 @@
             this.textBox_sex.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_sex.Name = "textBox_sex";
             this.textBox_sex.ReadOnly = true;
-            this.textBox_sex.Size = new System.Drawing.Size(191, 30);
+            this.textBox_sex.Size = new System.Drawing.Size(191, 26);
             this.textBox_sex.TabIndex = 2;
             // 
             // textBox_name
@@ -788,7 +789,7 @@
             this.textBox_name.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.textBox_name.Name = "textBox_name";
             this.textBox_name.ReadOnly = true;
-            this.textBox_name.Size = new System.Drawing.Size(191, 30);
+            this.textBox_name.Size = new System.Drawing.Size(191, 26);
             this.textBox_name.TabIndex = 1;
             // 
             // textBox_bs
@@ -811,7 +812,7 @@
             this.label2.Location = new System.Drawing.Point(29, 72);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 20);
+            this.label2.Size = new System.Drawing.Size(88, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "身份证号：";
             // 
@@ -823,7 +824,7 @@
             this.label6.Location = new System.Drawing.Point(29, 150);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(69, 20);
+            this.label6.Size = new System.Drawing.Size(56, 16);
             this.label6.TabIndex = 7;
             this.label6.Text = "病史：";
             // 
@@ -835,7 +836,7 @@
             this.label_tip.Location = new System.Drawing.Point(29, 33);
             this.label_tip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label_tip.Name = "label_tip";
-            this.label_tip.Size = new System.Drawing.Size(69, 20);
+            this.label_tip.Size = new System.Drawing.Size(56, 16);
             this.label_tip.TabIndex = 1;
             this.label_tip.Text = "姓名：";
             // 
@@ -847,7 +848,7 @@
             this.label5.Location = new System.Drawing.Point(477, 114);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(69, 20);
+            this.label5.Size = new System.Drawing.Size(56, 16);
             this.label5.TabIndex = 6;
             this.label5.Text = "床号：";
             // 
@@ -859,7 +860,7 @@
             this.label1.Location = new System.Drawing.Point(477, 35);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 20);
+            this.label1.Size = new System.Drawing.Size(56, 16);
             this.label1.TabIndex = 2;
             this.label1.Text = "性别：";
             // 
@@ -871,7 +872,7 @@
             this.label4.Location = new System.Drawing.Point(29, 112);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 20);
+            this.label4.Size = new System.Drawing.Size(56, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "科室：";
             // 
@@ -883,7 +884,7 @@
             this.label3.Location = new System.Drawing.Point(475, 74);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 20);
+            this.label3.Size = new System.Drawing.Size(56, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "年龄：";
             // 
@@ -920,7 +921,7 @@
             this.label_Info.ForeColor = System.Drawing.Color.DarkOrange;
             this.label_Info.Location = new System.Drawing.Point(31, 28);
             this.label_Info.Name = "label_Info";
-            this.label_Info.Size = new System.Drawing.Size(85, 24);
+            this.label_Info.Size = new System.Drawing.Size(69, 19);
             this.label_Info.TabIndex = 35;
             this.label_Info.Text = "患者：";
             // 
@@ -962,7 +963,7 @@
             // 
             // TestResultDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));

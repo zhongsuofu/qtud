@@ -99,3 +99,4 @@ F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.PatientManage
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.Properties.Resources.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.RangSettingDlg.resources
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.SettingForm.resources
+F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.SettingForm.resources
