@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Qtud.DBManage.Manager;
 using Qtud.DBManage.Model;
+using Qtud.SystemCommon;
 
 namespace Qtud.Qtud
 {
@@ -72,21 +73,21 @@ namespace Qtud.Qtud
         /// </summary>
         /// <returns></returns>
         private bool VerifyUserPWD()
-        {
+        { 
             bool bRet = false;
             string strWhere = string.Empty;
             try
             {
                 //对密码做DEs加密和Base64 编码 
-                string PswStr = textBox_UserName.Text.Trim() + "*@*" + this.textBox_UserPasswd.Text;  //密码由用户名加密码组成
+                string PswStr = textBox_UserName.Text.Trim() + "---" + this.textBox_UserPasswd.Text;  //密码由用户名加密码组成
 
-                //string _Des = DES.DESEncoder(PswStr, Encoding.Default, null, null);  //DES加密 
-                //string EBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(_Des));  //Base64编码
+                string _Des = DES.DESEncoder(PswStr, Encoding.Default, null, null);  //DES加密 
+                string EBase64 = Convert.ToBase64String(System.Text.Encoding.Default.GetBytes(_Des));  //Base64编码
 
 
-                strWhere += " user_name='" + textBox_UserName.Text.Trim() + "'";
-                //strWhere += " and UserPassword='" + EBase64 + "'";
-                strWhere += " and user_passwd='" + this.textBox_UserPasswd.Text + "'";
+                strWhere += " user_loginName='" + textBox_UserName.Text.Trim() + "'";
+                strWhere += " and user_passwd='" + EBase64 + "'";
+                //strWhere += " and user_passwd='" + this.textBox_UserPasswd.Text + "'";
                 strWhere += " and user_status=1";
                 List<UserModel> liUserInfo = um.GetModelList(strWhere);
                 if (0 == liUserInfo.Count)
@@ -99,6 +100,12 @@ namespace Qtud.Qtud
                 UserModel data = liUserInfo[0];
                 data.user_lastlogintime = DateTime.Now;
                 um.UpdateLastLogTime(data);
+
+                //解密
+                string DBase64 = System.Text.Encoding.Default.GetString(Convert.FromBase64String(data.user_passwd));  //Base解码
+                string strtemp = DES.DESDecoder(DBase64, Encoding.Default, null, null);  //DES解码 
+                strtemp = strtemp.Replace(data.user_loginName + "---", "");
+                data.user_passwd = strtemp;
 
                 CurrentUser._CurUserModel = data;
 
@@ -134,7 +141,7 @@ namespace Qtud.Qtud
                 {
                     return "";
                 }
-                sRet = liUserInfo[0].user_name;
+                sRet = liUserInfo[0].user_loginName;
             }
             catch (System.Exception e)
             {

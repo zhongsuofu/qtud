@@ -89,11 +89,14 @@ namespace Qtud.DBManage.DAL
 		/// <summary>
 		/// 删除一条数据
 		/// </summary>
-		public void Delete(string UUID)
+		public void Delete(string strWhere)
 		{ 
 			StringBuilder strSql=new StringBuilder();
-			strSql.Append("delete from tb_patient_info  ");
-			strSql.Append(@" where uuid='" + UUID + @"' ");
+            strSql.Append("delete from tbl_patient_checknum_file_info  ");
+            if (strWhere.Trim() != "")
+            {
+                strSql.Append(" where " + strWhere);
+            }
 
             //OleDbParameter[] parameters = {
             //        new OleDbParameter("@UUID", OleDbType.VarChar,64)};

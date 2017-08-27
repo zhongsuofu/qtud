@@ -38,7 +38,7 @@
             this.button_Back = new System.Windows.Forms.Button();
             this.panel_Report = new System.Windows.Forms.Panel();
             this.panel_print = new System.Windows.Forms.Panel();
-            this.panel_Context = new  MyPanel();
+            this.panel_Context = new MyPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.report_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
@@ -140,9 +140,9 @@
             // 
             // panel_Context
             // 
-            this.panel_Context.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_Context.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Context.BackColor = System.Drawing.Color.White;
             this.panel_Context.ContextMenuStrip = this.contextMenuStrip1;
             this.panel_Context.Location = new System.Drawing.Point(2, 4);
@@ -155,18 +155,19 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.report_ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 50);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
             // 
             // report_ToolStripMenuItem
             // 
             this.report_ToolStripMenuItem.Name = "report_ToolStripMenuItem";
-            this.report_ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
+            this.report_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.report_ToolStripMenuItem.Text = "不打印报告页";
+            this.report_ToolStripMenuItem.Visible = false;
             this.report_ToolStripMenuItem.Click += new System.EventHandler(this.report_ToolStripMenuItem_Click);
             // 
             // MakeReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 723);
             this.Controls.Add(this.panel_Report);

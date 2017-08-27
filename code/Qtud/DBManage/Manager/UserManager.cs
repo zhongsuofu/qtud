@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using LTP.Common;
 using Qtud.DBManage.Model;
 
+
 namespace Qtud.DBManage.Manager 
 {
 	/// <summary>
@@ -132,13 +133,12 @@ namespace Qtud.DBManage.Manager
 			{
 				Qtud.DBManage.Model.UserModel model;
 				for (int n = 0; n < rowsCount; n++)
-				{
-                    
-
+				{ 
                     model = new Qtud.DBManage.Model.UserModel();
                     model.user_id = dt.Rows[n]["user_id"].ToString();
                     model.user_name = dt.Rows[n]["user_name"].ToString();
                     model.user_passwd = dt.Rows[n]["user_passwd"].ToString();
+                     
                     if (dt.Rows[n]["user_status"].ToString() != "")
                        model.user_status =int.Parse(dt.Rows[n]["user_status"].ToString()) ;
                     if (dt.Rows[n]["user_class"].ToString() != "")

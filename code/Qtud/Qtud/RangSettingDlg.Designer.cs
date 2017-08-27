@@ -49,7 +49,7 @@
             this.textBox_pvetX.Location = new System.Drawing.Point(211, 75);
             this.textBox_pvetX.MaxLength = 24;
             this.textBox_pvetX.Name = "textBox_pvetX";
-            this.textBox_pvetX.Size = new System.Drawing.Size(110, 30);
+            this.textBox_pvetX.Size = new System.Drawing.Size(110, 26);
             this.textBox_pvetX.TabIndex = 8;
             // 
             // label2
@@ -59,16 +59,16 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(76, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 20);
+            this.label2.Size = new System.Drawing.Size(104, 16);
             this.label2.TabIndex = 7;
-            this.label2.Text = "压力范围：";
+            this.label2.Text = "压力值范围：";
             // 
             // textBox_nlX
             // 
             this.textBox_nlX.Location = new System.Drawing.Point(211, 141);
             this.textBox_nlX.MaxLength = 24;
             this.textBox_nlX.Name = "textBox_nlX";
-            this.textBox_nlX.Size = new System.Drawing.Size(110, 30);
+            this.textBox_nlX.Size = new System.Drawing.Size(110, 26);
             this.textBox_nlX.TabIndex = 10;
             // 
             // label1
@@ -78,7 +78,7 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(76, 144);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 20);
+            this.label1.Size = new System.Drawing.Size(80, 16);
             this.label1.TabIndex = 9;
             this.label1.Text = "尿量范围:";
             // 
@@ -87,7 +87,7 @@
             this.textBox_nllX.Location = new System.Drawing.Point(210, 219);
             this.textBox_nllX.MaxLength = 24;
             this.textBox_nllX.Name = "textBox_nllX";
-            this.textBox_nllX.Size = new System.Drawing.Size(110, 30);
+            this.textBox_nllX.Size = new System.Drawing.Size(110, 26);
             this.textBox_nllX.TabIndex = 12;
             // 
             // label3
@@ -97,7 +97,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(56, 222);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 20);
+            this.label3.Size = new System.Drawing.Size(96, 16);
             this.label3.TabIndex = 11;
             this.label3.Text = "尿流率范围:";
             // 
@@ -106,7 +106,7 @@
             this.textBox_pvetY.Location = new System.Drawing.Point(393, 75);
             this.textBox_pvetY.MaxLength = 24;
             this.textBox_pvetY.Name = "textBox_pvetY";
-            this.textBox_pvetY.Size = new System.Drawing.Size(110, 30);
+            this.textBox_pvetY.Size = new System.Drawing.Size(110, 26);
             this.textBox_pvetY.TabIndex = 9;
             // 
             // label4
@@ -116,7 +116,7 @@
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(344, 78);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 20);
+            this.label4.Size = new System.Drawing.Size(24, 16);
             this.label4.TabIndex = 14;
             this.label4.Text = "至";
             // 
@@ -127,7 +127,7 @@
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(344, 144);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 20);
+            this.label5.Size = new System.Drawing.Size(24, 16);
             this.label5.TabIndex = 16;
             this.label5.Text = "至";
             // 
@@ -136,7 +136,7 @@
             this.textBox_nlY.Location = new System.Drawing.Point(393, 141);
             this.textBox_nlY.MaxLength = 24;
             this.textBox_nlY.Name = "textBox_nlY";
-            this.textBox_nlY.Size = new System.Drawing.Size(110, 30);
+            this.textBox_nlY.Size = new System.Drawing.Size(110, 26);
             this.textBox_nlY.TabIndex = 11;
             // 
             // label6
@@ -146,7 +146,7 @@
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(344, 222);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(29, 20);
+            this.label6.Size = new System.Drawing.Size(24, 16);
             this.label6.TabIndex = 18;
             this.label6.Text = "至";
             // 
@@ -155,7 +155,7 @@
             this.textBox_nllY.Location = new System.Drawing.Point(393, 219);
             this.textBox_nllY.MaxLength = 24;
             this.textBox_nllY.Name = "textBox_nllY";
-            this.textBox_nllY.Size = new System.Drawing.Size(110, 30);
+            this.textBox_nllY.Size = new System.Drawing.Size(110, 26);
             this.textBox_nllY.TabIndex = 13;
             // 
             // button1
@@ -170,7 +170,7 @@
             // 
             // RangSettingDlg
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(564, 395);

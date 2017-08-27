@@ -28,21 +28,21 @@ namespace Qtud.Qtud
         {
             if (textBox_pvetX.Text.Trim() == "")
             {
-                MessageBox.Show("Pves 下限设置错误，请重新设置", "输入错误");
+                MessageBox.Show("压力值 下限设置错误，请重新设置", "输入错误");
                 textBox_pvetX.Focus();
                 return ;
             }
 
             if (textBox_pvetY.Text.Trim() == "")
             {
-                MessageBox.Show("Pves 上限设置错误，请重新设置", "输入错误");
+                MessageBox.Show("压力值 上限设置错误，请重新设置", "输入错误");
                 textBox_pvetY.Focus();
                 return;
             }
 
             if (int.Parse(textBox_pvetX.Text.Trim()) >= int.Parse(textBox_pvetY.Text.Trim()))
             {
-                MessageBox.Show("Pves 下限应小于上限，请重新设置", "输入错误");
+                MessageBox.Show("压力值 下限应小于上限，请重新设置", "输入错误");
                 textBox_pvetY.Focus();
                 return;
             }

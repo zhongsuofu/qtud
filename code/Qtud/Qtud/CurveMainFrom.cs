@@ -75,6 +75,13 @@ namespace Qtud.Qtud
     {
         #region  变量
 
+        // 代理定义，可以在Invoke时传入相应的参数  
+        private delegate void funHandle(int nValue);
+        private funHandle myHandle = null;
+        private CopyFileProgressForm progressForm = new CopyFileProgressForm();
+        private bool startThread = true;
+  
+
         private PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
         private List<string> m_ListUSBDevs = new List<string>();  //USB设备列表
 
@@ -113,6 +120,8 @@ namespace Qtud.Qtud
 
 
         //-------------------------------------------------------
+        private int nCurFileCnt = 0;
+        private int nMaxFileCnt = 0;
         public struct StruFileInfo  //一个检测号文件
         {
             public string  strFileMode;      //文件检测模式
@@ -126,10 +135,11 @@ namespace Qtud.Qtud
         }
         public struct StruCheckFileInfo  //一个检测号文件
         {
+            public int nFileCnt;
             public bool isLoad;     //是否导入                  //Txt文件
             public List<StruOneDayFileInfo> m_StruOneDayFileInfo;    //文件列表
         }
-        Dictionary<string, StruCheckFileInfo> m_checkNum_Files_map = new Dictionary<string, StruCheckFileInfo>();    //检查号与文件的映射
+        Dictionary<string, StruCheckFileInfo> m_checkNum_Files_map = new Dictionary<string, StruCheckFileInfo>();    //检查号与文件的映射,用于导出数据
         //-------------------------------------------------------
 
        
@@ -232,8 +242,34 @@ namespace Qtud.Qtud
             strIniFile = Directory.GetCurrentDirectory() + "\\" + strIniFile;
             //获取指定KEY的值  
             ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
-            if (ValueUnit==null)
-                ValueUnit = "cmH2O"; 
+            if (ValueUnit==null || ValueUnit ==string.Empty)
+                ValueUnit = "cmH2O";
+
+            string strTempX = string.Empty; 
+            string strTempY = string.Empty;
+            strTempX = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "pvetX", null);
+            if (strTempX == null || strTempX == string.Empty)
+                strTempX = "-100";
+            strTempY = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "pvetY", null);
+            if (strTempY == null || strTempY == string.Empty)
+                strTempY = "300";
+            curve3_Range = new Size(int.Parse(strTempX), int.Parse(strTempY));
+
+            strTempX = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "nlX", null);
+            if (strTempX == null || strTempX == string.Empty)
+                strTempX = "0";
+            strTempY = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "nlY", null);
+            if (strTempY == null || strTempY == string.Empty)
+                strTempY = "3000";
+            nl_Range = new Size(int.Parse(strTempX), int.Parse(strTempY));
+
+            strTempX = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "nllX", null);
+            if (strTempX == null || strTempX == string.Empty)
+                strTempX = "0";
+            strTempY = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "nllY", null);
+            if (strTempY == null || strTempY == string.Empty)
+                strTempY = "300";
+            nll_Range = new Size(int.Parse(strTempX), int.Parse(strTempY));
             //-----------------------------------
             
 
@@ -246,12 +282,103 @@ namespace Qtud.Qtud
 
             m_CurSelCurveArea.Location = new Point(0, 0);
             m_CurSelCurveArea.Size = new Size(0, 0);
+            //-----------------------------------
 
             comboBox_checkMode.SelectedIndex = m_SelMode+1;
-            m_ListUSBDevs = GetMobileDiskList(); 
+            m_ListUSBDevs = GetMobileDiskList();
+            if (checkBox1.Checked)
+                GetHistoryFile();
             UpdateUsbTree();
-             
+
+
+            //-----------------------------------
+            //初始化历史打印曲线
+            if(m_TestDatas.uuid != "")
+                IniHistoryCurveData();
+            //-----------------------------------
+
        
+        }
+        private void IniHistoryCurveData()
+        {
+            //---------------------------------------
+            tbl_curve_info_Manager m_curve_info_Manager = new tbl_curve_info_Manager(); //曲线
+            string strWhere = string.Empty;
+            strWhere += @"  report_uuid='" + m_TestDatas.uuid + @"'  ORDER BY nindex";//非冻结  
+            List<tbl_curve_info_Model> m_curveInfoList = m_curve_info_Manager.GetModelList(strWhere);
+            foreach (tbl_curve_info_Model curveinfo_Model in m_curveInfoList)
+            {
+                CurveDatas m_TempCurveDatas = new CurveDatas
+                {
+                    StartTime = DateTime.Now, //(filename.Replace('.', ':')),
+                    endTime = DateTime.Now,
+                    showMode = new byte[5],  //全部显示
+                    FirstFileEndIndex = -1,
+                    str_range = string.Empty,
+
+                    list_Pabd = new List<StruData>(),
+                    list_Pdet = new List<StruData>(),
+                    list_Pves = new List<StruData>(),
+                    list_Wights = new List<StruData>(),
+                    list_ufr = new List<StruData>(),
+
+                    list_Files = new List<string>()
+
+                };
+
+                m_TempCurveDatas.StartTime = curveinfo_Model.starttime;
+                m_TempCurveDatas.endTime = curveinfo_Model.endtime;
+                m_TempCurveDatas.strMeno = curveinfo_Model.meno;
+                m_TempCurveDatas.str_range = curveinfo_Model.rangs;
+
+                string[] m_modeList = curveinfo_Model.strmode.Split(',');
+                for (int t = 0; t < m_modeList.Count() && t < 5; t++)
+                {
+                    if (m_modeList[t].ToString() != "")
+                        m_TempCurveDatas.showMode[t] = byte.Parse(m_modeList[t].ToString());
+                    else
+                        m_TempCurveDatas.showMode[t] = 0;
+                }
+                //---------------------------------------
+                //读取文件列表
+                tbl_patient_checknum_file_info_Manager pcfimanager = new tbl_patient_checknum_file_info_Manager();
+                strWhere = @"   uuid in (select file_uuid from tbl_curve_file_link where curve_uuid='" + curveinfo_Model.uuid + @"' )  ORDER BY path";
+                List<tbl_patient_checknum_file_info_Model> m_checknum_file_info_list = pcfimanager.GetModelList(strWhere);
+                foreach (tbl_patient_checknum_file_info_Model checknum_file_info_Model in m_checknum_file_info_list)
+                {
+                    m_TempCurveDatas.list_Files.Add(checknum_file_info_Model.path);
+                }
+                //---------------------------------------
+                if (m_TempCurveDatas.list_Files.Count > 0)
+                {
+                    string strDataFile = m_TempCurveDatas.list_Files[0];
+                    int ipos = strDataFile.LastIndexOf(@"\ID");
+                    string strDate = strDataFile.Substring(ipos + 3);  // 2017-07-25 08.36.22.hold
+                    ipos = strDate.LastIndexOf('.');
+                    strDate = strDate.Substring(0, ipos);
+                    DateTime StartTime = DateTime.Parse(strDate.Replace('.', ':'));  // 2017-06-29 16:57:10
+
+                    System.TimeSpan ts = m_TempCurveDatas.StartTime - StartTime;
+                    int nstartIndex = (int)(ts.TotalMilliseconds / 500);
+                    System.TimeSpan te = m_TempCurveDatas.endTime - StartTime;
+                    int nendIndex = (int)(te.TotalMilliseconds / 500);
+
+                    ReadFiles(m_TempCurveDatas.list_Files, ref m_TempCurveDatas, nstartIndex, nendIndex);
+                    m_PrintCurveDatas.Add(m_TempCurveDatas);
+                    //---------------------------------------
+
+                    string strTemp = string.Empty;
+                    if (m_SubCurveDatas.list_Pabd.Count > 0)
+                    {
+                        strTemp = m_PrintCurveDatas.Count + ": " + m_SubCurveDatas.StartTime.ToString();
+                    }
+                    else
+                    {
+                        strTemp = m_PrintCurveDatas.Count + ": " + m_CurveDatas.StartTime.ToString();
+                    } 
+                    listBox_SelSeg.Items.Add(strTemp);
+                }
+            }
         }
          
     
@@ -875,6 +1002,8 @@ namespace Qtud.Qtud
 
                                     Thread.Sleep(5000);
                                     m_ListUSBDevs = GetMobileDiskList();
+                                    if (checkBox1.Checked)
+                                        GetHistoryFile();
                                     UpdateUsbTree();
                                      
                                     break;
@@ -1010,6 +1139,7 @@ namespace Qtud.Qtud
             treeView_File.Nodes.Clear();
             Dev_listSerial_Map.Clear();
             m_CheckNode_List.Clear();
+            m_checkNum_Files_map.Clear();
 
             nSelStartindex = 0;
             IniCurveData(ref m_SubCurveDatas);
@@ -1120,14 +1250,20 @@ namespace Qtud.Qtud
 
                     StruCheckFileInfo tempCheckFileInfo = new StruCheckFileInfo
                     {
+                        nFileCnt = 0,
                         isLoad = false,
                         m_StruOneDayFileInfo = new List<StruOneDayFileInfo>()
                     };
 
+                    nCurFileCnt = 0;
                     Update_Serial_Txt_SubTree(treeNode2, strDev + strSerial + @"\",ref tempCheckFileInfo);  // txt 文件路径列表 G:\1508491901\
 
-                    if (!m_checkNum_Files_map.ContainsKey(strSerial))
-                        m_checkNum_Files_map[strSerial] = tempCheckFileInfo;
+                    if (strDev.Length < 10) //非历史数据 
+                    {
+                        tempCheckFileInfo.nFileCnt = nCurFileCnt;
+                        if (!m_checkNum_Files_map.ContainsKey(strSerial))
+                            m_checkNum_Files_map[strSerial] = tempCheckFileInfo;
+                    }
                     
                     //----------------------------------
 
@@ -1217,6 +1353,7 @@ namespace Qtud.Qtud
                     m_tempFileInfo.strFileMode = Stru_Txt_Data.strCheckMode;
                     m_tempFileInfo.m_filePath = tempPath1;
                     tempCheckFileInfo.m_StruFileInfo.Add(m_tempFileInfo);
+                    nCurFileCnt++;
                     //--------------------------------------------
 
                     if (m_SelMode != -1 )
@@ -2316,9 +2453,9 @@ namespace Qtud.Qtud
 
             MakeReportForm m_reportForm = new MakeReportForm(m_CurSelPatientInfo, m_PrintCurveDatas, m_TestDatas, curve3_Range, nl_Range, nll_Range);
             DialogResult dlgResult = m_reportForm.ShowDialog();
-            if (dlgResult == DialogResult.Cancel )
+            if (dlgResult == DialogResult.No )
             {
-                dlgResult = DialogResult.Cancel;
+                DialogResult = DialogResult.No;
                 Close();
                 return;
             }
@@ -2612,13 +2749,13 @@ namespace Qtud.Qtud
             {
                 m_SubCurveDatas.strMeno = strmeno;
                 CopyCurveData(ref m_TempCurveDatas, m_SubCurveDatas);
-                strTemp = m_PrintCurveDatas.Count + ": " + m_SubCurveDatas.StartTime.ToString();
+                strTemp = m_PrintCurveDatas.Count + 1 + ": " + m_SubCurveDatas.StartTime.ToString();
             }
             else
             {
                 m_CurveDatas.strMeno = strmeno;
                 CopyCurveData(ref m_TempCurveDatas, m_CurveDatas);
-                strTemp = m_PrintCurveDatas.Count + ": " + m_CurveDatas.StartTime.ToString();
+                strTemp = m_PrintCurveDatas.Count + 1 + ": " + m_CurveDatas.StartTime.ToString();
             }
 
             m_TempCurveDatas.str_range = curve3_Range.Width + "," + curve3_Range.Height + "," + nl_Range.Width + "," + nl_Range.Height + "," + nll_Range.Width + "," + nll_Range.Height;
@@ -2984,7 +3121,7 @@ namespace Qtud.Qtud
 
 
         //查看原图
-        private void srcToolStripMenuItem_Click(object sender, EventArgs e)
+        private void showYuantu()
         {
             m_isDownLeft = false;
             m_CurSelCurveArea.Size = new Size(0, 0);
@@ -2992,28 +3129,31 @@ namespace Qtud.Qtud
             nSelStartindex = 0;
             IniCurveData(ref m_SubCurveDatas);
             DrawCurve(m_CurveDatas);  //绘图
-
         }
 
-        private void refresh_ToolStripMenuItem_Click(object sender, EventArgs e)
+        //查看原图
+        private void srcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showYuantu(); 
+        }
+
+        //刷新
+        private void refresh_func( )
         {
             m_ListUSBDevs.Clear();
             m_ListUSBDevs = GetMobileDiskList();
-
+            if (checkBox1.Checked)
+                GetHistoryFile();
             UpdateUsbTree();
+        }
+        private void refresh_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            refresh_func();
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
-        }
-
-        private void panel_Draw_Resize(object sender, EventArgs e)
-        {
-            if (m_SubCurveDatas.list_Pabd.Count > 0)
-                DrawCurve(m_SubCurveDatas);
-            else
-                DrawCurve(m_CurveDatas);  //绘图
         }
 
         private void Range_ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3035,13 +3175,65 @@ namespace Qtud.Qtud
 
         private void Export_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("正在开发中");
+            Export_Func(); 
         }
+
+
+        /// <summary>  
+        /// 线程函数中调用的函数  
+        /// </summary>  
+        private void ShowProgressBar()
+        {
+            myHandle = new funHandle(progressForm.SetProgressValue);
+            progressForm.ShowDialog();
+        }
+
+        /// <summary>  
+        /// 线程函数，用于处理调用  
+        /// </summary>  
+        private void ThreadFun()
+        {
+            MethodInvoker mi = new MethodInvoker(ShowProgressBar);
+            this.BeginInvoke(mi);
+
+            //System.Threading.Thread.Sleep(1000); // sleep to show window  
+
+            try
+            {
+                for (int i = 0; i < nMaxFileCnt; i++)
+                {
+                    if (nCurFileCnt < 0)
+                    {
+                        this.Invoke(this.myHandle, new object[] { nCurFileCnt });
+                        break;
+                    }
+
+                    System.Threading.Thread.Sleep(200);
+                    // 这里直接调用代理  
+                    this.Invoke(this.myHandle, new object[] { i % nMaxFileCnt });
+                }
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+            
+        }  
 
         //导出一个检查号下的文件，isAllExport是否全部导出 G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
 
         private void ExportFile(string checkNo, ref  StruCheckFileInfo tempStruCheckFileInfo, bool isAllExport = false)
         {
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
+            if (tempStruCheckFileInfo.nFileCnt > 0)
+            {
+                nCurFileCnt = 0;
+                nMaxFileCnt = tempStruCheckFileInfo.nFileCnt;
+                progressForm.SetProgressMaximumValue(tempStruCheckFileInfo.nFileCnt);
+                // 启动线程  
+                thread.Start();
+            }
+
             foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
             {
                 string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
@@ -3095,6 +3287,8 @@ namespace Qtud.Qtud
 
                 foreach (StruFileInfo tempFileInfo in OneDayFileInfo.m_StruFileInfo)
                 {
+                    nCurFileCnt++;
+
                     strtempPath = tempFileInfo.m_filePath;   //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
                     string[] strCodes = strtempPath.Split('\\');
                     strtempPath = strDesPath + strCodes[2] + @"\" + strCodes[3];   // + \info\ID2017-06-30
@@ -3144,9 +3338,15 @@ namespace Qtud.Qtud
                     
                 }
             }
+            nCurFileCnt = -1;
+            //thread.Suspend();
+            
         }
-
         private void Export_Click(object sender, EventArgs e)
+        {
+            Export_Func();
+        }
+        private void Export_Func()  //导出功能
         {
             if (m_CheckNode_List.Count < 1)
             {
@@ -3192,6 +3392,19 @@ namespace Qtud.Qtud
                 if (res != DialogResult.OK)
                     return;
 
+                if (startThread)
+                {
+                    startThread = false;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
+                    nCurFileCnt = 0;
+                    nMaxFileCnt = 1;
+                    progressForm.SetProgressMaximumValue(1);
+                    // 启动线程  
+                    thread.Start(); 
+                    nCurFileCnt = -1;
+                }
+             
+
                 try
                 { 
                     string strWhere = string.Empty;
@@ -3211,7 +3424,9 @@ namespace Qtud.Qtud
                         ExportFile(checkNo, ref tempStruCheckFileInfo, false);
                         tempStruCheckFileInfo.isLoad = true;
                     }
-                    UpdateUsbTree();
+
+                    refresh_func();
+
                     MessageBox.Show("导出完成！");
 
                 }
@@ -3233,39 +3448,7 @@ namespace Qtud.Qtud
         //显示历史记录
         private void button_show_history_Click(object sender, EventArgs e)
         {
-            m_ListUSBDevs.Clear();
-            m_ListUSBDevs = GetMobileDiskList();
-
-            string strWhere = string.Empty;
-            strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid +@"' order by txtpath ";
-            List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
-            string lastpath = string.Empty;
-            foreach (tbl_patient_checknum_link_Model tempmodel in tempModelist)
-            {
-                int npos = tempmodel.txtPath.LastIndexOf("\\");
-                string strDesPath = m_strFloder + m_CurSelPatientInfo.id; // +@"\" + tempmodel.checknum;
-                  
-                if (npos > -1)
-                {
-                    strDesPath = tempmodel.txtPath.Substring(0,npos);
-                    npos =  strDesPath.LastIndexOf("\\");
-                    strDesPath = tempmodel.txtPath.Substring(0, npos);
-                }
-                if (lastpath == strDesPath)
-                    continue;
-                else
-                {
-                    lastpath = strDesPath;
-                }
-                if (!Directory.Exists(strDesPath))  //创建文件夹
-                {
-                    MessageBox.Show(@"无历史数据！");
-                    continue;
-                }
-                strDesPath += @"\";
-                m_ListUSBDevs.Add(strDesPath);
-            }
-            UpdateUsbTree();
+            
         }
 
 
@@ -3376,8 +3559,19 @@ namespace Qtud.Qtud
                 //保存曲线与文件的关系
                 foreach (string onefile in onedatas.list_Files)  //J:\3384328829\info\ID2017-08-10\ID2017-08-10 08.19.11.hold
                 {
-                    int npos = onefile.IndexOf('\\');
-                    string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + onefile.Substring(npos+1);
+                    int npos = -1 ;
+                    string strDesPath = string.Empty ;
+
+                    if (onefile.IndexOf("qtud_data") > -1)
+                    {
+                        strDesPath = onefile;
+                    }
+                    else
+                    {
+                        npos = onefile.IndexOf('\\');
+                        strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + onefile.Substring(npos + 1);
+
+                    }
 
                     try
                     {
@@ -3453,6 +3647,165 @@ namespace Qtud.Qtud
                     m_isSavePrintCurve = false;
                 }
             }
+        }
+
+        private void panel_Draw_SizeChanged(object sender, EventArgs e)
+        {
+            if (m_SubCurveDatas.list_Pabd.Count > 0)
+                DrawCurve(m_SubCurveDatas);
+            else
+                DrawCurve(m_CurveDatas);  //绘图
+        }
+
+        private void listBox_SelSeg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (m_PrintCurveDatas.Count < 1)
+                return;
+
+            if (listBox_SelSeg.SelectedIndex >= m_PrintCurveDatas.Count)
+                return;
+            IniCurveData(ref m_CurveDatas);
+            CopyCurveData(ref m_CurveDatas, m_PrintCurveDatas[listBox_SelSeg.SelectedIndex]);
+
+
+            showYuantu(); 
+        }
+
+        //获取历史数据文件
+        private void GetHistoryFile()
+        {
+            string strWhere = string.Empty;
+            strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' order by txtpath ";
+            List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+            string lastpath = string.Empty;
+            foreach (tbl_patient_checknum_link_Model tempmodel in tempModelist)
+            {
+                int npos = tempmodel.txtPath.LastIndexOf("\\");
+                string strDesPath = m_strFloder + m_CurSelPatientInfo.id; // +@"\" + tempmodel.checknum;
+
+                if (npos > -1)
+                {
+                    strDesPath = tempmodel.txtPath.Substring(0, npos);
+                    npos = strDesPath.LastIndexOf("\\");
+                    strDesPath = tempmodel.txtPath.Substring(0, npos);
+                }
+                if (lastpath == strDesPath)
+                    continue;
+                else
+                {
+                    lastpath = strDesPath;
+                }
+                if (!Directory.Exists(strDesPath))  //创建文件夹
+                {
+                    MessageBox.Show(@"无历史数据！");
+                    continue;
+                }
+                strDesPath += @"\";
+                m_ListUSBDevs.Add(strDesPath);
+            }
+        }
+
+        private void ShowTreeData(bool isShowHistory=false)
+        {
+            m_ListUSBDevs.Clear();
+            m_ListUSBDevs = GetMobileDiskList();
+
+            if (isShowHistory)
+            {
+                GetHistoryFile();
+            }
+           
+            UpdateUsbTree();
+        }
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+                ShowTreeData(true);
+            else
+            {
+                ShowTreeData(false);
+            }
+        }
+
+        #region 删除这个目录下的所有子目录和文件
+        //删除这个目录下的所有文件及文件夹
+        private void deleteTmpFiles(string strPath)
+        {
+            //删除这个目录下的所有子目录
+            if (Directory.GetDirectories(strPath).Length > 0)
+            {
+                foreach (string var in Directory.GetDirectories(strPath))
+                {
+                    //DeleteDirectory(var);
+                    Directory.Delete(var, true);
+                    //DeleteDirectory(var);
+                }
+            }
+            //删除这个目录下的所有文件
+            if (Directory.GetFiles(strPath).Length > 0)
+            {
+                foreach (string var in Directory.GetFiles(strPath))
+                {
+                    File.Delete(var);
+                }
+            }
+        }
+        #endregion
+
+        //删除历史数据
+        private void delHistory_ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!checkBox1.Checked)
+            {
+                MessageBox.Show("只能删除历史数据");
+                return;
+            }
+
+            if (m_CheckNode_List.Count < 1)
+            {
+                MessageBox.Show("请勾选需要删除的历史数据");
+                return;
+            }
+
+            TreeNode FirstNode = m_CheckNode_List[0];
+
+            string strTag = FirstNode.Tag.ToString();
+            if (strTag.IndexOf("\\qtud_data\\" + m_CurSelPatientInfo.id) <= -1)  //选的不是历史数据
+            {
+                MessageBox.Show("选择的不是历史数据");
+                return;
+            }
+
+            int ipos = FirstNode.Tag.ToString().IndexOf(",");  //401,d:\qtud_data\5\3384328829\info\ID2017-08-10\ID2017-08-10 08.34.09
+            string strPath = FirstNode.Tag.ToString().Substring(ipos + 1); //d:\qtud_data\5\3384328829\info\ID2017-08-10\ID2017-08-10 08.34.09
+
+           string[] pathArr =  strPath.Split('\\');
+
+           DialogResult res = MessageBox.Show("删除历史数据，可能会导致历史报告图形不能正常显示。\r\n确定删除历史数据 \"" + pathArr[3] + "\" 吗? ", "删除提示", MessageBoxButtons.OKCancel);
+            if (res == DialogResult.OK)
+            {
+                //删除文件记录
+                string strWhere = @" check_uuid in (select uuid from tbl_patient_checknum_link where patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ) ";
+                patient_checknum_file_info_Manager.Delete(strWhere);
+
+                //删除文件关联记录
+                strWhere = @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ";
+                patient_checknum_link_Manager.Delete(strWhere);
+
+                //删除文件夹
+                strPath = pathArr[0]+ "\\"+pathArr[1]+ "\\"+pathArr[2]+ "\\"+pathArr[3] ;
+                deleteTmpFiles(strPath);
+                Directory.Delete(strPath, true);
+
+                //刷新
+                m_ListUSBDevs.Clear();
+                m_ListUSBDevs = GetMobileDiskList();
+                if (checkBox1.Checked)
+                    GetHistoryFile();
+                UpdateUsbTree();
+            }
+            
+
         }
          
         //----------------------------------------------------------

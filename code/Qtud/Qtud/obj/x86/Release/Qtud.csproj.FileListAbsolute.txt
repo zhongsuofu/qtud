@@ -100,3 +100,6 @@ F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.Properties.Re
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.RangSettingDlg.resources
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.SettingForm.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.SettingForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.CopyFileProgressForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.UserForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Release\Qtud.Qtud.UserMgrForm.resources

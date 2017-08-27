@@ -110,3 +110,6 @@ J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系�
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.pdb
 J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.SettingForm.resources
 F:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.SettingForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserMgrForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserForm.resources
+J:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.CopyFileProgressForm.resources

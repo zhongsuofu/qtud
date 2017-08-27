@@ -37,7 +37,7 @@
             this.button_Back = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button_show_history = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Export = new System.Windows.Forms.Button();
             this.comboBox_checkMode = new System.Windows.Forms.ComboBox();
@@ -74,8 +74,9 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.srcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel_Draw = new MyPanel();
+            this.panel_Draw = new  MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
+            this.delHistory_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
@@ -161,7 +162,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
-            this.panel4.Controls.Add(this.button_show_history);
+            this.panel4.Controls.Add(this.checkBox1);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.Export);
             this.panel4.Controls.Add(this.comboBox_checkMode);
@@ -172,15 +173,17 @@
             this.panel4.Size = new System.Drawing.Size(354, 885);
             this.panel4.TabIndex = 0;
             // 
-            // button_show_history
+            // checkBox1
             // 
-            this.button_show_history.Location = new System.Drawing.Point(113, 18);
-            this.button_show_history.Name = "button_show_history";
-            this.button_show_history.Size = new System.Drawing.Size(102, 44);
-            this.button_show_history.TabIndex = 5;
-            this.button_show_history.Text = "历史数据";
-            this.button_show_history.UseVisualStyleBackColor = true;
-            this.button_show_history.Click += new System.EventHandler(this.button_show_history_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.ForeColor = System.Drawing.Color.White;
+            this.checkBox1.Location = new System.Drawing.Point(231, 31);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(111, 24);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.Text = "历史数据";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label1
             // 
@@ -201,7 +204,7 @@
             // 
             this.Export.Location = new System.Drawing.Point(21, 18);
             this.Export.Name = "Export";
-            this.Export.Size = new System.Drawing.Size(86, 44);
+            this.Export.Size = new System.Drawing.Size(105, 44);
             this.Export.TabIndex = 4;
             this.Export.Text = "导 出";
             this.Export.UseVisualStyleBackColor = true;
@@ -258,9 +261,10 @@
             this.toolStripSeparator2,
             this.Allcancel_ToolStripMenuItem,
             this.toolStripSeparator4,
-            this.refresh_ToolStripMenuItem});
+            this.refresh_ToolStripMenuItem,
+            this.delHistory_ToolStripMenuItem});
             this.contextMenuStrip_TreeView.Name = "contextMenuStrip_TreeView";
-            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(199, 280);
+            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(199, 304);
             // 
             // All_ToolStripMenuItem
             // 
@@ -323,6 +327,7 @@
             this.Export_ToolStripMenuItem.Name = "Export_ToolStripMenuItem";
             this.Export_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
             this.Export_ToolStripMenuItem.Text = "导 出";
+            this.Export_ToolStripMenuItem.Visible = false;
             this.Export_ToolStripMenuItem.Click += new System.EventHandler(this.Export_ToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
@@ -372,8 +377,9 @@
             this.listBox_SelSeg.ItemHeight = 23;
             this.listBox_SelSeg.Location = new System.Drawing.Point(6, 265);
             this.listBox_SelSeg.Name = "listBox_SelSeg";
-            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 579);
+            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 556);
             this.listBox_SelSeg.TabIndex = 6;
+            this.listBox_SelSeg.SelectedIndexChanged += new System.EventHandler(this.listBox_SelSeg_SelectedIndexChanged);
             // 
             // contextMenuStrip_deleteItem
             // 
@@ -530,6 +536,7 @@
             this.Range_ToolStripMenuItem.Name = "Range_ToolStripMenuItem";
             this.Range_ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
             this.Range_ToolStripMenuItem.Text = "数据范围";
+            this.Range_ToolStripMenuItem.Visible = false;
             this.Range_ToolStripMenuItem.Click += new System.EventHandler(this.Range_ToolStripMenuItem_Click);
             // 
             // panel_Draw
@@ -545,11 +552,11 @@
             this.panel_Draw.Name = "panel_Draw";
             this.panel_Draw.Size = new System.Drawing.Size(607, 867);
             this.panel_Draw.TabIndex = 3;
+            this.panel_Draw.SizeChanged += new System.EventHandler(this.panel_Draw_SizeChanged);
             this.panel_Draw.Click += new System.EventHandler(this.panel_Draw_Click);
             this.panel_Draw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel_Draw_MouseDown);
             this.panel_Draw.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel_Draw_MouseMove);
             this.panel_Draw.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel_Draw_MouseUp);
-            this.panel_Draw.Resize += new System.EventHandler(this.panel_Draw_Resize);
             // 
             // label_tip
             // 
@@ -566,6 +573,13 @@
             this.label_tip.TabIndex = 0;
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
+            // 
+            // delHistory_ToolStripMenuItem
+            // 
+            this.delHistory_ToolStripMenuItem.Name = "delHistory_ToolStripMenuItem";
+            this.delHistory_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.delHistory_ToolStripMenuItem.Text = "删除历史数据";
+            this.delHistory_ToolStripMenuItem.Click += new System.EventHandler(this.delHistory_ToolStripMenuItem_Click);
             // 
             // MainFrom_Curve
             // 
@@ -650,8 +664,9 @@
         private System.Windows.Forms.Button Export;
         private System.Windows.Forms.ComboBox comboBox_checkMode;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button_show_history;
         private System.Windows.Forms.Button button_Save;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem delHistory_ToolStripMenuItem;
         
     }
 }

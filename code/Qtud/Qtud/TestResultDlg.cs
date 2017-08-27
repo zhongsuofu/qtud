@@ -488,10 +488,7 @@ namespace Qtud.Qtud
             Hide();
             MainFrom_Curve m_MainFrom2 = new MainFrom_Curve(m_CurSelPatientInfo, m_TestDatas);
             DialogResult dlgResult = m_MainFrom2.ShowDialog();
-            if (dlgResult == DialogResult.OK)
-            {
-
-            }
+           
             m_TestDatas.uuid = m_MainFrom2.m_TestDatas.uuid;
             if (m_TestDatas.uuid != "")
             {
@@ -500,6 +497,12 @@ namespace Qtud.Qtud
                     m_ReportInfoModel = new ReportInfoModel();
                     m_ReportInfoModel.uuid = m_MainFrom2.m_TestDatas.uuid;
                 }
+            }
+            if (dlgResult == DialogResult.No)
+            {
+                DialogResult = DialogResult.No;
+                Close();
+                return;
             }
             Show();
         }

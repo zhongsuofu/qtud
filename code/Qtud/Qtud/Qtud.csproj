@@ -58,6 +58,12 @@
     <Compile Include="CMainForm.Designer.cs">
       <DependentUpon>CMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CopyFileProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CopyFileProgressForm.Designer.cs">
+      <DependentUpon>CopyFileProgressForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="CurrentUser.cs" />
     <Compile Include="CurveMeno.cs">
       <SubType>Form</SubType>
@@ -66,6 +72,7 @@
       <DependentUpon>CurveMeno.cs</DependentUpon>
     </Compile>
     <Compile Include="DrawFuns.cs" />
+    <Compile Include="PanelScorllTest.cs" />
     <Compile Include="SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,8 +141,23 @@
       <DependentUpon>TestResultDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="UsbDevhelper.cs" />
+    <Compile Include="UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserMgrForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserMgrForm.Designer.cs">
+      <DependentUpon>UserMgrForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CMainForm.resx">
       <DependentUpon>CMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CopyFileProgressForm.resx">
+      <DependentUpon>CopyFileProgressForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CurveMeno.resx">
       <DependentUpon>CurveMeno.cs</DependentUpon>
@@ -179,6 +201,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TestResultDlg.resx">
       <DependentUpon>TestResultDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserMgrForm.resx">
+      <DependentUpon>UserMgrForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />

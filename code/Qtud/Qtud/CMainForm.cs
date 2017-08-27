@@ -11,6 +11,7 @@ using System.Threading;
 using Qtud.DBManage.Manager;
 using Qtud.DBManage.Model;
 using Qtud.SystemCommon;
+using System.IO;
 
 namespace Qtud.Qtud
 {
@@ -25,6 +26,16 @@ namespace Qtud.Qtud
         private List<PatientInfoModel> listPatientInfo = new List<PatientInfoModel>();  //病人数据列表
         private List<ReportInfoModel> listReportInfo = new List<ReportInfoModel>();    //报告数据列表
         private PatientInfoModel m_CurSelPatientInfo = new PatientInfoModel();    //当前选择的病人
+
+        private tbl_patient_checknum_link_Manager patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
+        private tbl_patient_checknum_file_info_Manager patient_checknum_file_info_Manager = new tbl_patient_checknum_file_info_Manager();  //文件存储管理
+
+
+        private ReportInfoModel m_ReportInfoModel = new ReportInfoModel();
+        private ReportInfoManager m_ReportInfoManager = new ReportInfoManager();  //报告
+
+        private tbl_curve_info_Model curve_info_Model = new tbl_curve_info_Model();
+        private tbl_curve_info_Manager m_curve_info_Manager = new tbl_curve_info_Manager(); //曲线
 
         private TestDatas m_TestDatas = new TestDatas();
 
@@ -58,7 +69,15 @@ namespace Qtud.Qtud
         private void CMainFoam_Load(object sender, EventArgs e)
         {  
             this.WindowState = FormWindowState.Maximized;
-            panel1.Location = new Point((int)(this.panel_mid.Width - panel1.Width) / 2, panel1.Top);
+
+            int nleft = (int)(this.panel_mid.Width - panel1.Width) / 2;
+            if (nleft < 1)
+                nleft = 1;
+            panel1.Location = new Point(nleft, panel1.Top);
+
+            label_userName.Text = CurrentUser._CurUserModel.user_name;
+            if (label_userName.Text == "")
+                label_userName.Text = "我的信息";
 
             UpdateListView();
 
@@ -271,7 +290,7 @@ namespace Qtud.Qtud
 
         private void CMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult ret = MessageBox.Show("确认退出系统吗 " ,"退出", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+            DialogResult ret = MessageBox.Show("确定退出系统吗？ " ,"退出", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
             if (ret == DialogResult.Cancel)
             {
                 e.Cancel = true;
@@ -311,7 +330,12 @@ namespace Qtud.Qtud
 
         private void button_user_manage_Click(object sender, EventArgs e)
         {
-
+            UserMgrForm m_UserMgrForm = new UserMgrForm();
+            DialogResult dlgResult1 = m_UserMgrForm.ShowDialog();
+            if (dlgResult1 == DialogResult.OK)
+            { 
+            }
+            
         }
 
         private void button_sys_Setting_Click(object sender, EventArgs e)
@@ -359,6 +383,30 @@ namespace Qtud.Qtud
             }
         }
 
+        #region 删除这个目录下的所有子目录和文件
+        //删除这个目录下的所有文件及文件夹
+        private void deleteTmpFiles(string strPath)
+        {
+            //删除这个目录下的所有子目录
+            if (Directory.GetDirectories(strPath).Length > 0)
+            {
+                foreach (string var in Directory.GetDirectories(strPath))
+                {
+                    //DeleteDirectory(var);
+                    Directory.Delete(var, true);
+                    //DeleteDirectory(var);
+                }
+            }
+            //删除这个目录下的所有文件
+            if (Directory.GetFiles(strPath).Length > 0)
+            {
+                foreach (string var in Directory.GetFiles(strPath))
+                {
+                    File.Delete(var);
+                }
+            }
+        }
+        #endregion
 
         /// <summary>
         /// 删除患者信息
@@ -382,14 +430,60 @@ namespace Qtud.Qtud
                     string strWhere = string.Empty;
                     string sRet = string.Empty;
                     try
-                    {
-                        pim.Delete(m_CurSelPatientInfo.uuid);
-                        UpdateListView();
-                        textBox_queryWhere.Text = string.Empty;
-
+                    { 
                         //===================================
                         //删除患者的其它信息
+                        strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' ";
+                        List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+
+                        string strpatientPath = string.Empty;
+                        foreach (tbl_patient_checknum_link_Model tempmodel in tempModelist)
+                        {
+                            string[] pathArr = tempmodel.txtPath.Split('\\');
+
+                            //删除文件记录
+                            strWhere = @" check_uuid in (select uuid from tbl_patient_checknum_link where patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ) ";
+                            patient_checknum_file_info_Manager.Delete(strWhere);
+
+                            //删除文件关联记录
+                            strWhere = @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ";
+                            patient_checknum_link_Manager.Delete(strWhere);
+
+                            //删除文件夹
+                            string  strPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2] + "\\" + pathArr[3];
+                            deleteTmpFiles(strPath);
+                            Directory.Delete(strPath, true);
+                            strpatientPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2];
+
+                            
+                        }
+                        if (strpatientPath != "")
+                            Directory.Delete(strpatientPath, true);
                         //===================================
+
+                        tbl_curve_file_link_Manager m_file_link_manager = new tbl_curve_file_link_Manager();
+                        strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' ";
+                        List< ReportInfoModel> m_ReportList = m_ReportInfoManager.GetModelList(strWhere);
+                        foreach (ReportInfoModel tempmodel in m_ReportList)
+                        {
+                            //删除之前的曲线与文件的连接关系
+                            //tbl_curve_file_link
+                            strWhere = @" curve_uuid in ( Select uuid from tbl_curve_info where  report_uuid='" + tempmodel.uuid + @"' )";
+                            m_file_link_manager.Delete(strWhere);
+
+                            //删除之前的曲线信息
+                            strWhere = @" report_uuid='" + tempmodel.uuid + @"' ";
+                            m_curve_info_Manager.Delete(strWhere);
+                        }
+                        strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' ";
+                        m_ReportInfoManager.Delete(strWhere);
+                         
+                       
+                        //===================================
+
+                        pim.Delete(m_CurSelPatientInfo.uuid);  //删除病人信息
+                        UpdateListView();
+                        textBox_queryWhere.Text = string.Empty;
 
                         m_CurSelPatientInfo = null;
                         listView_report.Items.Clear();
@@ -582,7 +676,7 @@ namespace Qtud.Qtud
                                     MessageBox.Show(" 删除失败！ ");
                                 }
                             }
-                             
+
                             UpdateReportListBox();
                              
                             break;
@@ -737,15 +831,27 @@ namespace Qtud.Qtud
                 MessageBox.Show("请选择报告", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
 
             }
-            
-            
+
+
         }
 
-        private void CMainForm_ResizeEnd(object sender, EventArgs e)
+        private void CMainForm_SizeChanged(object sender, EventArgs e)
         {
-            //this.WindowState = FormWindowState.Maximized;
-            //panel1.Location = new Point((int)(this.panel_mid.Width - panel1.Width) / 2, panel1.Top);
+            int nleft = (int)(this.panel_mid.Width - panel1.Width) / 2;
+            if (nleft < 1)
+                nleft =   1;
+            panel1.Location = new Point(nleft, panel1.Top);
 
+        }
+
+        private void label_userName_Click(object sender, EventArgs e)
+        {
+            UserForm m_UserForm = new UserForm(CurrentUser._CurUserModel, true );
+            DialogResult dlgResult1 = m_UserForm.ShowDialog();
+            if (dlgResult1 == DialogResult.OK)
+            {
+                label_userName.Text = CurrentUser._CurUserModel.user_name;
+            }
         }
  
 

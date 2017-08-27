@@ -176,7 +176,7 @@ namespace Qtud.Qtud
 
         private void button_Back_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.OK;
+            this.DialogResult = DialogResult.Cancel;
             Close();
         }
 
@@ -432,24 +432,24 @@ namespace Qtud.Qtud
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pves", ValueUnit, OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Blue);
+                                m_DrawFuns.DrawRowtitle("Pves", ValueUnit, OneCurveData.fmax_Pves.ToString(), m_range, m_onetitleRect, Color.Black); //Blue
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pves;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Blue, ref temp, OneCurveData.FirstFileEndIndex);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pabd)  //Pabd
                             {
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pabd", ValueUnit, OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.DarkViolet);
+                                m_DrawFuns.DrawRowtitle("Pabd", ValueUnit, OneCurveData.fmax_Pabd.ToString(), m_range, m_onetitleRect, Color.Black);//DarkViolet
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pabd;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkViolet, ref temp, OneCurveData.FirstFileEndIndex);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Pdet)  //Pdet
@@ -457,12 +457,12 @@ namespace Qtud.Qtud
                                 Size m_range = curve3_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("Pdet", ValueUnit, OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Green);
+                                m_DrawFuns.DrawRowtitle("Pdet", ValueUnit, OneCurveData.fmax_Pdet.ToString(), m_range, m_onetitleRect, Color.Black); //Green
 
                                 List<StruData> tempstrudata = OneCurveData.list_Pdet;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Green, ref temp, OneCurveData.FirstFileEndIndex);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.Wight)  //Wight
@@ -470,12 +470,12 @@ namespace Qtud.Qtud
                                 Size m_range = nl_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("尿量", "ml", OneCurveData.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.DeepSkyBlue);
+                                m_DrawFuns.DrawRowtitle("尿量", "ml", OneCurveData.fmax_Wight.ToString(), m_range, m_onetitleRect, Color.Black);  //DeepSkyBlue
 
                                 List<StruData> tempstrudata = OneCurveData.list_Wights;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DeepSkyBlue, ref temp, OneCurveData.FirstFileEndIndex);
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp, OneCurveData.FirstFileEndIndex);
                                 useii++;
                             }
                             else if (OneCurveData.showMode[ii] == 1 && ii == (int)CuvrlMode.ufr)  //ufr
@@ -483,12 +483,12 @@ namespace Qtud.Qtud
                                 Size m_range = nll_Range;  //范围：（最小值 ，最大值）
 
                                 //画行标题
-                                m_DrawFuns.DrawRowtitle("尿流率", "ml/s", OneCurveData.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.DarkOrange);
+                                m_DrawFuns.DrawRowtitle("尿流率", "ml/s", OneCurveData.fmax_ufr.ToString(), m_range, m_onetitleRect, Color.Black);  //DarkOrange
 
                                 List<StruData> tempstrudata = OneCurveData.list_ufr;
                                 //画曲线
                                 Dictionary<int, Index_value> temp = new Dictionary<int, Index_value>();
-                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.DarkOrange, ref temp, (int)(OneCurveData.FirstFileEndIndex / 2));
+                                nPosx = m_DrawFuns.plotLine3(ref tempstrudata, m_range, m_oneDrawArea, Color.Black, ref temp, (int)(OneCurveData.FirstFileEndIndex / 2));
                                 useii++;
                             }
                             ii++;
@@ -1066,7 +1066,7 @@ namespace Qtud.Qtud
             foreach (CurveDatas OneCurveData in m_PrintCurveDatas)
             {
                 //三条曲线
-                for (int iv = 0; iv < 3; iv++)
+                for (int iv = 0; iv < 5; iv++)
                 {
 
                     if (OneCurveData.showMode[iv] == 1)
@@ -1085,22 +1085,35 @@ namespace Qtud.Qtud
 
             }
             
-            int stepH = 170;
-            int nCurHight = 2000;  //病人信息
+            int stepH = 150;
+            int nCurHight = 1500;  //病人信息
             if ((stepH * iCount) + nCurHight > panel_Context.Height)  //重新设置窗体大小
             {
                 panel_print.Size = new Size((int)(panel_Report.Width * 0.6f), (stepH * iCount) + nCurHight);  //A4纸的模板：长宽比0.7
 
             }
 
+            //---------------------------------------------------
+
+            PanelScorllTest.InitializePanelScroll(panel_Report);  //滚动条设置
+
+            //---------------------------------------------------
             string strIniFile = "config.ini";
             strIniFile = Directory.GetCurrentDirectory() + "\\" + strIniFile;
             //获取指定KEY的值  
             ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
-            if (ValueUnit == null)
-                ValueUnit = "cmH2O"; 
+            if (ValueUnit == null || ValueUnit == string.Empty)
+                ValueUnit = "cmH2O";
 
-
+            string strShowFirstPage = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "ShowFirstPage", null);
+            if (strShowFirstPage == null || strShowFirstPage == string.Empty)
+                strShowFirstPage = "1";
+            if (strShowFirstPage == "1")
+                IsPrintReportheadPage = true;
+            else
+                IsPrintReportheadPage = false;
+            //---------------------------------------------------
+            
             DrawPrintContext();  //绘制报告内容
              
         }
@@ -1684,7 +1697,7 @@ namespace Qtud.Qtud
         //返回首页
         private void button_Retmainform_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.No;
             Close();
         }
 
