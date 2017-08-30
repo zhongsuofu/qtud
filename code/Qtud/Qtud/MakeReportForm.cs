@@ -1086,7 +1086,7 @@ namespace Qtud.Qtud
             }
             
             int stepH = 150;
-            int nCurHight = 1500;  //病人信息
+            int nCurHight = 800;  //病人信息
             if ((stepH * iCount) + nCurHight > panel_Context.Height)  //重新设置窗体大小
             {
                 panel_print.Size = new Size((int)(panel_Report.Width * 0.6f), (stepH * iCount) + nCurHight);  //A4纸的模板：长宽比0.7

@@ -161,7 +161,10 @@ namespace Qtud.Qtud
 
                 lvi.SubItems.Add(model.user_phone);
                 lvi.SubItems.Add(model.user_createtime.ToString());
-                lvi.SubItems.Add(model.user_lastlogintime.ToString());
+                if (model.user_lastlogintime < model.user_createtime)
+                    lvi.SubItems.Add("");
+                else
+                    lvi.SubItems.Add(model.user_lastlogintime.ToString());
                 lvi.SubItems.Add(model.user_meno );
                 this.listView_userList.Items.Add(lvi);
             } 
@@ -251,6 +254,25 @@ namespace Qtud.Qtud
         private void listView_userList_DoubleClick(object sender, EventArgs e)
         {
             edit_user_func();
+        }
+
+        private void button_return_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.OK;
+            Close();
+        }
+
+        //防止加载闪烁
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+
+                cp.ExStyle |= 0x02000000;
+
+                return cp;
+            }
         }
     }
 }

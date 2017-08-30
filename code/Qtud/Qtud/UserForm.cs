@@ -110,7 +110,7 @@ namespace Qtud.Qtud
 
                 m_UserModel.user_status = 1;
                 m_UserModel.user_createtime = DateTime.Now ;
-                m_UserModel.user_lastlogintime = DateTime.Now ;
+                m_UserModel.user_lastlogintime = DateTime.Now.AddYears(-10);
                 m_UserModel.user_id = PublicConst.GenerateUUID();
                 m_UserManager.Add(m_UserModel);
             }

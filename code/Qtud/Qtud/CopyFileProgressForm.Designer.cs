@@ -41,9 +41,9 @@
             this.label_file.ForeColor = System.Drawing.Color.White;
             this.label_file.Location = new System.Drawing.Point(31, 73);
             this.label_file.Name = "label_file";
-            this.label_file.Size = new System.Drawing.Size(85, 19);
+            this.label_file.Size = new System.Drawing.Size(66, 19);
             this.label_file.TabIndex = 0;
-            this.label_file.Text = "当前文件";
+            this.label_file.Text = "进度：";
             // 
             // progressBar1
             // 
@@ -62,7 +62,7 @@
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label_file);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CopyFileProgressForm";

@@ -35,6 +35,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btn_Add = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_EditPwd = new System.Windows.Forms.Button();
             this.comboBox_usertype = new System.Windows.Forms.ComboBox();
             this.textBox_repwd = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button_EditPwd = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,7 +98,7 @@
             this.btn_Add.Location = new System.Drawing.Point(531, 483);
             this.btn_Add.Name = "btn_Add";
             this.btn_Add.Size = new System.Drawing.Size(123, 47);
-            this.btn_Add.TabIndex = 10;
+            this.btn_Add.TabIndex = 9;
             this.btn_Add.Text = "保 存";
             this.btn_Add.UseVisualStyleBackColor = false;
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
@@ -133,6 +133,17 @@
             this.panel1.Size = new System.Drawing.Size(752, 576);
             this.panel1.TabIndex = 1;
             // 
+            // button_EditPwd
+            // 
+            this.button_EditPwd.BackColor = System.Drawing.Color.Transparent;
+            this.button_EditPwd.Location = new System.Drawing.Point(393, 483);
+            this.button_EditPwd.Name = "button_EditPwd";
+            this.button_EditPwd.Size = new System.Drawing.Size(123, 47);
+            this.button_EditPwd.TabIndex = 8;
+            this.button_EditPwd.Text = "修改密码";
+            this.button_EditPwd.UseVisualStyleBackColor = false;
+            this.button_EditPwd.Click += new System.EventHandler(this.button_EditPwd_Click);
+            // 
             // comboBox_usertype
             // 
             this.comboBox_usertype.FormattingEnabled = true;
@@ -142,7 +153,7 @@
             this.comboBox_usertype.Location = new System.Drawing.Point(249, 269);
             this.comboBox_usertype.Name = "comboBox_usertype";
             this.comboBox_usertype.Size = new System.Drawing.Size(311, 28);
-            this.comboBox_usertype.TabIndex = 19;
+            this.comboBox_usertype.TabIndex = 5;
             // 
             // textBox_repwd
             // 
@@ -151,7 +162,7 @@
             this.textBox_repwd.Name = "textBox_repwd";
             this.textBox_repwd.PasswordChar = '*';
             this.textBox_repwd.Size = new System.Drawing.Size(311, 30);
-            this.textBox_repwd.TabIndex = 18;
+            this.textBox_repwd.TabIndex = 4;
             // 
             // label8
             // 
@@ -183,7 +194,7 @@
             this.textBox_meno.Name = "textBox_meno";
             this.textBox_meno.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox_meno.Size = new System.Drawing.Size(405, 83);
-            this.textBox_meno.TabIndex = 9;
+            this.textBox_meno.TabIndex = 7;
             // 
             // label5
             // 
@@ -202,7 +213,7 @@
             this.textBox_phone.MaxLength = 16;
             this.textBox_phone.Name = "textBox_phone";
             this.textBox_phone.Size = new System.Drawing.Size(311, 30);
-            this.textBox_phone.TabIndex = 7;
+            this.textBox_phone.TabIndex = 6;
             // 
             // textBox_pwd
             // 
@@ -253,17 +264,6 @@
             this.label1.Size = new System.Drawing.Size(79, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "姓  名:";
-            // 
-            // button_EditPwd
-            // 
-            this.button_EditPwd.BackColor = System.Drawing.Color.Transparent;
-            this.button_EditPwd.Location = new System.Drawing.Point(393, 483);
-            this.button_EditPwd.Name = "button_EditPwd";
-            this.button_EditPwd.Size = new System.Drawing.Size(123, 47);
-            this.button_EditPwd.TabIndex = 20;
-            this.button_EditPwd.Text = "修改密码";
-            this.button_EditPwd.UseVisualStyleBackColor = false;
-            this.button_EditPwd.Click += new System.EventHandler(this.button_EditPwd_Click);
             // 
             // UserForm
             // 

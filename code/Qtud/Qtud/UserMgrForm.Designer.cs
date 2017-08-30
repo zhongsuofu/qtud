@@ -49,6 +49,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView_userList = new System.Windows.Forms.ListView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button_return = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,6 +65,7 @@
             // 
             this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
             this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel2.Controls.Add(this.button_return);
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.button_del_user);
             this.panel2.Controls.Add(this.button_edit_user);
@@ -88,7 +90,7 @@
             // button_del_user
             // 
             this.button_del_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_del_user.Location = new System.Drawing.Point(1574, 12);
+            this.button_del_user.Location = new System.Drawing.Point(1450, 12);
             this.button_del_user.Name = "button_del_user";
             this.button_del_user.Size = new System.Drawing.Size(118, 44);
             this.button_del_user.TabIndex = 5;
@@ -99,7 +101,7 @@
             // button_edit_user
             // 
             this.button_edit_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_edit_user.Location = new System.Drawing.Point(1450, 12);
+            this.button_edit_user.Location = new System.Drawing.Point(1326, 12);
             this.button_edit_user.Name = "button_edit_user";
             this.button_edit_user.Size = new System.Drawing.Size(118, 44);
             this.button_edit_user.TabIndex = 4;
@@ -110,7 +112,7 @@
             // button_New_user
             // 
             this.button_New_user.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_New_user.Location = new System.Drawing.Point(1326, 12);
+            this.button_New_user.Location = new System.Drawing.Point(1202, 12);
             this.button_New_user.Name = "button_New_user";
             this.button_New_user.Size = new System.Drawing.Size(118, 44);
             this.button_New_user.TabIndex = 3;
@@ -252,6 +254,17 @@
             this.panel1.Size = new System.Drawing.Size(1755, 565);
             this.panel1.TabIndex = 34;
             // 
+            // button_return
+            // 
+            this.button_return.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_return.Location = new System.Drawing.Point(1574, 12);
+            this.button_return.Name = "button_return";
+            this.button_return.Size = new System.Drawing.Size(118, 44);
+            this.button_return.TabIndex = 8;
+            this.button_return.Text = "返 回";
+            this.button_return.UseVisualStyleBackColor = true;
+            this.button_return.Click += new System.EventHandler(this.button_return_Click);
+            // 
             // UserMgrForm
             // 
             this.AcceptButton = this.button_query;
@@ -302,5 +315,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView listView_userList;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button button_return;
     }
 }

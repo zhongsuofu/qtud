@@ -249,19 +249,15 @@ namespace Qtud.Qtud
 
         //防止加载闪烁
         protected override CreateParams CreateParams
-        {
-
+        { 
             get
-            {
-
+            { 
                 CreateParams cp = base.CreateParams;
 
                 cp.ExStyle |= 0x02000000;
 
-                return cp;
-
-            }
-
+                return cp; 
+            } 
         }
 
         private void ADDPatientInfo(PatientInfoModel _model = null)
@@ -501,23 +497,8 @@ namespace Qtud.Qtud
         }
 
         private void listView_patList_Click(object sender, EventArgs e)
-        {
-            if (listView_patList.SelectedItems.Count < 0)
-                return;
-            string strID = listView_patList.SelectedItems[0].SubItems[1].Text;
-
-            int i = 0;
-            foreach (PatientInfoModel data in listPatientInfo)
-            {
-                if (strID == data.id)
-                {
-                    m_CurSelPatientInfo = data;   //当前选择的病人信息
-                    UpdateReportListBox();
-                    UpdatePatientInfoEdit(m_CurSelPatientInfo);
-                    break;
-                }
-                i++;
-            }
+        { 
+            
         }
 
         private void button_Create_rep_Click(object sender, EventArgs e)
@@ -595,12 +576,32 @@ namespace Qtud.Qtud
         }
         private void listView_patList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            //高亮显示
             e.Item.ForeColor = Color.Black;
             e.Item.BackColor = SystemColors.Window;
             Thread.Sleep(200);
-            if (listView_patList.FocusedItem != null)
+            //if (listView_patList.FocusedItem != null)
+            //{
+            //    listView_patList.FocusedItem.Selected = true;
+            //}
+
+
+            //------------------------------------------------
+            if (listView_patList.SelectedItems.Count < 1)
+                return;
+            string strID = listView_patList.SelectedItems[0].SubItems[1].Text;
+
+            int i = 0;
+            foreach (PatientInfoModel data in listPatientInfo)
             {
-                listView_patList.FocusedItem.Selected = true;
+                if (strID == data.id)
+                {
+                    m_CurSelPatientInfo = data;   //当前选择的病人信息
+                    UpdateReportListBox();
+                    UpdatePatientInfoEdit(m_CurSelPatientInfo);
+                    break;
+                }
+                i++;
             }
         }
 
@@ -850,7 +851,10 @@ namespace Qtud.Qtud
             DialogResult dlgResult1 = m_UserForm.ShowDialog();
             if (dlgResult1 == DialogResult.OK)
             {
-                label_userName.Text = CurrentUser._CurUserModel.user_name;
+                if (CurrentUser._CurUserModel.user_name == null || CurrentUser._CurUserModel.user_name == string.Empty)
+                    label_userName.Text = "我的信息";
+                else
+                    label_userName.Text = CurrentUser._CurUserModel.user_name;
             }
         }
  

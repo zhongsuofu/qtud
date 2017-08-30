@@ -270,6 +270,14 @@ namespace Qtud.Qtud
             if (strTempY == null || strTempY == string.Empty)
                 strTempY = "300";
             nll_Range = new Size(int.Parse(strTempX), int.Parse(strTempY));
+
+           string strDataDisk  = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "DataDisk", null);
+           if (strDataDisk == null || strDataDisk == string.Empty)
+               m_strFloder = @"d:\qtud_data\";    //备份文件夹 
+           else
+               m_strFloder = strDataDisk.Substring(0, 1) + @":\qtud_data\";   //备份文件夹 
+
+
             //-----------------------------------
             
 
@@ -412,7 +420,7 @@ namespace Qtud.Qtud
 
                     }
                     else
-                    {
+                    { 
                         //判断是否导出
 
                         int ipos = strTag.ToString().IndexOf(",");  //401,G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
@@ -424,57 +432,61 @@ namespace Qtud.Qtud
                         ipos = strPath.IndexOf("\\");
                         string checkNo = strPath.Substring(0, ipos); // 1508491901
 
-
-                        string strWhere = string.Empty;
-                        strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
-                        List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
-
-                        if (tempModelist.Count < 1 )
+                        StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
+                        if (!tempStruCheckFileInfo.isLoad)
                         {
-                            MessageBox.Show("请先导出数据");
-                            m_CheckNode_List.Add(e.Node);
+                            string strWhere = string.Empty;
+                            strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
+                            List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
 
-                            return;
-                        }
-
-                        //查看文件是否存在
-                        for (int r = 0; r < tempModelist.Count; r++)
-                        {
-                            if (!File.Exists(tempModelist[r].txtPath))
+                            if (tempModelist.Count < 1)
                             {
                                 MessageBox.Show("请先导出数据");
                                 m_CheckNode_List.Add(e.Node);
+
                                 return;
                             }
-                        }
-                        //查看是否有文件没导出
-                        if (m_checkNum_Files_map.ContainsKey(checkNo))
-                        {
-                            StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
 
-                            foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
+                            //查看文件是否存在
+                            for (int r = 0; r < tempModelist.Count; r++)
                             {
-                                string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
-
-                                ipos = strTxtFile.IndexOf("\\");
-                                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + strTxtFile.Substring(ipos);
-
-                                int n = 0;
-                                for ( n = 0; n < tempModelist.Count; n++)
-                                {
-                                    if (strDesPath == tempModelist[n].txtPath)
-                                    {
-                                        break;
-                                    } 
-                                }
-                                if (tempModelist.Count == n)
+                                if (!File.Exists(tempModelist[r].txtPath))
                                 {
                                     MessageBox.Show("请先导出数据");
                                     m_CheckNode_List.Add(e.Node);
                                     return;
                                 }
                             }
-                         }
+                            //查看是否有文件没导出
+                            if (m_checkNum_Files_map.ContainsKey(checkNo))
+                            { 
+                                foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
+                                {
+                                    string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
+
+                                    ipos = strTxtFile.IndexOf("\\");
+                                    string strDesPath = m_strFloder + m_CurSelPatientInfo.id + strTxtFile.Substring(ipos);
+
+                                    int n = 0;
+                                    for (n = 0; n < tempModelist.Count; n++)
+                                    {
+                                        if (strDesPath == tempModelist[n].txtPath)
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    if (tempModelist.Count == n)
+                                    {
+                                        MessageBox.Show("请先导出数据");
+                                        m_CheckNode_List.Add(e.Node);
+                                        return;
+                                    }
+                                }
+                            }
+
+                            tempStruCheckFileInfo.isLoad = true;
+                            m_checkNum_Files_map[checkNo] = tempStruCheckFileInfo;
+                        }
                     }
 
                     //----------------------------------------------------
@@ -1615,7 +1627,8 @@ namespace Qtud.Qtud
                         }
                         
 
-
+                        //--------------------------------------
+                        
 
                         StruData PvesData;
                         PvesData.value = nPves;
@@ -1628,6 +1641,7 @@ namespace Qtud.Qtud
                         PvesData.time = nTimeIndex;
                         PvesData.isShow = false;
                         m_TempCurveDatas.list_Pves.Add(PvesData);
+                        //--------------------------------------
 
                         StruData PabdData;
                         PabdData.value = nPabd ;
@@ -1639,6 +1653,7 @@ namespace Qtud.Qtud
                         PabdData.time = nTimeIndex;
                         PabdData.isShow = false;
                         m_TempCurveDatas.list_Pabd.Add(PabdData);
+                        //--------------------------------------
 
                         StruData PdetData;
                         PdetData.value = PvesData.value - PabdData.value;
@@ -2768,6 +2783,8 @@ namespace Qtud.Qtud
 
         private void toolStripMenuItem7_Click(object sender, EventArgs e)
         {
+            if (listBox_SelSeg.SelectedIndices.Count < 1)
+                return;
             m_PrintCurveDatas.RemoveAt(listBox_SelSeg.SelectedIndex);
             listBox_SelSeg.Items.RemoveAt(listBox_SelSeg.SelectedIndex);
             m_isSavePrintCurve = true;
@@ -3379,7 +3396,7 @@ namespace Qtud.Qtud
                   
                 PatientInfoManager pim = new PatientInfoManager();
                 List< PatientInfoModel> pInfoModelList = pim.GetModelList(strWhere);
-                if (pInfoModelList.Count > 0)
+                if (pInfoModelList.Count > 0 && pInfoModelList[0].id != m_CurSelPatientInfo.id)
                 {
                     MessageBox.Show("文件曾经导出在 \"" + pInfoModelList[0].id + @" " + pInfoModelList[0].name + "\" 名下，\r\n请确认: 检查数据是否是当前患者数据。");
                     return;
@@ -3388,7 +3405,7 @@ namespace Qtud.Qtud
 
             if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
             {
-                DialogResult res = MessageBox.Show("请确认: 导出的数据是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据。");
+                DialogResult res = MessageBox.Show("请确认: 导出的数据\"" + checkNo + "\"是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据。");
                 if (res != DialogResult.OK)
                     return;
 
@@ -3410,20 +3427,18 @@ namespace Qtud.Qtud
                     string strWhere = string.Empty;
                     strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
                     List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+                    StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
                     if (tempModelist.Count < 1)  //从没导入
                     { 
-                        StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
 
                         ExportFile(checkNo, ref tempStruCheckFileInfo, true);
-                        tempStruCheckFileInfo.isLoad = true;
                     }
                     else //部分导出
-                    {
-                        StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
-
+                    { 
                         ExportFile(checkNo, ref tempStruCheckFileInfo, false);
-                        tempStruCheckFileInfo.isLoad = true;
                     }
+                    tempStruCheckFileInfo.isLoad = true;
+                    m_checkNum_Files_map[checkNo] = tempStruCheckFileInfo;
 
                     refresh_func();
 
@@ -3662,7 +3677,7 @@ namespace Qtud.Qtud
             if (m_PrintCurveDatas.Count < 1)
                 return;
 
-            if (listBox_SelSeg.SelectedIndex >= m_PrintCurveDatas.Count)
+            if (listBox_SelSeg.SelectedIndex <0 || listBox_SelSeg.SelectedIndex >= m_PrintCurveDatas.Count)
                 return;
             IniCurveData(ref m_CurveDatas);
             CopyCurveData(ref m_CurveDatas, m_PrintCurveDatas[listBox_SelSeg.SelectedIndex]);
