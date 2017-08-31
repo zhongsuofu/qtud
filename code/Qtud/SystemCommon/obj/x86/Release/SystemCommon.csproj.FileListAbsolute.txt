@@ -46,3 +46,12 @@ F:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\MySql.Data.dll
 F:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.csprojResolveAssemblyReference.cache
 F:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.dll
 F:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.pdb
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\SystemCommon.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\SystemCommon.pdb
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\Excel.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\ICSharpCode.SharpZipLib.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\SelfishInfo.Access.DBUtility.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\bin\x86\Release\MySql.Data.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.csprojResolveAssemblyReference.cache
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.dll
+I:\【备份】\Work\OTUD\code\Qtud\SystemCommon\obj\x86\Release\SystemCommon.pdb

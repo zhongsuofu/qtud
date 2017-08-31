@@ -82,12 +82,11 @@ namespace Qtud.Qtud
             strIniFile = Directory.GetCurrentDirectory() + "\\" +strIniFile; 
              //获取指定KEY的值  
             string ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
-            if (ValueUnit != "")
-            {
-                label_vlpp.Text = ValueUnit;
-                label_dlpp.Text = ValueUnit;
-                label_alpp.Text = ValueUnit;
-            }
+            if (ValueUnit == null || ValueUnit == string.Empty)
+                ValueUnit = "cmH2O";
+            label_vlpp.Text = ValueUnit;
+            label_dlpp.Text = ValueUnit;
+            label_alpp.Text = ValueUnit;
             //---------------------------------------------------- 
 
             textBox_name.Text = m_CurSelPatientInfo.name;

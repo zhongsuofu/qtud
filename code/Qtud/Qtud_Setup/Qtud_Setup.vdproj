@@ -15,260 +15,194 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_07167CF1BEAB4F0AB184611DB262A603"
+        "MsmKey" = "8:_08D0D9E377C44C6A9ED1D1313470223C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_16AA9508D650E8975F0ED30C845F5696"
-        "OwnerKey" = "8:_BF73DD24C27CFEE2A6AE5E55F4DDB86F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_16AA9508D650E8975F0ED30C845F5696"
-        "OwnerKey" = "8:_61AFE1CE62354B5B905F3875816DE280"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1B3042B00DE041508CEED71D36DBDF10"
+        "MsmKey" = "8:_13BC69724CAA457A9962C2D86E386DEA"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4C730CD2BF183D0706B84816E9F90EFE"
-        "OwnerKey" = "8:_C3D17B9BC2F06D6B0251369E6917BC38"
+        "MsmKey" = "8:_2279EEB81CD2E07EB4C1BE1D9BE425F8"
+        "OwnerKey" = "8:_7A137EB0D1C75A8FA46B572545117350"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4C730CD2BF183D0706B84816E9F90EFE"
-        "OwnerKey" = "8:_E25FDDD2FF7A4D26A70985E612D0BAB8"
+        "MsmKey" = "8:_2279EEB81CD2E07EB4C1BE1D9BE425F8"
+        "OwnerKey" = "8:_BDEA8531776C4A048195BD5FB204DEBB"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_5BAF73494D9272532112CF5179CD0BE4"
-        "OwnerKey" = "8:_DD9770B049E04F9E87BA48C93EDA5933"
+        "MsmKey" = "8:_296FE57AAE34072466C6B19102887250"
+        "OwnerKey" = "8:_72E05C35BE0E46B3AA61497208CA8958"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_61AFE1CE62354B5B905F3875816DE280"
+        "MsmKey" = "8:_296FE57AAE34072466C6B19102887250"
+        "OwnerKey" = "8:_F8B8EBDF943863F65A3650814BE65065"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_3FBF23C85FD640008534D25A1C6F89FB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_62309AEE32A34B7C9099AA96AA174CDE"
+        "MsmKey" = "8:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7C4650BFFE7146F387EAC0CC822F1DF2"
+        "MsmKey" = "8:_5ECB2E53824544099E675DE36FFE1852"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_946CC599076446F8A2E1C00178B537D2"
+        "MsmKey" = "8:_656AB3A7BC3B4992831694A5D0F17593"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_9931E6744EA24F728E2FEC2792C1B6AE"
+        "MsmKey" = "8:_72E05C35BE0E46B3AA61497208CA8958"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A137EB0D1C75A8FA46B572545117350"
+        "OwnerKey" = "8:_72E05C35BE0E46B3AA61497208CA8958"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A137EB0D1C75A8FA46B572545117350"
+        "OwnerKey" = "8:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A137EB0D1C75A8FA46B572545117350"
+        "OwnerKey" = "8:_F8B8EBDF943863F65A3650814BE65065"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_80C0E15D8E7D47EFA7C4094AF20D1B5E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_87AD2F6EF1C347618D1449282BC569C6"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_9CDBB803C90FA675D91943A34B8A13A2"
-        "OwnerKey" = "8:_E271716ACD554D0EBD75A4FAB3FC193E"
+        "OwnerKey" = "8:_BB48D55BF27F47179E8AF1A25135981E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_A22AE8A7AFC34E99A4C53B0167A9399A"
+        "MsmKey" = "8:_B6F1760067114FF892AA19DF70CE3AC2"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BA581648CB2D48BBADB8D2104814203C"
+        "MsmKey" = "8:_B9794D32D7E14891A6E67F95D74D9097"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BE2AAB4761EE47A78B50E628275ABC88"
+        "MsmKey" = "8:_BB48D55BF27F47179E8AF1A25135981E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BF73DD24C27CFEE2A6AE5E55F4DDB86F"
-        "OwnerKey" = "8:_F4BFF4E55B114423943E9EF5F0F72135"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BF73DD24C27CFEE2A6AE5E55F4DDB86F"
-        "OwnerKey" = "8:_5BAF73494D9272532112CF5179CD0BE4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_BF871D0F43CA46089A5C275A5AA4B67C"
+        "MsmKey" = "8:_BDD901719CA0469C97A0B36A67871D00"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_C3D17B9BC2F06D6B0251369E6917BC38"
-        "OwnerKey" = "8:_F4BFF4E55B114423943E9EF5F0F72135"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C3D17B9BC2F06D6B0251369E6917BC38"
-        "OwnerKey" = "8:_5BAF73494D9272532112CF5179CD0BE4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C3D17B9BC2F06D6B0251369E6917BC38"
-        "OwnerKey" = "8:_DD9770B049E04F9E87BA48C93EDA5933"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C5B545BF10D541E8B392FF3F690EF3D8"
+        "MsmKey" = "8:_BDEA8531776C4A048195BD5FB204DEBB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D16DC79E11BC0CB8F5DD09FB9A7067B4"
-        "OwnerKey" = "8:_F4BFF4E55B114423943E9EF5F0F72135"
+        "MsmKey" = "8:_C2465B0865220CE5D99C9AA699C39628"
+        "OwnerKey" = "8:_72E05C35BE0E46B3AA61497208CA8958"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D16DC79E11BC0CB8F5DD09FB9A7067B4"
-        "OwnerKey" = "8:_5BAF73494D9272532112CF5179CD0BE4"
+        "MsmKey" = "8:_C2465B0865220CE5D99C9AA699C39628"
+        "OwnerKey" = "8:_F8B8EBDF943863F65A3650814BE65065"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D77E5611B0DA40859CA2B0C7BD80F236"
+        "MsmKey" = "8:_C38828A766474DCD8405FE30E06D7F91"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DD9770B049E04F9E87BA48C93EDA5933"
+        "MsmKey" = "8:_C52FA61489CA3185716AF0F18EC11F62"
+        "OwnerKey" = "8:_C2465B0865220CE5D99C9AA699C39628"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C52FA61489CA3185716AF0F18EC11F62"
+        "OwnerKey" = "8:_DE425486F10242D59D94038412C33B81"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DE425486F10242D59D94038412C33B81"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E25FDDD2FF7A4D26A70985E612D0BAB8"
+        "MsmKey" = "8:_F151A0E3259D4FFE81E0F40F9CB93C5B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_E271716ACD554D0EBD75A4FAB3FC193E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F4BFF4E55B114423943E9EF5F0F72135"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_F8B8EBDF943863F65A3650814BE65065"
+        "OwnerKey" = "8:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D16DC79E11BC0CB8F5DD09FB9A7067B4"
+        "OwnerKey" = "8:_72E05C35BE0E46B3AA61497208CA8958"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_16AA9508D650E8975F0ED30C845F5696"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BF73DD24C27CFEE2A6AE5E55F4DDB86F"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4C730CD2BF183D0706B84816E9F90EFE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C3D17B9BC2F06D6B0251369E6917BC38"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_F4BFF4E55B114423943E9EF5F0F72135"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D77E5611B0DA40859CA2B0C7BD80F236"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BA581648CB2D48BBADB8D2104814203C"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_62309AEE32A34B7C9099AA96AA174CDE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_61AFE1CE62354B5B905F3875816DE280"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E25FDDD2FF7A4D26A70985E612D0BAB8"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5BAF73494D9272532112CF5179CD0BE4"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DD9770B049E04F9E87BA48C93EDA5933"
+        "OwnerKey" = "8:_BB48D55BF27F47179E8AF1A25135981E"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -280,7 +214,73 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_E271716ACD554D0EBD75A4FAB3FC193E"
+        "OwnerKey" = "8:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F8B8EBDF943863F65A3650814BE65065"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BDEA8531776C4A048195BD5FB204DEBB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DE425486F10242D59D94038412C33B81"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_BDD901719CA0469C97A0B36A67871D00"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B6F1760067114FF892AA19DF70CE3AC2"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5ECB2E53824544099E675DE36FFE1852"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7A137EB0D1C75A8FA46B572545117350"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_2279EEB81CD2E07EB4C1BE1D9BE425F8"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C2465B0865220CE5D99C9AA699C39628"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C52FA61489CA3185716AF0F18EC11F62"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_296FE57AAE34072466C6B19102887250"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -393,7 +393,27 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_07167CF1BEAB4F0AB184611DB262A603"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_08D0D9E377C44C6A9ED1D1313470223C"
+            {
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\huoniao.ico"
+            "TargetName" = "8:huoniao.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13BC69724CAA457A9962C2D86E386DEA"
             {
             "SourcePath" = "8:..\\Qtud\\bin\\Release\\config.ini"
             "TargetName" = "8:config.ini"
@@ -413,59 +433,18 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_16AA9508D650E8975F0ED30C845F5696"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=5.1.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:MySql.Data.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1B3042B00DE041508CEED71D36DBDF10"
-            {
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.pdb"
-            "TargetName" = "8:尿动力数据管理系统.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4C730CD2BF183D0706B84816E9F90EFE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2279EEB81CD2E07EB4C1BE1D9BE425F8"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_2279EEB81CD2E07EB4C1BE1D9BE425F8"
+                    {
+                    "Name" = "8:ICSharpCode.SharpZipLib.DLL"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:ICSharpCode.SharpZipLib.DLL"
             "TargetName" = "8:"
@@ -485,15 +464,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5BAF73494D9272532112CF5179CD0BE4"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_296FE57AAE34072466C6B19102887250"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DBManage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:LTP.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_296FE57AAE34072466C6B19102887250"
+                    {
+                    "Name" = "8:LTP.Common.DLL"
+                    "Attributes" = "3:512"
+                    }
                 }
-            "SourcePath" = "8:DBManage.DLL"
+            "SourcePath" = "8:LTP.Common.DLL"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
@@ -511,20 +495,40 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_61AFE1CE62354B5B905F3875816DE280"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3FBF23C85FD640008534D25A1C6F89FB"
+            {
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SqlCon.xml"
+            "TargetName" = "8:SqlCon.xml"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SelfishInfo.Access.DBUtility, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:尿动力数据管理系统, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_61AFE1CE62354B5B905F3875816DE280"
+                    "_5C5A59FCAA3E424A94AC4E3FFAE32D07"
                     {
-                    "Name" = "8:SelfishInfo.Access.DBUtility.dll"
+                    "Name" = "8:尿动力数据管理系统.exe"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SelfishInfo.Access.DBUtility.dll"
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
@@ -542,20 +546,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_62309AEE32A34B7C9099AA96AA174CDE"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5ECB2E53824544099E675DE36FFE1852"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=5.1.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_62309AEE32A34B7C9099AA96AA174CDE"
+                    "_5ECB2E53824544099E675DE36FFE1852"
                     {
-                    "Name" = "8:MySql.Data.dll"
+                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\MySql.Data.dll"
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\ICSharpCode.SharpZipLib.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
@@ -573,7 +577,89 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_7C4650BFFE7146F387EAC0CC822F1DF2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_656AB3A7BC3B4992831694A5D0F17593"
+            {
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.pdb"
+            "TargetName" = "8:尿动力数据管理系统.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_72E05C35BE0E46B3AA61497208CA8958"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DBManage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_72E05C35BE0E46B3AA61497208CA8958"
+                    {
+                    "Name" = "8:DBManage.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\DBManage.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7A137EB0D1C75A8FA46B572545117350"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SystemCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_7A137EB0D1C75A8FA46B572545117350"
+                    {
+                    "Name" = "8:SystemCommon.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SystemCommon.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_80C0E15D8E7D47EFA7C4094AF20D1B5E"
             {
             "SourcePath" = "8:..\\Qtud\\bin\\Release\\DBManage.pdb"
             "TargetName" = "8:DBManage.pdb"
@@ -593,30 +679,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_946CC599076446F8A2E1C00178B537D2"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_87AD2F6EF1C347618D1449282BC569C6"
             {
             "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.exe.config"
             "TargetName" = "8:尿动力数据管理系统.exe.config"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9931E6744EA24F728E2FEC2792C1B6AE"
-            {
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.vshost.exe.manifest"
-            "TargetName" = "8:尿动力数据管理系统.vshost.exe.manifest"
             "Tag" = "8:"
             "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
             "Condition" = "8:"
@@ -664,34 +730,14 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A22AE8A7AFC34E99A4C53B0167A9399A"
-            {
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\huoniao.ico"
-            "TargetName" = "8:huoniao.ico"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BA581648CB2D48BBADB8D2104814203C"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B6F1760067114FF892AA19DF70CE3AC2"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:LTP.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BA581648CB2D48BBADB8D2104814203C"
+                    "_B6F1760067114FF892AA19DF70CE3AC2"
                     {
                     "Name" = "8:LTP.Common.dll"
                     "Attributes" = "3:512"
@@ -715,99 +761,7 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE2AAB4761EE47A78B50E628275ABC88"
-            {
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SqlCon.xml"
-            "TargetName" = "8:SqlCon.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BF73DD24C27CFEE2A6AE5E55F4DDB86F"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SelfishInfo.Access.DBUtility, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:SelfishInfo.Access.DBUtility.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BF871D0F43CA46089A5C275A5AA4B67C"
-            {
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SystemCommon.pdb"
-            "TargetName" = "8:SystemCommon.pdb"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C3D17B9BC2F06D6B0251369E6917BC38"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SystemCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:SystemCommon.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C5B545BF10D541E8B392FF3F690EF3D8"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B9794D32D7E14891A6E67F95D74D9097"
             {
             "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.vshost.exe.config"
             "TargetName" = "8:尿动力数据管理系统.vshost.exe.config"
@@ -827,133 +781,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D16DC79E11BC0CB8F5DD09FB9A7067B4"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:LTP.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                }
-            "SourcePath" = "8:LTP.Common.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_D77E5611B0DA40859CA2B0C7BD80F236"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_D77E5611B0DA40859CA2B0C7BD80F236"
-                    {
-                    "Name" = "8:ICSharpCode.SharpZipLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\ICSharpCode.SharpZipLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DD9770B049E04F9E87BA48C93EDA5933"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:尿动力数据管理系统, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_DD9770B049E04F9E87BA48C93EDA5933"
-                    {
-                    "Name" = "8:尿动力数据管理系统.exe"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.exe"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E25FDDD2FF7A4D26A70985E612D0BAB8"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:SystemCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
-                "ScatterAssemblies"
-                {
-                    "_E25FDDD2FF7A4D26A70985E612D0BAB8"
-                    {
-                    "Name" = "8:SystemCommon.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SystemCommon.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_E271716ACD554D0EBD75A4FAB3FC193E"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BB48D55BF27F47179E8AF1A25135981E"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:vshost32, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
-                    "_E271716ACD554D0EBD75A4FAB3FC193E"
+                    "_BB48D55BF27F47179E8AF1A25135981E"
                     {
                     "Name" = "8:尿动力数据管理系统.vshost.exe"
                     "Attributes" = "3:512"
@@ -977,20 +812,20 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F4BFF4E55B114423943E9EF5F0F72135"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BDD901719CA0469C97A0B36A67871D00"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:DBManage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=5.1.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F4BFF4E55B114423943E9EF5F0F72135"
+                    "_BDD901719CA0469C97A0B36A67871D00"
                     {
-                    "Name" = "8:DBManage.dll"
+                    "Name" = "8:MySql.Data.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:..\\Qtud\\bin\\Release\\DBManage.dll"
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\MySql.Data.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
@@ -1006,6 +841,201 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_BDEA8531776C4A048195BD5FB204DEBB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SystemCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_BDEA8531776C4A048195BD5FB204DEBB"
+                    {
+                    "Name" = "8:SystemCommon.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SystemCommon.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C2465B0865220CE5D99C9AA699C39628"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SelfishInfo.Access.DBUtility, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_C2465B0865220CE5D99C9AA699C39628"
+                    {
+                    "Name" = "8:SelfishInfo.Access.DBUtility.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:SelfishInfo.Access.DBUtility.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C38828A766474DCD8405FE30E06D7F91"
+            {
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\尿动力数据管理系统.vshost.exe.manifest"
+            "TargetName" = "8:尿动力数据管理系统.vshost.exe.manifest"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C52FA61489CA3185716AF0F18EC11F62"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MySql.Data, Version=5.1.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_C52FA61489CA3185716AF0F18EC11F62"
+                    {
+                    "Name" = "8:MySql.Data.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MySql.Data.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DE425486F10242D59D94038412C33B81"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:SelfishInfo.Access.DBUtility, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86"
+                "ScatterAssemblies"
+                {
+                    "_DE425486F10242D59D94038412C33B81"
+                    {
+                    "Name" = "8:SelfishInfo.Access.DBUtility.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SelfishInfo.Access.DBUtility.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F151A0E3259D4FFE81E0F40F9CB93C5B"
+            {
+            "SourcePath" = "8:..\\Qtud\\bin\\Release\\SystemCommon.pdb"
+            "TargetName" = "8:SystemCommon.pdb"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F8B8EBDF943863F65A3650814BE65065"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:DBManage, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_F8B8EBDF943863F65A3650814BE65065"
+                    {
+                    "Name" = "8:DBManage.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:DBManage.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_675F3464E65447479E863F76F9909F1A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
         }
@@ -1065,7 +1095,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Otud"
         "ProductCode" = "8:{C32E2701-9464-4965-812E-31A426EDF3A0}"
-        "PackageCode" = "8:{53F790F7-DD05-439F-BB60-A973E1EB03B6}"
+        "PackageCode" = "8:{3434F0F0-C23B-4524-9492-07496CF6C0CE}"
         "UpgradeCode" = "8:{D9D44344-6D8A-4C89-BCFA-B953B1C9FC96}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1185,7 +1215,7 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_28F94FB26FD047E2A4C766DCADF1074C"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_8BC96A79BA444467AC6E65B83313ACC8"
             {
             "Name" = "8:尿动力数据管理系统"
             "Arguments" = "8:"
@@ -1193,10 +1223,10 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_DD9770B049E04F9E87BA48C93EDA5933"
+            "Target" = "8:_5C5A59FCAA3E424A94AC4E3FFAE32D07"
             "Folder" = "8:_D520F0C42A8C4743B57A108BCC0E356F"
             "WorkingFolder" = "8:_675F3464E65447479E863F76F9909F1A"
-            "Icon" = "8:_A22AE8A7AFC34E99A4C53B0167A9399A"
+            "Icon" = "8:_08D0D9E377C44C6A9ED1D1313470223C"
             "Feature" = "8:"
             }
         }

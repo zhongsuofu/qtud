@@ -23,7 +23,7 @@ namespace Qtud.Qtud
             strIniFile = Directory.GetCurrentDirectory() + "\\" +strIniFile; 
               //获取指定KEY的值  
             string ValueUnit = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "strUnit", null);
-            if (ValueUnit == "cmH2O")
+            if (ValueUnit == null || ValueUnit == string.Empty || ValueUnit == "cmH2O")
             {
                 comboBox_unit.SelectedIndex = 0;
             }

@@ -42,3 +42,14 @@ F:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\SystemCommon.pdb
 F:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.csprojResolveAssemblyReference.cache
 F:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.dll
 F:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.pdb
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\DBManage.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\DBManage.pdb
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\LTP.Common.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\MySql.Data.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\SelfishInfo.Access.DBUtility.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\SystemCommon.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\ICSharpCode.SharpZipLib.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\bin\Release\SystemCommon.pdb
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.csprojResolveAssemblyReference.cache
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.dll
+I:\【备份】\Work\OTUD\code\Qtud\DBManage\obj\Release\DBManage.pdb

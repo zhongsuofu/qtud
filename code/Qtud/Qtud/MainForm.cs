@@ -739,6 +739,11 @@ namespace Qtud.Qtud
                        WeightData.isShow = false;
                        m_StruDataManage.list_Wights.Add(WeightData);
 
+
+                       if (nPves > 999)
+                           nPves = 999;
+                       if (nPves < -99)
+                           nPves = -99;
                        StruData PvesData;
                        if (nPves > 0)
                            PvesData.value = nPves / 10;
@@ -749,6 +754,11 @@ namespace Qtud.Qtud
                        PvesData.isShow = false;
                        m_StruDataManage.list_Pves.Add(PvesData);
 
+
+                       if (nPabd > 999)
+                           nPabd = 999;
+                       if (nPabd < -99)
+                           nPabd = -99;
                        StruData PabdData;
                        if (nPabd > 0)
                            PabdData.value = nPabd / 10;
@@ -758,9 +768,15 @@ namespace Qtud.Qtud
                        PabdData.time = nTimeIndex;
                        PabdData.isShow = false;
                        m_StruDataManage.list_Pabd.Add(PabdData);
-
+                        
                        StruData PdetData;
                        PdetData.value = PvesData.value - PabdData.value;
+
+
+                       if (PdetData.value > 999)
+                           PdetData.value = 999;
+                       if (PdetData.value < -99)
+                           PdetData.value = -99;
                        PdetData.time = nTimeIndex;
                        PdetData.isShow = false;
                        m_StruDataManage.list_Pdet.Add(PdetData);

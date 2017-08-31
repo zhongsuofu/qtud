@@ -39,7 +39,7 @@
             this.label_file.BackColor = System.Drawing.Color.Transparent;
             this.label_file.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_file.ForeColor = System.Drawing.Color.White;
-            this.label_file.Location = new System.Drawing.Point(31, 73);
+            this.label_file.Location = new System.Drawing.Point(26, 55);
             this.label_file.Name = "label_file";
             this.label_file.Size = new System.Drawing.Size(66, 19);
             this.label_file.TabIndex = 0;
@@ -47,9 +47,9 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(30, 114);
+            this.progressBar1.Location = new System.Drawing.Point(30, 97);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(667, 23);
+            this.progressBar1.Size = new System.Drawing.Size(446, 23);
             this.progressBar1.TabIndex = 1;
             // 
             // CopyFileProgressForm
@@ -58,7 +58,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(729, 219);
+            this.ClientSize = new System.Drawing.Size(499, 177);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label_file);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

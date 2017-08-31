@@ -75,11 +75,16 @@ namespace Qtud.Qtud
     {
         #region  变量
 
-        // 代理定义，可以在Invoke时传入相应的参数  
+        // 代理定义，可以在Invoke时传入相应的参数   
+        private CopyFileProgressForm  progressForm = new CopyFileProgressForm();
+        private BackgroundWorker bkWorker = new BackgroundWorker();
+        private string m_StrCheckNo = string.Empty;  //导出的检查号
+        private StruCheckFileInfo m_StruCheckFileInfo = new StruCheckFileInfo();  //导出的文件结构
+
         private delegate void funHandle(int nValue);
         private funHandle myHandle = null;
-        private CopyFileProgressForm progressForm = new CopyFileProgressForm();
-        private bool startThread = true;
+        private bool b_Runing = true;
+        private int nexportFileCnt = 0;
   
 
         private PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
@@ -220,6 +225,23 @@ namespace Qtud.Qtud
         {
             InitializeComponent();
 
+
+            //---------------------------------------------
+            // 使用BackgroundWorker时不能在工作线程中访问UI线程部分，  
+            // 即你不能在BackgroundWorker的事件和方法中操作UI，否则会抛跨线程操作无效的异常  
+            // 添加下列语句可以避免异常。  
+            CheckForIllegalCrossThreadCalls = false;
+
+            bkWorker.WorkerReportsProgress = true;
+            bkWorker.WorkerSupportsCancellation = true;
+            // This event will be raised on the worker thread when the worker starts
+            bkWorker.DoWork += new DoWorkEventHandler(DoWork);
+            // This event will be raised when we call ReportProgress
+            bkWorker.ProgressChanged += new ProgressChangedEventHandler(ProgessChanged);
+            bkWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(CompleteWork);
+            
+            //---------------------------------------------
+
             m_CurSelPatientInfo = CurSelPatientInfo;
             m_TestDatas = _TestDatas;
 
@@ -229,6 +251,7 @@ namespace Qtud.Qtud
         ~MainFrom_Curve()
         {
             // 这里是清理非托管资源的用户代码段
+            b_Runing = false;
             m_DrawFuns.Dispose();
         }
 
@@ -1628,7 +1651,10 @@ namespace Qtud.Qtud
                         
 
                         //--------------------------------------
-                        
+                        if (nPves > 999)
+                            nPves = 999;
+                        if (nPves < -99)
+                            nPves = -99;
 
                         StruData PvesData;
                         PvesData.value = nPves;
@@ -1643,6 +1669,10 @@ namespace Qtud.Qtud
                         m_TempCurveDatas.list_Pves.Add(PvesData);
                         //--------------------------------------
 
+                        if (nPabd > 999)
+                            nPabd = 999;
+                        if (nPabd < -99)
+                            nPabd = -99;
                         StruData PabdData;
                         PabdData.value = nPabd ;
 
@@ -1654,9 +1684,14 @@ namespace Qtud.Qtud
                         PabdData.isShow = false;
                         m_TempCurveDatas.list_Pabd.Add(PabdData);
                         //--------------------------------------
-
+                         
                         StruData PdetData;
                         PdetData.value = PvesData.value - PabdData.value;
+
+                        if (PdetData.value > 999)
+                            PdetData.value = 999;
+                        if (PdetData.value < -99)
+                            PdetData.value = -99;
 
                         if (m_TempCurveDatas.fmax_Pdet < PdetData.value)
                         {
@@ -1786,7 +1821,11 @@ namespace Qtud.Qtud
 
 
 
-
+                        //---------------------------------
+                        if (nPves > 999)
+                            nPves = 999;
+                        if (nPves < -99)
+                            nPves = -99;
                         StruData PvesData;
                         PvesData.value = nPves;
                          
@@ -1801,6 +1840,11 @@ namespace Qtud.Qtud
                             }
                         }
 
+                        //---------------------------------
+                        if (nPabd > 999)
+                            nPabd = 999;
+                        if (nPabd < -99)
+                            nPabd = -99;
                         StruData PabdData;
                         PabdData.value = nPabd; 
                         PabdData.time = nTimeIndex;
@@ -1814,9 +1858,14 @@ namespace Qtud.Qtud
                             }
                         }
 
+                        //---------------------------------
                         StruData PdetData;
                         PdetData.value = PvesData.value - PabdData.value;
-                         
+                        if (PdetData.value > 999)
+                            PdetData.value = 999;
+                        if (PdetData.value < -99)
+                            PdetData.value = -99;
+
                         PdetData.time = nTimeIndex;
                         PdetData.isShow = false;
                         if (nTimeIndex >= nstartIndex && nTimeIndex <= nendIndex)
@@ -3201,8 +3250,12 @@ namespace Qtud.Qtud
         /// </summary>  
         private void ShowProgressBar()
         {
+            //progressForm = new CopyFileProgressForm();
+            //progressForm.SetProgressMaximumValue(nMaxFileCnt);
+
             myHandle = new funHandle(progressForm.SetProgressValue);
             progressForm.ShowDialog();
+            //progressForm = null;
         }
 
         /// <summary>  
@@ -3214,20 +3267,25 @@ namespace Qtud.Qtud
             this.BeginInvoke(mi);
 
             //System.Threading.Thread.Sleep(1000); // sleep to show window  
-
+             
             try
             {
-                for (int i = 0; i < nMaxFileCnt; i++)
-                {
-                    if (nCurFileCnt < 0)
+                while (b_Runing )
+                { 
+                    if (nexportFileCnt < 0)
                     {
-                        this.Invoke(this.myHandle, new object[] { nCurFileCnt });
-                        break;
+                        this.Invoke(this.myHandle, new object[] { -1 });
+                        return;
+                    }
+                    if (nMaxFileCnt < 1)
+                    {
+                        this.Invoke(this.myHandle, new object[] { -1 });
+                        return;
                     }
 
-                    System.Threading.Thread.Sleep(200);
+                    System.Threading.Thread.Sleep(5);
                     // 这里直接调用代理  
-                    this.Invoke(this.myHandle, new object[] { i % nMaxFileCnt });
+                    this.Invoke(this.myHandle, new object[] { nexportFileCnt });
                 }
             }
             catch (System.Exception ex)
@@ -3241,21 +3299,37 @@ namespace Qtud.Qtud
 
         private void ExportFile(string checkNo, ref  StruCheckFileInfo tempStruCheckFileInfo, bool isAllExport = false)
         {
-            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
-            if (tempStruCheckFileInfo.nFileCnt > 0)
+            m_StrCheckNo = checkNo;
+            m_StruCheckFileInfo = tempStruCheckFileInfo;
+
+            if (m_StruCheckFileInfo.nFileCnt > 0)
             {
-                nCurFileCnt = 0;
-                nMaxFileCnt = tempStruCheckFileInfo.nFileCnt;
-                progressForm.SetProgressMaximumValue(tempStruCheckFileInfo.nFileCnt);
-                // 启动线程  
-                thread.Start();
+                nexportFileCnt = 0;
+                nMaxFileCnt = m_StruCheckFileInfo.nFileCnt;
+                progressForm.SetProgressMaximumValue(nMaxFileCnt);
+
+                //--------------------------------
+                progressForm.StartPosition = FormStartPosition.CenterParent;
+
+                bkWorker.RunWorkerAsync();
+
+                progressForm.ShowDialog();
+
+                //--------------------------------
+
+                
+                //// 启动线程  
+                //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
+                //thread.Start();
             }
 
-            foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
+            return;
+
+            foreach (StruOneDayFileInfo OneDayFileInfo in m_StruCheckFileInfo.m_StruOneDayFileInfo)
             {
                 string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
 
-                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + checkNo;
+                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + m_StrCheckNo;
                 if (!Directory.Exists(strDesPath))  //创建文件夹
                 {
                     Directory.CreateDirectory(strDesPath);
@@ -3276,7 +3350,7 @@ namespace Qtud.Qtud
 
                     strtempPath = strtempPath.Replace('\\', '*');
                     string strWhere = string.Empty;
-                    strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"' and  txtpath='" + strtempPath + @"' ";
+                    strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + m_StrCheckNo + @"' and  txtpath='" + strtempPath + @"' ";
                     List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
                   
                     if (tempModelist.Count < 1)
@@ -3285,7 +3359,7 @@ namespace Qtud.Qtud
                         //---------------------------------------
 
                         m_model.uuid = PublicConst.GenerateUUID();
-                        m_model.checknum = checkNo;
+                        m_model.checknum = m_StrCheckNo;
                         m_model.patient_uuid = m_CurSelPatientInfo.uuid;
 
                         m_model.txtPath = strtempPath;
@@ -3304,7 +3378,7 @@ namespace Qtud.Qtud
 
                 foreach (StruFileInfo tempFileInfo in OneDayFileInfo.m_StruFileInfo)
                 {
-                    nCurFileCnt++;
+                    nexportFileCnt++;
 
                     strtempPath = tempFileInfo.m_filePath;   //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
                     string[] strCodes = strtempPath.Split('\\');
@@ -3325,7 +3399,7 @@ namespace Qtud.Qtud
                         string strtarFile = strtempPath + m_strDataFilList[v].Substring(npos + 1);
                         if (!File.Exists(strtarFile))  //创建文件夹
                         {
-                            File.Copy(m_strDataFilList[v], strtarFile);  //复制txt文件
+                            File.Copy(m_strDataFilList[v], strtarFile);  //复制数据文件
                         }
 
 
@@ -3355,8 +3429,8 @@ namespace Qtud.Qtud
                     
                 }
             }
-            nCurFileCnt = -1;
-            //thread.Suspend();
+            nexportFileCnt = -1; 
+
             
         }
         private void Export_Click(object sender, EventArgs e)
@@ -3405,23 +3479,10 @@ namespace Qtud.Qtud
 
             if (checkNo != "" && m_checkNum_Files_map.ContainsKey(checkNo))
             {
-                DialogResult res = MessageBox.Show("请确认: 导出的数据\"" + checkNo + "\"是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据。");
+                DialogResult res = MessageBox.Show("请确认: 导出的数据\"" + checkNo + "\"是当前患者 \"" + m_CurSelPatientInfo.id + @" " + m_CurSelPatientInfo.name + "\" 的数据。","导出确认",MessageBoxButtons.OKCancel);
                 if (res != DialogResult.OK)
                     return;
-
-                if (startThread)
-                {
-                    startThread = false;
-                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
-                    nCurFileCnt = 0;
-                    nMaxFileCnt = 1;
-                    progressForm.SetProgressMaximumValue(1);
-                    // 启动线程  
-                    thread.Start(); 
-                    nCurFileCnt = -1;
-                }
-             
-
+                 
                 try
                 { 
                     string strWhere = string.Empty;
@@ -3442,7 +3503,7 @@ namespace Qtud.Qtud
 
                     refresh_func();
 
-                    MessageBox.Show("导出完成！");
+                    //MessageBox.Show("导出完成！");
 
                 }
                 catch (System.Exception ex)
@@ -3822,7 +3883,173 @@ namespace Qtud.Qtud
             
 
         }
-         
+
+
+        //----------------------------------------------------------
+
+        public void DoWork(object sender, DoWorkEventArgs e)
+        {
+            // 事件处理，指定处理函数  
+            e.Result = ProcessProgress(bkWorker, e);
+
+
+
+        }
+
+        public void ProgessChanged(object sender, ProgressChangedEventArgs e)
+        {
+            // bkWorker.ReportProgress 会调用到这里，此处可以进行自定义报告方式  
+            progressForm.SetNotifyInfo(e.ProgressPercentage, "导出进度: " + Convert.ToString((int)(100 * e.ProgressPercentage / nMaxFileCnt)) + "%");
+        }
+
+        public void CompleteWork(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressForm.Close();
+            MessageBox.Show("导出完成!");
+        }
+
+        private int ProcessProgress(object sender, DoWorkEventArgs e)
+        {
+            //for (int i = 0; i < nMaxFileCnt; i++)
+            //{
+            //    if (bkWorker.CancellationPending)
+            //    {
+            //        e.Cancel = true;
+            //        return -1;
+            //    }
+            //    else
+            //    {
+            //        // 状态报告  
+            //        bkWorker.ReportProgress(i / 10);
+
+            //        // 等待，用于UI刷新界面，很重要  
+            //        System.Threading.Thread.Sleep(2);
+            //    }
+            //}
+             
+            foreach (StruOneDayFileInfo OneDayFileInfo in m_StruCheckFileInfo.m_StruOneDayFileInfo)
+            {
+                string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
+
+                string strDesPath = m_strFloder + m_CurSelPatientInfo.id + @"\" + m_StrCheckNo;
+                if (!Directory.Exists(strDesPath))  //创建文件夹
+                {
+                    Directory.CreateDirectory(strDesPath);
+                }
+                strDesPath += @"\";
+                string strtempPath = string.Empty;
+
+                tbl_patient_checknum_link_Model m_model = new tbl_patient_checknum_link_Model();
+                int npos = strTxtFile.LastIndexOf("\\");
+                if (npos > -1)
+                {
+                    strtempPath = strDesPath + strTxtFile.Substring(npos + 1);   //目标txt文件
+
+                    if (!File.Exists(strtempPath))  //创建文件夹
+                    {
+                        File.Copy(strTxtFile, strtempPath);  //复制txt文件 
+                    }
+
+                    strtempPath = strtempPath.Replace('\\', '*');
+                    string strWhere = string.Empty;
+                    strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + m_StrCheckNo + @"' and  txtpath='" + strtempPath + @"' ";
+                    List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
+
+                    if (tempModelist.Count < 1)
+                    {
+                        //txt文件可以单独存储一个表。存储到数据库
+                        //---------------------------------------
+
+                        m_model.uuid = PublicConst.GenerateUUID();
+                        m_model.checknum = m_StrCheckNo;
+                        m_model.patient_uuid = m_CurSelPatientInfo.uuid;
+
+                        m_model.txtPath = strtempPath;
+                        patient_checknum_link_Manager.Add(m_model);
+                        //---------------------------------------
+                    }
+                    else
+                    {
+                        m_model = tempModelist[0];
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+
+                foreach (StruFileInfo tempFileInfo in OneDayFileInfo.m_StruFileInfo)
+                {
+                    //--------------------------------
+                    nexportFileCnt++;
+                    if (bkWorker.CancellationPending)
+                    {
+                        //e.Cancel = true;
+                        //return -1;
+                    }
+                    else
+                    {
+                        // 状态报告  
+                        bkWorker.ReportProgress((int)(nexportFileCnt  ));
+
+                        // 等待，用于UI刷新界面，很重要  
+                        System.Threading.Thread.Sleep(1);
+                    }
+                    //--------------------------------
+
+                    strtempPath = tempFileInfo.m_filePath;   //G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
+                    string[] strCodes = strtempPath.Split('\\');
+                    strtempPath = strDesPath + strCodes[2] + @"\" + strCodes[3];   // + \info\ID2017-06-30
+                    if (!Directory.Exists(strtempPath))  //创建文件夹
+                    {
+                        Directory.CreateDirectory(strtempPath);
+                    }
+                    strtempPath += @"\";
+
+                    //--------------------------------------------
+                    //获取路径下，文件名含有strDate的文件
+                    npos = tempFileInfo.m_filePath.LastIndexOf('\\');
+                    List<string> m_strDataFilList = UpdateDataFileList(tempFileInfo.m_filePath.Substring(0, npos + 1), tempFileInfo.m_filePath.Substring(npos + 1));
+                    for (int v = 0; v < m_strDataFilList.Count; v++)
+                    {
+                        npos = m_strDataFilList[v].LastIndexOf("\\");
+                        string strtarFile = strtempPath + m_strDataFilList[v].Substring(npos + 1);
+                        if (!File.Exists(strtarFile))  //创建文件夹
+                        {
+                            File.Copy(m_strDataFilList[v], strtarFile);  //复制数据文件
+                        }
+
+
+                        strtarFile = strtarFile.Replace('\\', '*');
+                        string strWhere = @"check_uuid='" + m_model.uuid + @"' and  path='" + strtarFile + @"'  ";
+                        List<tbl_patient_checknum_file_info_Model> tempModelist = patient_checknum_file_info_Manager.GetModelList(strWhere);
+
+                        if (tempModelist.Count < 1)
+                        {
+                            // 存储到数据库
+                            //---------------------------------------
+
+                            tbl_patient_checknum_file_info_Model file_Model = new tbl_patient_checknum_file_info_Model();
+                            file_Model.check_uuid = m_model.uuid;
+                            file_Model.createtime = DateTime.Now;
+                            file_Model.checkmode = tempFileInfo.strFileMode;
+                            file_Model.uuid = PublicConst.GenerateUUID();
+                            file_Model.path = strtarFile;
+                            patient_checknum_file_info_Manager.Add(file_Model);
+                            //---------------------------------------
+                        }
+
+
+                    }
+                    //--------------------------------------------
+
+
+                }
+            }
+            nexportFileCnt = -1; 
+
+            return -1;
+        }  
         //----------------------------------------------------------
 
         
