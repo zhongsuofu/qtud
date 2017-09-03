@@ -56,6 +56,7 @@
             this.Allcancel_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.refresh_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.delHistory_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listBox_SelSeg = new System.Windows.Forms.ListBox();
             this.contextMenuStrip_deleteItem = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -74,9 +75,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.srcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel_Draw = new  MyPanel();
+            this.panel_Draw = new MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
-            this.delHistory_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.contextMenuStrip_TreeView.SuspendLayout();
@@ -354,6 +354,13 @@
             this.refresh_ToolStripMenuItem.Text = "刷 新";
             this.refresh_ToolStripMenuItem.Click += new System.EventHandler(this.refresh_ToolStripMenuItem_Click);
             // 
+            // delHistory_ToolStripMenuItem
+            // 
+            this.delHistory_ToolStripMenuItem.Name = "delHistory_ToolStripMenuItem";
+            this.delHistory_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.delHistory_ToolStripMenuItem.Text = "删除历史数据";
+            this.delHistory_ToolStripMenuItem.Click += new System.EventHandler(this.delHistory_ToolStripMenuItem_Click);
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.Transparent;
@@ -574,13 +581,6 @@
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
             // 
-            // delHistory_ToolStripMenuItem
-            // 
-            this.delHistory_ToolStripMenuItem.Name = "delHistory_ToolStripMenuItem";
-            this.delHistory_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
-            this.delHistory_ToolStripMenuItem.Text = "删除历史数据";
-            this.delHistory_ToolStripMenuItem.Click += new System.EventHandler(this.delHistory_ToolStripMenuItem_Click);
-            // 
             // MainFrom_Curve
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -594,6 +594,7 @@
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainFrom_Curve";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

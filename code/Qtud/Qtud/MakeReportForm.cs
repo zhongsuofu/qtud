@@ -897,6 +897,11 @@ namespace Qtud.Qtud
                     }
                    
                 }
+                else
+                {
+                    nCurHight += 40;  //每组曲线间隔
+                     
+                }
                 //-------------------------------------------------------
 
 
@@ -1641,6 +1646,9 @@ namespace Qtud.Qtud
                     m_DrawFuns.DrawPrintOneString(OneCurveData.strMeno, 10, StringAlignment.Far, m_DrawArea);
                     nCurHight += 10;  //每组曲线间隔
                 }
+                else
+                    nCurHight += 40;  //每组曲线间隔
+
                 //-------------------------------------------------------
                 
                  

@@ -49,11 +49,14 @@
             this.textBox_pvetX = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.checkBox_printFirst = new System.Windows.Forms.CheckBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.textBox_UseAbleSpace = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(360, 275);
+            this.button1.Location = new System.Drawing.Point(360, 306);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(104, 43);
@@ -70,7 +73,7 @@
             this.label6.Location = new System.Drawing.Point(529, 329);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(24, 16);
+            this.label6.Size = new System.Drawing.Size(29, 20);
             this.label6.TabIndex = 31;
             this.label6.Text = "  ";
             // 
@@ -82,7 +85,7 @@
             this.label5.Location = new System.Drawing.Point(529, 225);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(24, 16);
+            this.label5.Size = new System.Drawing.Size(29, 20);
             this.label5.TabIndex = 30;
             this.label5.Text = "  ";
             // 
@@ -94,7 +97,7 @@
             this.label3.Location = new System.Drawing.Point(169, 329);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(16, 16);
+            this.label3.Size = new System.Drawing.Size(19, 20);
             this.label3.TabIndex = 25;
             this.label3.Text = " ";
             // 
@@ -106,7 +109,7 @@
             this.label1.Location = new System.Drawing.Point(194, 225);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 16);
+            this.label1.Size = new System.Drawing.Size(19, 20);
             this.label1.TabIndex = 23;
             this.label1.Text = " ";
             // 
@@ -115,10 +118,10 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(79, 50);
+            this.label2.Location = new System.Drawing.Point(72, 50);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(88, 16);
+            this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 20;
             this.label2.Text = "数值单位：";
             // 
@@ -130,7 +133,7 @@
             "mmHg"});
             this.comboBox_unit.Location = new System.Drawing.Point(183, 47);
             this.comboBox_unit.Name = "comboBox_unit";
-            this.comboBox_unit.Size = new System.Drawing.Size(110, 24);
+            this.comboBox_unit.Size = new System.Drawing.Size(110, 28);
             this.comboBox_unit.TabIndex = 35;
             // 
             // label4
@@ -138,18 +141,18 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(317, 166);
+            this.label4.Location = new System.Drawing.Point(317, 172);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 16);
+            this.label4.Size = new System.Drawing.Size(29, 20);
             this.label4.TabIndex = 47;
             this.label4.Text = "至";
             // 
             // textBox_nllY
             // 
-            this.textBox_nllY.Location = new System.Drawing.Point(360, 163);
+            this.textBox_nllY.Location = new System.Drawing.Point(360, 169);
             this.textBox_nllY.MaxLength = 24;
             this.textBox_nllY.Name = "textBox_nllY";
-            this.textBox_nllY.Size = new System.Drawing.Size(110, 26);
+            this.textBox_nllY.Size = new System.Drawing.Size(110, 30);
             this.textBox_nllY.TabIndex = 44;
             // 
             // label7
@@ -157,18 +160,18 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(317, 127);
+            this.label7.Location = new System.Drawing.Point(317, 129);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(24, 16);
+            this.label7.Size = new System.Drawing.Size(29, 20);
             this.label7.TabIndex = 46;
             this.label7.Text = "至";
             // 
             // textBox_nlY
             // 
-            this.textBox_nlY.Location = new System.Drawing.Point(360, 124);
+            this.textBox_nlY.Location = new System.Drawing.Point(360, 126);
             this.textBox_nlY.MaxLength = 24;
             this.textBox_nlY.Name = "textBox_nlY";
-            this.textBox_nlY.Size = new System.Drawing.Size(110, 26);
+            this.textBox_nlY.Size = new System.Drawing.Size(110, 30);
             this.textBox_nlY.TabIndex = 42;
             // 
             // label8
@@ -178,24 +181,24 @@
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(317, 90);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(24, 16);
+            this.label8.Size = new System.Drawing.Size(29, 20);
             this.label8.TabIndex = 45;
             this.label8.Text = "至";
             // 
             // textBox_pvetY
             // 
-            this.textBox_pvetY.Location = new System.Drawing.Point(360, 87);
+            this.textBox_pvetY.Location = new System.Drawing.Point(360, 84);
             this.textBox_pvetY.MaxLength = 24;
             this.textBox_pvetY.Name = "textBox_pvetY";
-            this.textBox_pvetY.Size = new System.Drawing.Size(110, 26);
+            this.textBox_pvetY.Size = new System.Drawing.Size(110, 30);
             this.textBox_pvetY.TabIndex = 38;
             // 
             // textBox_nllX
             // 
-            this.textBox_nllX.Location = new System.Drawing.Point(183, 160);
+            this.textBox_nllX.Location = new System.Drawing.Point(183, 166);
             this.textBox_nllX.MaxLength = 24;
             this.textBox_nllX.Name = "textBox_nllX";
-            this.textBox_nllX.Size = new System.Drawing.Size(110, 26);
+            this.textBox_nllX.Size = new System.Drawing.Size(110, 30);
             this.textBox_nllX.TabIndex = 43;
             // 
             // label9
@@ -203,18 +206,18 @@
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(63, 158);
+            this.label9.Location = new System.Drawing.Point(51, 166);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(96, 16);
+            this.label9.Size = new System.Drawing.Size(119, 20);
             this.label9.TabIndex = 41;
             this.label9.Text = "尿流率范围:";
             // 
             // textBox_nlX
             // 
-            this.textBox_nlX.Location = new System.Drawing.Point(183, 124);
+            this.textBox_nlX.Location = new System.Drawing.Point(183, 126);
             this.textBox_nlX.MaxLength = 24;
             this.textBox_nlX.Name = "textBox_nlX";
-            this.textBox_nlX.Size = new System.Drawing.Size(110, 26);
+            this.textBox_nlX.Size = new System.Drawing.Size(110, 30);
             this.textBox_nlX.TabIndex = 40;
             // 
             // label10
@@ -222,9 +225,9 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.ForeColor = System.Drawing.Color.White;
-            this.label10.Location = new System.Drawing.Point(79, 127);
+            this.label10.Location = new System.Drawing.Point(71, 126);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(80, 16);
+            this.label10.Size = new System.Drawing.Size(99, 20);
             this.label10.TabIndex = 39;
             this.label10.Text = "尿量范围:";
             // 
@@ -233,7 +236,7 @@
             this.textBox_pvetX.Location = new System.Drawing.Point(183, 84);
             this.textBox_pvetX.MaxLength = 24;
             this.textBox_pvetX.Name = "textBox_pvetX";
-            this.textBox_pvetX.Size = new System.Drawing.Size(110, 26);
+            this.textBox_pvetX.Size = new System.Drawing.Size(110, 30);
             this.textBox_pvetX.TabIndex = 37;
             // 
             // label11
@@ -241,9 +244,9 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.Transparent;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(63, 90);
+            this.label11.Location = new System.Drawing.Point(51, 90);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(104, 16);
+            this.label11.Size = new System.Drawing.Size(129, 20);
             this.label11.TabIndex = 36;
             this.label11.Text = "压力值范围：";
             // 
@@ -252,20 +255,54 @@
             this.checkBox_printFirst.AutoSize = true;
             this.checkBox_printFirst.BackColor = System.Drawing.Color.Transparent;
             this.checkBox_printFirst.ForeColor = System.Drawing.Color.White;
-            this.checkBox_printFirst.Location = new System.Drawing.Point(183, 202);
+            this.checkBox_printFirst.Location = new System.Drawing.Point(183, 213);
             this.checkBox_printFirst.Name = "checkBox_printFirst";
-            this.checkBox_printFirst.Size = new System.Drawing.Size(91, 20);
+            this.checkBox_printFirst.Size = new System.Drawing.Size(111, 24);
             this.checkBox_printFirst.TabIndex = 48;
             this.checkBox_printFirst.Text = "打印首页";
             this.checkBox_printFirst.UseVisualStyleBackColor = false;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(51, 251);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(279, 20);
+            this.label12.TabIndex = 49;
+            this.label12.Text = "磁盘可用空间剩余量预警阈值:";
+            // 
+            // textBox_UseAbleSpace
+            // 
+            this.textBox_UseAbleSpace.Location = new System.Drawing.Point(360, 248);
+            this.textBox_UseAbleSpace.MaxLength = 24;
+            this.textBox_UseAbleSpace.Name = "textBox_UseAbleSpace";
+            this.textBox_UseAbleSpace.Size = new System.Drawing.Size(65, 30);
+            this.textBox_UseAbleSpace.TabIndex = 50;
+            this.textBox_UseAbleSpace.Text = "20";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(439, 252);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(19, 20);
+            this.label13.TabIndex = 51;
+            this.label13.Text = "%";
+            // 
             // SettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(522, 371);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.textBox_UseAbleSpace);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.checkBox_printFirst);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox_nllY);
@@ -321,6 +358,9 @@
         private System.Windows.Forms.TextBox textBox_pvetX;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBox_printFirst;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBox_UseAbleSpace;
+        private System.Windows.Forms.Label label13;
 
     }
 }

@@ -89,6 +89,53 @@ namespace Qtud.Qtud
             if (ShowFirstPage == "1")
                 checkBox_printFirst.Checked = true;
 
+
+            string UseAbleSpace = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "UseAbleSpace", null);
+            if (string.IsNullOrEmpty(UseAbleSpace))
+            {
+                UseAbleSpace = "20";
+            }
+            textBox_UseAbleSpace.Text = UseAbleSpace;
+
+        }
+
+
+
+        protected bool isNumberic(string message)  //, out int result
+        {
+            int result = 0;
+            //判断是否为整数字符串
+
+            //是的话则将其转换为数字并将其设为out类型的输出值、返回true, 否则为false
+
+            result = -1;   //result 定义为out 用来输出值
+
+            try
+            {
+
+                //当数字字符串的为是少于4时，以下三种都可以转换，任选一种
+
+                //如果位数超过4的话，请选用Convert.ToInt32() 和int.Parse()
+
+
+
+                result = int.Parse(message);
+
+                //result = Convert.ToInt16(message);
+
+                //result = Convert.ToInt32(message);
+
+                return true;
+
+            }
+
+            catch
+            {
+
+                return false;
+
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -106,20 +153,20 @@ namespace Qtud.Qtud
 
 
             string strTempValue = string.Empty;
-            if (textBox_pvetX.Text.Trim() == "")
+            if (textBox_pvetX.Text.Trim() == "" || !isNumberic(textBox_pvetX.Text.Trim()))
             {
                 MessageBox.Show("压力值 下限设置错误，请重新设置", "输入错误");
                 textBox_pvetX.Focus();
                 return;
             }
 
-            if (textBox_pvetY.Text.Trim() == "")
+            if (textBox_pvetY.Text.Trim() == "" || !isNumberic(textBox_pvetY.Text.Trim()))
             {
                 MessageBox.Show("压力值 上限设置错误，请重新设置", "输入错误");
                 textBox_pvetY.Focus();
                 return;
             }
-
+             
             if (int.Parse(textBox_pvetX.Text.Trim()) >= int.Parse(textBox_pvetY.Text.Trim()))
             {
                 MessageBox.Show("压力值 下限应小于上限，请重新设置", "输入错误");
@@ -128,14 +175,14 @@ namespace Qtud.Qtud
             }
 
             //-------------------------------------------
-            if (textBox_nlX.Text.Trim() == "")
+            if (textBox_nlX.Text.Trim() == "" || !isNumberic(textBox_nlX.Text.Trim()))
             {
                 MessageBox.Show("尿量 下限设置错误，请重新设置", "输入错误");
                 textBox_nlX.Focus();
                 return;
             }
 
-            if (textBox_nlY.Text.Trim() == "")
+            if (textBox_nlY.Text.Trim() == "" || !isNumberic(textBox_nlY.Text.Trim()))
             {
                 MessageBox.Show("尿量 上限设置错误，请重新设置", "输入错误");
                 textBox_nlY.Focus();
@@ -149,14 +196,14 @@ namespace Qtud.Qtud
                 return;
             }
             //-------------------------------------------
-            if (textBox_nllX.Text.Trim() == "")
+            if (textBox_nllX.Text.Trim() == "" || !isNumberic(textBox_nllX.Text.Trim()))
             {
                 MessageBox.Show("尿流率 下限设置错误，请重新设置", "输入错误");
                 textBox_nllX.Focus();
                 return;
             }
 
-            if (textBox_nllY.Text.Trim() == "")
+            if (textBox_nllY.Text.Trim() == "" || !isNumberic(textBox_nllY.Text.Trim()))
             {
                 MessageBox.Show("尿流率 上限设置错误，请重新设置", "输入错误");
                 textBox_nllY.Focus();
@@ -169,7 +216,19 @@ namespace Qtud.Qtud
                 textBox_nllX.Focus();
                 return;
             }
-
+            //-------------------------------------------
+            if (textBox_UseAbleSpace.Text.Trim() == "" || !isNumberic(textBox_UseAbleSpace.Text.Trim()))
+            {
+                MessageBox.Show("磁盘可用空间剩余量预警阈值 设置错误，请重新设置", "输入错误");
+                textBox_UseAbleSpace.Focus();
+                return;
+            }
+            if (int.Parse(textBox_UseAbleSpace.Text.Trim()) < 1 || int.Parse(textBox_UseAbleSpace.Text.Trim()) > 100)
+            {
+                MessageBox.Show("磁盘可用空间剩余量预警阈值范围(1,100)，请重新设置", "输入错误");
+                textBox_UseAbleSpace.Focus();
+                return;
+            }
             //-------------------------------------------
             INIOperationClass.INIWriteValue(strIniFile, "Setting", "pvetX", textBox_pvetX.Text.Trim());
             INIOperationClass.INIWriteValue(strIniFile, "Setting", "pvetY", textBox_pvetY.Text.Trim());
@@ -189,7 +248,12 @@ namespace Qtud.Qtud
             }
             INIOperationClass.INIWriteValue(strIniFile, "Setting", "ShowFirstPage", strTempValue);
 
-            this.DialogResult   = DialogResult.OK;
+            //-------------------------------------------
+             
+            INIOperationClass.INIWriteValue(strIniFile, "Setting", "UseAbleSpace", textBox_UseAbleSpace.Text.Trim());
+             
+            //-------------------------------------------
+            this.DialogResult = DialogResult.OK;
             Close();
         }
     }

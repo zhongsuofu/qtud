@@ -39,6 +39,11 @@ namespace Qtud.Qtud
 
         private TestDatas m_TestDatas = new TestDatas();
 
+        System.Timers.Timer t = new System.Timers.Timer(60 * 60 * 1000);//60 * 60 * 1000 实例化Timer类，设置间隔时间为1小时  ；
+        private int m_nUseAbleSpace = 20;
+        private string strIniFile = "config.ini"; 
+        private string m_strFloder = @"d:\qtud_data\";
+
         #endregion
 
         public CMainForm()
@@ -63,6 +68,11 @@ namespace Qtud.Qtud
             }
             //----------------------------------------------------
         }
+        
+        ~CMainForm() 
+        {
+            t.Close();
+        }
 
         #region 事件处理函数
 
@@ -79,13 +89,134 @@ namespace Qtud.Qtud
             if (label_userName.Text == "")
                 label_userName.Text = "我的信息";
 
+            //---------------------------------------------------
+            strIniFile = Directory.GetCurrentDirectory() + "\\" + strIniFile;
+         
+            string UseAbleSpace = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "UseAbleSpace", null);
+            if (string.IsNullOrEmpty(UseAbleSpace))
+            {
+                UseAbleSpace = "20";
+            }
+            try
+            {
+                m_nUseAbleSpace = int.Parse(UseAbleSpace);
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
+
+            string strDataDisk = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "DataDisk", null);
+            if ( string.IsNullOrEmpty(strDataDisk))
+                m_strFloder = @"d:\qtud_data\";    //备份文件夹 
+            else
+                m_strFloder = strDataDisk.Substring(0, 1) + @":\qtud_data\";   //备份文件夹 
+
+            //---------------------------------------------------
+
+
             UpdateListView();
+
+            //----------------------------------------------------
+            f();
+            //定时器
+            //System.Timers.Timer t = new System.Timers.Timer(60 * 60* 1000);//实例化Timer类，设置间隔时间为1000毫秒 就是1秒；
+            t.Elapsed += new System.Timers.ElapsedEventHandler(theout);//到达时间的时候执行事件；
+            t.AutoReset = true;//设置是执行一次（false）还是一直执行(true)；
+            t.Enabled = true;//是否执行System.Timers.Timer.Elapsed事件；
+            //----------------------------------------------------
 
         }
          
         #endregion
 
 
+        //定时器处理函数
+        public void theout(object source, System.Timers.ElapsedEventArgs e)
+        {
+            this.Invoke(new TextOption(f));//invok 委托实现跨线程的调用
+        }
+
+        delegate void TextOption();//定义一个委托
+
+        void f()
+        {
+            //label1.Text = DateTime.Now.ToString();//调用内容，并用lable1显示出来。。。
+            bool ishaveSpace = false;
+            string strFirstUseableDisk = string.Empty;
+            string strDiskInfo = GetDriver(ref ishaveSpace, ref strFirstUseableDisk);
+            if (!ishaveSpace)  //没有空间提示。
+            {
+                strDiskInfo = "磁盘空间不足，可能会影响到数据导出。\r\n\r\n" + strDiskInfo;
+                MessageBox.Show(strDiskInfo);
+            }
+            else
+            {
+                if (strFirstUseableDisk != "" && m_strFloder.Substring(0, 3).ToUpper() != strFirstUseableDisk)
+                {
+                    INIOperationClass.INIWriteValue(strIniFile, "Setting", "DataDisk", strFirstUseableDisk);
+
+                }
+            }
+        }
+
+        //ishaveSpace 是否有可用空间， strFirstUseableDisk 第一个可用磁盘
+        public string GetDriver(ref bool ishaveSpace,ref string strFirstUseableDisk )
+        {
+            long lsum = 0, ldr = 0;
+            long gb = 1024 * 1024 * 1024;
+
+            //系统盘
+            String str = string.Empty;
+            String nl = Environment.NewLine;
+            //String query = "My system drive is %SystemDrive% and my system root is %SystemRoot%";
+            //str = Environment.ExpandEnvironmentVariables(query);
+            String query = "%SystemDrive%";
+            str = Environment.ExpandEnvironmentVariables(query);
+
+
+            strFirstUseableDisk = string.Empty;
+            string strRes = string.Empty;
+            ishaveSpace = false;  // 可用空间 是否到超过阈值，出发预警
+            foreach (DriveInfo drive in DriveInfo.GetDrives())
+            {
+                //判断是否是固定磁盘  
+                if (drive.DriveType == DriveType.Fixed)
+                {
+                    lsum = drive.TotalSize / gb;
+                    ldr = drive.TotalFreeSpace / gb;
+                    long per = 0;
+                    if(drive.TotalSize > 0  && drive.TotalFreeSpace>0)
+                        per= (long)drive.TotalFreeSpace *100 /drive.TotalSize;
+                    if(per>0)
+                        strRes += drive.Name + "  总空间 " + lsum.ToString() + "G   剩余空间 " + ldr.ToString() + "G   剩余空间占比 " + per.ToString() + "%\r\n";
+                    else
+                        strRes += drive.Name + "  总空间 " + lsum.ToString() + "G   剩余空间 " + ldr.ToString() + "G\r\n";
+
+
+                    //判断是否是系统盘 
+                    if (str != "" && drive.Name.IndexOf(str) > -1)  //系统盘
+                    {
+                        continue;
+                    } 
+                     
+                    if(per >= m_nUseAbleSpace )
+                    {
+                        ishaveSpace = true;
+
+                        if (strFirstUseableDisk == "")
+                        {
+                            strFirstUseableDisk = drive.Name;
+                        }
+                    }
+                }
+            }
+            //progressBar1.Value = int.Parse((lsum - ldr).ToString());  
+            //progressBar1.Maximum = int.Parse(lsum.ToString());  
+            //lbMsg.Text = "磁盘" + disksrc + "的可用空间为" + ldr + "GB！";  
+
+            return strRes;
+        }  
 
         #region 功能函数
 
@@ -353,15 +484,15 @@ namespace Qtud.Qtud
         //修改
         private void button2_Click(object sender, EventArgs e)
         {
-            if (m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "")
+            if ( m_CurSelPatientInfo == null || m_CurSelPatientInfo.id == "" ) // listView_patList.SelectedItems.Count < 1
             {
                 DialogResult ret = MessageBox.Show("请选择需要修改的患者", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 return;
             }
             else
             {
-                string site = listView_patList.SelectedItems[0].Text;
-                string strid = listView_patList.SelectedItems[0].SubItems[1].Text;
+                //string site = listView_patList.SelectedItems[0].Text;
+                string strid = m_CurSelPatientInfo.id; //  listView_patList.SelectedItems[0].SubItems[1].Text;
 
 
                 int i = 0;
@@ -389,7 +520,8 @@ namespace Qtud.Qtud
                 foreach (string var in Directory.GetDirectories(strPath))
                 {
                     //DeleteDirectory(var);
-                    Directory.Delete(var, true);
+                    if (!string.IsNullOrEmpty(var) && Directory.Exists(var))
+                        Directory.Delete(var, true);
                     //DeleteDirectory(var);
                 }
             }
@@ -398,7 +530,8 @@ namespace Qtud.Qtud
             {
                 foreach (string var in Directory.GetFiles(strPath))
                 {
-                    File.Delete(var);
+                    if (!string.IsNullOrEmpty(var) && File.Exists(var))
+                        File.Delete(var);
                 }
             }
         }
@@ -418,7 +551,7 @@ namespace Qtud.Qtud
             }
             else
             {
-                DialogResult ret = MessageBox.Show("删除病人后，相关的检查数据都会删除。\r\n确定删除病人 " + m_CurSelPatientInfo.name + " 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
+                DialogResult ret = MessageBox.Show("删除患者后，相关的检查数据都会删除。\r\n确定删除患者 \"" + m_CurSelPatientInfo.name + "\" 吗?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk);
                 if (ret == DialogResult.OK)
                 {
 
@@ -445,16 +578,22 @@ namespace Qtud.Qtud
                             strWhere = @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ";
                             patient_checknum_link_Manager.Delete(strWhere);
 
-                            //删除文件夹
+                            //删除文件夹下文件
                             string  strPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2] + "\\" + pathArr[3];
                             deleteTmpFiles(strPath);
-                            Directory.Delete(strPath, true);
+
+                            //删除文件夹
+                            if (!string.IsNullOrEmpty(strPath) && Directory.Exists(strPath)) 
+                                Directory.Delete(strPath, true);
+
                             strpatientPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2];
 
                             
                         }
-                        if (strpatientPath != "")
+                        if (!string.IsNullOrEmpty(strpatientPath) && Directory.Exists(strpatientPath))
+                        {
                             Directory.Delete(strpatientPath, true);
+                        }
                         //===================================
 
                         tbl_curve_file_link_Manager m_file_link_manager = new tbl_curve_file_link_Manager();

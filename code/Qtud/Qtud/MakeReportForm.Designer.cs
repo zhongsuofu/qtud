@@ -140,9 +140,9 @@
             // 
             // panel_Context
             // 
-            this.panel_Context.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_Context.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.panel_Context.BackColor = System.Drawing.Color.White;
             this.panel_Context.ContextMenuStrip = this.contextMenuStrip1;
             this.panel_Context.Location = new System.Drawing.Point(2, 4);
@@ -155,24 +155,25 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.report_ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(169, 28);
             // 
             // report_ToolStripMenuItem
             // 
             this.report_ToolStripMenuItem.Name = "report_ToolStripMenuItem";
-            this.report_ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.report_ToolStripMenuItem.Size = new System.Drawing.Size(168, 24);
             this.report_ToolStripMenuItem.Text = "不打印报告页";
             this.report_ToolStripMenuItem.Visible = false;
             this.report_ToolStripMenuItem.Click += new System.EventHandler(this.report_ToolStripMenuItem_Click);
             // 
             // MakeReportForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 723);
             this.Controls.Add(this.panel_Report);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MakeReportForm";
             this.Text = "检查报告";

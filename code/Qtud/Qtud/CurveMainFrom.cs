@@ -71,6 +71,8 @@ namespace Qtud.Qtud
        public string Value;
     };
 
+    //-------------------------------------------------------------------------------
+
     public partial class MainFrom_Curve : Form
     {
         #region  变量
@@ -80,10 +82,7 @@ namespace Qtud.Qtud
         private BackgroundWorker bkWorker = new BackgroundWorker();
         private string m_StrCheckNo = string.Empty;  //导出的检查号
         private StruCheckFileInfo m_StruCheckFileInfo = new StruCheckFileInfo();  //导出的文件结构
-
-        private delegate void funHandle(int nValue);
-        private funHandle myHandle = null;
-        private bool b_Runing = true;
+         
         private int nexportFileCnt = 0;
   
 
@@ -251,7 +250,6 @@ namespace Qtud.Qtud
         ~MainFrom_Curve()
         {
             // 这里是清理非托管资源的用户代码段
-            b_Runing = false;
             m_DrawFuns.Dispose();
         }
 
@@ -3242,58 +3240,7 @@ namespace Qtud.Qtud
         private void Export_ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Export_Func(); 
-        }
-
-
-        /// <summary>  
-        /// 线程函数中调用的函数  
-        /// </summary>  
-        private void ShowProgressBar()
-        {
-            //progressForm = new CopyFileProgressForm();
-            //progressForm.SetProgressMaximumValue(nMaxFileCnt);
-
-            myHandle = new funHandle(progressForm.SetProgressValue);
-            progressForm.ShowDialog();
-            //progressForm = null;
-        }
-
-        /// <summary>  
-        /// 线程函数，用于处理调用  
-        /// </summary>  
-        private void ThreadFun()
-        {
-            MethodInvoker mi = new MethodInvoker(ShowProgressBar);
-            this.BeginInvoke(mi);
-
-            //System.Threading.Thread.Sleep(1000); // sleep to show window  
-             
-            try
-            {
-                while (b_Runing )
-                { 
-                    if (nexportFileCnt < 0)
-                    {
-                        this.Invoke(this.myHandle, new object[] { -1 });
-                        return;
-                    }
-                    if (nMaxFileCnt < 1)
-                    {
-                        this.Invoke(this.myHandle, new object[] { -1 });
-                        return;
-                    }
-
-                    System.Threading.Thread.Sleep(5);
-                    // 这里直接调用代理  
-                    this.Invoke(this.myHandle, new object[] { nexportFileCnt });
-                }
-            }
-            catch (System.Exception ex)
-            {
-            	
-            }
-            
-        }  
+        } 
 
         //导出一个检查号下的文件，isAllExport是否全部导出 G:\1508491901\info\ID2017-06-30\ID2017-06-30 11.42.32
 
@@ -3309,21 +3256,15 @@ namespace Qtud.Qtud
                 progressForm.SetProgressMaximumValue(nMaxFileCnt);
 
                 //--------------------------------
-                progressForm.StartPosition = FormStartPosition.CenterParent;
-
-                bkWorker.RunWorkerAsync();
-
+                progressForm.StartPosition = FormStartPosition.CenterParent; 
+                bkWorker.RunWorkerAsync(); 
                 progressForm.ShowDialog();
 
                 //--------------------------------
-
-                
-                //// 启动线程  
-                //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(ThreadFun));
-                //thread.Start();
+                 
             }
 
-            return;
+            return;  //以下代码放在 bkWorker中执行了。
 
             foreach (StruOneDayFileInfo OneDayFileInfo in m_StruCheckFileInfo.m_StruOneDayFileInfo)
             {
@@ -3813,7 +3754,8 @@ namespace Qtud.Qtud
                 foreach (string var in Directory.GetDirectories(strPath))
                 {
                     //DeleteDirectory(var);
-                    Directory.Delete(var, true);
+                    if (!string.IsNullOrEmpty(var) && Directory.Exists(var))
+                        Directory.Delete(var, true);
                     //DeleteDirectory(var);
                 }
             }
@@ -3822,7 +3764,8 @@ namespace Qtud.Qtud
             {
                 foreach (string var in Directory.GetFiles(strPath))
                 {
-                    File.Delete(var);
+                    if (!string.IsNullOrEmpty(var) && File.Exists(var))
+                        File.Delete(var);
                 }
             }
         }
@@ -3868,10 +3811,12 @@ namespace Qtud.Qtud
                 strWhere = @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + pathArr[3] + @"' ";
                 patient_checknum_link_Manager.Delete(strWhere);
 
-                //删除文件夹
+                //删除文件夹下文件
                 strPath = pathArr[0]+ "\\"+pathArr[1]+ "\\"+pathArr[2]+ "\\"+pathArr[3] ;
                 deleteTmpFiles(strPath);
-                Directory.Delete(strPath, true);
+                //删除文件夹
+                if (!string.IsNullOrEmpty(strPath) && Directory.Exists(strPath))
+                    Directory.Delete(strPath, true);
 
                 //刷新
                 m_ListUSBDevs.Clear();

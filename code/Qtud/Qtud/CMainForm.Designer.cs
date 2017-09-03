@@ -73,12 +73,12 @@
             this.button_edit_report = new System.Windows.Forms.Button();
             this.button_Create_rep = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label_userName = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.button_sys_Setting = new System.Windows.Forms.Button();
             this.button_user_manage = new System.Windows.Forms.Button();
             this.label_Info = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label_userName = new System.Windows.Forms.Label();
             this.panel_mid.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -564,6 +564,20 @@
             this.panel2.Size = new System.Drawing.Size(1457, 79);
             this.panel2.TabIndex = 1;
             // 
+            // label_userName
+            // 
+            this.label_userName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label_userName.AutoSize = true;
+            this.label_userName.BackColor = System.Drawing.Color.Transparent;
+            this.label_userName.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_userName.ForeColor = System.Drawing.Color.White;
+            this.label_userName.Location = new System.Drawing.Point(1072, 32);
+            this.label_userName.Name = "label_userName";
+            this.label_userName.Size = new System.Drawing.Size(89, 20);
+            this.label_userName.TabIndex = 42;
+            this.label_userName.Text = "当前用户";
+            this.label_userName.Click += new System.EventHandler(this.label_userName_Click);
+            // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Transparent;
@@ -619,20 +633,6 @@
             this.panel3.Size = new System.Drawing.Size(1457, 631);
             this.panel3.TabIndex = 22;
             // 
-            // label_userName
-            // 
-            this.label_userName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label_userName.AutoSize = true;
-            this.label_userName.BackColor = System.Drawing.Color.Transparent;
-            this.label_userName.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label_userName.ForeColor = System.Drawing.Color.White;
-            this.label_userName.Location = new System.Drawing.Point(1072, 32);
-            this.label_userName.Name = "label_userName";
-            this.label_userName.Size = new System.Drawing.Size(89, 20);
-            this.label_userName.TabIndex = 42;
-            this.label_userName.Text = "当前用户";
-            this.label_userName.Click += new System.EventHandler(this.label_userName_Click);
-            // 
             // CMainForm
             // 
             this.AcceptButton = this.button_query;
@@ -644,6 +644,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Font = new System.Drawing.Font("新宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
