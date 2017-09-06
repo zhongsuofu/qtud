@@ -89,7 +89,7 @@ namespace Qtud.Qtud
         private PatientInfoModel m_CurSelPatientInfo;    //当前选择的病人
         private List<string> m_ListUSBDevs = new List<string>();  //USB设备列表
 
-        private string  m_strFloder= @"d:\qtud_data\";    //备份文件夹 
+        private string  m_strFloder= @"D:\qtud_data\";    //备份文件夹 
 
         private string ValueUnit = "cmH2O";  //数值单位
         Dictionary<string, List<string>> Dev_listSerial_Map = new Dictionary<string, List<string>>();    //设备号 -检测号列表映射
@@ -126,7 +126,7 @@ namespace Qtud.Qtud
         //-------------------------------------------------------
         private int nCurFileCnt = 0;
         private int nMaxFileCnt = 0;
-        public struct StruFileInfo  //一个检测号文件
+        public struct StruFileInfo  //一个文件
         {
             public string  strFileMode;      //文件检测模式
             public string  m_filePath;    //文件路径
@@ -294,7 +294,7 @@ namespace Qtud.Qtud
 
            string strDataDisk  = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "DataDisk", null);
            if (strDataDisk == null || strDataDisk == string.Empty)
-               m_strFloder = @"d:\qtud_data\";    //备份文件夹 
+               m_strFloder = @"D:\qtud_data\";    //备份文件夹 
            else
                m_strFloder = strDataDisk.Substring(0, 1) + @":\qtud_data\";   //备份文件夹 
 
@@ -456,6 +456,8 @@ namespace Qtud.Qtud
                         StruCheckFileInfo tempStruCheckFileInfo = m_checkNum_Files_map[checkNo];
                         if (!tempStruCheckFileInfo.isLoad)
                         {
+
+                            //查看数据库中是否有记录
                             string strWhere = string.Empty;
                             strWhere = @"patient_uuid='" + m_CurSelPatientInfo.uuid + @"' and  checkNum='" + checkNo + @"'";
                             List<tbl_patient_checknum_link_Model> tempModelist = patient_checknum_link_Manager.GetModelList(strWhere);
@@ -468,7 +470,7 @@ namespace Qtud.Qtud
                                 return;
                             }
 
-                            //查看文件是否存在
+                            //查看txt文件是否存在
                             for (int r = 0; r < tempModelist.Count; r++)
                             {
                                 if (!File.Exists(tempModelist[r].txtPath))
@@ -478,7 +480,7 @@ namespace Qtud.Qtud
                                     return;
                                 }
                             }
-                            //查看是否有文件没导出
+                            //查看是否有文件没导出,新检查的日期
                             if (m_checkNum_Files_map.ContainsKey(checkNo))
                             { 
                                 foreach (StruOneDayFileInfo OneDayFileInfo in tempStruCheckFileInfo.m_StruOneDayFileInfo)
@@ -491,16 +493,40 @@ namespace Qtud.Qtud
                                     int n = 0;
                                     for (n = 0; n < tempModelist.Count; n++)
                                     {
-                                        if (strDesPath == tempModelist[n].txtPath)
+                                        if (strDesPath.ToLower() == tempModelist[n].txtPath.ToLower())
                                         {
                                             break;
                                         }
                                     }
-                                    if (tempModelist.Count == n)
+                                    if (tempModelist.Count == n || !File.Exists(strDesPath))
                                     {
                                         MessageBox.Show("请先导出数据");
                                         m_CheckNode_List.Add(e.Node);
                                         return;
+                                    }
+                                    else
+                                    {
+                                        try
+                                        {
+                                            //判断是不是有当日新增检查
+                                            FileInfo fi = new FileInfo(strTxtFile);
+                                            FileInfo fd = new FileInfo(strDesPath);
+                                            if (fi == null || fd == null || fi.Length != fd.Length)  //LastWriteTimes
+                                            {
+                                                MessageBox.Show("请先导出数据");
+                                                m_CheckNode_List.Add(e.Node);
+                                                return;
+                                            }
+                                        }
+                                        catch (System.Exception ex)
+                                        {
+                                            MessageBox.Show("请先导出数据");
+                                            m_CheckNode_List.Add(e.Node);
+                                            return;
+                                        }
+                                       
+       
+
                                     }
                                 }
                             }
@@ -3413,7 +3439,7 @@ namespace Qtud.Qtud
                 List< PatientInfoModel> pInfoModelList = pim.GetModelList(strWhere);
                 if (pInfoModelList.Count > 0 && pInfoModelList[0].id != m_CurSelPatientInfo.id)
                 {
-                    MessageBox.Show("文件曾经导出在 \"" + pInfoModelList[0].id + @" " + pInfoModelList[0].name + "\" 名下，\r\n请确认: 检查数据是否是当前患者数据。");
+                    MessageBox.Show("文件曾经导出在 \"" + pInfoModelList[0].id + @" " + pInfoModelList[0].name + "\" 名下，不能再次导出。\r\n\r\n请确认: 检查数据是否是当前患者的数据。");
                     return;
                 }
             }
@@ -3813,10 +3839,12 @@ namespace Qtud.Qtud
 
                 //删除文件夹下文件
                 strPath = pathArr[0]+ "\\"+pathArr[1]+ "\\"+pathArr[2]+ "\\"+pathArr[3] ;
-                deleteTmpFiles(strPath);
                 //删除文件夹
                 if (!string.IsNullOrEmpty(strPath) && Directory.Exists(strPath))
+                {
+                    deleteTmpFiles(strPath);
                     Directory.Delete(strPath, true);
+                }
 
                 //刷新
                 m_ListUSBDevs.Clear();
@@ -3871,7 +3899,11 @@ namespace Qtud.Qtud
             //        System.Threading.Thread.Sleep(2);
             //    }
             //}
-             
+            if (m_strFloder == "" && !Directory.Exists(m_strFloder))
+            {
+                return -1;
+            }
+
             foreach (StruOneDayFileInfo OneDayFileInfo in m_StruCheckFileInfo.m_StruOneDayFileInfo)
             {
                 string strTxtFile = OneDayFileInfo.strTxtFile;  //G:\3384328829\ID2017-08-10.txt
@@ -3889,6 +3921,23 @@ namespace Qtud.Qtud
                 if (npos > -1)
                 {
                     strtempPath = strDesPath + strTxtFile.Substring(npos + 1);   //目标txt文件
+
+                    try
+                    {
+                        //判断是不是有当日新增检查
+                        FileInfo fi = new FileInfo(strTxtFile);
+                        FileInfo fd = new FileInfo(strtempPath);
+                        if (fi == null || fd == null || fi.Length != fd.Length)  //LastWriteTimes
+                        {
+                            if (File.Exists(strtempPath))
+                                File.Delete(strtempPath);
+                        }
+                    }
+                    catch (System.Exception ex)
+                    {
+                        if (File.Exists(strtempPath))
+                            File.Delete(strtempPath);
+                    }
 
                     if (!File.Exists(strtempPath))  //创建文件夹
                     {

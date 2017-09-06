@@ -2,7 +2,7 @@
 <SysConfig>
   <AccessConfig>
     <ConnectionString>
-         SERVER=localhost;DATABASE=qtud;UID=root;PASSWORD=softok;
+         SERVER=localhost;DATABASE=qtud;UID=root;PASSWORD=visystem;
     </ConnectionString>
     <ConStringEncrypt>false</ConStringEncrypt>
   </AccessConfig>

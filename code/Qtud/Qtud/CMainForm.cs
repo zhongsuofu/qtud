@@ -580,11 +580,13 @@ namespace Qtud.Qtud
 
                             //删除文件夹下文件
                             string  strPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2] + "\\" + pathArr[3];
-                            deleteTmpFiles(strPath);
 
                             //删除文件夹
-                            if (!string.IsNullOrEmpty(strPath) && Directory.Exists(strPath)) 
+                            if (!string.IsNullOrEmpty(strPath) && Directory.Exists(strPath))
+                            {
+                                deleteTmpFiles(strPath); 
                                 Directory.Delete(strPath, true);
+                            }
 
                             strpatientPath = pathArr[0] + "\\" + pathArr[1] + "\\" + pathArr[2];
 
