@@ -42,7 +42,7 @@ namespace Qtud.Qtud
         System.Timers.Timer t = new System.Timers.Timer(60 * 60 * 1000);//60 * 60 * 1000 实例化Timer类，设置间隔时间为1小时  ；
         private int m_nUseAbleSpace = 20;
         private string strIniFile = "config.ini"; 
-        private string m_strFloder = @"d:\qtud_data\";
+        private string m_strFloder = @"D:\qtud_data\";
 
         #endregion
 
@@ -108,7 +108,7 @@ namespace Qtud.Qtud
 
             string strDataDisk = INIOperationClass.INIGetStringValue(strIniFile, "Setting", "DataDisk", null);
             if ( string.IsNullOrEmpty(strDataDisk))
-                m_strFloder = @"d:\qtud_data\";    //备份文件夹 
+                m_strFloder = @"D:\qtud_data\";    //备份文件夹 
             else
                 m_strFloder = strDataDisk.Substring(0, 1) + @":\qtud_data\";   //备份文件夹 
 
@@ -152,9 +152,16 @@ namespace Qtud.Qtud
             }
             else
             {
-                if (strFirstUseableDisk != "" && m_strFloder.Substring(0, 3).ToUpper() != strFirstUseableDisk)
+                if (strFirstUseableDisk != "" && m_strFloder.Substring(0, 3).ToUpper() != strFirstUseableDisk.ToUpper())
                 {
-                    INIOperationClass.INIWriteValue(strIniFile, "Setting", "DataDisk", strFirstUseableDisk);
+                    try
+                    {
+                        INIOperationClass.INIWriteValue(strIniFile, "Setting", "DataDisk", strFirstUseableDisk);
+                    }
+                    catch (System.Exception ex)
+                    {
+                        //MessageBox.Show(ex.ToString()); 
+                    }
 
                 }
             }

@@ -493,12 +493,12 @@ namespace Qtud.Qtud
                                     int n = 0;
                                     for (n = 0; n < tempModelist.Count; n++)
                                     {
-                                        if (strDesPath.ToLower() == tempModelist[n].txtPath.ToLower())
+                                        if (strDesPath.ToLower() == tempModelist[n].txtPath.ToLower())  //判断txt文件是否大小不一致,说明同一天中有新的检测数据
                                         {
                                             break;
                                         }
                                     }
-                                    if (tempModelist.Count == n || !File.Exists(strDesPath))
+                                    if (tempModelist.Count == n || !File.Exists(strDesPath)) //说明新一天的检查
                                     {
                                         MessageBox.Show("请先导出数据");
                                         m_CheckNode_List.Add(e.Node);
@@ -3899,8 +3899,10 @@ namespace Qtud.Qtud
             //        System.Threading.Thread.Sleep(2);
             //    }
             //}
-            if (m_strFloder == "" && !Directory.Exists(m_strFloder))
+
+            if (m_strFloder == "" || !Directory.Exists(m_strFloder.Substring(0,3))) //D:\
             {
+                MessageBox.Show("导出文件路径"+m_strFloder+"不存在");
                 return -1;
             }
 

@@ -151,11 +151,11 @@
             // 
             this.label_Info.AutoSize = true;
             this.label_Info.BackColor = System.Drawing.Color.Transparent;
-            this.label_Info.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_Info.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_Info.ForeColor = System.Drawing.Color.DarkOrange;
             this.label_Info.Location = new System.Drawing.Point(41, 32);
             this.label_Info.Name = "label_Info";
-            this.label_Info.Size = new System.Drawing.Size(85, 24);
+            this.label_Info.Size = new System.Drawing.Size(69, 19);
             this.label_Info.TabIndex = 0;
             this.label_Info.Text = "患者：";
             // 
@@ -179,7 +179,7 @@
             this.checkBox1.ForeColor = System.Drawing.Color.White;
             this.checkBox1.Location = new System.Drawing.Point(231, 31);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(111, 24);
+            this.checkBox1.Size = new System.Drawing.Size(91, 20);
             this.checkBox1.TabIndex = 6;
             this.checkBox1.Text = "历史数据";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -192,11 +192,11 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("SimSun", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(17, 88);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(89, 19);
+            this.label1.Size = new System.Drawing.Size(71, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "检测模式";
             // 
@@ -229,7 +229,7 @@
             "6-尿动力检测模式"});
             this.comboBox_checkMode.Location = new System.Drawing.Point(111, 83);
             this.comboBox_checkMode.Name = "comboBox_checkMode";
-            this.comboBox_checkMode.Size = new System.Drawing.Size(231, 28);
+            this.comboBox_checkMode.Size = new System.Drawing.Size(231, 24);
             this.comboBox_checkMode.TabIndex = 2;
             this.comboBox_checkMode.SelectedIndexChanged += new System.EventHandler(this.comboBox_checkMode_SelectedIndexChanged);
             // 
@@ -264,68 +264,68 @@
             this.refresh_ToolStripMenuItem,
             this.delHistory_ToolStripMenuItem});
             this.contextMenuStrip_TreeView.Name = "contextMenuStrip_TreeView";
-            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(199, 304);
+            this.contextMenuStrip_TreeView.Size = new System.Drawing.Size(173, 280);
             // 
             // All_ToolStripMenuItem
             // 
             this.All_ToolStripMenuItem.Name = "All_ToolStripMenuItem";
-            this.All_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.All_ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.All_ToolStripMenuItem.Text = "全 部";
             this.All_ToolStripMenuItem.Click += new System.EventHandler(this.All_ToolStripMenuItem_Click);
             // 
             // ToolStripMenuItem0
             // 
             this.ToolStripMenuItem0.Name = "ToolStripMenuItem0";
-            this.ToolStripMenuItem0.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem0.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem0.Text = "0-畅通模式";
             this.ToolStripMenuItem0.Click += new System.EventHandler(this.ToolStripMenuItem0_Click);
             // 
             // ToolStripMenuItem1
             // 
             this.ToolStripMenuItem1.Name = "ToolStripMenuItem1";
-            this.ToolStripMenuItem1.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem1.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem1.Text = "1-尿潴留模式";
             this.ToolStripMenuItem1.Click += new System.EventHandler(this.ToolStripMenuItem1_Click);
             // 
             // ToolStripMenuItem2
             // 
             this.ToolStripMenuItem2.Name = "ToolStripMenuItem2";
-            this.ToolStripMenuItem2.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem2.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem2.Text = "2-定时模式";
             this.ToolStripMenuItem2.Click += new System.EventHandler(this.ToolStripMenuItem2_Click);
             // 
             // ToolStripMenuItem3
             // 
             this.ToolStripMenuItem3.Name = "ToolStripMenuItem3";
-            this.ToolStripMenuItem3.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem3.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem3.Text = "3-定压模式";
             this.ToolStripMenuItem3.Click += new System.EventHandler(this.ToolStripMenuItem3_Click);
             // 
             // ToolStripMenuItem4
             // 
             this.ToolStripMenuItem4.Name = "ToolStripMenuItem4";
-            this.ToolStripMenuItem4.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem4.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem4.Text = "4-定时定压模式";
             this.ToolStripMenuItem4.Click += new System.EventHandler(this.ToolStripMenuItem4_Click);
             // 
             // ToolStripMenuItem5
             // 
             this.ToolStripMenuItem5.Name = "ToolStripMenuItem5";
-            this.ToolStripMenuItem5.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem5.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem5.Text = "5-分段定压模式";
             this.ToolStripMenuItem5.Click += new System.EventHandler(this.ToolStripMenuItem5_Click);
             // 
             // ToolStripMenuItem6
             // 
             this.ToolStripMenuItem6.Name = "ToolStripMenuItem6";
-            this.ToolStripMenuItem6.Size = new System.Drawing.Size(198, 24);
+            this.ToolStripMenuItem6.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem6.Text = "6-尿动力检测模式";
             this.ToolStripMenuItem6.Click += new System.EventHandler(this.ToolStripMenuItem6_Click);
             // 
             // Export_ToolStripMenuItem
             // 
             this.Export_ToolStripMenuItem.Name = "Export_ToolStripMenuItem";
-            this.Export_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.Export_ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.Export_ToolStripMenuItem.Text = "导 出";
             this.Export_ToolStripMenuItem.Visible = false;
             this.Export_ToolStripMenuItem.Click += new System.EventHandler(this.Export_ToolStripMenuItem_Click);
@@ -333,31 +333,31 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(169, 6);
             // 
             // Allcancel_ToolStripMenuItem
             // 
             this.Allcancel_ToolStripMenuItem.Name = "Allcancel_ToolStripMenuItem";
-            this.Allcancel_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.Allcancel_ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.Allcancel_ToolStripMenuItem.Text = "全部取消";
             this.Allcancel_ToolStripMenuItem.Click += new System.EventHandler(this.全部取消ToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(195, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(169, 6);
             // 
             // refresh_ToolStripMenuItem
             // 
             this.refresh_ToolStripMenuItem.Name = "refresh_ToolStripMenuItem";
-            this.refresh_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.refresh_ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.refresh_ToolStripMenuItem.Text = "刷 新";
             this.refresh_ToolStripMenuItem.Click += new System.EventHandler(this.refresh_ToolStripMenuItem_Click);
             // 
             // delHistory_ToolStripMenuItem
             // 
             this.delHistory_ToolStripMenuItem.Name = "delHistory_ToolStripMenuItem";
-            this.delHistory_ToolStripMenuItem.Size = new System.Drawing.Size(198, 24);
+            this.delHistory_ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.delHistory_ToolStripMenuItem.Text = "删除历史数据";
             this.delHistory_ToolStripMenuItem.Click += new System.EventHandler(this.delHistory_ToolStripMenuItem_Click);
             // 
@@ -378,13 +378,13 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox_SelSeg.ContextMenuStrip = this.contextMenuStrip_deleteItem;
-            this.listBox_SelSeg.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.listBox_SelSeg.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox_SelSeg.ForeColor = System.Drawing.Color.DarkBlue;
             this.listBox_SelSeg.FormattingEnabled = true;
-            this.listBox_SelSeg.ItemHeight = 23;
+            this.listBox_SelSeg.ItemHeight = 18;
             this.listBox_SelSeg.Location = new System.Drawing.Point(6, 265);
             this.listBox_SelSeg.Name = "listBox_SelSeg";
-            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 556);
+            this.listBox_SelSeg.Size = new System.Drawing.Size(276, 544);
             this.listBox_SelSeg.TabIndex = 6;
             this.listBox_SelSeg.SelectedIndexChanged += new System.EventHandler(this.listBox_SelSeg_SelectedIndexChanged);
             // 
@@ -396,31 +396,31 @@
             this.toolStripSeparator1,
             this.menoToolStripMenuItem});
             this.contextMenuStrip_deleteItem.Name = "contextMenuStrip_TreeView";
-            this.contextMenuStrip_deleteItem.Size = new System.Drawing.Size(139, 82);
+            this.contextMenuStrip_deleteItem.Size = new System.Drawing.Size(125, 76);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(138, 24);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem7.Text = "删除选项";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
             // 删除全部ToolStripMenuItem
             // 
             this.删除全部ToolStripMenuItem.Name = "删除全部ToolStripMenuItem";
-            this.删除全部ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.删除全部ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.删除全部ToolStripMenuItem.Text = "删除全部";
             this.删除全部ToolStripMenuItem.Click += new System.EventHandler(this.删除全部ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(121, 6);
             // 
             // menoToolStripMenuItem
             // 
             this.menoToolStripMenuItem.Name = "menoToolStripMenuItem";
-            this.menoToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.menoToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.menoToolStripMenuItem.Text = "编辑备注";
             this.menoToolStripMenuItem.Click += new System.EventHandler(this.menoToolStripMenuItem_Click);
             // 
@@ -447,7 +447,7 @@
             this.checkBox_nll.ForeColor = System.Drawing.Color.White;
             this.checkBox_nll.Location = new System.Drawing.Point(37, 160);
             this.checkBox_nll.Name = "checkBox_nll";
-            this.checkBox_nll.Size = new System.Drawing.Size(131, 24);
+            this.checkBox_nll.Size = new System.Drawing.Size(107, 20);
             this.checkBox_nll.TabIndex = 4;
             this.checkBox_nll.Text = "尿流率曲线";
             this.checkBox_nll.UseVisualStyleBackColor = true;
@@ -461,7 +461,7 @@
             this.checkBox_nl.ForeColor = System.Drawing.Color.White;
             this.checkBox_nl.Location = new System.Drawing.Point(37, 133);
             this.checkBox_nl.Name = "checkBox_nl";
-            this.checkBox_nl.Size = new System.Drawing.Size(111, 24);
+            this.checkBox_nl.Size = new System.Drawing.Size(91, 20);
             this.checkBox_nl.TabIndex = 3;
             this.checkBox_nl.Text = "尿量曲线";
             this.checkBox_nl.UseVisualStyleBackColor = true;
@@ -475,7 +475,7 @@
             this.checkBox_Pdet.ForeColor = System.Drawing.Color.White;
             this.checkBox_Pdet.Location = new System.Drawing.Point(37, 106);
             this.checkBox_Pdet.Name = "checkBox_Pdet";
-            this.checkBox_Pdet.Size = new System.Drawing.Size(211, 24);
+            this.checkBox_Pdet.Size = new System.Drawing.Size(171, 20);
             this.checkBox_Pdet.TabIndex = 2;
             this.checkBox_Pdet.Text = "Pdet逼尿肌压力曲线";
             this.checkBox_Pdet.UseVisualStyleBackColor = true;
@@ -489,7 +489,7 @@
             this.checkBox_Pabd.ForeColor = System.Drawing.Color.White;
             this.checkBox_Pabd.Location = new System.Drawing.Point(37, 79);
             this.checkBox_Pabd.Name = "checkBox_Pabd";
-            this.checkBox_Pabd.Size = new System.Drawing.Size(191, 24);
+            this.checkBox_Pabd.Size = new System.Drawing.Size(155, 20);
             this.checkBox_Pabd.TabIndex = 1;
             this.checkBox_Pabd.Text = "Pabd直肠压力曲线";
             this.checkBox_Pabd.UseVisualStyleBackColor = true;
@@ -503,7 +503,7 @@
             this.checkBox_Pves.ForeColor = System.Drawing.Color.White;
             this.checkBox_Pves.Location = new System.Drawing.Point(37, 52);
             this.checkBox_Pves.Name = "checkBox_Pves";
-            this.checkBox_Pves.Size = new System.Drawing.Size(191, 24);
+            this.checkBox_Pves.Size = new System.Drawing.Size(155, 20);
             this.checkBox_Pves.TabIndex = 0;
             this.checkBox_Pves.Text = "Pves膀胱压力曲线";
             this.checkBox_Pves.UseVisualStyleBackColor = true;
@@ -517,31 +517,31 @@
             this.srcToolStripMenuItem,
             this.Range_ToolStripMenuItem});
             this.contextMenuStrip_Curve.Name = "contextMenuStrip_TreeView";
-            this.contextMenuStrip_Curve.Size = new System.Drawing.Size(139, 82);
+            this.contextMenuStrip_Curve.Size = new System.Drawing.Size(125, 76);
             // 
             // toolStripMenuItem_AddReport
             // 
             this.toolStripMenuItem_AddReport.Name = "toolStripMenuItem_AddReport";
-            this.toolStripMenuItem_AddReport.Size = new System.Drawing.Size(138, 24);
+            this.toolStripMenuItem_AddReport.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem_AddReport.Text = "加入报告";
             this.toolStripMenuItem_AddReport.Click += new System.EventHandler(this.toolStripMenuItem_AddReport_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(135, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(121, 6);
             // 
             // srcToolStripMenuItem
             // 
             this.srcToolStripMenuItem.Name = "srcToolStripMenuItem";
-            this.srcToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.srcToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.srcToolStripMenuItem.Text = "查看原图";
             this.srcToolStripMenuItem.Click += new System.EventHandler(this.srcToolStripMenuItem_Click);
             // 
             // Range_ToolStripMenuItem
             // 
             this.Range_ToolStripMenuItem.Name = "Range_ToolStripMenuItem";
-            this.Range_ToolStripMenuItem.Size = new System.Drawing.Size(138, 24);
+            this.Range_ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.Range_ToolStripMenuItem.Text = "数据范围";
             this.Range_ToolStripMenuItem.Visible = false;
             this.Range_ToolStripMenuItem.Click += new System.EventHandler(this.Range_ToolStripMenuItem_Click);
@@ -572,18 +572,18 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.label_tip.AutoSize = true;
             this.label_tip.BackColor = System.Drawing.Color.Transparent;
-            this.label_tip.Font = new System.Drawing.Font("宋体", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label_tip.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label_tip.ForeColor = System.Drawing.Color.DarkBlue;
             this.label_tip.Location = new System.Drawing.Point(12, 12);
             this.label_tip.Name = "label_tip";
-            this.label_tip.Size = new System.Drawing.Size(75, 24);
+            this.label_tip.Size = new System.Drawing.Size(64, 19);
             this.label_tip.TabIndex = 0;
             this.label_tip.Text = "label";
             this.label_tip.Visible = false;
             // 
             // MainFrom_Curve
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -592,7 +592,7 @@
             this.Controls.Add(this.panel_Draw);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
-            this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Font = new System.Drawing.Font("SimSun", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
