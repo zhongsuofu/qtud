@@ -20,7 +20,8 @@ namespace Qtud.Qtud
         private UserManager um = new UserManager();
         private PatientInfoModel model = new PatientInfoModel();
         private int DlgType = 0;//新建0，更新1
-         
+
+        private string strModelId = string.Empty;  //返回添加的ID
          
         #endregion
 
@@ -38,6 +39,11 @@ namespace Qtud.Qtud
                 model.uuid = PublicConst.GenerateUUID();
                 DlgType = 0;
             } 
+        }
+
+        public string GetUserId()
+        {
+            return strModelId;
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -117,6 +123,7 @@ namespace Qtud.Qtud
                     pim.Update(model);
                      
                 }
+                strModelId = model.id;
                 this.DialogResult = DialogResult.OK;
             }
             catch (System.Exception e)

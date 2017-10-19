@@ -361,20 +361,24 @@ namespace Qtud.Qtud
 
                         int nduan = 5;  //分几个区间
 
-                        int nStepSecond = 0;
+                        float nStepSecond = 0f; 
                         if (nSecond > nduan)
                         {
-                            nStepSecond = (int)nSecond / nduan;
+                            nStepSecond = (float)(nSecond / nduan);
                         }
                         else
                         {
-                            nStepSecond = 1;
+                            nStepSecond = 1f;
                         }
                         Rectangle tempRC = new Rectangle();
                         tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch - 60), iniH + 6);
                         tempRC.Size = new Size(120, 20);
 
-                        m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+                        int nKdType = 1;  //横刻度类型，0，时间段，  1，实际时间
+                        if (nKdType == 0)
+                            m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+                        else
+                            m_DrawFuns.DrawPrintOneString(OneCurveData.StartTime.ToString("HH:mm:ss"), 10, StringAlignment.Center, tempRC);
 
                         int stepW = (int)(m_DrawArea.Width - ntitleWitch) / nduan;
                         for (int iv = 0; iv < nduan; iv++)
@@ -382,17 +386,26 @@ namespace Qtud.Qtud
                             m_DrawFuns.plotLine2( new Point[] { new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, m_DrawArea.Top), new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, iniH) }, true);
 
                             string strtitle = string.Empty;
-                            if (nStepSecond < 60)
-                                strtitle = (iv + 1) * nStepSecond + "秒";
+                            if (nKdType == 0)
+                            {
+                                if (nStepSecond < 60)
+                                    strtitle = (int)((iv + 1) * nStepSecond) + "秒";
+                                else
+                                {
+                                    strtitle = (int)((iv + 1) * nStepSecond) / 60 + "分";
+                                    strtitle += (int)((iv + 1) * nStepSecond) % 60 + "秒";
+                                }
+                            }
                             else
                             {
-                                strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
-                                strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
+                                strtitle = OneCurveData.StartTime.AddSeconds((double)((iv + 1) * nStepSecond)).ToString("HH:mm:ss");
+
                             }
 
                             if ((iv + 1) == nduan)
                             { 
                                 tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
+                                strtitle = OneCurveData.endTime.ToString("HH:mm:ss");
                             }
                             else
                             {
@@ -1222,20 +1235,25 @@ namespace Qtud.Qtud
 
                     int nduan = 5;  //分几个区间
 
-                    int nStepSecond = 0;
+                    float nStepSecond = 0f;
                     if (nSecond > nduan)
                     {
-                        nStepSecond = (int)nSecond / nduan;
+                        nStepSecond = (float)(nSecond / nduan);
                     }
                     else
                     {
-                        nStepSecond = 1;
+                        nStepSecond = 1f;
                     }
                     Rectangle tempRC = new Rectangle();
                     tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch - 60), iniH + 6);
                     tempRC.Size = new Size(120, 20);
 
-                    m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+                    int nKdType = 1;  //横刻度类型，0，时间段，  1，实际时间
+                    if (nKdType == 0)
+                        m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+                    else
+                        m_DrawFuns.DrawPrintOneString(OneCurveData.StartTime.ToString("HH:mm:ss"), 10, StringAlignment.Center, tempRC);
+
 
                     int stepW = (int)(m_DrawArea.Width - ntitleWitch) / nduan;
                     for (int iv = 0; iv < nduan; iv++)
@@ -1243,16 +1261,26 @@ namespace Qtud.Qtud
                         m_DrawFuns.plotLine2( new Point[] { new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, m_DrawArea.Top), new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, iniH) }, true);
 
                         string strtitle = string.Empty;
-                        if (nStepSecond < 60)
-                            strtitle = (iv + 1) * nStepSecond + "秒";
+                        if (nKdType == 0)
+                        {
+                            if (nStepSecond < 60)
+                                strtitle = (int)((iv + 1) * nStepSecond) + "秒";
+                            else
+                            {
+                                strtitle = (int)((iv + 1) * nStepSecond) / 60 + "分";
+                                strtitle += (int)((iv + 1) * nStepSecond) % 60 + "秒";
+                            }
+                        }
                         else
                         {
-                            strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
-                            strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
+                            strtitle = OneCurveData.StartTime.AddSeconds((double)((iv + 1) * nStepSecond)).ToString("HH:mm:ss");
+
                         }
+
                         if ((iv + 1) == nduan)
                         {
                             tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 80), iniH + 6);
+                            strtitle = OneCurveData.endTime.ToString("HH:mm:ss");
                         }
                         else
                         {

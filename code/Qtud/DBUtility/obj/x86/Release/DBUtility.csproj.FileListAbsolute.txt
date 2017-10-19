@@ -6,7 +6,6 @@ E:\work\OTUD\code\Qtud\DBUtility\bin\x86\Release\MySql.Data.dll
 E:\work\OTUD\code\Qtud\DBUtility\obj\x86\Release\SelfishInfo.Access.DBUtility.dll
 G:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\SelfishInfo.Access.DBUtility.dll
 G:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\MySql.Data.dll
-G:\【备份】\Work\OTUD\code\Qtud\DBUtility\obj\x86\Release\DBUtility.csprojResolveAssemblyReference.cache
 G:\【备份】\Work\OTUD\code\Qtud\DBUtility\obj\x86\Release\SelfishInfo.Access.DBUtility.dll
 J:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\SelfishInfo.Access.DBUtility.dll
 J:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\MySql.Data.dll
@@ -20,3 +19,4 @@ I:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\SelfishInfo.Access
 I:\【备份】\Work\OTUD\code\Qtud\DBUtility\bin\x86\Release\MySql.Data.dll
 I:\【备份】\Work\OTUD\code\Qtud\DBUtility\obj\x86\Release\DBUtility.csprojResolveAssemblyReference.cache
 I:\【备份】\Work\OTUD\code\Qtud\DBUtility\obj\x86\Release\SelfishInfo.Access.DBUtility.dll
+G:\【备份】\Work\OTUD\code\Qtud\DBUtility\obj\x86\Release\DBUtility.csprojResolveAssemblyReference.cache

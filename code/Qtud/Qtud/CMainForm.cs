@@ -115,7 +115,7 @@ namespace Qtud.Qtud
             //---------------------------------------------------
 
 
-            UpdateListView();
+            UpdateListView("");
 
             //----------------------------------------------------
             f();
@@ -228,12 +228,19 @@ namespace Qtud.Qtud
         #region 功能函数
 
         //更新病人列表
-        public void UpdateListView()
+        public void UpdateListView(string strUserId )
         {
             string strWhere = string.Empty;
             string sRet = string.Empty;
             listView_patList.Items.Clear();
             listPatientInfo.Clear();
+             
+
+            m_CurSelPatientInfo = null;
+            listView_report.Items.Clear();
+
+            listView_patList.Focus();
+
             try
             { 
                 strWhere += "  id<>''";//非冻结
@@ -259,6 +266,15 @@ namespace Qtud.Qtud
                       
                         this.listView_patList.Items.Add(lvi);
 
+                        if (strUserId != "" && strUserId == data.id)
+                        {
+                            listView_patList.Items[i-1].Selected = true;
+                        }
+                        else if (i == 1)
+                        {
+                            listView_patList.Items[0].Selected = true; 
+                        } 
+
                     }
                      
                 }
@@ -276,6 +292,11 @@ namespace Qtud.Qtud
             string sRet = string.Empty;
             listView_patList.Items.Clear();
             listPatientInfo.Clear();
+
+            m_CurSelPatientInfo = null;
+            listView_report.Items.Clear();
+            listView_patList.Focus();
+
             try
             {
                 //string _Des = DES.DESEncoder(strQuery.Trim(), Encoding.Default, null, null);  //DES加密 
@@ -306,6 +327,11 @@ namespace Qtud.Qtud
                         lvi.SubItems.Add(data.name);
                         
                         this.listView_patList.Items.Add(lvi);
+
+                        if (i == 1)
+                        {
+                            listView_patList.Items[0].Selected = true;
+                        } 
                     }
                 }
 
@@ -322,6 +348,8 @@ namespace Qtud.Qtud
             string sRet = string.Empty;
             listView_report.Items.Clear();
             listReportInfo.Clear();
+
+            listView_report.Focus();
             try
             {
                 strWhere += @" patient_uuid='" + m_CurSelPatientInfo.uuid + @"' ";//非冻结
@@ -340,6 +368,11 @@ namespace Qtud.Qtud
                         lvi.SubItems.Add(data.CreateDate.ToString());
                         
                         this.listView_report.Items.Add(lvi);
+
+                        if (i == 1)
+                        {
+                            listView_report.Items[0].Selected = true;
+                        } 
 
                     }
 
@@ -403,8 +436,8 @@ namespace Qtud.Qtud
             PatientInfoDlg m_PatientInfoDlg = new PatientInfoDlg(_model);
             DialogResult dlgResult = m_PatientInfoDlg.ShowDialog();
             if (dlgResult == DialogResult.OK)  //添加完成
-            {
-                UpdateListView();
+            { 
+               UpdateListView(m_PatientInfoDlg.GetUserId());
 
             }
         }
@@ -414,7 +447,7 @@ namespace Qtud.Qtud
         {
             if (textBox_queryWhere.Text == "")
             {
-                UpdateListView();
+                UpdateListView("");
             }
             else
             {
@@ -438,7 +471,7 @@ namespace Qtud.Qtud
 
             if (textBox_queryWhere.Text.Trim() == "")
             {
-                UpdateListView();
+                UpdateListView("");
             }
         }
 
@@ -626,12 +659,12 @@ namespace Qtud.Qtud
                         //===================================
 
                         pim.Delete(m_CurSelPatientInfo.uuid);  //删除病人信息
-                        UpdateListView();
                         textBox_queryWhere.Text = string.Empty;
 
                         m_CurSelPatientInfo = null;
                         listView_report.Items.Clear();
                         listReportInfo.Clear();
+                        UpdateListView("");
                     }
                     catch (System.Exception er)
                     {
@@ -680,6 +713,7 @@ namespace Qtud.Qtud
         {
             UpdateReport(); 
         }
+
         private void UpdateReport( )
         {
             if (this.listView_report.SelectedItems.Count > 0)

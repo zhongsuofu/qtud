@@ -426,6 +426,26 @@ namespace Qtud.Qtud
 
         }
 
+
+        //取消全部选中的树节点
+        private void  CancelAllNode()
+        {
+            int i = 0;
+            for (i = m_CheckNode_List.Count - 1; i >= 0; i--)
+            {
+                TreeNode oneNode = m_CheckNode_List[i];
+                oneNode.Checked = false;
+
+            }
+            //foreach (TreeNode oneNode in m_CheckNode_List)  //遍历文件
+            //{
+            //    oneNode.Checked = false;
+            //}
+            treeView_File.EndUpdate();
+            m_CheckNode_List.Clear();
+            DrawEmpty();
+        }
+
         private void treeView_File_AfterCheck(object sender, TreeViewEventArgs e)
         {
             
@@ -465,6 +485,7 @@ namespace Qtud.Qtud
                             if (tempModelist.Count < 1)
                             {
                                 MessageBox.Show("请先导出数据");
+                                CancelAllNode();
                                 m_CheckNode_List.Add(e.Node);
 
                                 return;
@@ -476,6 +497,7 @@ namespace Qtud.Qtud
                                 if (!File.Exists(tempModelist[r].txtPath))
                                 {
                                     MessageBox.Show("请先导出数据");
+                                    CancelAllNode();
                                     m_CheckNode_List.Add(e.Node);
                                     return;
                                 }
@@ -501,6 +523,7 @@ namespace Qtud.Qtud
                                     if (tempModelist.Count == n || !File.Exists(strDesPath)) //说明新一天的检查
                                     {
                                         MessageBox.Show("请先导出数据");
+                                        CancelAllNode();
                                         m_CheckNode_List.Add(e.Node);
                                         return;
                                     }
@@ -514,6 +537,7 @@ namespace Qtud.Qtud
                                             if (fi == null || fd == null || fi.Length != fd.Length)  //LastWriteTimes
                                             {
                                                 MessageBox.Show("请先导出数据");
+                                                CancelAllNode();
                                                 m_CheckNode_List.Add(e.Node);
                                                 return;
                                             }
@@ -521,6 +545,7 @@ namespace Qtud.Qtud
                                         catch (System.Exception ex)
                                         {
                                             MessageBox.Show("请先导出数据");
+                                            CancelAllNode();
                                             m_CheckNode_List.Add(e.Node);
                                             return;
                                         }
@@ -543,9 +568,12 @@ namespace Qtud.Qtud
                     {
                         if (m_CheckNode_List.Count == 2)
                         {
-                            MessageBox.Show("最多只能选取2个数据文件");
-                            e.Node.Checked = false; 
-                            return;
+                            //MessageBox.Show("最多只能选取2个数据文件");
+                            //e.Node.Checked = false;
+                            //return;
+
+                            CancelAllNode();
+
                         }
                         if (m_CheckNode_List.Count == 1)  //两个文件合并
                         {
@@ -623,13 +651,17 @@ namespace Qtud.Qtud
                             return;
                         }
                     }
+                    else if (nMode == "2")
+                    {
+                        CancelAllNode();
+                    }
                     else
                     {
                         if (m_CheckNode_List.Count > 0)
                         {
                             MessageBox.Show("最多只能选取1个数据文件");
                             e.Node.Checked = false;
-                            return;
+                            return; 
                         }
                     }
 
@@ -2083,35 +2115,41 @@ namespace Qtud.Qtud
                     int nMinute = nSecond / 60; //分钟数
 
                     int nduan = 5;  //分几个区间
-                    int nStepSecond = 0;
+                    float nStepSecond = 0f;
                     if (nSecond >= nduan)
                     {
-                        nStepSecond = (int)nSecond / nduan;
+                        nStepSecond = (float)(nSecond / nduan);
                     }
                     else
                     {
                         if (nSecond == 0)
                         {
                             nduan = 1;
-                            nStepSecond = 1;
+                            nStepSecond = 1.0f;
                         }
                         else
                         {
                             nduan = nSecond;
-                            nStepSecond = 1; 
+                            nStepSecond = 1.0f; 
                         }
                         
                     }
 
                     if (curX != -1)
                         m_DrawFuns.plotLine2(new Point[] { new Point(curX, m_DrawArea.Top), new Point(curX, iniH) });
-                    
 
+                    //----------------------------------------------------------
+                    //绘制刻度
                     Rectangle tempRC = new Rectangle();
                     tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch - 60), iniH + 6);
                     tempRC.Size = new Size(120, 20);
-                     
-                    m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+
+                    int nKdType = 1;  //横刻度类型，0，时间段，  1，实际时间
+                    if (nKdType == 0)
+                        m_DrawFuns.DrawPrintOneString(@"0", 10, StringAlignment.Center, tempRC);
+                    else
+                        m_DrawFuns.DrawPrintOneString(oneDataManage.StartTime.ToString("HH:mm:ss"), 10, StringAlignment.Center, tempRC);
+
                      
                     int stepW = (int)(m_DrawArea.Width - ntitleWitch) / nduan;
                     for (int iv = 0; iv < nduan; iv++)
@@ -2119,17 +2157,28 @@ namespace Qtud.Qtud
                         m_DrawFuns.plotLine2( new Point[] { new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, m_DrawArea.Top), new Point(m_DrawArea.Left + ntitleWitch + iv * stepW, iniH) }, true);
 
                         string strtitle = string.Empty;
-                        if (nStepSecond < 60)
-                            strtitle = (iv + 1) * nStepSecond + "秒";
+                        if (nKdType == 0)
+                        {
+                            if ((int)nStepSecond < 60)
+                                strtitle = (int)((iv + 1) * nStepSecond) + "秒";
+                            else
+                            {
+                                strtitle = (int)((iv + 1) * nStepSecond) / 60 + "分";
+                                strtitle += (int)((iv + 1) * nStepSecond) % 60 + "秒";
+                            }
+                        }
                         else
                         {
-                            strtitle = ((iv + 1) * nStepSecond) / 60 + "分";
-                            strtitle += ((iv + 1) * nStepSecond) % 60 + "秒";
+                            strtitle = oneDataManage.StartTime.AddSeconds( (double)((iv + 1) * nStepSecond)).ToString("HH:mm:ss");
+                           
                         }
+                        
 
                         if ((iv + 1) == nduan)
                         {
                             tempRC.Location = new Point((int)(m_DrawArea.Left + ntitleWitch + (iv + 1) * stepW - 60), iniH + 6);
+
+                            strtitle = oneDataManage.endTime.ToString("HH:mm:ss");
                         }
                         else
                         {
@@ -3194,6 +3243,7 @@ namespace Qtud.Qtud
             {
                 TreeNode oneNode = m_CheckNode_List[i];
                 oneNode.Checked = false;
+                 
             }
                 //foreach (TreeNode oneNode in m_CheckNode_List)  //遍历文件
                 //{
