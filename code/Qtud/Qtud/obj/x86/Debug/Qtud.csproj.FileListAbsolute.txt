@@ -143,8 +143,6 @@ I:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserForm.resour
 I:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserMgrForm.resources
 I:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.csproj.GenerateResource.Cache
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\尿动力数据管理系统.exe.config
-G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.exe
-G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.pdb
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\尿动力数据管理系统.exe
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\尿动力数据管理系统.pdb
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\bin\Debug\DBManage.dll
@@ -174,3 +172,5 @@ G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.TestResultDlg.r
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserForm.resources
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.Qtud.UserMgrForm.resources
 G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\Qtud.csproj.GenerateResource.Cache
+G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.exe
+G:\【备份】\Work\OTUD\code\Qtud\Qtud\obj\x86\Debug\尿动力数据管理系统.pdb

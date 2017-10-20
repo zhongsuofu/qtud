@@ -75,7 +75,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.srcToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Range_ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel_Draw = new MyPanel();
+            this.panel_Draw = new  MyPanel();
             this.label_tip = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();

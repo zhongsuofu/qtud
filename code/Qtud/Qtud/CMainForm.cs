@@ -27,6 +27,8 @@ namespace Qtud.Qtud
         private List<ReportInfoModel> listReportInfo = new List<ReportInfoModel>();    //报告数据列表
         private PatientInfoModel m_CurSelPatientInfo = new PatientInfoModel();    //当前选择的病人
 
+        private int iOld = -1; //患者选择项
+
         private tbl_patient_checknum_link_Manager patient_checknum_link_Manager = new tbl_patient_checknum_link_Manager();
         private tbl_patient_checknum_file_info_Manager patient_checknum_file_info_Manager = new tbl_patient_checknum_file_info_Manager();  //文件存储管理
 
@@ -238,6 +240,7 @@ namespace Qtud.Qtud
 
             m_CurSelPatientInfo = null;
             listView_report.Items.Clear();
+            iOld = -1;
 
             listView_patList.Focus();
 
@@ -756,19 +759,50 @@ namespace Qtud.Qtud
 
             }
         }
+
+
         private void listView_patList_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             //高亮显示
-            e.Item.ForeColor = Color.Black;
-            e.Item.BackColor = SystemColors.Window;
-            Thread.Sleep(200);
+            //e.Item.ForeColor = Color.Black;
+            //e.Item.BackColor = SystemColors.Window;
+
             //if (listView_patList.FocusedItem != null)
             //{
             //    listView_patList.FocusedItem.Selected = true;
             //}
+            if (listView_patList.SelectedIndices.Count > 0) //若有选中项 
+            {
+                if (iOld == -1)
+                {
+                    listView_patList.Items[listView_patList.SelectedIndices[0]].BackColor = Color.FromArgb(49, 106, 197); //设置选中项的背景颜色 
+                    listView_patList.Items[listView_patList.SelectedIndices[0]].ForeColor = Color.White; //设置选中项的背景颜色 
+                    iOld = listView_patList.SelectedIndices[0]; //设置当前选中项索引 
+                }
+                else
+                {
+                    if (listView_patList.SelectedIndices[0] != iOld)
+                    {
+                        listView_patList.Items[listView_patList.SelectedIndices[0]].BackColor = Color.FromArgb(49, 106, 197); //设置选中项的背景颜色 
+                        listView_patList.Items[listView_patList.SelectedIndices[0]].ForeColor = Color.White; //设置选中项的背景颜色 
 
+                        listView_patList.Items[iOld].BackColor = SystemColors.Window; //恢复默认背景色 
+                        listView_patList.Items[iOld].ForeColor = Color.Black; //恢复默认背景色 
+                        
+                        iOld = listView_patList.SelectedIndices[0]; //设置当前选中项索引 
+                    }
+                }
+            }
+            else //若无选中项 
+            {
+                listView_patList.Items[iOld].BackColor = SystemColors.Window; // Color.FromArgb(239, 248, 250); //恢复默认背景色 
+                listView_patList.Items[iOld].ForeColor = Color.Black;  
+                iOld = -1; //设置当前处于无选中项状态 
+            } 
 
             //------------------------------------------------
+            Thread.Sleep(200);
+
             if (listView_patList.SelectedItems.Count < 1)
                 return;
             string strID = listView_patList.SelectedItems[0].SubItems[1].Text;
